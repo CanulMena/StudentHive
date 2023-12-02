@@ -2,11 +2,14 @@
 import 'package:flutter/material.dart';
 
 const Color mainColor = Color.fromARGB(135, 16, 184, 203);
+const Color customYahir = Color.fromRGBO(0, 188, 212, 1);
 List<Color> moreColors = [
   mainColor, 
+  Colors.cyan,
   Colors.red,
   Colors.yellow,
   Colors.green, 
+
 ];
 
 class ThemesApp {

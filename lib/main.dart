@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:studenthive/config/themes/theme_app.dart';
-import 'package:studenthive/presentation/screens/publication/landlordhouse_post_screen.dart.dart';
+import 'package:studenthive/presentation/screens/home/publication_home_screen.dart';
 
 
 void main(){
@@ -14,8 +14,8 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'StudentHive',
-      home: const PublicationScreen(),
-      theme: ThemesApp(selectColor: 0).themes(),
+      home: const PublicationHomeScreen(),
+      theme: ThemesApp(selectColor: 1).themes(),
       debugShowCheckedModeBanner: false,
     );
   }
