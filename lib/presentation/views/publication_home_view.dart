@@ -1,16 +1,25 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:studenthive/domain/entities/publication.dart';
+import 'package:studenthive/presentation/provider/home_provider.dart';
 
 class HomeView extends StatelessWidget {
-  const HomeView({super.key});
+  
+  const HomeView({super.key,});
 
 
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
     const Radius radius = Radius.circular(20);
+
+    final homeProvider = context.watch<HomeProvider>();
+    final List<Publication> listPublicationProvider = homeProvider.publications;//
+
     return ListView.builder(
-      itemCount: 100,
+      itemCount: listPublicationProvider.length,
       itemBuilder: (context, index) {
+        final Publication imagePost = listPublicationProvider[index];
         return Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
@@ -38,6 +47,16 @@ class HomeView extends StatelessWidget {
                         ),
                         color: Colors.black,
                       ),
+                      child: ClipRRect(
+                        borderRadius: const BorderRadius.only(
+                          topLeft: radius,
+                          topRight: radius
+                        ),
+                        child: Image.asset(
+                          imagePost.imageUrl,
+                          fit: BoxFit.cover,
+                          ),
+                      ),
                     ),
                     Container(
                       //! Contenedor de información
@@ -47,7 +66,7 @@ class HomeView extends StatelessWidget {
                           bottomLeft: radius,
                           bottomRight: radius
                         ),
-                        color: Colors.blue,
+                        color: Colors.green,
                       ),
                     ),
                   ],

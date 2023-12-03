@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:studenthive/config/themes/theme_app.dart';
+import 'package:studenthive/presentation/provider/home_provider.dart';
 import 'package:studenthive/presentation/screens/home/publication_home_screen.dart';
 
 
@@ -12,11 +14,16 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'StudentHive',
-      home: const PublicationHomeScreen(),
-      theme: ThemesApp(selectColor: 1).themes(),
-      debugShowCheckedModeBanner: false,
+    return MultiProvider(
+      providers: [
+        ChangeNotifierProvider(create: (_) => HomeProvider()..nextPublication())
+      ],
+      child: MaterialApp(
+        title: 'StudentHive',
+        home: const PublicationHomeScreen(),
+        theme: ThemesApp(selectColor: 1).themes(),
+        debugShowCheckedModeBanner: false,
+      ),
     );
   }
 }

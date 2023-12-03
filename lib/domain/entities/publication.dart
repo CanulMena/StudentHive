@@ -1,17 +1,15 @@
 
 class Publication {
-  String imageUrl;
   String title;
+  String imageUrl;
   String date;
   int price;
 
   Publication({
-    required this.imageUrl,
     required this.title,
+    required this.imageUrl,
     required this.date,
     required this.price
-  });
-
-  
+  }); 
 }
 

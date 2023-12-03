@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:studenthive/presentation/provider/home_provider.dart';
 
 class CustomBottom extends StatefulWidget {
-
-  final void Function(int) onIndexChanged;
   
   const CustomBottom({
     super.key, 
-    required this.onIndexChanged
     });
 
   @override
@@ -14,19 +13,17 @@ class CustomBottom extends StatefulWidget {
 }
 
 class _CustomBottomState extends State<CustomBottom> {
-  int selectIndex = 0;
 
   @override
   Widget build(BuildContext context) {
     final color = Theme.of(context).colorScheme;
+    final homeProvider = context.watch<HomeProvider>();
+
     return BottomNavigationBar(
-      currentIndex: selectIndex,//agregamos selectIndex para seleccionar un BottomNavegationBar
+      currentIndex: homeProvider.selectedIndex,
       onTap: (value) {
         setState(() {
-          selectIndex = value;/*cuando seleccionamos un BottomNavegationBar... agregará su numero de index a value 
-          y selectIndex tomará el valor de value*/
-          
-          widget.onIndexChanged(value);
+          homeProvider.setIndex(value);
         });
       },
       items: [
