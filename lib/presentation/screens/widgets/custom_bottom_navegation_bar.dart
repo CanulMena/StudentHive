@@ -4,9 +4,7 @@ import 'package:studenthive/presentation/provider/home_provider.dart';
 
 class CustomBottom extends StatefulWidget {
   
-  const CustomBottom({
-    super.key, 
-    });
+  const CustomBottom({super.key,});
 
   @override
   State<CustomBottom> createState() => _CustomBottomState();
