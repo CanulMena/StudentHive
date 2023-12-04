@@ -9,9 +9,6 @@ class PublicationView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
 
-    // final homeProvider = context.watch<HomeProvider>();
-    // final List<Publication> listPublicationProvider = homeProvider.publications;
-
     return ListView.builder(
       itemCount: listPublicationProvider.length,
       itemBuilder: (context, index) {

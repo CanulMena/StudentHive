@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:studenthive/presentation/provider/home_provider.dart';
-import 'package:studenthive/presentation/screens/widgets/custom_bottom_navegation_bar.dart';
-import 'package:studenthive/presentation/screens/widgets/custom_appbar.dart';
+import 'package:studenthive/presentation/screens/widgets/shared/widgets/custom_bottom_navegation_bar.dart';
+import 'package:studenthive/presentation/screens/widgets/shared/widgets/custom_appbar.dart';
 import 'package:studenthive/presentation/views/acount_view.dart';
 import 'package:studenthive/presentation/views/favorites_view.dart';
 import 'package:studenthive/presentation/views/notificatino_view.dart';
@@ -15,6 +15,7 @@ class PublicationHomeScreen extends StatelessWidget {
    build(BuildContext context) {
 
     final homeProvider = context.watch<HomeProvider>();
+
     List<Widget> screens = [
     PublicationView( listPublicationProvider: homeProvider.publications,),
     const NotificationView(),
@@ -31,7 +32,9 @@ class PublicationHomeScreen extends StatelessWidget {
           children: screens, //*Esta propiedad nos pide las listas a las que accederemos con la propiedad de index.
         ),
 
-        bottomNavigationBar: const CustomBottom(),
+        bottomNavigationBar: CustomButtomNavegationBar( 
+          selectIndex: (value) => homeProvider.setIndex(value), 
+          selectedIndex: homeProvider.selectedIndex),
       ),
     );
   }

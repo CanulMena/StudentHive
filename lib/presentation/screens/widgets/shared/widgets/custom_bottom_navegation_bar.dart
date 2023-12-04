@@ -1,27 +1,27 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
-import 'package:studenthive/presentation/provider/home_provider.dart';
 
-class CustomBottom extends StatefulWidget {
-  
-  const CustomBottom({super.key,});
+class CustomButtomNavegationBar extends StatefulWidget {
+  final ValueChanged selectIndex;  
+  final int selectedIndex;
+  const CustomButtomNavegationBar({super.key, required this.selectIndex, required this.selectedIndex,});
 
   @override
-  State<CustomBottom> createState() => _CustomBottomState();
+  State<CustomButtomNavegationBar> createState() => _CustomButtomNavegationBarState();
 }
 
-class _CustomBottomState extends State<CustomBottom> {
+class _CustomButtomNavegationBarState extends State<CustomButtomNavegationBar> {
 
   @override
   Widget build(BuildContext context) {
     final color = Theme.of(context).colorScheme;
-    final homeProvider = context.watch<HomeProvider>();
+    // final homeProvider = context.watch<HomeProvider>();
 
     return BottomNavigationBar(
-      currentIndex: homeProvider.selectedIndex,
+      currentIndex: widget.selectedIndex,//*El index que seleccinaré del BottomNavegationBarItem
       onTap: (value) {
         setState(() {
-          homeProvider.setIndex(value);
+          widget.selectIndex(value);
+          // homeProvider.setIndex(value);
         });
       },
       items: [
