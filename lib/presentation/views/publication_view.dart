@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:studenthive/domain/entities/publication.dart';
-import 'package:studenthive/presentation/screens/widgets/shared/widgets/publication_container.dart';
+import 'package:studenthive/presentation/screens/publication/selected_publication_screen.dart';
+import 'package:studenthive/presentation/screens/widgets/shared/widgets/publication/publication_container.dart';
 
 class PublicationView extends StatelessWidget {
   final List<Publication> listPublicationProvider;
@@ -20,7 +21,14 @@ class PublicationView extends StatelessWidget {
               padding: const EdgeInsets.symmetric(
                 vertical: 20,
               ),  
-              child: PublicationContainer(imagePost: imagePost),
+              child: PublicationContainer(
+                imagePost: imagePost, 
+                navegateToPublication: SelectedPublication(
+                  onReturn: (){
+                    Navigator.pop(context);
+                  }    
+                ),
+              ),
             ),
           ],
         );

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:studenthive/config/themes/theme_app.dart';
 import 'package:studenthive/presentation/provider/home_provider.dart';
-import 'package:studenthive/presentation/screens/publication/publication_home_screen.dart';
+import 'package:studenthive/presentation/screens/publication/publications_home_screen.dart';
 
 
 void main(){
