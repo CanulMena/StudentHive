@@ -23,20 +23,18 @@ class PublicationHomeScreen extends StatelessWidget {
     const FavoriteView()
   ];
     
-    return SafeArea(
-      child: Scaffold(
-        appBar: const CustomAppBar().build(context),
+    return Scaffold(
+      appBar: const CustomAppBar().build(context),
 
-        body: IndexedStack(
-          index: homeProvider.selectedIndex,//*El numero de index al que vamos a acceder
-          children: screens, //*Esta propiedad nos pide las listas a las que accederemos con la propiedad de index.
-        ),
-
-        bottomNavigationBar: CustomButtomNavegationBar( 
-          selectIndex: (value) => homeProvider.setIndex(value), 
-          selectedIndex: homeProvider.selectedIndex
-          ),
+      body: IndexedStack(//! Aprender el nombre de este widget
+        index: homeProvider.selectedIndex,//*El numero de index al que vamos a acceder
+        children: screens, //*Esta propiedad nos pide las listas a las que accederemos con la propiedad de index.
       ),
+
+      bottomNavigationBar: CustomButtomNavegationBar( 
+        selectIndex: (value) => homeProvider.setIndex(value), 
+        selectedIndex: homeProvider.selectedIndex
+        ),
     );
   }
 }

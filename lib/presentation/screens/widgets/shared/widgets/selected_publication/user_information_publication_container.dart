@@ -24,7 +24,7 @@ class UserInfoWidget extends StatelessWidget {
                 ),
                 SizedBox(height: 16),
                 Text(
-                  'Nombre del Usuario',
+                  'Emmanuel Alberto Yama Pachecho',
                   style: TextStyle(
                     fontSize: 18,
                     fontWeight: FontWeight.bold,

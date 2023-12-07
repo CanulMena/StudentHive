@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:studenthive/presentation/screens/widgets/shared/widgets/selected_publication/information_publication_container.dart';
+import 'package:studenthive/presentation/screens/widgets/shared/widgets/selected_publication/user_information_publication_container.dart';
 import 'package:studenthive/presentation/screens/widgets/shared/widgets/selected_publication/bottom_selected_publication.dart';
 class SelectedPublication extends StatelessWidget {
-  final Function onReturn;
-  const SelectedPublication({super.key, required this.onReturn});
+  const SelectedPublication({super.key,});
 
     @override
   Widget build(BuildContext context) {
@@ -22,14 +21,13 @@ class SelectedPublication extends StatelessWidget {
 
         appBar: AppBar(
           title: const Text('Cuarto disponible cerca del TEC'),
-          backgroundColor: Colors.cyan,
           leading: IconButton(
             icon: const Icon(
               Icons.arrow_back,
               color: Colors.black,
             ),
             onPressed: () {
-              onReturn();
+              Navigator.pop(context);
               },
             ),
         ),
@@ -38,8 +36,8 @@ class SelectedPublication extends StatelessWidget {
           children: <Widget>[
             //ignore: avoid_unnecessary_containers
             Container(
-              child: Image.network(
-                'https://cdn.pixabay.com/photo/2015/03/12/14/35/family-room-670281_1280.jpg',
+              child: Image.asset(
+                'assets/images/1.jpg',
                 width: 500,
                 height: 300,
                 fit: BoxFit.cover,
@@ -52,7 +50,7 @@ class SelectedPublication extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    'Ubicacion: Timucuy Mérdia, Yucatán',
+                    'Ubicacion: Mérdia, Yucatán',
                     style: boldTextStyle,
                   ),
                   Text(
@@ -60,7 +58,7 @@ class SelectedPublication extends StatelessWidget {
                     style: boldTextStyle,
                   ),
                   Text(
-                    'Fecha de publicación: 1-Diciembre-2023',
+                    'Fecha de publicación: 28-Septiembre-2023',
                     style: boldTextStyle,
                   ),
                 ],
@@ -121,7 +119,7 @@ class SelectedPublication extends StatelessWidget {
           ],
         ),
 
-        //! bottomNavigationBar: const CustomBottomAppBar(),  si agregamos la propiedad el codigo se bugea
+        // bottomNavigationBar: const CustomBottomAppBar(),  /* si agregamos la propiedad el codigo se bugea */
 
       );
     }

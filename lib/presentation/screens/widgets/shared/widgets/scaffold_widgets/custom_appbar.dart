@@ -8,9 +8,13 @@ class CustomAppBar extends StatelessWidget {
     return AppBar(
       actions: [
         IconButton(
+          onPressed: (){}, 
+          icon: const Icon(Icons.search)
+          ),
+        IconButton(
           onPressed: () {}, 
           icon: const Icon(Icons.menu),
-          )
+          ),
         ],
       );
   }

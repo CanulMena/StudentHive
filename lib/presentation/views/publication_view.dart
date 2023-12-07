@@ -14,7 +14,7 @@ class PublicationView extends StatelessWidget {
       itemCount: listPublicationProvider.length,
       itemBuilder: (context, index) {
         final Publication imagePost = listPublicationProvider[index];
-        return Row(
+        return Column( //? No se porque antes tenía puesto un Row XD pero por cualquier pongo este comentarío por si pasa algo :)
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Padding(
@@ -22,12 +22,8 @@ class PublicationView extends StatelessWidget {
                 vertical: 20,
               ),  
               child: PublicationContainer(
-                imagePost: imagePost, 
-                navegateToPublication: SelectedPublication(
-                  onReturn: (){
-                    Navigator.pop(context);
-                  }    
-                ),
+                navegateToPublication: const SelectedPublication(),
+                imagePost: imagePost, //imagePost contiene el numero index de la lista de provider - La lista de provider contiene una entidade de publication
               ),
             ),
           ],

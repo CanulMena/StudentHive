@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:studenthive/domain/entities/publication.dart';
+import 'package:studenthive/presentation/screens/widgets/shared/widgets/publication/image_container.dart';
+import 'package:studenthive/presentation/screens/widgets/shared/widgets/publication/information_container.dart';
 
 class PublicationContainer extends StatelessWidget {
   final Publication imagePost; 
@@ -13,12 +15,15 @@ class PublicationContainer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+
     final size = MediaQuery.of(context).size;
-    const Radius radius = Radius.circular(20);
+
     return GestureDetector(
+
       onTap: (){
         Navigator.push(context, MaterialPageRoute(builder: (context) => navegateToPublication ,));
       },
+      
       child: Container(
         //! Publication container
         height: size.height * 0.56, 
@@ -26,44 +31,23 @@ class PublicationContainer extends StatelessWidget {
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(20),
           color: Colors.red,
+          boxShadow: [
+            BoxShadow(
+              color: Colors.grey.withOpacity(0.5),  // Color de la sombra
+              spreadRadius: 6,  // Distancia de la propagación de la sombra
+              blurRadius: 8,  // Radio del desenfoque de la sombra
+              offset: const Offset(0, 3),  // Desplazamiento de la sombra
+              ),
+            ],
         ),
         child: Column(
           children: [
-            Container(
-              //! Contenedor de imagen
-              height: size.height * 0.56 * 0.7,
-              decoration: const BoxDecoration(
-                borderRadius: BorderRadius.only(
-                  topLeft: radius,
-                  topRight: radius
-                ),
-                color: Colors.black,
-              ),
-              child: ClipRRect(
-                borderRadius: const BorderRadius.only(
-                  topLeft: radius,
-                  topRight: radius
-                ),
-                child: Image.asset(
-                  imagePost.imageUrl,
-                  fit: BoxFit.cover,
-                  ),
-              ),
-            ),
-            Container(
-              //! Contenedor de información
-              height: size.height * 0.56 * 0.3,
-              decoration: const BoxDecoration(
-                borderRadius: BorderRadius.only(
-                  bottomLeft: radius,
-                  bottomRight: radius
-                ),
-                color: Colors.green,
-              ),
-            ),
+            ImageContainer( imagePost: imagePost,),
+            InformationContainer(imagePost: imagePost,)
           ],
         ),
       ),
     );
   }
 }
+

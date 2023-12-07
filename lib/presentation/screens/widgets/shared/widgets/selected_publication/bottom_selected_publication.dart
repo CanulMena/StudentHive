@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:studenthive/presentation/screens/publication/manage_request.dart';
 
 class CustomBottomAppBar extends StatelessWidget {
   const CustomBottomAppBar({super.key});
@@ -14,7 +15,7 @@ class CustomBottomAppBar extends StatelessWidget {
             const Column(
               children: [
                 Text(
-                  '\$1500 MXN',
+                  '\$1800 MXN',
                   style: TextStyle(
                     fontSize: 15,
                     color: Colors.black,
@@ -32,7 +33,7 @@ class CustomBottomAppBar extends StatelessWidget {
 
             ElevatedButton(
               onPressed: () {
-                //! Lógica para la Acción Reserva
+                Navigator.push(context, MaterialPageRoute(builder: (_) => const ManageRequest()));
               },
               style: ElevatedButton.styleFrom(
                 backgroundColor: Colors.cyan,
