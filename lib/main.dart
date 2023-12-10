@@ -4,8 +4,7 @@ import 'package:studenthive/config/themes/theme_app.dart';
 import 'package:studenthive/infrastructure/datasource/publication_datasource_impl.dart';
 import 'package:studenthive/infrastructure/repositories/publication_repositories_impl.dart';
 import 'package:studenthive/presentation/provider/home_provider.dart';
-import 'package:studenthive/presentation/screens/publication/publications_home_screen.dart';
-
+import 'package:studenthive/presentation/screens/login/login_screen.dart';
 
 void main(){
   runApp(const MyApp());
@@ -26,7 +25,7 @@ class MyApp extends StatelessWidget {
       ],
       child: MaterialApp(
         title: 'StudentHive',
-        home: const PublicationHomeScreen(),
+        home: const LoginScreen(),
         theme: ThemesApp(selectColor: 1).themes(),
         debugShowCheckedModeBanner: false,
       ),
