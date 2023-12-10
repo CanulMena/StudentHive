@@ -20,9 +20,9 @@ class MyApp extends StatelessWidget {
     return MultiProvider(
       providers: [
         ChangeNotifierProvider(create: (_) => HomeProvider(
-          publicationRepositoriesImpl: 
-          PublicationRepositoriesImpl(publicationDataSourceImpl: PublicationDataSourceImpl())
-        )..nextPublications())
+          publicationRepositoriesImpl: PublicationRepositoriesImpl(
+            publicationDataSourceImpl: PublicationDataSourceImpl())
+            )..nextPublications())
       ],
       child: MaterialApp(
         title: 'StudentHive',
