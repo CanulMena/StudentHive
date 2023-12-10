@@ -29,7 +29,7 @@ class InformationContainer extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.symmetric(vertical: 8),
               child: _CustomText(
-                imagePost: imagePost.title,
+                imagePost: imagePost.titulo,
                 fontSize: 16, 
                 fontWeight: FontWeight.w700,
                 ),
@@ -37,7 +37,7 @@ class InformationContainer extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.symmetric(vertical: 8),
               child: _CustomText(
-                imagePost: imagePost.date, 
+                imagePost: imagePost.fechaPublicacion, 
                 fontSize: 16,
                 fontWeight: FontWeight.w500,
                 ),
@@ -45,7 +45,7 @@ class InformationContainer extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.symmetric(vertical: 8),
               child: _CustomText(
-                imagePost: ' \$${imagePost.price.toString()} MXN',
+                imagePost: ' \$${imagePost.precioHabitacion.toString()} MXN',
                 fontSize: 16,
                 fontWeight: FontWeight.w600,
                 ),

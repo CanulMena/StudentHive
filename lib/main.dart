@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:studenthive/config/themes/theme_app.dart';
+import 'package:studenthive/infrastructure/datasource/publication_datasource_impl.dart';
+import 'package:studenthive/infrastructure/repositories/publication_repositories_impl.dart';
 import 'package:studenthive/presentation/provider/home_provider.dart';
 import 'package:studenthive/presentation/screens/publication/publications_home_screen.dart';
 
@@ -14,9 +16,13 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    
     return MultiProvider(
       providers: [
-        ChangeNotifierProvider(create: (_) => HomeProvider()..nextPublication())
+        ChangeNotifierProvider(create: (_) => HomeProvider(
+          publicationRepositoriesImpl: 
+          PublicationRepositoriesImpl(publicationDataSourceImpl: PublicationDataSourceImpl())
+        )..nextPublications())
       ],
       child: MaterialApp(
         title: 'StudentHive',

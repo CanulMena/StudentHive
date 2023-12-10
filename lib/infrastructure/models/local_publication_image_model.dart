@@ -1,32 +1,65 @@
 import 'package:studenthive/domain/entities/publication.dart';
 
 class LocalPublicationImageModel {
-  String title;
-  String imageUrl;
-  String date;
-  int price;
+  int idPublicacion;
+  String titulo;
+  String imagenes;
+  int numeroDeCuartosHabitacion;
+  String ubicacionHabitacion;
+  double precioHabitacion;
+  String fechaPublicacion;
+  String estatus;
+  int idAnfitrion;
+  String nombreAnfitrion;
+  String numeroTelefono;
+  String genero;
 
   LocalPublicationImageModel({
-    required this.title,
-    required this.imageUrl,
-    required this.date,
-    required this.price
+    required this.idPublicacion,
+    required this.titulo,
+    required this.imagenes,
+    required this.numeroDeCuartosHabitacion,
+    required this.ubicacionHabitacion,
+    required this.precioHabitacion,
+    required this.fechaPublicacion,
+    required this.estatus,
+    required this.idAnfitrion,
+    required this.nombreAnfitrion,
+    required this.numeroTelefono,
+    required this.genero,
   });
   //*Estamos creando una constructor con nombre que se llama fromJson y retornará el contructor de la clase. Y pedirá como parametros un json.
   factory LocalPublicationImageModel.fromJson( Map<String, dynamic> json ){
     return LocalPublicationImageModel(
-      title : json['title'],
-      imageUrl : json['imageUrl'],
-      date : json['date'],
-      price : json['price'],
-    );
+      idPublicacion: json['idPublicacion'], 
+      titulo: json['titulo'], 
+      imagenes: json['imagenes'], 
+      numeroDeCuartosHabitacion: json['numeroDeCuartosHabitacion'], 
+      ubicacionHabitacion: json['ubicacionHabitacion'], 
+      precioHabitacion: json['precioHabitacion'], 
+      fechaPublicacion: json['fechaPublicacion'], 
+      estatus: json['estatus'], 
+      idAnfitrion: json['idAnfitrion'], 
+      nombreAnfitrion: json['nombreAnfitrion'], 
+      numeroTelefono: json['numeroTelefono'], 
+      genero: json['genero'],
+      );
   }
   
   Publication toImagePost(){
     return Publication(
-      title: title, 
-      imageUrl: imageUrl, 
-      date: date, 
-      price: price);
+      idPublicacion: idPublicacion, 
+      titulo: titulo, 
+      imagenes: imagenes, 
+      numeroDeCuartosHabitacion: 
+      numeroDeCuartosHabitacion, 
+      ubicacionHabitacion: ubicacionHabitacion, 
+      precioHabitacion: precioHabitacion, 
+      fechaPublicacion: fechaPublicacion, 
+      estatus: estatus, 
+      idAnfitrion: idAnfitrion, 
+      nombreAnfitrion: nombreAnfitrion, 
+      numeroTelefono: numeroTelefono, 
+      genero: genero);
+    }
   }
-}

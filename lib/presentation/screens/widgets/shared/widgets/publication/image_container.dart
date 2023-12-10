@@ -24,8 +24,8 @@ class ImageContainer extends StatelessWidget {
           topLeft: radius,
           topRight: radius
         ),
-        child: Image.asset(
-          imagePost.imageUrl,
+        child: Image.network(
+          imagePost.imagenes,
           width: double.infinity,//*Con el valor double.infinity indicamos que debe tomar todo el ancho disponible dentro su contenedor
           height: size.height * 0.56 * 0.75,
           fit: BoxFit.cover,//*La propiedad fit nos indica como debe de ajustarse la imagen dentro de su area disponible 

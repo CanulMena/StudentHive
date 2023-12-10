@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:studenthive/domain/entities/publication.dart';
-import 'package:studenthive/presentation/screens/publication/selected_publication_screen.dart';
+import 'package:studenthive/presentation/screens/information/selected_publication_screen.dart';
 import 'package:studenthive/presentation/screens/widgets/shared/widgets/publication/publication_container.dart';
 
 class PublicationView extends StatelessWidget {
@@ -14,7 +14,7 @@ class PublicationView extends StatelessWidget {
       itemCount: listPublicationProvider.length,
       itemBuilder: (context, index) {
         final Publication imagePost = listPublicationProvider[index];
-        return Column( //? No se porque antes tenía puesto un Row XD pero por cualquier pongo este comentarío por si pasa algo :)
+        return Column( //? No se porque antes tenía puesto un Row XD pero por cualquier cosa pongo este comentarío por si pasa algo :)
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Padding(
