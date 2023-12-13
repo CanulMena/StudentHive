@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:studenthive/presentation/provider/home_provider.dart';
-import 'package:studenthive/presentation/screens/widgets/shared/widgets/scaffold_widgets/custom_bottom_navegation_bar.dart';
-import 'package:studenthive/presentation/screens/widgets/shared/widgets/scaffold_widgets/custom_appbar.dart';
+import 'package:studenthive/presentation/screens/widgets/shared/scaffold_widgets/custom_bottom_navegation_bar.dart';
+import 'package:studenthive/presentation/screens/widgets/shared/scaffold_widgets/custom_appbar.dart';
 import 'package:studenthive/presentation/views/acount_view.dart';
 import 'package:studenthive/presentation/views/favorites_view.dart';
 import 'package:studenthive/presentation/views/notificatino_view.dart';

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:studenthive/domain/entities/publication.dart';
-import 'package:studenthive/presentation/screens/widgets/shared/widgets/publication/image_container.dart';
-import 'package:studenthive/presentation/screens/widgets/shared/widgets/publication/information_container.dart';
+import 'package:studenthive/presentation/screens/widgets/publication/image_container.dart';
+import 'package:studenthive/presentation/screens/widgets/publication/information_container.dart';
 
 class PublicationContainer extends StatelessWidget {
   final Publication imagePost; 

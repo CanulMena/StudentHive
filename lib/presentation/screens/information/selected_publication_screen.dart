@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:studenthive/presentation/screens/widgets/shared/widgets/selected_publication/user_information_publication_container.dart';
-import 'package:studenthive/presentation/screens/widgets/shared/widgets/selected_publication/bottom_selected_publication.dart';
+import 'package:studenthive/presentation/screens/widgets/selected_publication/user_information_publication_container.dart';
+import 'package:studenthive/presentation/screens/widgets/selected_publication/bottom_selected_publication.dart';
 class SelectedPublication extends StatelessWidget {
   const SelectedPublication({super.key,});
 

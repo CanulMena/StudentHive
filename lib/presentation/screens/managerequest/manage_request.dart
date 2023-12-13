@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:studenthive/presentation/screens/widgets/shared/widgets/reserve/reserve_container.dart';
+import 'package:studenthive/presentation/screens/widgets/reserve/reserve_container.dart';
 
 class ManageRequest extends StatelessWidget {
   const ManageRequest({super.key});
