@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:studenthive/presentation/screens/login/create_acount_screen.dart';
-import 'package:studenthive/presentation/screens/publication/publications_home_screen.dart';
+import 'package:studenthive/presentation/screens/home/home_screen.dart';
 import 'package:studenthive/presentation/screens/widgets/login/blue_box.dart';
 import 'package:studenthive/presentation/screens/widgets/login/input_decoration.dart';
 import 'package:studenthive/presentation/screens/widgets/login/hive_icon.dart';
@@ -143,7 +143,7 @@ class LoginScreen extends StatelessWidget {
                               context,
                               MaterialPageRoute(
                                 builder: (context) =>
-                                    const PublicationHomeScreen(),
+                                    const HomeScreen(),
                               ),
                             );
                           },

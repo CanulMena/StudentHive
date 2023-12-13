@@ -13,37 +13,35 @@ class _CustomButtomNavegationBarState extends State<CustomButtomNavegationBar> {
 
   @override
   Widget build(BuildContext context) {
-    final color = Theme.of(context).colorScheme;
-    // final homeProvider = context.watch<HomeProvider>();
+    final colors = Theme.of(context).colorScheme;
 
     return BottomNavigationBar(
-      currentIndex: widget.selectedIndex,//*El index que seleccinaré del BottomNavegationBarItem
+      currentIndex: widget.selectedIndex,
       onTap: (value) {
         setState(() {
           widget.selectIndex(value);
-          // homeProvider.setIndex(value);
         });
       },
       items: [
         BottomNavigationBarItem(
           icon: const Icon(Icons.home),
-          backgroundColor: color.primary,
+          backgroundColor: colors.primary,
           label: 'Home'
           ),
         BottomNavigationBarItem(
           icon: const Icon(Icons.notifications),
-          backgroundColor: color.primary,
+          backgroundColor: colors.primary,
           label: 'Notificactions'
           ),
         BottomNavigationBarItem(
-          icon: const Icon(Icons.person),
-          backgroundColor: color.primary,
-          label: 'Count'
+          icon: const Icon(Icons.favorite),
+          backgroundColor: colors.primary,
+          label: 'Fovorites'
           ),
         BottomNavigationBarItem(
-          icon: const Icon(Icons.favorite),
-          backgroundColor: color.primary,
-          label: 'Fovorites'
+          icon: const Icon(Icons.person),
+          backgroundColor: colors.primary,
+          label: 'Count'
           ),
       ],
     );

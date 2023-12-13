@@ -10,29 +10,22 @@ class HomeProvider extends ChangeNotifier {
     required this.publicationRepositoriesImpl
   });
 
-  int _selectedIndex = 0; 
+  int _selectedView = 0; 
 
-  int get selectedIndex => _selectedIndex;//Configuramos que la variable siempre inicie con 0
+  int get selectedIndex => _selectedView;
 
   List<Publication> publications = [];
 
-  // final GetPublication getPublication = GetPublication();
-
-  void setIndex(int index) {
-    _selectedIndex = index;
+  void selectView(int viewPage) {
+    _selectedView = viewPage;
     notifyListeners();
   }
 
-  Future<void> nextPublications() async {
-  try {
+  Future<void> getPublications() async {
     final List<Publication> newPublications = await publicationRepositoriesImpl.getInformationPublication();
     
     publications.addAll(newPublications);
 
     notifyListeners();
-  } catch (error) {
-    throw 'we have an error';
-    // Puedes manejar el error de manera apropiada según tus necesidades
-  }
- }
+  } 
 }
