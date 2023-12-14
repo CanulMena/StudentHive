@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:studenthive/domain/entities/publication.dart';
 
 class InformationContainer extends StatelessWidget {
-  final Publication imagePost;
-  const InformationContainer({super.key, required this.imagePost});
+  final Publication informationPost;
+  const InformationContainer({super.key, required this.informationPost});
 
   @override
   Widget build(BuildContext context) {
@@ -29,7 +29,7 @@ class InformationContainer extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.symmetric(vertical: 8),
               child: _CustomText(
-                imagePost: imagePost.titulo,
+                imagePost: informationPost.titulo,
                 fontSize: 16, 
                 fontWeight: FontWeight.w700,
                 ),
@@ -37,7 +37,7 @@ class InformationContainer extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.symmetric(vertical: 8),
               child: _CustomText(
-                imagePost: imagePost.fechaPublicacion, 
+                imagePost: informationPost.fechaPublicacion, 
                 fontSize: 16,
                 fontWeight: FontWeight.w500,
                 ),
@@ -45,7 +45,7 @@ class InformationContainer extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.symmetric(vertical: 8),
               child: _CustomText(
-                imagePost: ' \$${imagePost.precioHabitacion.toString()} MXN',
+                imagePost: ' \$${informationPost.precioHabitacion.toString()} MXN',
                 fontSize: 16,
                 fontWeight: FontWeight.w600,
                 ),

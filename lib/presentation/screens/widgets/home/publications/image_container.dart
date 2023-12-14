@@ -13,11 +13,11 @@ class ImageContainer extends StatelessWidget {
       //! Contenedor de imagen
       height: size.height * 0.56 * 0.75,
       decoration: const BoxDecoration(
+        color: Colors.black,
         borderRadius: BorderRadius.only(
           topLeft: radius,
           topRight: radius
         ),
-        color: Colors.black,
       ),
       child: ClipRRect(
         borderRadius: const BorderRadius.only(

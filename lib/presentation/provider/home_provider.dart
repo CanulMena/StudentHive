@@ -10,14 +10,12 @@ class HomeProvider extends ChangeNotifier {
     required this.publicationRepositoriesImpl
   });
 
-  int _selectedView = 0; 
-
-  int get selectedIndex => _selectedView;
+  int selectedView = 0; 
 
   List<Publication> publications = [];
 
   void selectView(int viewPage) {
-    _selectedView = viewPage;
+    selectedView = viewPage;
     notifyListeners();
   }
 

@@ -1,16 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:studenthive/domain/entities/publication.dart';
-import 'package:studenthive/presentation/screens/widgets/publication/image_container.dart';
-import 'package:studenthive/presentation/screens/widgets/publication/information_container.dart';
+import 'package:studenthive/presentation/screens/widgets/home/publications/image_container.dart';
+import 'package:studenthive/presentation/screens/widgets/home/publications/information_container.dart';
 
 class PublicationContainer extends StatelessWidget {
-  final Publication imagePost; 
-  final Widget navegateToPublication;
+  final Publication publicationPost; 
+  final Widget navigateToPublication;
 
   const PublicationContainer({
     super.key, 
-    required this.imagePost,  
-    required this.navegateToPublication,
+    required this.publicationPost,  
+    required this.navigateToPublication,
     });
 
   @override
@@ -21,7 +22,7 @@ class PublicationContainer extends StatelessWidget {
     return GestureDetector(
 
       onTap: (){
-        Navigator.push(context, MaterialPageRoute(builder: (context) => navegateToPublication ,));
+        context.push('/publication');
       },
       
       child: Container(
@@ -42,12 +43,11 @@ class PublicationContainer extends StatelessWidget {
         ),
         child: Column(
           children: [
-            ImageContainer( imagePost: imagePost,),
-            InformationContainer(imagePost: imagePost,)
+            ImageContainer( imagePost: publicationPost,),
+            InformationContainer(informationPost: publicationPost,)
           ],
         ),
       ),
     );
   }
 }
-

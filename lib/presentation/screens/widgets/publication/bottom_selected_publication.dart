@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:studenthive/presentation/screens/managerequest/manage_request.dart';
+import 'package:studenthive/presentation/screens/reserve/reserve_screen.dart';
 
 class CustomBottomAppBar extends StatelessWidget {
   const CustomBottomAppBar({super.key});
@@ -33,7 +33,7 @@ class CustomBottomAppBar extends StatelessWidget {
 
             ElevatedButton(
               onPressed: () {
-                Navigator.push(context, MaterialPageRoute(builder: (_) => const ManageRequest()));
+                Navigator.push(context, MaterialPageRoute(builder: (_) => const ReserveScreen()));
               },
               style: ElevatedButton.styleFrom(
                 backgroundColor: Colors.cyan,

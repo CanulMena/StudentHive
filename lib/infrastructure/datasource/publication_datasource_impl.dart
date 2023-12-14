@@ -4,7 +4,9 @@ import 'package:studenthive/domain/entities/publication.dart';
 import 'package:studenthive/infrastructure/models/local_publication_image_model.dart';
 
 class PublicationDataSourceImpl extends PublicationDataSource {
+
   final Dio dio = Dio();
+  
   @override
   Future<List<Publication>> getInformationPublication() async {
     try {

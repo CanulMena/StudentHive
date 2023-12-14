@@ -1,20 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:studenthive/domain/entities/publication.dart';
-import 'package:studenthive/presentation/screens/information/selected_publication_screen.dart';
-import 'package:studenthive/presentation/screens/widgets/publication/publication_container.dart';
+import 'package:studenthive/presentation/screens/publication/publication_screen.dart';
+import 'package:studenthive/presentation/screens/widgets/home/publications/publication_container.dart';
 
-class PublicationView extends StatelessWidget {
+class PublicationsView extends StatelessWidget {
   final List<Publication> listPublicationProvider;
-  const PublicationView({super.key, required this.listPublicationProvider,});
+  const PublicationsView({super.key, required this.listPublicationProvider,});
 
   @override
   Widget build(BuildContext context) {
 
     return ListView.builder(
-      itemCount: listPublicationProvider.length,
+      itemCount:  listPublicationProvider.length,
       itemBuilder: (context, index) {
-        final Publication imagePost = listPublicationProvider[index];
-        return Column( //? No se porque antes tenía puesto un Row XD pero por cualquier cosa pongo este comentarío por si pasa algo :)
+        final Publication publicationPost = listPublicationProvider[index];
+        return Column( //*Ya lo pocisiona en el centro del espacio disponible
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Padding(
@@ -22,8 +22,8 @@ class PublicationView extends StatelessWidget {
                 vertical: 20,
               ),  
               child: PublicationContainer(
-                navegateToPublication: const SelectedPublication(),
-                imagePost: imagePost, //imagePost contiene el numero index de la lista de provider - La lista de provider contiene una entidade de publication
+                navigateToPublication: const PublicationScreen(),
+                publicationPost: publicationPost,
               ),
             ),
           ],

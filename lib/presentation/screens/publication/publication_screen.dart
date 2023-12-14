@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:studenthive/presentation/screens/widgets/selected_publication/user_information_publication_container.dart';
-import 'package:studenthive/presentation/screens/widgets/selected_publication/bottom_selected_publication.dart';
-class SelectedPublication extends StatelessWidget {
-  const SelectedPublication({super.key,});
+import 'package:go_router/go_router.dart';
+import 'package:studenthive/presentation/screens/widgets/publication/user_information_publication_container.dart';
+import 'package:studenthive/presentation/screens/widgets/publication/bottom_selected_publication.dart';
+class PublicationScreen extends StatelessWidget {
+  const PublicationScreen({super.key,});
 
     @override
   Widget build(BuildContext context) {
@@ -27,7 +28,7 @@ class SelectedPublication extends StatelessWidget {
               color: Colors.black,
             ),
             onPressed: () {
-              Navigator.pop(context);
+              context.pop();
               },
             ),
         ),
@@ -139,4 +140,3 @@ class SelectedPublication extends StatelessWidget {
   }
 }
 
-//TODO: OPTIMIZAR EL CODIGO Y AGREGAR EL MAPEO DE LA API
