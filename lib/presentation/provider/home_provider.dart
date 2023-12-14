@@ -12,7 +12,7 @@ class HomeProvider extends ChangeNotifier {
 
   int selectedView = 0; 
 
-  bool isGetPublication = false;
+  bool isLoading = true;
 
   List<Publication> publications = [];
 
@@ -22,10 +22,11 @@ class HomeProvider extends ChangeNotifier {
   }
 
   Future<void> getPublications() async {
+    await Future.delayed(const Duration(seconds: 2));
     final List<Publication> newPublications =  await publicationRepositoriesImpl.getInformationPublication();
     
     publications.addAll(newPublications);
-    isGetPublication = true;
+    isLoading = false;
     notifyListeners();
   } 
 }

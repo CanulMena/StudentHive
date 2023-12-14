@@ -1,9 +1,8 @@
 
 import 'package:flutter/material.dart';
 
-const Color mainColor = Color.fromARGB(135, 16, 184, 203);
-const Color customYahir = Color.fromRGBO(0, 188, 212, 1);
-List<Color> moreColors = [
+const Color mainColor = Color.fromARGB(133, 2, 18, 164);
+List<Color> listColors = [
   mainColor, 
   Colors.cyan,
   Colors.red,
@@ -13,15 +12,15 @@ List<Color> moreColors = [
 ];
 
 class ThemesApp {
-  final int selectColor;
+  final int selectedColor;
 
-  ThemesApp({required this.selectColor})
- : assert( selectColor >= 0 && selectColor <= moreColors.length -1, 'selectColor must be between 0 and ${moreColors.length -1}');
+  ThemesApp({required this.selectedColor})
+ : assert( selectedColor >= 0 && selectedColor <= listColors.length -1, 'selectColor must be between 0 and ${listColors.length -1}');
 
   ThemeData themes(){
     return ThemeData(
       useMaterial3: false,
-      colorSchemeSeed: moreColors[selectColor]
+      colorSchemeSeed: listColors[selectedColor],
     );
   }
   
