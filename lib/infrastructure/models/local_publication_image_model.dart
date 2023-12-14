@@ -1,6 +1,6 @@
 import 'package:studenthive/domain/entities/publication.dart';
 
-class LocalPublicationImageModel {
+class PublicationModel {
   int idPublicacion;
   String titulo;
   String imagenes;
@@ -14,7 +14,7 @@ class LocalPublicationImageModel {
   String numeroTelefono;
   String genero;
 
-  LocalPublicationImageModel({
+  PublicationModel({
     required this.idPublicacion,
     required this.titulo,
     required this.imagenes,
@@ -29,8 +29,8 @@ class LocalPublicationImageModel {
     required this.genero,
   });
   //*Estamos creando una constructor con nombre que se llama fromJson y retornará el contructor de la clase. Y pedirá como parametros un json.
-  factory LocalPublicationImageModel.fromJson( Map<String, dynamic> json ){
-    return LocalPublicationImageModel(
+  factory PublicationModel.fromJson( Map<String, dynamic> json ){
+    return PublicationModel(
       idPublicacion: json['idPublicacion'], 
       titulo: json['titulo'], 
       imagenes: json['imagenes'], 
@@ -46,7 +46,7 @@ class LocalPublicationImageModel {
       );
   }
   
-  Publication toImagePost(){
+  Publication toPublicationPost(){
     return Publication(
       idPublicacion: idPublicacion, 
       titulo: titulo, 

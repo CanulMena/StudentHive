@@ -22,7 +22,7 @@ class HomeScreen extends StatelessWidget {
     return Scaffold(
       appBar: _CustomAppBar().build(context),
 
-      body: IndexedStack(//! Aprender el nombre de este widget
+      body: IndexedStack(
         index: homeProvider.selectedView,
         children: screens, 
       ),

@@ -14,7 +14,7 @@ class PublicationsView extends StatelessWidget {
       itemCount:  listPublicationProvider.length,
       itemBuilder: (context, index) {
         final Publication publicationPost = listPublicationProvider[index];
-        return Column( //*Ya lo pocisiona en el centro del espacio disponible
+        return Column( //*El widget column ya lo pocisiona en el centro del espacio disponible
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Padding(

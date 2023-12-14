@@ -9,26 +9,16 @@ class PublicationDataSourceImpl extends PublicationDataSource {
   
   @override
   Future<List<Publication>> getInformationPublication() async {
-    try {
+
     final response = await dio.get('https://studenthive.somee.com/api/Publicaciones');
-    final List<dynamic> jsonList = response.data as List<dynamic>;
-
-    // Mapear la lista de JSON a una lista de instancias de LocalPublicationImageModel
-    final List<LocalPublicationImageModel> publicationModels = jsonList.map((json) {
-      return LocalPublicationImageModel.fromJson(json);
-    }).toList();
-
-    // Mapear la lista de modelos locales a una lista de instancias de Publication
-    final List<Publication> publications = publicationModels.map((model) {
-      return model.toImagePost();
+    final List<dynamic> jsonDynamicList = response.data; //*Tenemos que pasarle la data del reponse
+                                          
+    final List<Publication> publications = jsonDynamicList.map((map){ //estoy convirtiendo sus index en listas?????
+      return PublicationModel.fromJson(map).toPublicationPost();
     }).toList();
 
     return publications;
-
-  } catch (error) {
     
-    throw Exception('Error en la solicitud GET: $error');
-  }
 }
 
   }

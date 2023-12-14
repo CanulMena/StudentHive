@@ -12,6 +12,8 @@ class HomeProvider extends ChangeNotifier {
 
   int selectedView = 0; 
 
+  bool isGetPublication = false;
+
   List<Publication> publications = [];
 
   void selectView(int viewPage) {
@@ -20,10 +22,10 @@ class HomeProvider extends ChangeNotifier {
   }
 
   Future<void> getPublications() async {
-    final List<Publication> newPublications = await publicationRepositoriesImpl.getInformationPublication();
+    final List<Publication> newPublications =  await publicationRepositoriesImpl.getInformationPublication();
     
     publications.addAll(newPublications);
-
+    isGetPublication = true;
     notifyListeners();
   } 
 }
