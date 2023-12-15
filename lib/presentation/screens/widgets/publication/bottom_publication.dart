@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:studenthive/domain/entities/publication.dart';
-import 'package:studenthive/presentation/screens/reserve/reserve_screen.dart';
 
 class BottomPublication extends StatelessWidget {
   final Publication publicationPost;
@@ -45,7 +45,7 @@ class BottomPublication extends StatelessWidget {
     
             ElevatedButton(
               onPressed: () {
-                Navigator.push(context, MaterialPageRoute(builder: (_) => const ReserveScreen()));
+                context.push('/reserve', extra: publicationPost);
               },
               style: ElevatedButton.styleFrom(
                 backgroundColor: colors.primary,

@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:studenthive/domain/entities/publication.dart';
 import 'package:studenthive/presentation/screens/widgets/reserve/reserve_container.dart';
 
 class ReserveScreen extends StatelessWidget {
-  const ReserveScreen({super.key});
+  final Publication publicationPost;
+  const ReserveScreen({super.key, required this.publicationPost});
 
   @override
   Widget build(BuildContext  context) {
+
     const TextStyle boldTextStyle =  TextStyle(
       fontSize: 20,
       fontWeight: FontWeight.bold

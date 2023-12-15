@@ -6,12 +6,10 @@ import 'package:studenthive/presentation/screens/widgets/home/publications/infor
 
 class PublicationContainer extends StatelessWidget {
   final Publication publicationPost; 
-  final Widget navigateToPublication;
 
   const PublicationContainer({
     super.key, 
     required this.publicationPost,  
-    required this.navigateToPublication,
     });
 
   @override

@@ -13,8 +13,9 @@ class PublicationScreen extends StatelessWidget {
     @override
   Widget build(BuildContext context) {
     return Scaffold(
+      
+        appBar: _CustomAppBar().build(context),  
 
-        appBar: _CustomAppBar().build(context),   
         body: Column(
           children: [
             Expanded(child: _CustomListView( publicationPost: publicationPost,)),
@@ -25,7 +26,6 @@ class PublicationScreen extends StatelessWidget {
       );
     }
 }
-
 
 class _CustomAppBar extends StatelessWidget {
 
@@ -62,7 +62,7 @@ class _CustomListView extends StatelessWidget {
       fontSize: 15,
       fontWeight: FontWeight.w500,
     );
-    return ListView(//Será el que estará mas por encima de todos
+    return ListView(
       children: [
 
         SizedBox(

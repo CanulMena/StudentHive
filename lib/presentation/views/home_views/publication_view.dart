@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:studenthive/domain/entities/publication.dart';
 import 'package:studenthive/presentation/provider/home_provider.dart';
-import 'package:studenthive/presentation/screens/publication/publication_screen.dart';
 import 'package:studenthive/presentation/screens/widgets/home/publications/publication_container.dart';
 
 class PublicationsView extends StatelessWidget {
@@ -25,7 +24,6 @@ class PublicationsView extends StatelessWidget {
                 vertical: 20,
               ),  
               child: PublicationContainer(
-                navigateToPublication: PublicationScreen( publicationPost: publicationPost,),
                 publicationPost: publicationPost,
               ),
             ),

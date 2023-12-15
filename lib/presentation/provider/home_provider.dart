@@ -22,7 +22,6 @@ class HomeProvider extends ChangeNotifier {
   }
 
   Future<void> getPublications() async {
-    await Future.delayed(const Duration(seconds: 2));
     final List<Publication> newPublications =  await publicationRepositoriesImpl.getInformationPublication();
     
     publications.addAll(newPublications);

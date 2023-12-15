@@ -22,13 +22,8 @@ final GoRouter router = GoRouter(
     GoRoute(
       path: '/reserve',
       builder: (BuildContext context, GoRouterState state) {
-        return const ReserveScreen();
-      },      
-    ),
-    GoRoute(
-      path: '/',
-      builder: (BuildContext context, GoRouterState state) {
-        return const HomeScreen();
+        final Publication publicationPost = GoRouterState.of(context).extra! as Publication;
+        return ReserveScreen(publicationPost: publicationPost,);
       },      
     ),
   ],
