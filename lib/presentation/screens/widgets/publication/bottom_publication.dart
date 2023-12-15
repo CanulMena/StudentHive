@@ -1,27 +1,39 @@
 import 'package:flutter/material.dart';
+import 'package:studenthive/domain/entities/publication.dart';
 import 'package:studenthive/presentation/screens/reserve/reserve_screen.dart';
 
-class CustomBottomAppBar extends StatelessWidget {
-  const CustomBottomAppBar({super.key});
+class BottomPublication extends StatelessWidget {
+  final Publication publicationPost;
+  const BottomPublication({super.key, required this.publicationPost});
 
   @override
   Widget build(BuildContext context) {
-    return BottomAppBar(
-      child: Container(
-        padding: const EdgeInsets.all(8.0),
-        child: Row(
+    final colors = Theme.of(context).colorScheme;
+    final size = MediaQuery.of(context).size;
+    return Container(
+      height: size.height * 0.10,
+      decoration: const BoxDecoration(
+        border: Border(
+          top: BorderSide(
+            color: Color.fromARGB(255, 229, 218, 218)
+          ),
+        )
+      ),
+      child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
-            const Column(
+    
+            Column(
+              mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Text(
-                  '\$1800 MXN',
-                  style: TextStyle(
+                  '\$${publicationPost.precioHabitacion} MXN',
+                  style: const TextStyle(
                     fontSize: 15,
                     color: Colors.black,
                   ),
                 ),
-                Text(
+                const Text(
                   'AL MES',
                   style: TextStyle(
                     fontSize: 12,
@@ -30,27 +42,27 @@ class CustomBottomAppBar extends StatelessWidget {
                 ),
               ],
             ),
-
+    
             ElevatedButton(
               onPressed: () {
                 Navigator.push(context, MaterialPageRoute(builder: (_) => const ReserveScreen()));
               },
               style: ElevatedButton.styleFrom(
-                backgroundColor: Colors.cyan,
+                backgroundColor: colors.primary,
+                padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 15),
               ),
               child: const Text(
                 'Reservar',
                 style: TextStyle(
                   fontSize: 15,
                   fontWeight: FontWeight.bold,
-                  color: Colors.black,
+                  color: Colors.white,
                 ),
               ),
             ),
-            
+    
           ],
         ),
-      ),
     );
   }
 }

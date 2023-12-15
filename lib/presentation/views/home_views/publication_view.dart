@@ -6,17 +6,17 @@ import 'package:studenthive/presentation/screens/publication/publication_screen.
 import 'package:studenthive/presentation/screens/widgets/home/publications/publication_container.dart';
 
 class PublicationsView extends StatelessWidget {
-  final List<Publication> listPublicationProvider;
-  const PublicationsView({super.key, required this.listPublicationProvider,});
+  final List<Publication> listPublications;
+  const PublicationsView({super.key, required this.listPublications,});
 
   @override
   Widget build(BuildContext context) {
     final homeProvider = context.watch<HomeProvider>();
 
     return homeProvider.isLoading ? const Center(child: CircularProgressIndicator()) : ListView.builder(
-      itemCount:  listPublicationProvider.length,
+      itemCount:  listPublications.length,
       itemBuilder: (context, index) {
-        final Publication publicationPost = listPublicationProvider[index];
+        final Publication publicationPost = listPublications[index];
         return Column( //*El widget column ya lo pocisiona en el centro del espacio disponible
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
@@ -25,7 +25,7 @@ class PublicationsView extends StatelessWidget {
                 vertical: 20,
               ),  
               child: PublicationContainer(
-                navigateToPublication: const PublicationScreen(),
+                navigateToPublication: PublicationScreen( publicationPost: publicationPost,),
                 publicationPost: publicationPost,
               ),
             ),

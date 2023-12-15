@@ -22,7 +22,7 @@ class PublicationContainer extends StatelessWidget {
     return GestureDetector(
 
       onTap: (){
-        context.push('/publication');
+        context.push('/publication', extra: publicationPost);
       },
       
       child: Container(

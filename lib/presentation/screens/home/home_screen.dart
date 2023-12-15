@@ -13,7 +13,7 @@ class HomeScreen extends StatelessWidget {
     final homeProvider = context.watch<HomeProvider>();
 
     List<Widget> screens = [
-    PublicationsView( listPublicationProvider: homeProvider.publications,),
+    PublicationsView( listPublications: homeProvider.publications,),
     const NotificationView(),
     const FavoriteView(),
     const AcountView(),
