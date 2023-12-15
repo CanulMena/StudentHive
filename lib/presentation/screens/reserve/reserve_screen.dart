@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:studenthive/domain/entities/publication.dart';
+import 'package:provider/provider.dart';
+import 'package:studenthive/presentation/provider/reserve_provider.dart';
 import 'package:studenthive/presentation/screens/widgets/reserve/reserve_container.dart';
 
 class ReserveScreen extends StatelessWidget {
-  final Publication publicationPost;
-  const ReserveScreen({super.key, required this.publicationPost});
+  const ReserveScreen({super.key,});
 
   @override
   Widget build(BuildContext  context) {
+    final reserveProvider = context.watch<ReserveProvider>();
 
     const TextStyle boldTextStyle =  TextStyle(
       fontSize: 20,
@@ -23,8 +24,9 @@ class ReserveScreen extends StatelessWidget {
         boldTextStyle).build(context),
 
         body: ListView.builder(
-          itemCount: 1,
+          itemCount: reserveProvider.listReservation.length,
           itemBuilder: (context, index) {
+            final publicationReserved = reserveProvider.listReservation[index];
             return const Column(
               children: [
                 Padding(

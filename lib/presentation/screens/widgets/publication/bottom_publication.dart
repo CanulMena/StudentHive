@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:provider/provider.dart';
 import 'package:studenthive/domain/entities/publication.dart';
+import 'package:studenthive/presentation/provider/reserve_provider.dart';
 
 class BottomPublication extends StatelessWidget {
   final Publication publicationPost;
@@ -10,6 +12,7 @@ class BottomPublication extends StatelessWidget {
   Widget build(BuildContext context) {
     final colors = Theme.of(context).colorScheme;
     final size = MediaQuery.of(context).size;
+    final reserveProvider = context.watch<ReserveProvider>();
     return Container(
       height: size.height * 0.10,
       decoration: const BoxDecoration(
@@ -45,7 +48,8 @@ class BottomPublication extends StatelessWidget {
     
             ElevatedButton(
               onPressed: () {
-                context.push('/reserve', extra: publicationPost);
+                context.push('/reserve',);
+                reserveProvider.addReservation(publicationPost);
               },
               style: ElevatedButton.styleFrom(
                 backgroundColor: colors.primary,
