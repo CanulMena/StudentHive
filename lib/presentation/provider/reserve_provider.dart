@@ -9,4 +9,9 @@ class ReserveProvider extends ChangeNotifier{
     listReservation.add(reservation);
   }
 
+  void deleteReservation(Publication reservation){
+    listReservation.remove(reservation);
+    notifyListeners();
+  }
+
 }

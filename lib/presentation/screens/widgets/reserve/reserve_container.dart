@@ -1,7 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:studenthive/domain/entities/publication.dart';
+import 'package:studenthive/presentation/provider/reserve_provider.dart';
 
 class ReserveContainer extends StatelessWidget {
-  const ReserveContainer({super.key});
+  final Publication publicationReserved;
+  final ReserveProvider reserveProvider;
+  const ReserveContainer({
+    super.key, 
+    required this.publicationReserved, 
+    required this.reserveProvider
+    });
 
   @override
   Widget build(BuildContext context) {
@@ -24,7 +32,6 @@ class ReserveContainer extends StatelessWidget {
         ],
     ),
         child: Row( 
-          // mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
             Container(
               //!Image container
@@ -37,8 +44,8 @@ class ReserveContainer extends StatelessWidget {
               ),
               child: ClipRRect(
                 borderRadius: BorderRadius.circular(20),
-                child: Image.asset(
-                  'assets/images/1.jpg',
+                child: Image.network(
+                  publicationReserved.imagenes,
                   width: double.infinity,
                   height: double.infinity,
                   fit: BoxFit.cover,
@@ -54,32 +61,32 @@ class ReserveContainer extends StatelessWidget {
               decoration: const BoxDecoration(
                 // color: Colors.green
               ),
-              child: const Column(
+              child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
 
                   Text(
-                    'Cerca de la UTM',
-                    style: TextStyle(
+                    publicationReserved.titulo,
+                    style: const TextStyle(
                       color: Colors.white,
                       fontSize: 15,
                       fontWeight: FontWeight.bold,
                     ),
                   ),
-                  SizedBox(height: 10,),
+                  const SizedBox(height: 10,),
                   Text(
-                    '\$${1800}',
-                    style: TextStyle(
+                    '\$${publicationReserved.precioHabitacion}',
+                    style: const TextStyle(
                       color: Colors.white,
                       fontSize: 15,
                       fontWeight: FontWeight.bold,
                     ),
                   ),
-                  SizedBox(height: 10,),
+                  const SizedBox(height: 10,),
                   Text(
-                    'Emmanuel Yama',
-                    style: TextStyle(
+                    publicationReserved.nombreAnfitrion,
+                    style: const TextStyle(
                       color: Colors.white,
                       fontSize: 15,
                       fontWeight: FontWeight.w500,
@@ -89,26 +96,15 @@ class ReserveContainer extends StatelessWidget {
                 ],
               )
             ),
-
+            //!Delete Publication
             IconButton(
-              onPressed: () {},
+              onPressed: () {
+                reserveProvider.deleteReservation(publicationReserved);
+              },
               color: Colors.white,
               icon: const Icon(
                 Icons.clear
               )),
-            // Container(
-            //   //!Icon container
-            //    decoration: const BoxDecoration(
-            //     color: Colors.orange
-            //   ),
-            //   height: size.height * .20 * 100,
-            //   width: size.width * .95 * .15,
-            //   child: IconButton(
-            //   onPressed: () {},
-            //   icon: const Icon(
-            //     Icons.delete
-            //   )),
-            // )
           ],
         ),
       );

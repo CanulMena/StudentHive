@@ -27,14 +27,17 @@ class ReserveScreen extends StatelessWidget {
           itemCount: reserveProvider.listReservation.length,
           itemBuilder: (context, index) {
             final publicationReserved = reserveProvider.listReservation[index];
-            return const Column(
+            return Column(
               children: [
                 Padding(
-                  padding: EdgeInsets.symmetric(
+                  padding: const EdgeInsets.symmetric(
                      vertical: 10,
                      ),
 
-                  child: ReserveContainer(),
+                  child: ReserveContainer(
+                    publicationReserved: publicationReserved,
+                    reserveProvider: reserveProvider,
+                    ),
                 ),
               ],
             );
