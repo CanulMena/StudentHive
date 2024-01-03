@@ -14,7 +14,17 @@ class PublicationScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       
-        appBar: _CustomAppBar().build(context),  
+        appBar: AppBar(
+          leading: IconButton(
+            icon: const Icon(
+              Icons.arrow_back,
+              color: Colors.white,
+              ),
+            onPressed: () {
+              context.pop();
+              },
+            ),
+        ), 
 
         body: Column(
           children: [
@@ -25,24 +35,6 @@ class PublicationScreen extends StatelessWidget {
 
       );
     }
-}
-
-class _CustomAppBar extends StatelessWidget {
-
-  @override
-  PreferredSizeWidget build(BuildContext context) {
-    return AppBar(
-      leading: IconButton(
-        icon: const Icon(
-          Icons.arrow_back,
-          color: Colors.white,
-        ),
-        onPressed: () {
-          context.pop();
-          },
-        ),
-    );
-  }
 }
 
 class _CustomListView extends StatelessWidget {
