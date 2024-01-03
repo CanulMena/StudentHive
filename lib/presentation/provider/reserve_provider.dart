@@ -21,4 +21,4 @@ class ReserveProvider extends ChangeNotifier{
     return listReservation.any((e) => reservation.idPublicacion == e.idPublicacion);
   }
 
-}
+} 

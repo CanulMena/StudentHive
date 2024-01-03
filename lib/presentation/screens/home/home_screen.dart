@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:studenthive/presentation/provider/favorite_provider.dart';
 import 'package:studenthive/presentation/provider/home_provider.dart';
 import 'package:studenthive/presentation/screens/widgets/home/custom_bottom_navegation_bar.dart';
 import 'package:studenthive/presentation/views/home_views.dart';
@@ -10,12 +11,13 @@ class HomeScreen extends StatelessWidget {
   @override
    build(BuildContext context) {
 
-    final homeProvider = context.watch<HomeProvider>();
+    final HomeProvider homeProvider = context.watch<HomeProvider>();
+    final FavoriteProvider favoriteProvider = context.watch<FavoriteProvider>();
 
     List<Widget> screens = [
     PublicationsView( listPublications: homeProvider.publications,),
     const NotificationView(),
-    const FavoriteView(),
+    FavoriteView(favoriteProvider: favoriteProvider),
     const AcountView(),
   ];
     
