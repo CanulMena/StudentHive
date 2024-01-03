@@ -22,7 +22,8 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(create: (_) => HomeProvider(
           publicationRepositoriesImpl: PublicationRepositoriesImpl(
             publicationDataSourceImpl: PublicationDataSourceImpl())
-            )..getPublications()),
+            )/* ..getPublications() */),
+            
         ChangeNotifierProvider(create: (context) => ReserveProvider(),)
       ],
       child: MaterialApp.router(
@@ -30,6 +31,7 @@ class MyApp extends StatelessWidget {
         title: 'StudentHive',
         theme: ThemesApp(selectedColor: 1).themes(),
         debugShowCheckedModeBanner: false,
+        
       ),
     );
   }
