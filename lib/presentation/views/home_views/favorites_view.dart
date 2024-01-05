@@ -7,30 +7,35 @@ class FavoriteView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ListView.builder(
-      itemCount: favoriteProvider.listFavorites.length,
-      itemBuilder: (context, index) {
-        return const _FavoriteContainer();
-      },
-    );
-  }
-}
+    return Scaffold(
+      appBar: AppBar(
+        backgroundColor: Colors.white,
+        elevation: 0,
+        actions: [
 
-class _FavoriteContainer extends StatelessWidget {
-  const _FavoriteContainer();
+          GestureDetector(
+            onTap: () {},
+            child: const Padding(
+              padding: EdgeInsets.fromLTRB(0, 20, 20, 0),
+              child: Text(
+                'Edit', 
+                style: TextStyle(
+                  color: Colors.black,
+                  fontSize: 15,
+                  decoration: TextDecoration.underline,
+                  decorationColor: Colors.black, // Cambia el color del subrayado
+                  decorationThickness: 2.0, // Ajusta el grosor del subrayado
+                  decorationStyle: TextDecorationStyle.solid,
+                  ),
+                ),
+              ),
+            )
 
-  @override
-  Widget build(BuildContext context) {
-    final size = MediaQuery.of(context).size;
-    return Padding(
-      padding: const EdgeInsets.all(8.0),
-      child: Container(
-        width: size.width * 0.4,
-        height: size.height * 0.2,
-        decoration: const BoxDecoration(
-          color: Colors.red
+          ],  
         ),
-      ),
-    );
+
+      body: const SizedBox(),
+
+      );
   }
 }

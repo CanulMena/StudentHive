@@ -20,6 +20,7 @@ class MyApp extends StatelessWidget {
     
     return MultiProvider(
       providers: [
+        
         ChangeNotifierProvider(create: (_) => HomeProvider(
           publicationRepositoriesImpl: PublicationRepositoriesImpl(
             publicationDataSourceImpl: PublicationDataSourceImpl())
@@ -27,7 +28,8 @@ class MyApp extends StatelessWidget {
             
         ChangeNotifierProvider(create: (context) => ReserveProvider(),),
 
-        ChangeNotifierProvider(create: (_) => FavoriteProvider())
+        ChangeNotifierProvider(create: (_) => FavoriteProvider()),
+        
       ],
       child: MaterialApp.router(
         routerConfig: router,

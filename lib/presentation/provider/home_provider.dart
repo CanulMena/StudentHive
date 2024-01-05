@@ -33,7 +33,7 @@ class HomeProvider extends ChangeNotifier {
     Publication(
       idPublicacion: 2, 
       titulo: 'Cerca de la UTM', 
-      imagenes: 'https://static9.depositphotos.com/1007373/1116/i/950/depositphotos_11164055-stock-photo-modern-master-bedroom-interior.jpg', 
+      imagenes: 'https://img.buzzfeed.com/buzzfeed-static/static/2017-06/7/19/asset/buzzfeed-prod-fastlane-02/sub-buzz-22814-1496876921-1.jpg?downsize=700%3A%2A&output-quality=auto&output-format=auto', 
       numeroDeCuartosHabitacion: 2, 
       ubicacionHabitacion: 'calle 112b x 54 y 56 ', 
       precioHabitacion: 1300, 

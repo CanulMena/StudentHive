@@ -29,14 +29,14 @@ class _CustomButtomNavegationBarState extends State<CustomButtomNavegationBar> {
           label: 'Home'
           ),
         BottomNavigationBarItem(
-          icon: const Icon(Icons.notifications),
-          backgroundColor: colors.primary,
-          label: 'Notificactions'
-          ),
-        BottomNavigationBarItem(
           icon: const Icon(Icons.favorite),
           backgroundColor: colors.primary,
           label: 'Fovorites'
+          ),
+        BottomNavigationBarItem(
+          icon: const Icon(Icons.notifications),
+          backgroundColor: colors.primary,
+          label: 'Notificactions'
           ),
         BottomNavigationBarItem(
           icon: const Icon(Icons.person),

@@ -15,15 +15,17 @@ class HomeScreen extends StatelessWidget {
     final FavoriteProvider favoriteProvider = context.watch<FavoriteProvider>();
 
     List<Widget> screens = [
+
     PublicationsView( listPublications: homeProvider.publications,),
-    const NotificationView(),
+
     FavoriteView(favoriteProvider: favoriteProvider),
+    
+    const NotificationView(),
+
     const AcountView(),
   ];
     
     return Scaffold(
-      appBar: _CustomAppBar().build(context),
-
       body: IndexedStack(
         index: homeProvider.selectedView,
         children: screens, 
@@ -34,25 +36,5 @@ class HomeScreen extends StatelessWidget {
         selectedIndex: homeProvider.selectedView
         ),
     );
-  }
-}
-
-
-class _CustomAppBar extends StatelessWidget {
-
-  @override
-  PreferredSizeWidget build(BuildContext context) {
-    return AppBar(
-      actions: [
-        IconButton(
-          onPressed: (){}, 
-          icon: const Icon(Icons.search)
-          ),
-        IconButton(
-          onPressed: () {}, 
-          icon: const Icon(Icons.menu),
-          ),
-        ],
-      );
   }
 }

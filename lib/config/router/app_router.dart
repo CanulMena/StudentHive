@@ -3,20 +3,30 @@ import 'package:go_router/go_router.dart';
 import 'package:studenthive/domain/entities/publication.dart';
 import 'package:studenthive/presentation/screens/screens.dart';
 
-final GoRouter router = GoRouter(
+bool isLogged = false;
 
+final GoRouter router = GoRouter(
+  
+  initialLocation: isLogged ? '/home' : '/login',
+  
   routes: <RouteBase>[
     GoRoute(
-      path: '/',
-      builder: (BuildContext context, GoRouterState state) {
+      path: '/login',
+      builder: (context, state) {
         return const LoginScreen();
-      },      
+      },
+    ),
+    GoRoute(
+      path: '/createAccount',
+      builder: (context, state) {
+        return const CreateAnAccountScreen();
+      },
     ),
     GoRoute(
       path: '/home',
-      builder: (BuildContext context, GoRouterState state) {
-        return const LoginScreen();
-      },      
+       builder: (context, state) {
+        return const HomeScreen();
+      },
     ),
     GoRoute(
       path: '/publication',
@@ -32,5 +42,6 @@ final GoRouter router = GoRouter(
       },      
     ),
   ],
+
 );  
 

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:studenthive/presentation/screens/login/create_acount_screen.dart';
+import 'package:go_router/go_router.dart';
 import 'package:studenthive/presentation/screens/home/home_screen.dart';
+import 'package:studenthive/presentation/screens/login/create_acount_screen.dart';
 import 'package:studenthive/presentation/screens/widgets/login/blue_box.dart';
 import 'package:studenthive/presentation/screens/widgets/login/input_decoration.dart';
 import 'package:studenthive/presentation/screens/widgets/login/hive_icon.dart';
@@ -18,8 +19,20 @@ class LoginScreen extends StatelessWidget {
         child: Stack(
           children: [
             BlueBox(boxHeigh: size.height * 0.6, circularRadius: 200),//Primero colocamos la parte mas inferior - Pues aca estará el fondo
+
             HiveIcon(size: size.height * 0.001, iconSize: 200), //el logo arriba del fondo
+
             loginForm(context),
+
+            Positioned(
+              top: 50,
+              left: 30,
+              child: GestureDetector(
+                onTap: () {
+                   context.go('/home');
+                },
+                child: const Icon(Icons.close),
+              )),
           ],
         ),
       ),
@@ -139,13 +152,7 @@ class LoginScreen extends StatelessWidget {
                             ),
                           ),
                           onPressed: () {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) =>
-                                    const HomeScreen(),
-                              ),
-                            );
+                           context.go('/home');
                           },
                         ),
 
@@ -159,13 +166,7 @@ class LoginScreen extends StatelessWidget {
 
                             TextButton(
                               onPressed: () {
-                                Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                    builder: (context) =>
-                                        const CreateAnAccountScreen(),
-                                  ),
-                                );
+                                context.push('/createAccount');
                               },
                               child: const Text(
                                 "Registrate",
@@ -190,4 +191,4 @@ class LoginScreen extends StatelessWidget {
 }
 
 
-//TODO: TERMINAR DE OPTIMIZAR EL CODIGO
+//TODO: TERMINAR DE REFACTORIZAR EL CODIGO
