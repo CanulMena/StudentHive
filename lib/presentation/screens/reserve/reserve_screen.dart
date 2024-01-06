@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:studenthive/presentation/provider/reserve_provider.dart';
-import 'package:studenthive/presentation/screens/widgets/reserve/reserve_container.dart';
+import 'package:studenthive/presentation/screens/widgets/widgets_screens/reserve/reserve_container.dart';
 
 class ReserveScreen extends StatelessWidget {
   const ReserveScreen({super.key,});

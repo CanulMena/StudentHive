@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:studenthive/domain/entities/publication.dart';
-import 'package:studenthive/presentation/screens/widgets/publication/bottom_publication.dart';
+import 'package:studenthive/presentation/screens/widgets/widgets_screens/publication/bottom_publication.dart';
 
 class PublicationScreen extends StatelessWidget {
   final Publication publicationPost; //!Una forma de obtener el valor de esta variable desde el go_router

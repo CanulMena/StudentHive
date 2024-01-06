@@ -3,8 +3,8 @@ import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
 import 'package:studenthive/domain/entities/publication.dart';
 import 'package:studenthive/presentation/provider/favorite_provider.dart';
-import 'package:studenthive/presentation/screens/widgets/home/publications/image_container.dart';
-import 'package:studenthive/presentation/screens/widgets/home/publications/information_container.dart';
+import 'package:studenthive/presentation/screens/widgets/widgets_screens/home/publications/image_container.dart';
+import 'package:studenthive/presentation/screens/widgets/widgets_screens/home/publications/information_container.dart';
 
 class PublicationContainer extends StatefulWidget {
   final Publication publicationPost; 
@@ -69,7 +69,9 @@ class _PublicationContainerState extends State<PublicationContainer> {
               onTap: () {
                 setState(() {
                   isLiked = !isLiked;
-                  isLiked ? favoriteProvider.addFavorites(widget.publicationPost) : favoriteProvider.deleteFavorites(widget.publicationPost);
+                  isLiked 
+                  ? favoriteProvider.addFavorites(widget.publicationPost) 
+                  : favoriteProvider.deleteFavorites(widget.publicationPost);
                   });
                 },
               child: Icon(

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:studenthive/presentation/provider/favorite_provider.dart';
 import 'package:studenthive/presentation/provider/home_provider.dart';
-import 'package:studenthive/presentation/screens/widgets/home/custom_bottom_navegation_bar.dart';
+import 'package:studenthive/presentation/screens/widgets/widgets_screens/home/custom_bottom_navegation_bar.dart';
 import 'package:studenthive/presentation/views/home_views.dart';
 
 class HomeScreen extends StatelessWidget {

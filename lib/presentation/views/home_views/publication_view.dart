@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:studenthive/domain/entities/publication.dart';
 import 'package:studenthive/presentation/provider/home_provider.dart';
-import 'package:studenthive/presentation/screens/widgets/home/publications/publication_container.dart';
+import 'package:studenthive/presentation/screens/widgets/widgets_screens/home/publications/publication_container.dart';
 
 class PublicationsView extends StatelessWidget {
   final List<Publication> listPublications;

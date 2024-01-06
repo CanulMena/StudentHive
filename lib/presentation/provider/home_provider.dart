@@ -18,7 +18,7 @@ class HomeProvider extends ChangeNotifier {
     Publication(
       idPublicacion: 1, 
       titulo: 'Cerca de la UTM', 
-      imagenes: 'https://www.arti-mana.com/wp-content/uploads/decoracion-de-un-cuarto.jpg.webp', 
+      imagenes: 'https://img.buzzfeed.com/buzzfeed-static/static/2017-06/6/20/asset/buzzfeed-prod-fastlane-03/sub-buzz-31580-1496794037-24.jpg?downsize=600:*&output-format=auto&output-quality=auto', 
       numeroDeCuartosHabitacion: 2, 
       ubicacionHabitacion: 'calle 111b x 52a y 54', 
       precioHabitacion: 1200, 
