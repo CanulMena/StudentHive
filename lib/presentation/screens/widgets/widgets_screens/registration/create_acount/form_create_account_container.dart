@@ -7,7 +7,7 @@ class FormularioContainer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return Container( //?Amarro todo el formulario en un contenedor que tedría todos los textFormField
       margin: const EdgeInsets.symmetric(horizontal: 30),
       child: Form(
         child: Column(
