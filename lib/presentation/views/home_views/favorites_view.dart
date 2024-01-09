@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:studenthive/config/router/app_router.dart';
 import 'package:studenthive/presentation/provider/favorite_provider.dart';
-import 'package:studenthive/presentation/screens/widgets/widgets_views/favorites/favorite_view_logged.dart';
-import 'package:studenthive/presentation/screens/widgets/widgets_views/favorites/favorite_view_no_logged.dart';
+import 'package:studenthive/presentation/screens/widgets/widgets_views/favorites_view/favorite_view_logged.dart';
+import 'package:studenthive/presentation/screens/widgets/widgets_views/favorites_view/favorite_view_no_logged.dart';
 
 class FavoriteView extends StatelessWidget {
   final FavoriteProvider favoriteProvider;
