@@ -33,7 +33,7 @@ class CustomListTile extends StatelessWidget {
         ),
 
       onTap: () {
-        context.go(menuItem.linkRoute);
+        context.push(menuItem.linkRoute);
       },
 
       tileColor: Colors.transparent,
