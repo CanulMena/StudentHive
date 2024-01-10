@@ -37,6 +37,12 @@ class LoggedAppMenuItems extends StatelessWidget {
 
             const SizedBox(height: 15,),
 
+            const _ProfileListTile(),
+
+            const _CreatePublicationListTile(),
+
+            const SizedBox(height: 15,),
+
             const Text(
               'Settings',
               style: TextStyle(
@@ -58,8 +64,47 @@ class LoggedAppMenuItems extends StatelessWidget {
               ),
 
             ...legalMenuItems.map((menuItem) => CustomListTile(menuItem: menuItem)),
+
+            const SizedBox(height: 50,)
           
           ],
         );
+  }
+}
+
+class _CreatePublicationListTile extends StatelessWidget {
+  const _CreatePublicationListTile();
+
+  @override
+  Widget build(BuildContext context) {
+    final colors = Theme.of(context).colorScheme;
+    return ListTile(
+      contentPadding: EdgeInsets.zero,
+      leading: const Icon(Icons.home),
+      title: const Text('Create a publication'),
+      trailing: Icon(
+        Icons.arrow_forward_ios_rounded,
+        color: colors.primary,
+        ),
+    );
+  }
+}
+
+class _ProfileListTile extends StatelessWidget {
+  const _ProfileListTile();
+
+  @override
+  Widget build(BuildContext context) {
+    final colors = Theme.of(context).colorScheme;
+    return ListTile(
+      contentPadding: EdgeInsets.zero,
+      leading: const Icon(Icons.person),
+      title: const Text('Name profile'),
+      subtitle: const Text('show profile'),
+      trailing: Icon(
+        Icons.arrow_forward_ios_rounded,
+        color: colors.primary,
+        ),
+    );
   }
 }

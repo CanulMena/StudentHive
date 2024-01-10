@@ -13,7 +13,7 @@ class MenuItem {
     });
 }
 
- List<MenuItem> noLoggedMenuItems = [
+ List<MenuItem> noLoggedMenuItems = [//!No logged menu items
   MenuItem(
     icon: Icons.settings_outlined, 
     title: 'Settings', 
@@ -36,7 +36,7 @@ class MenuItem {
     ),
   ];
 
-List<MenuItem> loggedSettigMenuItems = [
+List<MenuItem> loggedSettigMenuItems = [//!Settings menu items
   MenuItem(
     icon: Icons.person_outline_outlined, 
     title: 'Personal information', 
@@ -54,7 +54,7 @@ List<MenuItem> loggedSettigMenuItems = [
     ),
   ];
 
-List<MenuItem> legalMenuItems = [
+List<MenuItem> legalMenuItems = [//!Legal menu items
   MenuItem(
     icon: Icons.menu_book_outlined, 
     title: 'Termns of Service', 
