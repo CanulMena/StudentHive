@@ -2,23 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:studenthive/config/menu/menu_item.dart';
 
-class AcountView extends StatelessWidget {
-  const AcountView({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return ListView.builder(
-      itemCount: appMenuItems.length,
-      itemBuilder: (context, index) {
-        final menuItem = appMenuItems[index];
-        return _CustomListTile(menuItem: menuItem);
-      },
-      );
-  }
-}
-
-class _CustomListTile extends StatelessWidget {
-  const _CustomListTile({required this.menuItem,});
+class CustomListTile extends StatelessWidget {
+  const CustomListTile({super.key, required this.menuItem,});
 
   final MenuItem menuItem;
 
@@ -26,6 +11,8 @@ class _CustomListTile extends StatelessWidget {
   Widget build(BuildContext context) {
     final colors = Theme.of(context).colorScheme;
     return ListTile(
+
+      contentPadding: EdgeInsets.zero,
 
       title: Text(
         menuItem.title,
@@ -48,6 +35,16 @@ class _CustomListTile extends StatelessWidget {
       onTap: () {
         context.go(menuItem.linkRoute);
       },
+
+      tileColor: Colors.transparent,
+
+      shape: const Border(
+        bottom: BorderSide(
+          color: Color.fromARGB(255, 201, 197, 197),
+          width: 0.75
+        )
+
+      ),
     );
   }
 }
