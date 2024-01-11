@@ -11,46 +11,49 @@ class NotificationContainer2 extends StatelessWidget {
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
 
-    return Container(
-      alignment: Alignment.center,
-      height: size.height * .30,
-      width: size.width * .34,
-      decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(10),
-          color: Colors.white, 
-          border: const Border(
-            top: BorderSide(color: Colors.grey, width: .5),
-            bottom: BorderSide(color: Colors.grey, width: .5),
-            left: BorderSide(color: Colors.grey, width: .5),
-            right: BorderSide(color: Colors.grey, width: .5)
-          ),
-      ),
-      child: Row(
-        children: [
-          Container(
-            padding: const EdgeInsets.all(13),
-            height: size.height * .30,
-            width: size.width * .85,
-            child: const Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  'El apartartamento ya no se encuentra disponible pero aquí te dejamos algunas publicaciones que te pueden gustar ',
-                  style: TextStyle(
-                    color: Colors.black,
-                  ),
-                ),
-                Text(
-                  'Link de Publicacion 1',
-                  style: TextStyle(
-                    fontStyle: FontStyle.italic,
-                    color: Colors.red
-                  ),
-                ),
-              ],
+    return Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: Container(
+        alignment: Alignment.center,
+        height: size.height * .30,
+        width: size.width * .34,
+        decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(10),
+            color: Colors.white, 
+            border: const Border(
+              top: BorderSide(color: Colors.grey, width: .5),
+              bottom: BorderSide(color: Colors.grey, width: .5),
+              left: BorderSide(color: Colors.grey, width: .5),
+              right: BorderSide(color: Colors.grey, width: .5)
             ),
-          ),
-        ],
+        ),
+        child: Row(
+          children: [
+            Container(
+              padding: const EdgeInsets.all(13),
+              height: size.height * .30,
+              width: size.width * .85,
+              child: const Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    'El apartartamento ya no se encuentra disponible pero aquí te dejamos algunas publicaciones que te pueden gustar ',
+                    style: TextStyle(
+                      color: Colors.black,
+                    ),
+                  ),
+                  Text(
+                    'Link de Publicacion 1',
+                    style: TextStyle(
+                      fontStyle: FontStyle.italic,
+                      color: Colors.red
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ],
+        ),
       ),
     );  
   }

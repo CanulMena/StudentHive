@@ -82,7 +82,7 @@ class NotificationContainer3 extends StatelessWidget {
                           'Aceptar',
                         ),
                       ),
-                      const SizedBox(width: 15,),
+                      const SizedBox(width: 20,),
                       ElevatedButton(
                         onPressed: () {
                           //! Logica del boton Aceptar

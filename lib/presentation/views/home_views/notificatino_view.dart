@@ -13,26 +13,22 @@ class NotificationView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
 
-    return Padding(
-      padding: const EdgeInsets.all(10.0),
-      child: ListView(
-        children: <Widget>[
-          NotificationContainer1(
-            messageConst: messageConst,
-            messageApi: messageApi,
-          ),
-          NotificationContainer2(
-            messageConst: messageConst,
-            messageApi: messageApi,
-          ),
-          NotificationContainer3(
-            messageConst: messageConst, 
-            messageApi: messageApi
-          ),
-          // ? Agrega más instancias según sea necesario
-        ],
-      ) ,
+    return ListView(
+      children: <Widget>[
+        NotificationContainer1(
+          messageConst: messageConst,
+          messageApi: messageApi,
+        ),
+        NotificationContainer2(
+          messageConst: messageConst,
+          messageApi: messageApi,
+        ),
+        NotificationContainer3(
+          messageConst: messageConst, 
+          messageApi: messageApi
+        ),
+        // ? Agrega más instancias según sea necesario
+      ],
     );
-    
   }
 }
