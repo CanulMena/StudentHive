@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:studenthive/presentation/provider/favorite_provider.dart';
-import 'package:studenthive/presentation/screens/widgets/widgets_views/favorites/list_empty.dart';
-import 'package:studenthive/presentation/screens/widgets/widgets_views/favorites/list_no_empty.dart';
+import 'package:studenthive/presentation/views/widgets/widgets_views/favorites_view/list_empty.dart';
+import 'package:studenthive/presentation/views/widgets/widgets_views/favorites_view/list_no_empty.dart';
 
 class FavoriteViewLogged extends StatelessWidget {
   final FavoriteProvider favoriteProvider;
