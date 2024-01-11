@@ -9,7 +9,7 @@ class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
 
   @override
-   build(BuildContext context) {
+  build(BuildContext context) {
 
     final HomeProvider homeProvider = context.watch<HomeProvider>();
     final FavoriteProvider favoriteProvider = context.watch<FavoriteProvider>();
@@ -20,7 +20,7 @@ class HomeScreen extends StatelessWidget {
 
     FavoriteView(favoriteProvider: favoriteProvider),
     
-    const NotificationView(),
+    const NotificationView(messageApi: '', messageConst: '',),
 
     const AcountView(),
   ];
