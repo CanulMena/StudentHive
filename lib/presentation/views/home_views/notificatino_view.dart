@@ -15,6 +15,7 @@ class NotificationView extends StatelessWidget {
 
     return ListView(
       children: <Widget>[
+        SizedBox(),
         NotificationContainer1(
           messageConst: messageConst,
           messageApi: messageApi,
