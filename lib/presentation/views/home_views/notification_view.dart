@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:studenthive/presentation/views/widgets/widgets_views/notifications_view/reservation_accepted_notification_container.dart';
+import 'package:studenthive/presentation/views/widgets/widgets_views/notifications_view/reservation_rejected_notification_container.dart';
+import 'package:studenthive/presentation/views/widgets/widgets_views/notifications_view/host_view_notification_container.dart';
 
 //! test user entity
 class User {
@@ -66,9 +68,9 @@ class NotificationView extends StatelessWidget {
               height: 40,
             ),
             ...notificationList.map(
-              (notification) => ReservationAcceptedNotificationContainer(
-                titleNotification: notification.title,
-                user: notification.user,
+              (notification) => const HostViewNotificationContainer(
+                titleNotification: '',
+                user: '',
               ),
             ),
           ],

@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
-
+import 'package:studenthive/presentation/views/home_views/notification_view.dart';
 //* NOTIFICACIONES DE SOLICITUDES RECHAZADAS
 class ReservationRejectedNotificationContainer extends StatelessWidget {
-  final String titleNotification;
+  final String messageCosnat;
   final String messageApi;
 
   const ReservationRejectedNotificationContainer({
     super.key, 
-    required this.titleNotification, 
+    required this.messageCosnat, 
     required this.messageApi
   });
 
