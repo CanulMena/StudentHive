@@ -1,21 +1,51 @@
-import 'package:studenthive/presentation/screens/widgets/widgets_views/notifications/notification_container_1.dart';
-import 'package:studenthive/presentation/screens/widgets/widgets_views/notifications/notification_container_2.dart';
-import 'package:studenthive/presentation/screens/widgets/widgets_views/notifications/notification_container_3.dart';
 import 'package:flutter/material.dart';
+import 'package:studenthive/presentation/views/widgets/notifications/accepted_notification_container.dart';
+
+//! test user entity
+class User {
+  final int userId;
+  final int contactNumber;
+  final String firstName;
+  final String lastName;
+  final String urlPhoto;
+
+  User({
+    required this.contactNumber,
+    required this.firstName,
+    required this.lastName,
+    required this.urlPhoto,
+    required this.userId,
+  });
+}
+
+//? Enumeración para los tipos de notificaciones
+enum NotificationType { reserve, accepted, notAccepted }
+
+//! test notification entity
+class Notification {
+  final User user;
+  final String title;
+  final int notificationTime;
+  final NotificationType type;
+
+  Notification({
+    required this.user,
+    required this.title,
+    required this.notificationTime,
+    required this.type,
+  });
+}
+
 
 class NotificationView extends StatelessWidget {
-  final String messageConst;
-  final String messageApi;
-
-  const NotificationView({Key? key, required this.messageConst, required this.messageApi})
-      : super(key: key);
+  const NotificationView({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
 
     return ListView(
       children: <Widget>[
-
+        SizedBox(),
         NotificationContainer1(
           messageConst: messageConst,
           messageApi: messageApi,

@@ -20,7 +20,7 @@ class HomeScreen extends StatelessWidget {
 
     FavoriteView(favoriteProvider: favoriteProvider),
     
-    const NotificationView(messageApi: '', messageConst: '',),
+    const NotificationView(),
 
     const AcountView(),
   ];
