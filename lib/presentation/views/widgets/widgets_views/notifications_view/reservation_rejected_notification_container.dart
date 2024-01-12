@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 
 //* NOTIFICACIONES DE SOLICITUDES RECHAZADAS
-class NotificationContainer2 extends StatelessWidget {
+class ReservationRejectedNotificationContainer extends StatelessWidget {
   final String messageConst;
   final String messageApi;
 
-  const NotificationContainer2({super.key, required this.messageConst, required this.messageApi});
+  const ReservationRejectedNotificationContainer({super.key, required this.messageConst, required this.messageApi});
 
   @override
   Widget build(BuildContext context) {
