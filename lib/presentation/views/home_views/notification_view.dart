@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:studenthive/presentation/views/widgets/widgets_views/notifications_view/reservation_accepted_notification_container.dart';
-import 'package:studenthive/presentation/views/widgets/widgets_views/notifications_view/reservation_rejected_notification_container.dart';
 import 'package:studenthive/presentation/views/widgets/widgets_views/notifications_view/host_view_notification_container.dart';
 
 //! test user entity
@@ -58,7 +56,7 @@ class NotificationView extends StatelessWidget {
         child: ListView(
           children: [
             const Text(
-              'Notifications',
+              'jhkj',
               style: TextStyle(
                 fontSize: 30,
                 fontWeight: FontWeight.w600,

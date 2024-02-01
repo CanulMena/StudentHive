@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:studenthive/presentation/views/home_views/notification_view.dart';
 
 //! NOTIFICACIONES DE SOLICITUDES VISTA DEL ANFITRION
 class HostViewNotificationContainer extends StatelessWidget {
