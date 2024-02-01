@@ -24,14 +24,14 @@ class LoginScreen extends StatelessWidget {
         ),
       ),
     );
-  }
+  } 
 
   Widget loginForm(BuildContext context) {
     return SingleChildScrollView(
       child: Column(
         children: [
           const SizedBox(height: 250),
-          Container(
+          Container( // 
             padding: const EdgeInsets.all(10),
             margin: const EdgeInsets.symmetric(horizontal: 20),
             width: double.infinity,
