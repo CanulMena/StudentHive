@@ -3,3 +3,5 @@ export 'package:studenthive/presentation/screens/registration/create_acount_scre
 export 'package:studenthive/presentation/screens/registration/login_screen.dart';
 export 'package:studenthive/presentation/screens/reserve/reserve_screen.dart';
 export 'package:studenthive/presentation/screens/publication/publication_screen.dart';
+export 'package:studenthive/presentation/views/widgets/widgets_views/account_view.dart/logged_menu_items.dart';
+export 'package:studenthive/presentation/views/widgets/widgets_views/account_view.dart/create_publication/create_init_publication.dart';

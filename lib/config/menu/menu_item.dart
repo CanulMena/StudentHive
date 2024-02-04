@@ -31,7 +31,7 @@ class MenuItem {
     ),    
   MenuItem(
     icon: Icons.menu_book_outlined, 
-    title: 'Open-source licences', 
+    title: 'Open-source licenses', 
     linkRoute: '/'
     ),
   ];
@@ -57,7 +57,7 @@ List<MenuItem> loggedSettigMenuItems = [//!Settings menu items
 List<MenuItem> legalMenuItems = [//!Legal menu items
   MenuItem(
     icon: Icons.menu_book_outlined, 
-    title: 'Termns of Service', 
+    title: 'Terms of Service', 
     linkRoute: '/'
     ),    
   MenuItem(
@@ -67,7 +67,7 @@ List<MenuItem> legalMenuItems = [//!Legal menu items
     ),    
   MenuItem(
     icon: Icons.menu_book_outlined, 
-    title: 'Open-source licences', 
+    title: 'Open-source licenses', 
     linkRoute: '/'
     ),
   ];

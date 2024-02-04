@@ -6,9 +6,7 @@ import 'package:studenthive/presentation/screens/screens.dart';
 bool isLogged = false;
 
 final GoRouter router = GoRouter(
-  
   initialLocation: isLogged ? '/home' : '/login',
-  
   routes: <RouteBase>[
     GoRoute(
       path: '/login',
@@ -31,17 +29,23 @@ final GoRouter router = GoRouter(
     GoRoute(
       path: '/publication',
       builder: (BuildContext context, GoRouterState state) {
-        final Publication publicationPost = GoRouterState.of(context).extra! as Publication;
-        return PublicationScreen( publicationPost: publicationPost, );
-      },      
+        final Publication publicationPost =
+            GoRouterState.of(context).extra! as Publication;
+        return PublicationScreen(
+          publicationPost: publicationPost,
+        );
+      },
     ),
     GoRoute(
       path: '/reserve',
       builder: (BuildContext context, GoRouterState state) {
         return const ReserveScreen();
-      },      
+      },
     ),
+    GoRoute(
+        path: '/createPublication',
+        builder: (BuildContext context, GoRouterState state) {
+          return const CreatePublicationInit();
+        })
   ],
-
-);  
-
+);

@@ -47,7 +47,7 @@ class NotificationView extends StatelessWidget {
           AppBar(backgroundColor: Colors.white, elevation: 0, actions: const [
         //?Esto deajalo así luego vemos que ponemos XD
         Text(
-          'asdf',
+          '',
           style: TextStyle(color: Colors.black87),
         ),
       ]),
@@ -56,7 +56,7 @@ class NotificationView extends StatelessWidget {
         child: ListView(
           children: [
             const Text(
-              'jhkj',
+              'Notificaciones',
               style: TextStyle(
                 fontSize: 30,
                 fontWeight: FontWeight.w600,
@@ -78,7 +78,7 @@ class NotificationView extends StatelessWidget {
   }
 }
 
-//? usuaremos un gestor de estado para hacer un get de publicaciones.
+//? we are using un g de state para do un get de publications.
 List<Notification> notificationList = [
   Notification(
     user: userList[
@@ -97,23 +97,20 @@ List<Notification> notificationList = [
 
 //? usuaremos un gestor de estado para hacer un get de usuarios
 List<User> userList = [
-  
   User(
       userId: 1,
       contactNumber: 9999204857,
       firstName: 'Gustavo',
       lastName: 'Canul',
-      urlPhoto:'https://scontent.fmid2-1.fna.fbcdn.net/v/t39.30808-6/262531647_1775392782659993_5430604383254748736_n.jpg?_nc_cat=103&ccb=1-7&_nc_sid=dd5e9f&_nc_eui2=AeGI6LsoBo0sP1mlu5ispk6illY1StML69SWVjVK0wvr1FYu4BNbn47F0IKTzxas49JTQyYd_0chbB0bd3M6VB_w&_nc_ohc=TpCOEX9YRJ0AX-Mg31M&_nc_ht=scontent.fmid2-1.fna&oh=00_AfBvQuI30-4kqdmdsPSP0P4VUBDyFTjV4ryZty6WAhIvGw&oe=65A4D625'
-      ),
-
+      urlPhoto:
+          'https://scontent.fmid2-1.fna.fbcdn.net/v/t39.30808-6/262531647_1775392782659993_5430604383254748736_n.jpg?_nc_cat=103&ccb=1-7&_nc_sid=dd5e9f&_nc_eui2=AeGI6LsoBo0sP1mlu5ispk6illY1StML69SWVjVK0wvr1FYu4BNbn47F0IKTzxas49JTQyYd_0chbB0bd3M6VB_w&_nc_ohc=TpCOEX9YRJ0AX-Mg31M&_nc_ht=scontent.fmid2-1.fna&oh=00_AfBvQuI30-4kqdmdsPSP0P4VUBDyFTjV4ryZty6WAhIvGw&oe=65A4D625'),
   User(
-    userId: 1,
-    contactNumber: 9999204857, 
-    firstName: 'Gustavo', 
-    lastName: 'Canul', 
-    urlPhoto: 'https://scontent.fmid2-1.fna.fbcdn.net/v/t39.30808-6/262531647_1775392782659993_5430604383254748736_n.jpg?_nc_cat=103&ccb=1-7&_nc_sid=dd5e9f&_nc_eui2=AeGI6LsoBo0sP1mlu5ispk6illY1StML69SWVjVK0wvr1FYu4BNbn47F0IKTzxas49JTQyYd_0chbB0bd3M6VB_w&_nc_ohc=TpCOEX9YRJ0AX-Mg31M&_nc_ht=scontent.fmid2-1.fna&oh=00_AfBvQuI30-4kqdmdsPSP0P4VUBDyFTjV4ryZty6WAhIvGw&oe=65A4D625'
-    ),
-    
+      userId: 1,
+      contactNumber: 9999204857,
+      firstName: 'Gustavo',
+      lastName: 'Canul',
+      urlPhoto:
+          'https://scontent.fmid2-1.fna.fbcdn.net/v/t39.30808-6/262531647_1775392782659993_5430604383254748736_n.jpg?_nc_cat=103&ccb=1-7&_nc_sid=dd5e9f&_nc_eui2=AeGI6LsoBo0sP1mlu5ispk6illY1StML69SWVjVK0wvr1FYu4BNbn47F0IKTzxas49JTQyYd_0chbB0bd3M6VB_w&_nc_ohc=TpCOEX9YRJ0AX-Mg31M&_nc_ht=scontent.fmid2-1.fna&oh=00_AfBvQuI30-4kqdmdsPSP0P4VUBDyFTjV4ryZty6WAhIvGw&oe=65A4D625'),
   User(
       userId: 2,
       contactNumber: 9999204857,

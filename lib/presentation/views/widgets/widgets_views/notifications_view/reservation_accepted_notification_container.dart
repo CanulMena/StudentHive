@@ -1,15 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:studenthive/presentation/views/home_views/notification_view.dart';
 
 //* NOTIFICACIÓN DE SOLICITUDES ACEPATADAS
 class ReservationAcceptedNotificationContainer extends StatelessWidget {
+  final String user;
   final String titleNotification;
-  final User user;
 
   const ReservationAcceptedNotificationContainer({
     super.key,
-    required this.titleNotification,
     required this.user,
+    required this.titleNotification,
   });
 
   @override
@@ -18,15 +17,11 @@ class ReservationAcceptedNotificationContainer extends StatelessWidget {
 
     return Container(
       margin: const EdgeInsets.only(bottom: 10),
-      height: size.height * .10,
+      height: size.height * .16,
       width: size.width * .34,
       decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(10),
-          border: const Border(
-              top: BorderSide(color: Colors.grey, width: .5),
-              bottom: BorderSide(color: Colors.grey, width: .5),
-              left: BorderSide(color: Colors.grey, width: .5),
-              right: BorderSide(color: Colors.grey, width: .5)),
+          border: Border.all(color: Colors.grey, width: .5),
           color: Colors.white),
       child: Row(
         children: [
@@ -38,26 +33,33 @@ class ReservationAcceptedNotificationContainer extends StatelessWidget {
             width: size.width * 0.29 * 0.60,
             decoration:
                 const BoxDecoration(shape: BoxShape.circle, color: Colors.grey),
-            child: CircleAvatar(
-              backgroundImage: NetworkImage(user.urlPhoto),
+            child: const CircleAvatar(
+              backgroundImage: NetworkImage(''),
             ),
           ),
 
           Container(
             //?InformationContainer
             padding: const EdgeInsets.all(10),
-            height: size.height * .10,
+            height: size.height * .16,
             width: size.width * .67,
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
-                Text(
-                  //! Se cambia por el numero de telefono del usuario
-                  titleNotification,
-                  style: const TextStyle(
-                      fontStyle: FontStyle.italic, color: Colors.red),
-                )
+                const Text(
+                  'Felicidades su solicitud a sido aprobada por favor termina el proceso de reserva ',
+                  style:
+                      TextStyle(fontStyle: FontStyle.italic, color: Colors.red),
+                ),
+                const SizedBox(height: 5),
+                TextButton(
+                    onPressed: () {},
+                    style: ButtonStyle(
+                      backgroundColor: MaterialStateProperty.all(
+                          const Color.fromARGB(255, 77, 202, 218)),
+                    ),
+                    child: const Text('Terminar Reserva')),
               ],
             ),
           ),
