@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:studenthive/presentation/views/widgets/widgets_views/account_view.dart/create_publication/routerAnimation/navbar_button.dart';
 import 'package:studenthive/presentation/views/widgets/widgets_views/account_view.dart/create_publication/routerAnimation/router_animation.dart';
+import 'package:studenthive/presentation/views/widgets/widgets_views/account_view.dart/create_publication/steps_for_creation/create_publication_detail_house.dart';
 
 class CreatePublicationLocation extends StatelessWidget {
   const CreatePublicationLocation({super.key});
@@ -12,16 +13,6 @@ class CreatePublicationLocation extends StatelessWidget {
         appBar: PreferredSize(
           preferredSize: const Size.fromHeight(100),
           child: AppBar(
-              leading: ButtonBar(
-                children: [
-                  IconButton(
-                    icon: const Icon(Icons.arrow_back_ios_new),
-                    onPressed: () {
-                      Navigator.pop(context);
-                    },
-                  ),
-                ],
-              ),
               title: const Text('Describe lo mejor que puedas tu lugar')),
         ),
         body: Center(
@@ -42,8 +33,8 @@ class CreatePublicationLocation extends StatelessWidget {
                   CustomNavBarButton(
                     label: 'Siguiente',
                     onPressed: () {
-                      Navigator.of(context).push(
-                          createPageRoute(const CreatePublicationLocation()));
+                      Navigator.of(context)
+                          .push(createPageRoute(const DetailsHouse()));
                     },
                   )
                 ],
@@ -72,7 +63,7 @@ class _ContainerFormLocationState extends State<ContainerFormLocation> {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.all(10),
+      padding: const EdgeInsets.all(8.0),
       child: Form(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
