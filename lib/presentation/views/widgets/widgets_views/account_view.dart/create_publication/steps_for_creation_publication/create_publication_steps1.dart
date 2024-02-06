@@ -21,7 +21,7 @@ class _CretatePublicationSteps1State extends State<CretatePublicationSteps1> {
       appBar: AppBar(
         backgroundColor: Colors.white,
         elevation: 0,
-        toolbarHeight: 20,
+        toolbarHeight: 30,
       ),
       body: Padding(
         padding: const EdgeInsets.all(8.0),

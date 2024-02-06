@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:studenthive/presentation/views/widgets/widgets_views/account_view.dart/create_publication/routerAnimation/navbar_button.dart';
 import 'package:studenthive/presentation/views/widgets/widgets_views/account_view.dart/create_publication/routerAnimation/router_animation.dart';
-import 'package:studenthive/presentation/views/widgets/widgets_views/account_view.dart/create_publication/steps_for_creation_publication/container_details_publication.dart';
+import 'package:studenthive/presentation/views/widgets/widgets_views/account_view.dart/create_publication/utils_for_creation_publication/conatiner_details_publication.dart';
 import 'package:studenthive/presentation/views/widgets/widgets_views/account_view.dart/create_publication/steps_for_creation_publication/create_publication_who_else.dart';
 
 class DetailsHouse extends StatefulWidget {
-  const DetailsHouse({Key? key});
+  const DetailsHouse({super.key});
 
   @override
   State<DetailsHouse> createState() => _DetailsHouseState();

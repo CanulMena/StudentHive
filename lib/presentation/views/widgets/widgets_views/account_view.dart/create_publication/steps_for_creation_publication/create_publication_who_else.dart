@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:studenthive/presentation/views/widgets/widgets_views/account_view.dart/create_publication/routerAnimation/navbar_button.dart';
 import 'package:studenthive/presentation/views/widgets/widgets_views/account_view.dart/create_publication/routerAnimation/router_animation.dart';
+import 'package:studenthive/presentation/views/widgets/widgets_views/account_view.dart/create_publication/steps_for_creation_publication/create_publication_images.dart';
 
 class DataPerson extends StatelessWidget {
   const DataPerson({super.key});
@@ -66,7 +67,7 @@ class DataPerson extends StatelessWidget {
                   label: 'Siguiente',
                   onPressed: () {
                     Navigator.of(context)
-                        .push(createPageRoute(const DataPerson()));
+                        .push(createPageRoute(const AddImages()));
                   },
                 )
               ],
