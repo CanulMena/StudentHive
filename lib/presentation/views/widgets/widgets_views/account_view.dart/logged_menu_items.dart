@@ -8,67 +8,54 @@ class LoggedAppMenuItems extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListView(
+      children: [
+        const SizedBox(
+          height: 50,
+        ),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-
-            const SizedBox(height: 50,),
-          
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                const Text(
-                  'Profile',
-                  style: TextStyle(
-                    fontSize: 30,
-                    fontWeight: FontWeight.w500
-                    ),
-                  ),
-                IconButton(
-                  onPressed: () {
-                    // context.go('/notification');
-                    }, 
-                  icon: const Icon(
-                    Icons.notifications_none,
-                    
-                    size: 30,
-                    )
-                  )
-              ],
+            const Text(
+              'Profile',
+              style: TextStyle(fontSize: 30, fontWeight: FontWeight.w500),
             ),
-
-            const SizedBox(height: 15,),
-
-            const _ProfileListTile(),
-
-            const _CreatePublicationListTile(),
-
-            const SizedBox(height: 15,),
-
-            const Text(
-              'Settings',
-              style: TextStyle(
-                fontSize: 25,
-                fontWeight: FontWeight.w500
-                ),
-              ),
-          
-            ...loggedSettigMenuItems.map((menuItem) => CustomListTile(menuItem: menuItem)),
-
-            const SizedBox(height: 30,),
-
-            const Text(
-              'Legal',
-              style: TextStyle(
-                fontSize: 25,
-                fontWeight: FontWeight.w500
-                ),
-              ),
-
-            ...legalMenuItems.map((menuItem) => CustomListTile(menuItem: menuItem)),
-
-            const SizedBox(height: 50,)
-          
+            IconButton(
+                onPressed: () {
+                  // context.go('/notification');
+                },
+                icon: const Icon(
+                  Icons.notifications_none,
+                  size: 30,
+                ))
           ],
-        );
+        ),
+        const SizedBox(
+          height: 15,
+        ),
+        const _ProfileListTile(),
+        const _CreatePublicationListTile(),
+        const SizedBox(
+          height: 15,
+        ),
+        const Text(
+          'Settings',
+          style: TextStyle(fontSize: 25, fontWeight: FontWeight.w500),
+        ),
+        ...loggedSettigMenuItems
+            .map((menuItem) => CustomListTile(menuItem: menuItem)),
+        const SizedBox(
+          height: 30,
+        ),
+        const Text(
+          'Legal',
+          style: TextStyle(fontSize: 25, fontWeight: FontWeight.w500),
+        ),
+        ...legalMenuItems.map((menuItem) => CustomListTile(menuItem: menuItem)),
+        const SizedBox(
+          height: 50,
+        )
+      ],
+    );
   }
 }
 
@@ -77,15 +64,12 @@ class _CreatePublicationListTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final colors = Theme.of(context).colorScheme;
-    return ListTile(
-      contentPadding: EdgeInsets.zero,
-      leading: const Icon(Icons.home),
-      title: const Text('Create a publication'),
-      trailing: Icon(
-        Icons.arrow_forward_ios_rounded,
-        color: colors.primary,
-        ),
+    return CustomListTile(
+      menuItem: MenuItem(
+        icon: Icons.add_home_rounded,
+        title: 'Create a publication',
+        linkRoute: '/createPublication',
+      ),
     );
   }
 }
@@ -104,7 +88,7 @@ class _ProfileListTile extends StatelessWidget {
       trailing: Icon(
         Icons.arrow_forward_ios_rounded,
         color: colors.primary,
-        ),
+      ),
     );
   }
 }
