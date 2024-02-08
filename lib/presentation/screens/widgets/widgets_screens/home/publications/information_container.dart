@@ -8,32 +8,24 @@ class InformationContainer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
+    final textStyle = Theme.of(context).textTheme;
     return SizedBox(//! Contenedor de información
       height: size.height * 0.50 * 0.25,
       child: SizedBox(
         width: double.infinity,
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          // crossAxisAlignment:,
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Padding(
-              padding: const EdgeInsets.symmetric(vertical: 8),
-              child: _CustomText(
-                imagePost: informationPost.titulo,
-                fontSize: 16, 
-                fontWeight: FontWeight.w700,
-                ),
+              padding: const EdgeInsets.only(top: 8),
+              child: Text(informationPost.titulo, style: textStyle.titleMedium?.copyWith( fontWeight: FontWeight.w600, fontSize: 16 ))
             ),
             Padding(
-              padding: const EdgeInsets.symmetric(vertical: 8),
-              child: _CustomText(
-                imagePost: informationPost.fechaPublicacion, 
-                fontSize: 16,
-                fontWeight: FontWeight.w500,
-                ),
+              padding: const EdgeInsets.only(top: 6),
+              child: Text(informationPost.fechaPublicacion, style: textStyle.labelLarge,)
             ),
             Padding(
-              padding: const EdgeInsets.symmetric(vertical: 8),
+              padding: const EdgeInsets.only(top: 6),
               child: _CustomText(
                 imagePost: ' \$${informationPost.precioHabitacion.toString()} MXN',
                 fontSize: 16,
