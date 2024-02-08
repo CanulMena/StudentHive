@@ -14,7 +14,7 @@ class PublicationScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
     body:  _CustomListView(publicationPost: publicationPost,));
-
+  
     }
 }
 
@@ -25,30 +25,38 @@ class _CustomListView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    
-    // const TextStyle boldTextStyle = TextStyle(
-    //   fontSize: 20,
-    //   fontWeight: FontWeight.bold,
-    //   );
 
-    // const TextStyle secondText = TextStyle(
-    //   fontSize: 15,
-    //   fontWeight: FontWeight.w500,
-    // );
-
-  return const CustomScrollView(
+  return CustomScrollView(
     slivers: [
-      SliverAppBar(
+      const SliverAppBar(
         flexibleSpace: FlexibleSpaceBar(
           titlePadding: EdgeInsets.all(0),
-          title: _CustomAppBarP(),
-          
+          title: _CustomAppBarP(),   
         ),
+        
       ),
-
+      SliverList(
+        delegate: SliverChildBuilderDelegate(
+          childCount: 1,
+          (context, index) {
+            return const _RentalHouseDetils(); 
+          }
+        )
+      )
     ],
   );
 
+  }
+}
+
+class _RentalHouseDetils extends StatelessWidget {
+  const _RentalHouseDetils(
+
+  );
+
+  @override
+  Widget build(BuildContext context) {
+    return SizedBox();
   }
 }
 
