@@ -2,7 +2,7 @@
 class Publication {
   int idPublicacion;
   String titulo;
-  String imagenes;
+  List<String> imagenes;
   int numeroDeCuartosHabitacion;
   String ubicacionHabitacion;
   double precioHabitacion;

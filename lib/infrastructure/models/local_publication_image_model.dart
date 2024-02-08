@@ -3,7 +3,7 @@ import 'package:studenthive/domain/entities/publication.dart';
 class PublicationModel {
   int idPublicacion;
   String titulo;
-  String imagenes;
+  List<String> imagenes;
   int numeroDeCuartosHabitacion;
   String ubicacionHabitacion;
   double precioHabitacion;

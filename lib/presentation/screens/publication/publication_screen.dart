@@ -57,14 +57,14 @@ class _CustomListView extends StatelessWidget {
     return ListView(
       children: [
 
-        SizedBox(
-          child: Image.network(
-            publicationPost.imagenes,
-            width: 500,
-            height: 300,
-            fit: BoxFit.cover,
-          ),
-        ),
+        // SizedBox(
+        //   child: Image.network(
+        //     publicationPost.imagenes,
+        //     width: 500,
+        //     height: 300,
+        //     fit: BoxFit.cover,
+        //   ),
+        // ),
 
         Container(
           padding: const EdgeInsets.all(8),

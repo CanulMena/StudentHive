@@ -7,19 +7,9 @@ class InformationContainer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    const Color mainColor = Color.fromRGBO(222, 236, 239, 1);
     final size = MediaQuery.of(context).size;
-    const Radius radius = Radius.circular(20); 
-    return Container(
-      //! Contenedor de información
-      height: size.height * 0.56 * 0.25,
-      decoration: const BoxDecoration(
-        borderRadius: BorderRadius.only(
-          bottomLeft: radius,
-          bottomRight: radius
-        ),
-        color: mainColor
-      ),
+    return SizedBox(//! Contenedor de información
+      height: size.height * 0.50 * 0.25,
       child: SizedBox(
         width: double.infinity,
         child: Column(
