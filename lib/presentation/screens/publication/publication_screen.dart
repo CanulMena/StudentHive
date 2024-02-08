@@ -34,6 +34,8 @@ class _CustomListView extends StatelessWidget {
   return CustomScrollView(
     slivers: [
       const SliverAppBar(
+        // pinned: true,
+        floating: true,
         flexibleSpace: FlexibleSpaceBar(
           titlePadding: EdgeInsets.all(0),
           title: _CustomAppBarP(),   
@@ -90,20 +92,48 @@ class _RentalHouseDetils extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final textStyle = Theme.of(context).textTheme;
     final size = MediaQuery.of(context).size;
-    return Padding(
-      padding: const EdgeInsets.all(8.0),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          SizedBox(
-            height: size.height * 0.5,
-            child: Placeholder(), //!Como puedo hacer que este placeHolder este por debajo del CustomAppBar?
-          ),
-          //TODO: Add title desing
-          Text(publicationPost.titulo),
-        ],
-      ),
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+
+        SizedBox(
+          height: size.height * 0.5,
+          width: size.width * 1,
+          child: Image.network(
+            publicationPost.imagenes[1],
+            fit: BoxFit.cover,
+            ), 
+        ),
+
+        Container(//Information container
+        padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 14),
+        
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              publicationPost.titulo,
+              style: textStyle.titleLarge?.copyWith(
+                fontWeight: FontWeight.w600
+              ),),
+            const SizedBox(height: 6,),
+            Text(
+              publicationPost.ubicacionHabitacion,
+              style: textStyle.bodyLarge?.copyWith(
+                fontWeight: FontWeight.w600
+              ),),
+            const SizedBox(height: 3,),
+            // Text(
+            //   publicationPost.ubicacionHabitacion,
+            //   style: textStyle.bodyLarge?.copyWith(
+            //     fontWeight: FontWeight.w500
+            // ),),
+
+          ],
+        ),)
+      ],
     );
   }
 }
