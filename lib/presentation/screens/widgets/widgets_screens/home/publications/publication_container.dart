@@ -32,7 +32,7 @@ class _PublicationContainerState extends State<PublicationContainer> {
     return GestureDetector(
 
       onTap: (){
-        context.push('/publication', extra: widget.publicationsPost);
+        context.go('/publication', extra: widget.publicationsPost);
       },
       
       child: Stack(
@@ -53,6 +53,12 @@ class _PublicationContainerState extends State<PublicationContainer> {
             ),
           ),
 
+          const Positioned(
+            top: 15,
+            right: 20,
+            child: Icon(Icons.favorite, color: Color.fromARGB(255, 126, 124, 109), size: 25,)
+            ),
+
           Positioned(
             top: 15,
             right: 20,
@@ -69,11 +75,12 @@ class _PublicationContainerState extends State<PublicationContainer> {
                 isLiked 
                 ? Icons.favorite 
                 : Icons.favorite_border,
-                color: isLiked ? Colors.yellow.shade900 : Colors.yellow.shade800,
-                size: 30,
+                color: isLiked ? Colors.yellow.shade800 : const Color.fromARGB(255, 233, 228, 228),
+                size: 25,
               ),
             )
-          )
+          ),
+
         ]
       ),
     );
