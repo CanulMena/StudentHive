@@ -15,26 +15,23 @@ class HomeScreen extends StatelessWidget {
     final FavoriteProvider favoriteProvider = context.watch<FavoriteProvider>();
 
     List<Widget> screens = [
+      PublicationsView(
+        listPublications: homeProvider.publications,
+      ),
+      FavoriteView(favoriteProvider: favoriteProvider),
+      const NotificationView(),
+      const AcountView(),
+    ];
 
-    PublicationsView( listPublications: homeProvider.publications,),
-
-    FavoriteView(favoriteProvider: favoriteProvider),
-    
-    const NotificationView(),
-
-    const AcountView(),
-  ];
-    
     return Scaffold(
       body: IndexedStack(
         index: homeProvider.selectedView,
-        children: screens, 
+        children: screens,
       ),
-
-      bottomNavigationBar: CustomButtomNavegationBar( 
-        selectIndex: (value) => homeProvider.selectView(value), 
-        selectedIndex: homeProvider.selectedView
-        ),
+      bottomNavigationBar: CustomButtomNavegationBar(
+          selectIndex: (value) => homeProvider.selectView(value),
+          selectedIndex: homeProvider.selectedView,
+          ),
     );
   }
 }

@@ -34,7 +34,7 @@ class MyApp extends StatelessWidget {
       child: MaterialApp.router(
         routerConfig: router,
         title: 'StudentHive',
-        theme: ThemesApp(selectedColor: 1).themes(),
+        theme: ThemesApp().themes(),
         debugShowCheckedModeBanner: false,
         
       ),

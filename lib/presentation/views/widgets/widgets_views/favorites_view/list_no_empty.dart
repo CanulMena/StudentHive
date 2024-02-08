@@ -39,11 +39,11 @@ class ListNoEmpty extends StatelessWidget {
                     ),
                     child: ClipRRect(
                       borderRadius: const BorderRadius.all(Radius.circular(20)),
-                      child: Image.network(
-                        favoritePublication.imagenes,
-                        width: double.infinity,
-                        fit: BoxFit.cover,
-                      ),
+                      // child: Image.network(
+                      //   favoritePublication.imagenes,
+                      //   width: double.infinity,
+                      //   fit: BoxFit.cover,
+                      // ),
                     ),
                   ),
                   const SizedBox(height: 5),

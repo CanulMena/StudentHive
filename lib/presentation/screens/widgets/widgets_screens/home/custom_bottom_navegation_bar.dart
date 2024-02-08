@@ -13,9 +13,10 @@ class _CustomButtomNavegationBarState extends State<CustomButtomNavegationBar> {
 
   @override
   Widget build(BuildContext context) {
-    final colors = Theme.of(context).colorScheme;
 
-    return BottomNavigationBar(
+    return BottomNavigationBar( 
+      fixedColor: Colors.amber, //This is to add colors when i select an options
+      elevation: 0,
       currentIndex: widget.selectedIndex,
       onTap: (value) {
         setState(() {
@@ -24,23 +25,23 @@ class _CustomButtomNavegationBarState extends State<CustomButtomNavegationBar> {
       },
       items: [
         BottomNavigationBarItem(
-          icon: const Icon(Icons.home),
-          backgroundColor: colors.primary,
+          activeIcon: Icon(Icons.maps_home_work, color: Colors.amber.shade800,size: 28),
+          icon: Icon(Icons.maps_home_work_outlined, color: Colors.grey.shade500, size: 28,),
           label: 'Home'
           ),
         BottomNavigationBarItem(
-          icon: const Icon(Icons.favorite),
-          backgroundColor: colors.primary,
+          activeIcon: Icon(Icons.favorite, color: Colors.amber.shade800,size: 28),
+          icon: Icon(Icons.favorite_border_outlined, color: Colors.grey.shade500,size: 28),
           label: 'Fovorites'
           ),
         BottomNavigationBarItem(
-          icon: const Icon(Icons.notifications),
-          backgroundColor: colors.primary,
+          activeIcon: Icon(Icons.notifications, color: Colors.amber.shade800,size: 28),
+          icon: Icon(Icons.notifications_outlined, color: Colors.grey.shade500,size: 28),
           label: 'Notificactions'
           ),
         BottomNavigationBarItem(
-          icon: const Icon(Icons.person),
-          backgroundColor: colors.primary,
+          activeIcon: Icon(Icons.person, color: Colors.amber.shade800,size: 28),
+          icon: Icon(Icons.person_outline_outlined, color: Colors.grey.shade500,size: 28),
           label: 'Count'
           ),
       ],

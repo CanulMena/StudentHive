@@ -45,7 +45,6 @@ class NotificationView extends StatelessWidget {
       backgroundColor: Colors.white,
       appBar:
           AppBar(backgroundColor: Colors.white, elevation: 0, actions: const [
-        //?Esto deajalo así luego vemos que ponemos XD
         Text(
           '',
           style: TextStyle(color: Colors.black87),
@@ -81,8 +80,7 @@ class NotificationView extends StatelessWidget {
 //? we are using un g de state para do un get de publications.
 List<Notification> notificationList = [
   Notification(
-    user: userList[
-        0 /* 'esto estará de acuerdo a su idUser, para saber que usuario es' */],
+    user: userList[0],
     title: 'Accepted Notification',
     notificationTime: 1,
     type: NotificationType.accepted,
@@ -104,13 +102,7 @@ List<User> userList = [
       lastName: 'Canul',
       urlPhoto:
           'https://scontent.fmid2-1.fna.fbcdn.net/v/t39.30808-6/262531647_1775392782659993_5430604383254748736_n.jpg?_nc_cat=103&ccb=1-7&_nc_sid=dd5e9f&_nc_eui2=AeGI6LsoBo0sP1mlu5ispk6illY1StML69SWVjVK0wvr1FYu4BNbn47F0IKTzxas49JTQyYd_0chbB0bd3M6VB_w&_nc_ohc=TpCOEX9YRJ0AX-Mg31M&_nc_ht=scontent.fmid2-1.fna&oh=00_AfBvQuI30-4kqdmdsPSP0P4VUBDyFTjV4ryZty6WAhIvGw&oe=65A4D625'),
-  User(
-      userId: 1,
-      contactNumber: 9999204857,
-      firstName: 'Gustavo',
-      lastName: 'Canul',
-      urlPhoto:
-          'https://scontent.fmid2-1.fna.fbcdn.net/v/t39.30808-6/262531647_1775392782659993_5430604383254748736_n.jpg?_nc_cat=103&ccb=1-7&_nc_sid=dd5e9f&_nc_eui2=AeGI6LsoBo0sP1mlu5ispk6illY1StML69SWVjVK0wvr1FYu4BNbn47F0IKTzxas49JTQyYd_0chbB0bd3M6VB_w&_nc_ohc=TpCOEX9YRJ0AX-Mg31M&_nc_ht=scontent.fmid2-1.fna&oh=00_AfBvQuI30-4kqdmdsPSP0P4VUBDyFTjV4ryZty6WAhIvGw&oe=65A4D625'),
+
   User(
       userId: 2,
       contactNumber: 9999204857,

@@ -7,11 +7,11 @@ import 'package:studenthive/presentation/screens/widgets/widgets_screens/home/pu
 import 'package:studenthive/presentation/screens/widgets/widgets_screens/home/publications/information_container.dart';
 
 class PublicationContainer extends StatefulWidget {
-  final Publication publicationPost; 
+  final Publication publicationsPost; 
 
   const PublicationContainer({
     super.key, 
-    required this.publicationPost,  
+    required this.publicationsPost,  
     });
 
   @override
@@ -32,32 +32,23 @@ class _PublicationContainerState extends State<PublicationContainer> {
     return GestureDetector(
 
       onTap: (){
-        context.push('/publication', extra: widget.publicationPost);
+        context.push('/publication', extra: widget.publicationsPost);
       },
       
       child: Stack(
         children: [
 
-          Container(
+          Container(//this box have the boxshadow
           //! Publication container
-          height: size.height * 0.56, 
+          height: size.height * 0.51, 
           width: size.width * 0.86,
           decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(20),
-            // color: Colors.grey,
-            boxShadow: [
-              BoxShadow(
-                color: Colors.grey.withOpacity(0.5),  // Color de la sombra
-                spreadRadius: 6,  // Distancia de la propagación de la sombra
-                blurRadius: 8,  // Radio del desenfoque de la sombra
-                offset: const Offset(0, 3),  // Desplazamiento de la sombra
-                ),
-              ],
+            borderRadius: BorderRadius.circular(20)
           ),
           child: Column(
             children: [
-              ImageContainer( imagePost: widget.publicationPost,),
-              InformationContainer(informationPost: widget.publicationPost,)
+              ImageContainer( imagesPost: widget.publicationsPost.imagenes,),
+              InformationContainer(informationPost: widget.publicationsPost,)
               ],
             ),
           ),
@@ -70,17 +61,19 @@ class _PublicationContainerState extends State<PublicationContainer> {
                 setState(() {
                   isLiked = !isLiked;
                   isLiked 
-                  ? favoriteProvider.addFavorites(widget.publicationPost) 
-                  : favoriteProvider.deleteFavorites(widget.publicationPost);
+                  ? favoriteProvider.addFavorites(widget.publicationsPost) 
+                  : favoriteProvider.deleteFavorites(widget.publicationsPost);
                   });
                 },
               child: Icon(
-                isLiked ? Icons.favorite : Icons.favorite_border,
-                color: isLiked ? Colors.red : Colors.black,
+                isLiked 
+                ? Icons.favorite 
+                : Icons.favorite_border,
+                color: isLiked ? Colors.yellow.shade900 : Colors.yellow.shade800,
                 size: 30,
               ),
-              )
             )
+          )
         ]
       ),
     );

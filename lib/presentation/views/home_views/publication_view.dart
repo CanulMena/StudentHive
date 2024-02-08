@@ -1,52 +1,98 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:studenthive/domain/entities/publication.dart';
+import 'package:studenthive/presentation/delegates/search_publication_delegate.dart';
 import 'package:studenthive/presentation/provider/home_provider.dart';
 import 'package:studenthive/presentation/screens/widgets/widgets_screens/home/publications/publication_container.dart';
 
 class PublicationsView extends StatelessWidget {
   final List<Publication> listPublications;
-  const PublicationsView({super.key, required this.listPublications,});
+  const PublicationsView({
+    super.key,
+    required this.listPublications,
+  });
 
   @override
   Widget build(BuildContext context) {
     final homeProvider = context.watch<HomeProvider>();
 
-    return Scaffold(
-      appBar: AppBar(
-        actions: [
-        IconButton(
-          onPressed: (){}, 
-          icon: const Icon(Icons.search)
-          ),
-        IconButton(
-          onPressed: () {}, 
-          icon: const Icon(Icons.menu),
-          ),
-        ],
-      ),
+    return homeProvider.isLoading
+        ? const Center(child: CircularProgressIndicator())
+        : CustomScrollView(
+            //This is similar to an ListView within others ListView
+            slivers: [
+              const SliverAppBar(
+                pinned: true, //this is to show persistence the color of the appbar
+                floating: true,
+                flexibleSpace: FlexibleSpaceBar(
+                  centerTitle: true,
+                  titlePadding: EdgeInsets.all(0),
+                  title: CustomAppbar(),
+                ),
+              ),
+              SliverList(
+                  delegate: SliverChildBuilderDelegate(
+                      childCount: listPublications.length, (context, index) {
+                final publicationsPost = listPublications[index];
+                return Column(
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.symmetric(vertical: 15),
+                      child: PublicationContainer(
+                          publicationsPost: publicationsPost),
+                    ),
+                  ],
+                );
+              })),
+            ],
+          );
+  }
+}
 
-      body: homeProvider.isLoading ? const Center(child: CircularProgressIndicator()) : ListView.builder(
-      itemCount:  listPublications.length,
-      itemBuilder: (context, index) {
-        final Publication publicationPost = listPublications[index];
-        return Column( //*El widget column ya lo pocisiona en el centro del espacio disponible
-          mainAxisAlignment: MainAxisAlignment.center,
+class CustomAppbar extends StatelessWidget {
+  const CustomAppbar({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    final titleStyle = Theme.of(context).textTheme.titleMedium;
+
+    return SafeArea(
+        child: Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 10),
+      child: SizedBox(
+        width: double.infinity,
+        child: Row(
           children: [
+            Icon(
+              Icons.hive_outlined,
+              color: Colors.yellow.shade900,
+              size: 28,
+              ),
+            const SizedBox(
+              width: 5,
+            ),
+            Text(
+              'StudentHive',
+              style: titleStyle?.copyWith(
+                  color: Colors.amber.shade800,
+                  fontSize: 20, // Tamaño del texto
+                  fontWeight: FontWeight.w500  // Grosor del texto
 
-            Padding(
-              padding: const EdgeInsets.symmetric(
-                vertical: 20,
-              ),  
-              child: PublicationContainer(
-                publicationPost: publicationPost,
               ),
             ),
 
+            const Spacer(),
+            IconButton(
+                onPressed: () {
+                  showSearch(
+                    context: context, 
+                    delegate: SearchPublicationDelegate()
+                    );
+                },
+                icon: const Icon(Icons.search_rounded,))
           ],
-        );
-      },
-    ),
-    );
+        ),
+      ),
+    ));
   }
 }

@@ -44,12 +44,12 @@ class ReserveContainer extends StatelessWidget {
               ),
               child: ClipRRect(
                 borderRadius: BorderRadius.circular(20),
-                child: Image.network(
-                  publicationReserved.imagenes,
-                  width: double.infinity,
-                  height: double.infinity,
-                  fit: BoxFit.cover,
-                ),
+                // child: Image.network(
+                //   publicationReserved.imagenes,
+                //   width: double.infinity,
+                //   height: double.infinity,
+                //   fit: BoxFit.cover,
+                // ),
               ),
             ),
 
