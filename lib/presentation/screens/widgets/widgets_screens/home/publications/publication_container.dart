@@ -66,12 +66,14 @@ class _PublicationContainerState extends State<PublicationContainer> {
                   });
                 },
               child: Icon(
-                isLiked ? Icons.favorite : Icons.favorite_border,
-                color: isLiked ? Colors.red : Colors.black,
+                isLiked 
+                ? Icons.favorite 
+                : Icons.favorite_border,
+                color: isLiked ? Colors.yellow.shade900 : Colors.yellow.shade800,
                 size: 30,
               ),
-              )
             )
+          )
         ]
       ),
     );

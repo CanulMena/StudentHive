@@ -7,7 +7,6 @@ class ImageContainer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final colors = Theme.of(context).colorScheme;
     final size = MediaQuery.of(context).size;
     final decoration = BoxDecoration(
       borderRadius: const BorderRadius.all(Radius.circular(20)),

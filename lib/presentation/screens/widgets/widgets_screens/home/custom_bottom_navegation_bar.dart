@@ -25,22 +25,22 @@ class _CustomButtomNavegationBarState extends State<CustomButtomNavegationBar> {
       },
       items: [
         BottomNavigationBarItem(
-          activeIcon: Icon(Icons.maps_home_work, color: Colors.yellow.shade800,size: 28),
+          activeIcon: Icon(Icons.maps_home_work, color: Colors.amber.shade800,size: 28),
           icon: Icon(Icons.maps_home_work_outlined, color: Colors.grey.shade500, size: 28,),
           label: 'Home'
           ),
         BottomNavigationBarItem(
-          activeIcon: Icon(Icons.favorite, color: Colors.yellow.shade800,size: 28),
+          activeIcon: Icon(Icons.favorite, color: Colors.amber.shade800,size: 28),
           icon: Icon(Icons.favorite_border_outlined, color: Colors.grey.shade500,size: 28),
           label: 'Fovorites'
           ),
         BottomNavigationBarItem(
-          activeIcon: Icon(Icons.notifications, color: Colors.yellow.shade800,size: 28),
+          activeIcon: Icon(Icons.notifications, color: Colors.amber.shade800,size: 28),
           icon: Icon(Icons.notifications_outlined, color: Colors.grey.shade500,size: 28),
           label: 'Notificactions'
           ),
         BottomNavigationBarItem(
-          activeIcon: Icon(Icons.person, color: Colors.yellow.shade800,size: 28),
+          activeIcon: Icon(Icons.person, color: Colors.amber.shade800,size: 28),
           icon: Icon(Icons.person_outline_outlined, color: Colors.grey.shade500,size: 28),
           label: 'Count'
           ),
