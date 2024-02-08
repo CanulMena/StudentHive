@@ -8,92 +8,96 @@ class ViewImages extends StatelessWidget {
   Widget build(BuildContext context) {
     Size screenSize = MediaQuery.of(context).size;
     return Center(
-      child: Column(
-        children: [
-          //? clase que se encuentra en el archivo container_title_appbar.dart
-          const TitleAppbar(title: '¿Tus imagenes estan listas?'),
-          const SizedBox(
-            height: 10,
-          ),
-          SizedBox(
-              width: screenSize.width * 0.9,
-              height: screenSize.height * 0.3,
-              child: ContainerImanges(
-                height: screenSize.height * 0.3,
+      child: ListView(
+        children: [ 
+          Column(
+          children: [
+            //? clase que se encuentra en el archivo container_title_appbar.dart
+            const TitleAppbar(title: '¿Tus imagenes estan listas?'),
+            const SizedBox(
+              height: 10,
+            ),
+            SizedBox(
                 width: screenSize.width * 0.9,
-              )),
-          const SizedBox(
-            height: 10,
-          ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: [
-              SizedBox(
-                  width: screenSize.width * 0.45,
-                  height: screenSize.height * 0.2,
-                  child: ContainerImanges(
-                    height: screenSize.height * 0.2,
+                height: screenSize.height * 0.3,
+                child: ContainerImanges(
+                  height: screenSize.height * 0.3,
+                  width: screenSize.width * 0.9,
+                )),
+            const SizedBox(
+              height: 10,
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                SizedBox(
                     width: screenSize.width * 0.45,
-                  )),
-              SizedBox(
-                  width: screenSize.width * 0.45,
-                  height: screenSize.height * 0.2,
-                  child: ContainerImanges(
                     height: screenSize.height * 0.2,
+                    child: ContainerImanges(
+                      height: screenSize.height * 0.2,
+                      width: screenSize.width * 0.45,
+                    )),
+                SizedBox(
                     width: screenSize.width * 0.45,
-                  )),
-            ],
-          ),
-          const SizedBox(
-            height: 20,
-          ),
-          SizedBox(
-            width: screenSize.width * 0.8,
-            height: screenSize.height * 0.1,
-            child: TextButton(
-              style: ButtonStyle(
-                  overlayColor: MaterialStateProperty.all(Colors.grey[200]),
-                  shape: MaterialStateProperty.all(const RoundedRectangleBorder(
-                      borderRadius: BorderRadius.all(Radius.circular(10)))),
-                  foregroundColor: MaterialStateProperty.all(Colors.black),
-                  side: MaterialStateProperty.all(
-                      const BorderSide(color: Colors.grey))),
-              onPressed: () {},
-              child: const Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: [
-                  Icon(
-                    Icons.add,
-                    size: 30,
-                  ),
-                  Text('Agregar más fotos', style: TextStyle(fontSize: 20))
-                ],
+                    height: screenSize.height * 0.2,
+                    child: ContainerImanges(
+                      height: screenSize.height * 0.2,
+                      width: screenSize.width * 0.45,
+                    )),
+              ],
+            ),
+            const SizedBox(
+              height: 20,
+            ),
+            SizedBox(
+              width: screenSize.width * 0.8,
+              height: screenSize.height * 0.1,
+              child: TextButton(
+                style: ButtonStyle(
+                    overlayColor: MaterialStateProperty.all(Colors.grey[200]),
+                    shape: MaterialStateProperty.all(const RoundedRectangleBorder(
+                        borderRadius: BorderRadius.all(Radius.circular(10)))),
+                    foregroundColor: MaterialStateProperty.all(Colors.black),
+                    side: MaterialStateProperty.all(
+                        const BorderSide(color: Colors.grey))),
+                onPressed: () {},
+                child: const Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    Icon(
+                      Icons.add,
+                      size: 30,
+                    ),
+                    Text('Agregar más fotos', style: TextStyle(fontSize: 20))
+                  ],
+                ),
               ),
             ),
-          ),
-          const SizedBox(
-            height: 20,
-          ),
-          SizedBox(
-            child: TextButton(
-              style: ButtonStyle(
-                  overlayColor: MaterialStateProperty.all(Colors.grey[200]),
-                  shape: MaterialStateProperty.all(const RoundedRectangleBorder(
-                      borderRadius: BorderRadius.all(Radius.circular(30)))),
-                  foregroundColor: MaterialStateProperty.all(Colors.black),
-                  side: MaterialStateProperty.all(
-                      const BorderSide(color: Colors.grey))),
-              onPressed: () {},
-              child: Column(
-                children: [
-                  Icon(
-                    Icons.camera_alt_outlined,
-                    size: screenSize.width * 0.2,
-                  )
-                ],
-              ),
+            const SizedBox(
+              height: 20,
             ),
-          )
+            SizedBox(
+              child: TextButton(
+                style: ButtonStyle(
+                    overlayColor: MaterialStateProperty.all(Colors.grey[200]),
+                    shape: MaterialStateProperty.all(const RoundedRectangleBorder(
+                        borderRadius: BorderRadius.all(Radius.circular(30)))),
+                    foregroundColor: MaterialStateProperty.all(Colors.black),
+                    side: MaterialStateProperty.all(
+                        const BorderSide(color: Colors.grey))),
+                onPressed: () {},
+                child: Column(
+                  children: [
+                    Icon(
+                      Icons.camera_alt_outlined,
+                      size: screenSize.width * 0.2,
+                    )
+                  ],
+                ),
+              ),
+            )
+          ],
+        ),
         ],
       ),
     );

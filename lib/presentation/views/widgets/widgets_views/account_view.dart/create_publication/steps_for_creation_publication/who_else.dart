@@ -99,7 +99,7 @@ class _ContainerOptionWhoElseState extends State<ContainerOptionWhoElse> {
           ),
           foregroundColor: MaterialStateProperty.all(Colors.black),
           side: MaterialStateProperty.all(
-              BorderSide(color: isSelected ? Colors.cyan : Colors.grey)),
+              BorderSide(color: isSelected ? Colors.amber : Colors.grey)),
         ),
         onPressed: () {
           setState(() {

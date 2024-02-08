@@ -96,7 +96,7 @@ class OptionsContainerSelector extends StatelessWidget {
         width: size.width * 0.9,
         decoration: BoxDecoration(
           border: Border.all(
-            color: isSelected ? Colors.blue : Colors.grey,
+            color: isSelected ? Colors.amber : Colors.grey,
             width: 1,
           ),
           borderRadius: BorderRadius.circular(10),

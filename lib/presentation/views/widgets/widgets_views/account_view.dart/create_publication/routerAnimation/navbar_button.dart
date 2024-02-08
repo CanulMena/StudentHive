@@ -1,27 +1,65 @@
 import 'package:flutter/material.dart';
 
-class CustomNavBarButton extends StatelessWidget {
-  final String label;
-  final VoidCallback onPressed;
+class BottomButtons extends StatelessWidget {
+  final PageController pageController;
 
-  const CustomNavBarButton({
+  const BottomButtons({
     super.key,
-    required this.label,
-    required this.onPressed,
+    required this.pageController,
   });
 
   @override
   Widget build(BuildContext context) {
-    return TextButton(
-      onPressed: onPressed,
-      style: ButtonStyle(
-        minimumSize: MaterialStateProperty.all(const Size(125, 40)),
-        backgroundColor:
-            MaterialStateProperty.all(const Color.fromARGB(255, 199, 198, 198)),
-      ),
-      child: Text(
-        label,
-        style: const TextStyle(fontSize: 20),
+    // ignore: avoid_unnecessary_containers
+    return Container(
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          IconButton(
+              onPressed: () {
+                pageController.previousPage(
+                    duration: const Duration(milliseconds: 500),
+                    curve: Curves.ease);
+              },
+              icon: const Icon(
+                Icons.arrow_back,
+                color: Colors.amber,
+                size: 40,
+              )),
+          IconButton(
+              onPressed: () {
+                pageController.nextPage(
+                    duration: const Duration(milliseconds: 500),
+                    curve: Curves.ease);
+              },
+              icon: const Icon(
+                Icons.arrow_forward,
+                color: Colors.amber,
+                size: 40,
+              ))
+          // ElevatedButton(
+          //   onPressed: () {
+          //     pageController.nextPage(
+          //         duration: const Duration(milliseconds: 500),
+          //         curve: Curves.ease);
+          //   },
+          //   // ignore: sort_child_properties_last
+          //   child: const SizedBox(
+          //     height: 50,
+          //     width: 50,
+          //     child: Icon(
+          //       Icons.arrow_forward,
+          //       color: Colors.white,
+          //     ),
+          //   ),
+          //   style: ElevatedButton.styleFrom(
+          //       backgroundColor: Colors.amber,
+          //       elevation: 0,
+          //       shadowColor: Colors.transparent,
+          //       shape:
+          //           const CircleBorder(side: BorderSide(color: Colors.amber))),
+          // )
+        ],
       ),
     );
   }
