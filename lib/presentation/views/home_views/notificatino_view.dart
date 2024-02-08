@@ -49,9 +49,9 @@ class NotificationView extends StatelessWidget {
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 15),
         child: ListView(
-          children: [
+          children: const [
 
-            const Text(
+            Text(
               'Notifications',
               style: TextStyle(
                 fontSize: 30,
@@ -59,7 +59,7 @@ class NotificationView extends StatelessWidget {
               ),
             ),
 
-            const SizedBox( height: 40,),
+            SizedBox( height: 40,),
 
 
           ],

@@ -111,39 +111,3 @@ class _CustomListView extends StatelessWidget {
     );
   }
 }
-
-
-
-        //           Wrap(
-        //             children: <Widget>[
-        //               _buildFeatureContainer('wifi', Icons.wifi),
-        //               _buildFeatureContainer('Aire Acondicionado', Icons.air),
-        //               _buildFeatureContainer('Cocina', Icons.kitchen),
-        //               _buildFeatureContainer('Calefacción', Icons.heat_pump),
-        //             ],
-        //           ),
-        //         ],
-        //       ),
-        //     ),
-
-        //     const Icon(Icons.linear_scale),
-            
-        //     const UserInfoWidget(), // Widget de información del usuario
-
-        //     const CustomBottomAppBar() //* Agregamos dentro del listView para resolver el problema
-        //   ],
-        // ),
-
-          // Widget _buildFeatureContainer(String text, IconData iconData) {
-  //   return Container(
-  //     margin: const EdgeInsets.all(8.0),
-  //     child: Row(
-  //       mainAxisSize: MainAxisSize.min,
-  //       children: [
-  //         Text(text, style: const TextStyle(fontSize: 15)),
-  //         const SizedBox(width: 8.0),
-  //         Icon(iconData),
-  //       ],
-  //     ),
-  //   );
-  // }

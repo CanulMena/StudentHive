@@ -24,12 +24,12 @@ class SearchPublicationDelegate extends SearchDelegate{
 
   @override
   Widget buildResults(BuildContext context) {
-    return Text('buildResult');
+    return const Text('buildResult');
   }
 
   @override
   Widget buildSuggestions(BuildContext context) {
-    return Text('buildSuggestions');
+    return const Text('buildSuggestions');
   }
 
   
