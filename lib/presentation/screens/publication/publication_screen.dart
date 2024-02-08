@@ -4,7 +4,7 @@ import 'package:studenthive/domain/entities/publication.dart';
 import 'package:studenthive/presentation/screens/widgets/widgets_screens/publication/bottom_publication.dart';
 
 class PublicationScreen extends StatelessWidget {
-  final Publication publicationPost; //!Una forma de obtener el valor de esta variable desde el go_router
+  final Publication publicationPost; 
   const PublicationScreen({
     super.key, 
     required this.publicationPost,
@@ -13,7 +13,12 @@ class PublicationScreen extends StatelessWidget {
     @override
   Widget build(BuildContext context) {
     return Scaffold(
-    body:  _CustomListView(publicationPost: publicationPost,));
+    body:  Column(
+      children: [
+        Expanded(child: _CustomListView(publicationPost: publicationPost,)),
+        BottomPublication(publicationPost: publicationPost)
+      ],
+    ));
   
     }
 }
@@ -39,7 +44,7 @@ class _CustomListView extends StatelessWidget {
         delegate: SliverChildBuilderDelegate(
           childCount: 1,
           (context, index) {
-            return const _RentalHouseDetils(); 
+            return _RentalHouseDetils(publicationPost: publicationPost,); 
           }
         )
       )
@@ -49,16 +54,6 @@ class _CustomListView extends StatelessWidget {
   }
 }
 
-class _RentalHouseDetils extends StatelessWidget {
-  const _RentalHouseDetils(
-
-  );
-
-  @override
-  Widget build(BuildContext context) {
-    return SizedBox();
-  }
-}
 
 class _CustomAppBarP extends StatelessWidget {
   const _CustomAppBarP();
@@ -84,6 +79,30 @@ class _CustomAppBarP extends StatelessWidget {
             ],
           ),
         ),
+      ),
+    );
+  }
+}
+
+class _RentalHouseDetils extends StatelessWidget {
+  final Publication publicationPost; 
+  const _RentalHouseDetils({ required this.publicationPost});
+
+  @override
+  Widget build(BuildContext context) {
+    final size = MediaQuery.of(context).size;
+    return Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          SizedBox(
+            height: size.height * 0.5,
+            child: Placeholder(), //!Como puedo hacer que este placeHolder este por debajo del CustomAppBar?
+          ),
+          //TODO: Add title desing
+          Text(publicationPost.titulo),
+        ],
       ),
     );
   }
