@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:studenthive/presentation/views/widgets/widgets_views/account_view.dart/create_publication/app_steps_create_publications.dart';
 import 'package:studenthive/presentation/views/widgets/widgets_views/account_view.dart/create_publication/routerAnimation/router_animation.dart';
-import 'package:studenthive/presentation/views/widgets/widgets_views/account_view.dart/create_publication/steps_for_creation_publication/create_publication_steps1.dart';
+import 'package:studenthive/presentation/views/widgets/widgets_views/account_view.dart/create_publication/utils_for_creation_publication/container_title_appbar.dart';
 
 class CreatePublicationInit extends StatelessWidget {
   const CreatePublicationInit({super.key});
@@ -8,102 +9,96 @@ class CreatePublicationInit extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: PreferredSize(
-        preferredSize: const Size.fromHeight(100),
-        child: AppBar(
-            leading: ButtonBar(
+      body: Container(
+        height: double.infinity,
+        width: double.infinity,
+        alignment: Alignment.center,
+        child: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Column(children: [
+            //? TitleAppbar es una clase que se encarga de mostrar el titulo de la appbar
+            //? clase que se encuentra en el archivo container_title_appbar.dart
+            const TitleAppbar(
+                title: 'Comparte tu espacio de manera sencilla'),
+            const SizedBox(height: 80),
+            const ContainerInit(
+              title: '1. Describe tu cuarto',
+              subtitle:
+                  'Agrega algunos datos sencillos por ejemplo donde te encuntras, número de habitaciones, baños, etc.',
+              icon: Icons.edit_location_alt_sharp,
+            ),
+            const SizedBox(height: 40),
+            const ContainerInit(
+              title: '2. Personaliza tu espacio',
+              subtitle:
+                  'Agregar al menos tres fotos, un titulo y una descripción. Nosotros te ayudamos',
+              icon: Icons.add_home_rounded,
+            ),
+            const SizedBox(height: 40),
+            const ContainerInit(
+              title: '3. Publica tu espacio',
+              subtitle: 'Finaliza compartiendo tu espacio y busca un roomie.',
+              icon: Icons.check_circle,
+            ),
+            const SizedBox(height: 150),
+            ElevatedButton(
+              onPressed: () {
+                Navigator.of(context).push(
+                    createPageRoute(const AppStepsCreatePublications()));
+              },
+              child: const Text('Comenzar')
+            )
+          ]),
+        )
+      ),
+    );
+  }
+}
+
+class ContainerInit extends StatelessWidget {
+  const ContainerInit(
+      {super.key,
+      required this.title,
+      required this.subtitle,
+      required this.icon});
+  final String title;
+  final String subtitle;
+  final IconData icon;
+
+  @override
+  Widget build(BuildContext context) {
+    final size = MediaQuery.of(context).size;
+    return Container(
+        width: size.width * 0.9,
+        height: size.height * 0.12,
+        decoration: const BoxDecoration(
+          border: Border(bottom: BorderSide(color: Colors.grey, width: 1)),
+        ),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                IconButton(
-                  icon: const Icon(Icons.arrow_back_ios_new),
-                  onPressed: () {
-                    Navigator.pop(context);
-                  },
+                Text(
+                  title,
+                  style: const TextStyle(
+                      fontSize: 20, fontWeight: FontWeight.bold),
+                ),
+                SizedBox(
+                  height: size.height * 0.07,
+                  width: size.width * 0.7,
+                  child: Text(
+                    subtitle,
+                    style: const TextStyle(fontSize: 15),
+                  ),
                 ),
               ],
             ),
-            title: const Text('Comparte tu cuarto de manera sencilla')),
-      ),
-      body: SafeArea(
-        minimum: const EdgeInsets.only(top: 20),
-        child: Container(
-            alignment: Alignment.center,
-            child: Column(
-              children: [
-                SizedBox(
-                  width: 300,
-                  height: 600,
-                  child: Column(
-                    children: [
-                      const Row(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        children: [
-                          Text('1. Describe tu cuarto',
-                              style: TextStyle(
-                                  fontSize: 20, fontWeight: FontWeight.bold)),
-                          SizedBox(width: 30),
-                          Icon(Icons.add_location_alt_outlined, size: 50)
-                        ],
-                      ),
-                      const SizedBox(height: 5),
-                      Text(
-                        'Agrega algunos datos sencillos por ejemplo donde te encuentras, numeoro de visitantes.',
-                        style: TextStyle(fontSize: 15, color: Colors.grey[600]),
-                      ),
-                      const SizedBox(height: 50),
-                      const Row(
-                        children: [
-                          Text('2. Personaliza tu cuarto',
-                              style: TextStyle(
-                                  fontSize: 20, fontWeight: FontWeight.bold)),
-                          SizedBox(width: 30),
-                          Icon(Icons.add_home_outlined, size: 50)
-                        ],
-                      ),
-                      const SizedBox(height: 5),
-                      Text(
-                        'Agregar al menos tres fotos, un titulo y una descripcion, Nosotros te ayudamos',
-                        style: TextStyle(fontSize: 15, color: Colors.grey[600]),
-                      ),
-                      const SizedBox(height: 50),
-                      const Row(
-                        children: [
-                          Text(
-                            '3. Publica tu cuarto',
-                            style: TextStyle(
-                                fontSize: 20, fontWeight: FontWeight.bold),
-                          ),
-                          SizedBox(width: 50),
-                          Icon(
-                            Icons.check,
-                            size: 40,
-                          )
-                        ],
-                      ),
-                      Text(
-                        'Finaliza compartiendo tu cuarto y busca un rommíe',
-                        style: TextStyle(fontSize: 15, color: Colors.grey[600]),
-                      )
-                    ],
-                  ),
-                ),
-                const SizedBox(height: 20),
-                TextButton(
-                  onPressed: () {
-                    Navigator.of(context).push(
-                        createPageRoute(const CretatePublicationSteps1()));
-                  },
-                  style: ButtonStyle(
-                    alignment: Alignment.center,
-                    minimumSize: MaterialStateProperty.all(const Size(200, 50)),
-                    backgroundColor:
-                        MaterialStateProperty.all(const Color(0xFF159A9C)),
-                  ),
-                  child: const Text('Empezar',
-                      style: TextStyle(color: Colors.white)),
-                ),
-              ],
-            )),
-      ),
-    );
+            const SizedBox(width: 30),
+            Icon(icon, size: 50)
+          ],
+        ));
   }
 }

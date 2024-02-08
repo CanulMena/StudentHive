@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-PageRouteBuilder createPageRoute(Widget page) {
+PageRouteBuilder createPageRoute(Widget page,) {
   return PageRouteBuilder(
       pageBuilder: (
         context,

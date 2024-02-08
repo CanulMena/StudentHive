@@ -20,7 +20,11 @@ class ContainerDetailHouse extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final size = MediaQuery.of(context).size;
+
     return Container(
+      width: size.width * 0.9,
+      height: size.height * 0.1,
       padding: const EdgeInsets.all(10),
       decoration: const BoxDecoration(
         border: BorderDirectional(
