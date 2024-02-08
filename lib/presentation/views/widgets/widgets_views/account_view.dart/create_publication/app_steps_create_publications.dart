@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:studenthive/presentation/views/widgets/widgets_views/account_view.dart/create_publication/routerAnimation/navbar_button.dart';
 import 'package:studenthive/presentation/views/widgets/widgets_views/account_view.dart/create_publication/screen_create_publication.dart';
 
 class AppStepsCreatePublications extends StatefulWidget {
@@ -56,9 +57,8 @@ class _AppStepsCreatePublicationsState
             ),
           ],
         ),
-        // bottomNavigationBar: BottomButtons(
-        //   pageController: _pageController,
-        // )
-    );
+        bottomNavigationBar: BottomButtons(
+          pageController: _pageController,
+        ));
   }
 }
