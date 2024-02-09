@@ -44,8 +44,8 @@ class ReserveScreen extends StatelessWidget {
               children: [
                 Padding(
                   padding: const EdgeInsets.symmetric(
-                     vertical: 10,
-                     ),
+                    vertical: 10,
+                    ),
 
                   child: ReserveContainer(
                     publicationReserved: publicationReserved,
