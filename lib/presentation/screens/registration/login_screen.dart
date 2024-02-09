@@ -16,7 +16,7 @@ class LoginScreen extends StatelessWidget {
         height: double.infinity,
         child: Stack(
           children: [
-            BlueBox(boxHeigh: size.height * 0.6, circularRadius: 200),
+            BlueBox(boxHeigh: size.height * 0.75, circularRadius: 200),
             HiveIcon(size: size.height * 0.001, iconSize: 200),
             loginForm(context),
             closeButton(context),

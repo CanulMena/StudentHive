@@ -37,8 +37,8 @@ class ListNoEmpty extends StatelessWidget {
                       color: Colors.green,
                       borderRadius: BorderRadius.all(Radius.circular(20)),
                     ),
-                    child: ClipRRect(
-                      borderRadius: const BorderRadius.all(Radius.circular(20)),
+                    child: const ClipRRect(
+                      borderRadius: BorderRadius.all(Radius.circular(20)),
                       // child: Image.network(
                       //   favoritePublication.imagenes,
                       //   width: double.infinity,

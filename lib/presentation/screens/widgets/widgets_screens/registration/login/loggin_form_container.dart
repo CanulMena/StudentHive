@@ -9,7 +9,7 @@ class LogginFormContainer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: const EdgeInsets.symmetric(horizontal: 30),
+      margin: const EdgeInsets.symmetric(horizontal: 22),
       child: Form(
         child: Column(
           children: [
@@ -114,6 +114,7 @@ class LogginFormContainer extends StatelessWidget {
             "Registrate",
             style: TextStyle(
               color: Color(0xFF159A9C),
+
             ),
           ),
         ),

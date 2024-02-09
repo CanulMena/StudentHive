@@ -18,7 +18,7 @@ class ListEmpty extends StatelessWidget {
         ),
         SizedBox(height: 10),
         Text(
-          'You can tap on the heart icon from a publication to save your favorite publication',
+          'Tap on the heart to save your interests',
           style: TextStyle(
             fontSize: 15,
             fontWeight: FontWeight.w400,
