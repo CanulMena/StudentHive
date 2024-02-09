@@ -32,7 +32,7 @@ class _PublicationContainerState extends State<PublicationContainer> {
     return GestureDetector(
 
       onTap: (){
-        context.go('/publication', extra: widget.publicationsPost);
+        context.push('/publication', extra: widget.publicationsPost);
       },
       
       child: Stack(
