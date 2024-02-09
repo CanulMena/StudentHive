@@ -19,7 +19,7 @@ class PublicationScreen extends StatelessWidget {
           child: CustomListView(
           publicationPost: publicationPost,
         )),
-        BottomPublication(publicationPost: publicationPost)
+        BottomPublication(publicationPost: publicationPost)//just to commit
       ],
     ));
   }
