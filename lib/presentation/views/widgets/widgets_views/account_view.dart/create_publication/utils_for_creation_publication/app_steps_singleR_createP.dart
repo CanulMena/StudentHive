@@ -1,17 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:studenthive/presentation/views/widgets/widgets_views/account_view.dart/create_publication/routerAnimation/navbar_button.dart';
 import 'package:studenthive/presentation/views/widgets/widgets_views/account_view.dart/create_publication/screen_create_publication.dart';
+import 'package:studenthive/presentation/views/widgets/widgets_views/account_view.dart/create_publication/steps_for_creation_publication/house_detail_singleR.dart';
 
-class AppStepsCreatePublications extends StatefulWidget {
-  const AppStepsCreatePublications({super.key});
+class AppStepsCreateSinglePublications extends StatefulWidget {
+  const AppStepsCreateSinglePublications({super.key});
 
   @override
-  State<AppStepsCreatePublications> createState() =>
-      _AppStepsCreatePublicationsState();
+  State<AppStepsCreateSinglePublications> createState() =>
+      _AppStepsCreateSinglePublicationsState();
 }
 
-class _AppStepsCreatePublicationsState
-    extends State<AppStepsCreatePublications> {
+class _AppStepsCreateSinglePublicationsState
+    extends State<AppStepsCreateSinglePublications> {
   final PageController _pageController = PageController();
 
   double _currentPage = 0;
@@ -43,7 +44,7 @@ class _AppStepsCreatePublicationsState
                 controller: _pageController,
                 children: const [
                   HouseLocation(),
-                  DetailsHouse(),
+                  DetailsSingleHouse(),
                   WhoElse(),
                   HouseService(),
                   AddHouseImages(),
