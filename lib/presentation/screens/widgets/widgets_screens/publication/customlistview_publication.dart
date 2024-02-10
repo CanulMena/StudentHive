@@ -43,7 +43,7 @@ class _RentalHouseDetils extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                publicationPost.titulo,
+                publicationPost.title,
                 style:
                     textStyle.titleLarge?.copyWith(fontWeight: FontWeight.w600),
               ),
@@ -51,7 +51,7 @@ class _RentalHouseDetils extends StatelessWidget {
                 height: 6,
               ),
               Text(
-                publicationPost.ubicacionHabitacion,
+                publicationPost.houseLocation.address ,
                 style:
                     textStyle.bodyLarge?.copyWith(fontWeight: FontWeight.w600),
               ),

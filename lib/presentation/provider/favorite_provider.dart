@@ -19,7 +19,7 @@ class FavoriteProvider extends ChangeNotifier {
   }
 
   bool containsFavorites( Publication favorite) {
-    return listFavorites.any((element) => favorite.idPublicacion == element.idPublicacion);
+    return listFavorites.any((favorite) => favorite.idPublication == favorite.idPublication);
   }
 
 }

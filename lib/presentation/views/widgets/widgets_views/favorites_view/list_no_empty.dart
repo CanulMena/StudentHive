@@ -48,7 +48,7 @@ class ListNoEmpty extends StatelessWidget {
                   ),
                   const SizedBox(height: 5),
                   Text(
-                    favoritePublication.titulo,
+                    favoritePublication.title,
                     style: const TextStyle(
                       fontSize: 15,
                       fontWeight: FontWeight.w500,
