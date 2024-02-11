@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
 import 'package:studenthive/config/router/app_router.dart';
+import 'package:studenthive/domain/entities/user.dart';
 import 'package:studenthive/presentation/provider/login_provider.dart';
 import 'package:studenthive/presentation/screens/widgets/widgets_screens/registration/input_decoration.dart';
 
@@ -47,14 +48,11 @@ class LogginFormContainer extends StatelessWidget {
             buildMaterialButton(
             label: "Ingresar",
             onPressed: () {
-              final email = emailController.text;
-              final password = passwordController.text;
-              if (loginProvider.loginUser(email, password)) {
-                // Inicio de sesión exitoso, navegar a la pantalla de inicio
-                context.go('/home');
+              if (loginProvider.loginUser(emailController.text, passwordController.text)) {
+                final User currentUser = loginProvider.currentUser!;
                 isLogged = true;
+                context.go('/home', extra: currentUser );
               } else {
-                // Error en las credenciales, mostrar mensaje de error
                 ScaffoldMessenger.of(context).showSnackBar(
                   const SnackBar(content: Text('Correo o contraseña incorrectos')),
                 );

@@ -40,6 +40,7 @@ class PublicationsView extends StatelessWidget {
                       padding: const EdgeInsets.symmetric(vertical: 15),
                       child: PublicationContainer(
                           publicationsPost: publicationsPost),
+                          
                     ),
                   ],
                 );

@@ -1,18 +1,22 @@
 import 'package:flutter/material.dart';
 import 'package:studenthive/config/router/app_router.dart';
+import 'package:studenthive/domain/entities/user.dart';
 import 'package:studenthive/presentation/provider/favorite_provider.dart';
+import 'package:studenthive/presentation/provider/login_provider.dart';
 import 'package:studenthive/presentation/views/widgets/widgets_views/favorites_view/favorite_view_logged.dart';
 import 'package:studenthive/presentation/views/widgets/widgets_views/favorites_view/favorite_view_no_logged.dart';
 
 class FavoriteView extends StatelessWidget {
+  final LoginProvider loginProvider;
   final FavoriteProvider favoriteProvider;
 
-  const FavoriteView({super.key, required this.favoriteProvider});
+  const FavoriteView({super.key, required this.favoriteProvider, required this.loginProvider});
 
   @override
   Widget build(BuildContext context) {
 
     final size = MediaQuery.of(context).size;
+    final user = loginProvider.currentUser ?? User(userAge: '', email: '', password: '', name: '', lastName: '');
 
     return Scaffold(
       backgroundColor: Colors.white,
@@ -22,11 +26,11 @@ class FavoriteView extends StatelessWidget {
         actions: [
           GestureDetector(
             onTap: () {},
-            child: const Padding(
-              padding: EdgeInsets.fromLTRB(0, 20, 20, 0),
+            child: Padding(
+              padding: const EdgeInsets.fromLTRB(0, 20, 20, 0),
               child: Text(
-                'Edit',
-                style: TextStyle(
+                user.name,
+                style: const TextStyle(
                   color: Colors.black,
                   fontSize: 15,
                   decoration: TextDecoration.underline,

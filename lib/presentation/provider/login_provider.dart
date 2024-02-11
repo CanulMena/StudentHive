@@ -3,6 +3,8 @@ import 'package:studenthive/domain/entities/user.dart';
 
 class LoginProvider extends ChangeNotifier {
 
+  User? currentUser;
+
   final List<User> users =  [
     User(
       userAge: '9', 
@@ -23,16 +25,16 @@ class LoginProvider extends ChangeNotifier {
     users.add(user);
   }
 
-bool loginUser(String email, String password) {
-  // Busca un usuario con el correo electrónico proporcionado
-  for (var user in users) {
-    if (user.email == email && user.password == password) {
-      // Si se encuentra un usuario y la contraseña coincide, el inicio de sesión es exitoso
-      return true;
+  bool loginUser(String email, String password) {
+    // Busca un usuario con el correo electrónico proporcionado
+    for (var user in users) {
+      if (user.email == email && user.password == password) {
+        // Si se encuentra un usuario y la contraseña coincide, el inicio de sesión es exitoso
+        currentUser = user;
+        return true;
+      }
     }
+    // Si no se encontró el usuario o la contraseña no coincide, el inicio de sesión falla
+    return false;
   }
-  // Si no se encontró el usuario o la contraseña no coincide, el inicio de sesión falla
-  return false;
-}
-
 }
