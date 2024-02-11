@@ -45,21 +45,4 @@ class PublicationModel {
       genero: json['genero'],
       );
   }
-  
-  Publication toPublicationPost(){
-    return Publication(
-      idPublicacion: idPublicacion, 
-      titulo: titulo, 
-      imagenes: imagenes, 
-      numeroDeCuartosHabitacion: 
-      numeroDeCuartosHabitacion, 
-      ubicacionHabitacion: ubicacionHabitacion, 
-      precioHabitacion: precioHabitacion, 
-      fechaPublicacion: fechaPublicacion, 
-      estatus: estatus, 
-      idAnfitrion: idAnfitrion, 
-      nombreAnfitrion: nombreAnfitrion, 
-      numeroTelefono: numeroTelefono, 
-      genero: genero);
-    }
-  }
+}

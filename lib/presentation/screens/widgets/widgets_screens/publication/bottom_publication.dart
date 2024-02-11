@@ -30,7 +30,7 @@ class BottomPublication extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Text(
-                  '\$${publicationPost.precioHabitacion} MXN',
+                  '\$${publicationPost.rentPrice} MXN',
                   style: const TextStyle(
                     fontSize: 15,
                     color: Colors.black,

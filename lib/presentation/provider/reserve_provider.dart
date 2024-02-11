@@ -18,7 +18,7 @@ class ReserveProvider extends ChangeNotifier{
   }
 
   bool containsReservation(Publication reservation) {
-    return listReservation.any((e) => reservation.idPublicacion == e.idPublicacion);
+    return listReservation.any((e) => reservation.idPublication == e.idPublication);
   }
 
 } 

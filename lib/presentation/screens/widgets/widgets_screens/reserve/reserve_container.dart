@@ -67,7 +67,7 @@ class ReserveContainer extends StatelessWidget {
                 children: [
 
                   Text(
-                    publicationReserved.titulo,
+                    publicationReserved.title,
                     style: const TextStyle(
                       color: Colors.white,
                       fontSize: 15,
@@ -76,7 +76,7 @@ class ReserveContainer extends StatelessWidget {
                   ),
                   const SizedBox(height: 10,),
                   Text(
-                    '\$${publicationReserved.precioHabitacion}',
+                    '\$${publicationReserved.rentPrice}',
                     style: const TextStyle(
                       color: Colors.white,
                       fontSize: 15,
@@ -85,7 +85,7 @@ class ReserveContainer extends StatelessWidget {
                   ),
                   const SizedBox(height: 10,),
                   Text(
-                    publicationReserved.nombreAnfitrion,
+                    publicationReserved.idUser,
                     style: const TextStyle(
                       color: Colors.white,
                       fontSize: 15,
