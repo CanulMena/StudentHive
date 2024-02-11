@@ -46,10 +46,10 @@ class LoginScreen extends StatelessWidget {
                 ),
               ],
             ),
-            child: const Column(
+            child: Column(
               children: [
-                SizedBox(height: 10),
-                Text(
+                const SizedBox(height: 10),
+                const Text(
                   'Login',
                   style: TextStyle(
                     color: Colors.blueGrey,
@@ -57,7 +57,7 @@ class LoginScreen extends StatelessWidget {
                     fontWeight: FontWeight.bold,
                   ),
                 ),
-                SizedBox(height: 30),
+                const SizedBox(height: 30),
                 LogginFormContainer(),
               ],
             ),

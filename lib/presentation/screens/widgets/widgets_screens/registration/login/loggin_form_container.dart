@@ -1,13 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:provider/provider.dart';
 import 'package:studenthive/config/router/app_router.dart';
+import 'package:studenthive/presentation/provider/login_provider.dart';
 import 'package:studenthive/presentation/screens/widgets/widgets_screens/registration/input_decoration.dart';
 
 class LogginFormContainer extends StatelessWidget {
-  const LogginFormContainer({super.key});
+  LogginFormContainer({super.key});
+
+  final emailController = TextEditingController();
+  final passwordController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
+    final LoginProvider loginProvider = context.watch<LoginProvider>();
     return Container(
       margin: const EdgeInsets.symmetric(horizontal: 22),
       child: Form(
@@ -20,6 +26,7 @@ class LogginFormContainer extends StatelessWidget {
               validator: (value) {
                 return validateEmail(value);
               },
+              controller: emailController
             ),
 
             const SizedBox(height: 30),
@@ -32,17 +39,28 @@ class LogginFormContainer extends StatelessWidget {
               validator: (value) {
                 return validatePassword(value);
               },
+              controller:  passwordController
             ),
 
             const SizedBox(height: 30),
 
             buildMaterialButton(
-              label: "Ingresar",
-              onPressed: () {
-                isLogged = true;
+            label: "Ingresar",
+            onPressed: () {
+              final email = emailController.text;
+              final password = passwordController.text;
+              if (loginProvider.loginUser(email, password)) {
+                // Inicio de sesión exitoso, navegar a la pantalla de inicio
                 context.go('/home');
-              },
-            ),
+                isLogged = true;
+              } else {
+                // Error en las credenciales, mostrar mensaje de error
+                ScaffoldMessenger.of(context).showSnackBar(
+                  const SnackBar(content: Text('Correo o contraseña incorrectos')),
+                );
+              }
+            },
+          ),
 
             const SizedBox(height: 30),
 
@@ -60,6 +78,7 @@ class LogginFormContainer extends StatelessWidget {
     required Icon prefixIcon,
     bool isPassword = false,
     String? Function(String?)? validator,
+    required TextEditingController controller
   }) {
     return TextFormField(
       keyboardType: isPassword ? TextInputType.visiblePassword : TextInputType.emailAddress,
@@ -74,6 +93,7 @@ class LogginFormContainer extends StatelessWidget {
         prefixIcon: prefixIcon,
       ),
       validator: validator,
+      controller: controller,
     );
   }
 

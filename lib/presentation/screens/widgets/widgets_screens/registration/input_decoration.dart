@@ -35,9 +35,9 @@ class InputDecorations2 {
           borderSide: BorderSide(color: Color(0xFF159A9C), width: 3)),
       floatingLabelStyle: MaterialStateTextStyle.resolveWith(
           (states) => const TextStyle(color: Color(0xFF159A9C))),
-      hintText: hintText,
+      hintText: hintText, //*Será lo que saldrá en el textFormField antes que escribamos
       labelText: labelText,
-      prefixIcon: prefixIcon,
+      prefixIcon: prefixIcon, //*Este es el icon que aparece en la parte izquierda del TextFormField
     );
   }
 }

@@ -1,4 +1,3 @@
-import 'package:studenthive/domain/entities/publication.dart';
 
 class PublicationModel {
   int idPublicacion;
