@@ -26,7 +26,7 @@ class MyApp extends StatelessWidget {
 
         ChangeNotifierProvider(create: (_) => FavoriteProvider()),
 
-        ChangeNotifierProvider(create: (_) => LoginProvider())
+        ChangeNotifierProvider(create: (_) => LoginProvider()),
         
       ],
       child: MaterialApp.router(
