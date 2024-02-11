@@ -7,6 +7,7 @@ class Publication {
   final int rentPrice;
   final DateTime publicationDate;
   final RentalHouseDetail rentalHouseDetail;
+  final HouseService houseService;
   final TypeHouseRental typeHouseRental;
   final HouseLocation houseLocation;
   final String idUser;
@@ -19,6 +20,7 @@ class Publication {
     required this.status,
     required this.rentPrice,
     required this.publicationDate,
+    required this.houseService,
     required this.rentalHouseDetail,
     required this.typeHouseRental,
     required this.houseLocation,

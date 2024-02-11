@@ -11,7 +11,7 @@ class HomeProvider extends ChangeNotifier {
   List<Publication> publications = [
     Publication(
         idPublication: 1,
-        title: 'Tu mejor opcion',
+        title: 'Cuarto en buenas condiciones cerca de la utm',
         description:
             'Irure dolor minim officia ea fugiat eu excepteur magna et nulla ullamco. Ipsum dolor ex laboris incididunt ex elit ipsum. Enim nostrud officia Lorem magna proident enim laborum. Labore est voluptate non ea magna minim sit laborum duis qui.',
         images: [
@@ -24,10 +24,20 @@ class HomeProvider extends ChangeNotifier {
         publicationDate: DateTime.now(),
         rentalHouseDetail: RentalHouseDetail(
             idRentalHouseDetail: 1,
-            numberOfGuests: 2,
-            numberOfBathrooms: 1,
+            numberOfGuests: 3,
+            numberOfBathrooms: 2,
             numberOfRooms: 2,
             numberOfHammocks: 4),
+        houseService: HouseService(
+          idHouseService: 1,
+          wifi: true, 
+          kitchen: true, 
+          washer: true, 
+          airConditioning: true, 
+          water: true, 
+          gas: true, 
+          television: true
+          ),
         typeHouseRental: TypeHouseRental(
             idTypeHouseRental: 1,
             ownHouse: true,
@@ -55,7 +65,7 @@ class HomeProvider extends ChangeNotifier {
           'https://i.pinimg.com/564x/e8/1d/83/e81d836940072815e686eb83b78efac1.jpg',
         ],
         status: true,
-        rentPrice: 1500,
+        rentPrice: 1300,
         publicationDate: DateTime.now(),
         rentalHouseDetail: RentalHouseDetail(
             idRentalHouseDetail: 1,
@@ -63,13 +73,68 @@ class HomeProvider extends ChangeNotifier {
             numberOfBathrooms: 1,
             numberOfRooms: 2,
             numberOfHammocks: 4),
+        houseService: HouseService(
+          idHouseService: 2, 
+          wifi: true, 
+          kitchen: false, 
+          washer: false, 
+          airConditioning: true, 
+          water: true, 
+          gas: true, 
+          television: true
+        ),
         typeHouseRental: TypeHouseRental(
             idTypeHouseRental: 1,
             ownHouse: true,
             sharedRoom: false,
             singleRoom: false),
         houseLocation: HouseLocation(
-            idLocation: 1,  
+            idLocation: 2,  
+            address: 'C. 59 472',
+            city: 'Mérida',
+            state: 'Yucatan',
+            country: 'México',
+            postalCode: '97277',
+            neighborhood: 'Mercedes Barrera'
+            ),
+        idUser: '1'),
+
+    Publication(
+        idPublication: 2,
+        title: 'Busco Gente responsable',
+        description:
+            'Irure dolor minim officia ea fugiat eu excepteur magna et nulla ullamco. Ipsum dolor ex laboris incididunt ex elit ipsum. Enim nostrud officia Lorem magna proident enim laborum. Labore est voluptate non ea magna minim sit laborum duis qui.',
+        images: [
+          'https://i.pinimg.com/564x/99/2d/1a/992d1a380ae061ad25c779990a95930a.jpg',
+          'https://i.pinimg.com/564x/dc/16/80/dc1680e3656140da0ef1b57feaa095e3.jpg',
+          'https://i.pinimg.com/564x/e8/1d/83/e81d836940072815e686eb83b78efac1.jpg',
+        ],
+        status: true,
+        rentPrice: 1300,
+        publicationDate: DateTime.now(),
+        rentalHouseDetail: RentalHouseDetail(
+            idRentalHouseDetail: 1,
+            numberOfGuests: 2,
+            numberOfBathrooms: 1,
+            numberOfRooms: 2,
+            numberOfHammocks: 4),
+        houseService: HouseService(
+          idHouseService: 2, 
+          wifi: false, 
+          kitchen: false, 
+          washer: false, 
+          airConditioning: false, 
+          water: false, 
+          gas: false, 
+          television: false
+        ),
+        typeHouseRental: TypeHouseRental(
+            idTypeHouseRental: 1,
+            ownHouse: true,
+            sharedRoom: false,
+            singleRoom: false),
+        houseLocation: HouseLocation(
+            idLocation: 2,  
             address: 'C. 59 472',
             city: 'Mérida',
             state: 'Yucatan',

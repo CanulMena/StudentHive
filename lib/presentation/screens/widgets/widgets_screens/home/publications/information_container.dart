@@ -18,14 +18,19 @@ class InformationContainer extends StatelessWidget {
           children: [
             Padding(
               padding: const EdgeInsets.only(top: 8),
-              child: Text(informationPost.title, style: textStyle.titleMedium?.copyWith( fontWeight: FontWeight.w600, fontSize: 16 ))
+              child: Text(
+                '${informationPost.houseLocation.city}, ${informationPost.houseLocation.neighborhood}', 
+                style: textStyle.titleMedium?.copyWith( fontWeight: FontWeight.w600, fontSize: 16 )
+              )
             ),
             Padding(
-              padding: const EdgeInsets.only(top: 6),
-              child: Text(informationPost.publicationDate.toString(), style: textStyle.labelLarge,)
+              padding: const EdgeInsets.only(top: 3),
+              child: Text(
+                '${informationPost.publicationDate.year}-0${informationPost.publicationDate.month}-${informationPost.publicationDate.weekday}', 
+                style: textStyle.labelLarge,)
             ),
             Padding(
-              padding: const EdgeInsets.only(top: 6),
+              padding: const EdgeInsets.only(top: 3),
               child: _CustomText(
                 imagePost: ' \$${informationPost.rentPrice.toString()} MXN',
                 fontSize: 16,
