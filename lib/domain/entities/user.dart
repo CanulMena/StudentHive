@@ -10,15 +10,42 @@ class User {
   final String? url;
   final String? gender;
 
-  User({
-    required this.userAge,
-    required this.email,
-    required this.password,
-    required this.name,
-    required this.lastName,
-    this.description,
-    this.phoneNumber,
-    this.url,
-    this.gender
-    });
+  User(
+      {required this.userAge,
+      required this.email,
+      required this.password,
+      required this.name,
+      required this.lastName,
+      this.description,
+      this.phoneNumber,
+      this.url,
+      this.gender});
+
+  factory User.fromJson(Map<String, dynamic> json) {
+    return User(
+        userAge: json['userAge'],
+        email: json['email'],
+        password: json['password'],
+        name: json['name'],
+        lastName: json['lastName'],
+        description: json['description'],
+        phoneNumber: json['phoneNumber'],
+        url: json['url'],
+        gender: json['gender']
+        );
+  }
+  Map<String, dynamic> toJson() {
+  return {
+    'userAge' : userAge,
+    'email': email,
+    'password' : password,
+    'name': name,
+    'lastName' : lastName,
+    'description' : description,
+    'phoneNumber': phoneNumber,
+    'url' : url,
+    'gender' : gender
+    
+  };
+}
 }

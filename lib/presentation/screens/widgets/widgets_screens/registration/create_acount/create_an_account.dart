@@ -29,9 +29,9 @@ class CreateAnAccountForm extends StatelessWidget {
             child: Column(
               children: [
 
-                SizedBox(height: 10),
+                const SizedBox(height: 10),
 
-                Text(
+                const Text(
                   'Crear Cuenta',
                   style: TextStyle(
                     color: Colors.blueGrey,
@@ -40,7 +40,7 @@ class CreateAnAccountForm extends StatelessWidget {
                   ),
                 ),
 
-                SizedBox(height: 30),
+                const SizedBox(height: 30),
 
                 FormularioContainer(),
                 

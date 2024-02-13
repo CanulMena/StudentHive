@@ -1,20 +1,23 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
-import 'package:studenthive/config/router/app_router.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:studenthive/domain/entities/user.dart';
-import 'package:studenthive/presentation/provider/login_provider.dart';
+import 'package:studenthive/presentation/provider/user_provider.dart';
 import 'package:studenthive/presentation/screens/widgets/widgets_screens/registration/input_decoration.dart';
 
 class LogginFormContainer extends StatelessWidget {
   LogginFormContainer({super.key});
 
   final emailController = TextEditingController();
+
   final passwordController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
-    final LoginProvider loginProvider = context.watch<LoginProvider>();
+    final UserProvider loginProvider = context.watch<UserProvider>();
     return Container(
       margin: const EdgeInsets.symmetric(horizontal: 22),
       child: Form(
@@ -45,20 +48,32 @@ class LogginFormContainer extends StatelessWidget {
 
             const SizedBox(height: 30),
 
-            buildMaterialButton(
-            label: "Ingresar",
-            onPressed: () {
-              if (loginProvider.loginUser(emailController.text, passwordController.text)) {
-                final User currentUser = loginProvider.currentUser!;
-                isLogged = true;
-                context.go('/home', extra: currentUser );
-              } else {
-                ScaffoldMessenger.of(context).showSnackBar(
-                  const SnackBar(content: Text('Correo o contraseña incorrectos')),
-                );
-              }
-            },
-          ),
+              buildMaterialButton(
+              label: "Ingresar",
+              onPressed: () {
+                // Verificar el inicio de sesión
+                User? loginSuccess = loginProvider.loginUser(emailController.text, passwordController.text);
+                if( loginSuccess != null ){
+                  Map<String, dynamic> userMap = loginSuccess.toJson();//AHORA TENGO ESTE ERROR EN EL toJson
+                  String userJson = jsonEncode(userMap);
+                  SharedPreferences.getInstance().then((prefs) {
+                    prefs.setBool('isLogged', true);
+                    prefs.setString('userData', userJson);
+
+                  });
+                  //*Ayudame a guardar los datos del usuario.
+                  
+                  context.go('/home');
+                } else { 
+                  SharedPreferences.getInstance().then((prefs) => prefs.setBool('isLogged', false));
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    const SnackBar(content: Text('Correo o contraseña incorrectos'))
+                  );
+                }
+              },
+            ),
+
+
 
             const SizedBox(height: 30),
 

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
-import 'package:studenthive/presentation/provider/login_provider.dart';
+import 'package:studenthive/presentation/provider/user_provider.dart';
 import 'package:studenthive/presentation/screens/widgets/widgets_screens/registration/input_decoration.dart';
 
 class FormularioContainer extends StatelessWidget {
@@ -15,7 +15,7 @@ class FormularioContainer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final loginProvider = context.watch<LoginProvider>();
+    final loginProvider = context.watch<UserProvider>();
     return Container( 
       margin: const EdgeInsets.symmetric(horizontal: 30),
       child: Form(
@@ -139,7 +139,7 @@ class FormularioContainer extends StatelessWidget {
   );
 }
 
-  Widget _buildCreateAccountButton(BuildContext context, LoginProvider loginProvider) { //Hasta que no termine de llenar todo no mandaré el post en la api.
+  Widget _buildCreateAccountButton(BuildContext context, UserProvider loginProvider) { //Hasta que no termine de llenar todo no mandaré el post en la api.
 
     return MaterialButton(
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
