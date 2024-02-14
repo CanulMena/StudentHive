@@ -1,7 +1,23 @@
+import 'dart:convert';
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:studenthive/domain/entities/user.dart';
 
 class UserProvider extends ChangeNotifier {
+  late SharedPreferences _prefs;
+  late User currentUser = User(
+      userAge: '0',
+      email: 'studenthive@gmail.com',
+      password: 'asdf1234',
+      name: 'studenthive',
+      lastName: '');
+
+  bool isLoading = true; // Agregar un estado de carga
+
+  UserProvider() {
+    _loadCurrentUser();
+  }
+
   final List<User> users = [
     User(
         userAge: '9',
@@ -23,17 +39,28 @@ class UserProvider extends ChangeNotifier {
     users.add(user);
   }
 
-  User? loginUser(String email, String password) { //!No puedo validar a un usuario sin agregarle un correo y una contraseña.
-    // Busca un usuario con el correo electrónico proporcionado
+  User? loginUser(String email, String password) {
     for (var user in users) {
       if (user.email == email && user.password == password) {
-        // Si se encuentra un usuario y la contraseña coincide, el inicio de sesión es exitoso
-
         return user;
       }
     }
-    // Si no se encontró el usuario o la contraseña no coincide, el inicio de sesión falla
     return null;
   }
+
+  Future<void> addCurrentuser( String userJson) async {
+    await _prefs.setString('userData', userJson);
+    notifyListeners();
+  }
+
+  Future<void> _loadCurrentUser() async {
+    _prefs = await SharedPreferences.getInstance();
+    String? userDataJson = _prefs.getString('userData');
+    if (userDataJson != null) {
+      Map<String, dynamic> userDataMap = jsonDecode(userDataJson);
+      currentUser = User.fromJson(userDataMap);
+    }
+    isLoading = false;
+    notifyListeners();
+  }
 }
-  

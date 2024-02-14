@@ -5,6 +5,7 @@ import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:studenthive/domain/entities/user.dart';
+import 'package:studenthive/presentation/provider/auth_provider.dart';
 import 'package:studenthive/presentation/provider/user_provider.dart';
 import 'package:studenthive/presentation/screens/widgets/widgets_screens/registration/input_decoration.dart';
 
@@ -18,6 +19,8 @@ class LogginFormContainer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final UserProvider loginProvider = context.watch<UserProvider>();
+    final AuthProvider authProvider = context.watch<AuthProvider>();
+    final UserProvider userProvider = context.watch<UserProvider>();
     return Container(
       margin: const EdgeInsets.symmetric(horizontal: 22),
       child: Form(
@@ -54,18 +57,16 @@ class LogginFormContainer extends StatelessWidget {
                 // Verificar el inicio de sesión
                 User? loginSuccess = loginProvider.loginUser(emailController.text, passwordController.text);
                 if( loginSuccess != null ){
-                  Map<String, dynamic> userMap = loginSuccess.toJson();//AHORA TENGO ESTE ERROR EN EL toJson
+                  Map<String, dynamic> userMap = loginSuccess.toJson();
                   String userJson = jsonEncode(userMap);
-                  SharedPreferences.getInstance().then((prefs) {
-                    prefs.setBool('isLogged', true);
-                    prefs.setString('userData', userJson);
-
-                  });
-                  //*Ayudame a guardar los datos del usuario.
-                  
+                  authProvider.login();
+                  userProvider.addCurrentuser(userJson);
+                  // SharedPreferences.getInstance().then((prefs) {
+                  //   prefs.setBool('isLogged', true);
+                  //   prefs.setString('userData', userJson);
+                  // });
                   context.go('/home');
                 } else { 
-                  SharedPreferences.getInstance().then((prefs) => prefs.setBool('isLogged', false));
                   ScaffoldMessenger.of(context).showSnackBar(
                     const SnackBar(content: Text('Correo o contraseña incorrectos'))
                   );
