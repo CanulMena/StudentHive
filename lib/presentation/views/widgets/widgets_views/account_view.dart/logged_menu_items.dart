@@ -3,12 +3,13 @@ import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
 import 'package:studenthive/config/menu/menu_item.dart';
 import 'package:studenthive/presentation/provider/auth_provider.dart';
+import 'package:studenthive/presentation/provider/providers.dart';
 import 'package:studenthive/presentation/views/widgets/widgets_views/account_view.dart/custom_list_tile.dart';
 
 class LoggedAppMenuItems extends StatelessWidget {
   const LoggedAppMenuItems({super.key});
 
-  void openDialog(BuildContext context, AuthProvider authProvider) {
+  void openDialog(BuildContext context, AuthProvider authProvider, UserProvider userProvider) {
   showDialog( //*showDialog personalizado
     barrierDismissible: false,
     context: context,
@@ -31,6 +32,7 @@ class LoggedAppMenuItems extends StatelessWidget {
           FilledButton(
             onPressed: () {
               authProvider.logout();
+              userProvider.loadCurrentUser();
               context.go('/login');
             },
             child: const Text('Aceptar'),
@@ -46,6 +48,7 @@ class LoggedAppMenuItems extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final authProvider = context.watch<AuthProvider>(); //*Siempre que crear un provider desde un contexto directo.
+    final UserProvider userProvider = context.watch<UserProvider>();
     final textStyle = Theme.of(context).textTheme;
     return ListView(
       
@@ -101,7 +104,7 @@ class LoggedAppMenuItems extends StatelessWidget {
             style: TextStyle(fontSize: 18, fontWeight: FontWeight.w600, decoration: TextDecoration.underline),
           ),
           onTap: () {
-            openDialog(context, authProvider); 
+            openDialog(context, authProvider, userProvider); 
           },
         ),
       ],

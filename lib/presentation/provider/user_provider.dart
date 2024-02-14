@@ -15,7 +15,7 @@ class UserProvider extends ChangeNotifier {
   bool isLoading = true; // Agregar un estado de carga
 
   UserProvider() {
-    _loadCurrentUser();
+    loadCurrentUser();
   }
 
   final List<User> users = [
@@ -48,17 +48,29 @@ class UserProvider extends ChangeNotifier {
     return null;
   }
 
+  Future<void> removeCurrentUser() async {
+    await _prefs.remove('userData');
+  }
+
   Future<void> addCurrentuser( String userJson) async {
     await _prefs.setString('userData', userJson);
+    loadCurrentUser();
     notifyListeners();
   }
 
-  Future<void> _loadCurrentUser() async {
+  Future<void> loadCurrentUser() async {
     _prefs = await SharedPreferences.getInstance();
     String? userDataJson = _prefs.getString('userData');
     if (userDataJson != null) {
       Map<String, dynamic> userDataMap = jsonDecode(userDataJson);
       currentUser = User.fromJson(userDataMap);
+    } else {
+      currentUser = User(
+      userAge: '0',
+      email: 'studenthive@gmail.com',
+      password: 'asdf1234',
+      name: 'studenthive',
+      lastName: '');
     }
     isLoading = false;
     notifyListeners();

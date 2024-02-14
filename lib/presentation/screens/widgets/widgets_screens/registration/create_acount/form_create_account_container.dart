@@ -101,9 +101,9 @@ class FormularioContainer extends StatelessWidget {
       validator: validator, //*lo que escribio se lo devolverá a una funcion que lo validará.
       focusNode: focusNode,
       controller: controller,
-      // onTapOutside: (event) {
-      //   focusNode.unfocus(); //*Esto es para que se cierre el form si toco afuera de la pantala
-      // },
+      onTapOutside: (event) {
+        focusNode.unfocus(); //*Esto es para que se cierre el form si toco afuera de la pantala
+      },
       // onFieldSubmitted: (value){
       //   onValue(controller.value.text);
       //   controller.clear();

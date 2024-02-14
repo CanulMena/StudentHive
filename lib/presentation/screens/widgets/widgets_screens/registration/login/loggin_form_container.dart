@@ -1,9 +1,7 @@
 import 'dart:convert';
-
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 import 'package:studenthive/domain/entities/user.dart';
 import 'package:studenthive/presentation/provider/auth_provider.dart';
 import 'package:studenthive/presentation/provider/user_provider.dart';
@@ -18,7 +16,6 @@ class LogginFormContainer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final UserProvider loginProvider = context.watch<UserProvider>();
     final AuthProvider authProvider = context.watch<AuthProvider>();
     final UserProvider userProvider = context.watch<UserProvider>();
     return Container(
@@ -33,7 +30,10 @@ class LogginFormContainer extends StatelessWidget {
               validator: (value) {
                 return validateEmail(value);
               },
-              controller: emailController
+              controller: emailController, 
+              userProvider: userProvider,
+              authProvider: authProvider,
+              context: context
             ),
 
             const SizedBox(height: 30),
@@ -46,7 +46,10 @@ class LogginFormContainer extends StatelessWidget {
               validator: (value) {
                 return validatePassword(value);
               },
-              controller:  passwordController
+              controller:  passwordController,
+              userProvider: userProvider,
+              authProvider: authProvider,
+              context: context
             ),
 
             const SizedBox(height: 30),
@@ -55,7 +58,7 @@ class LogginFormContainer extends StatelessWidget {
               label: "Ingresar",
               onPressed: () {
                 // Verificar el inicio de sesión
-                User? loginSuccess = loginProvider.loginUser(emailController.text, passwordController.text);
+                User? loginSuccess = userProvider.loginUser(emailController.text, passwordController.text);
                 if( loginSuccess != null ){
                   Map<String, dynamic> userMap = loginSuccess.toJson();
                   String userJson = jsonEncode(userMap);
@@ -74,8 +77,6 @@ class LogginFormContainer extends StatelessWidget {
               },
             ),
 
-
-
             const SizedBox(height: 30),
 
             buildRegistrationLink(context),
@@ -87,6 +88,9 @@ class LogginFormContainer extends StatelessWidget {
   }
 
   Widget buildTextFormField({
+    required BuildContext context,
+    required UserProvider userProvider,
+    required AuthProvider authProvider,
     required String labelText,
     required String hintText,
     required Icon prefixIcon,
@@ -94,6 +98,7 @@ class LogginFormContainer extends StatelessWidget {
     String? Function(String?)? validator,
     required TextEditingController controller
   }) {
+    final FocusNode focusNode = FocusNode();
     return TextFormField(
       keyboardType: isPassword ? TextInputType.visiblePassword : TextInputType.emailAddress,
       autovalidateMode: AutovalidateMode.onUserInteraction,
@@ -108,6 +113,28 @@ class LogginFormContainer extends StatelessWidget {
       ),
       validator: validator,
       controller: controller,
+      focusNode: focusNode,
+      onFieldSubmitted: (value) {
+        User? loginSuccess = userProvider.loginUser(emailController.text, passwordController.text);
+        if( loginSuccess != null ){
+          Map<String, dynamic> userMap = loginSuccess.toJson();
+          String userJson = jsonEncode(userMap);
+          authProvider.login();
+          userProvider.addCurrentuser(userJson);
+          // SharedPreferences.getInstance().then((prefs) {
+          //   prefs.setBool('isLogged', true);
+          //   prefs.setString('userData', userJson);
+          // });
+          context.go('/home');
+        } else { 
+          ScaffoldMessenger.of(context).showSnackBar(
+            const SnackBar(content: Text('Correo o contraseña incorrectos'))
+          );
+        }
+      },
+      onTapOutside: (event) {
+        focusNode.unfocus();
+      },
     );
   }
 
