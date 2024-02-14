@@ -48,7 +48,10 @@ class _StepProgessState extends State<StepProgess> {
           height: size.height * 0.01,
           width: size.width * 0.9,
           margin: const EdgeInsets.symmetric(vertical: 16),
-          // ignore: sort_child_properties_last
+          decoration: BoxDecoration(
+              color: Colors.amber.withOpacity(0.4),
+              borderRadius: const BorderRadius.all(Radius.circular(8))),
+          
           child: Stack(
             children: [
               AnimatedContainer(
@@ -60,9 +63,6 @@ class _StepProgessState extends State<StepProgess> {
               ),
             ],
           ),
-          decoration: BoxDecoration(
-              color: Colors.amber.withOpacity(0.4),
-              borderRadius: const BorderRadius.all(Radius.circular(8))),
         )
       ],
     );
