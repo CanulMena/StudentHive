@@ -52,7 +52,7 @@ class _AppStepsCreatePublicationsState
                   HouseAddTittle(),
                   HouseAddDescription(),
                   HousePrice(),
-                  MakeReservationView()
+                  MakeReservationView(),
                 ],
               ),
             ),
