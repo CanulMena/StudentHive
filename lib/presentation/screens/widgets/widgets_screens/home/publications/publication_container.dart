@@ -47,7 +47,7 @@ class _PublicationContainerState extends State<PublicationContainer> {
           ),
           child: Column(
             children: [
-              ImageContainer( imagesPost: widget.publicationsPost.imagenes,),
+              ImageContainer( imagesPost: widget.publicationsPost.images,),
               InformationContainer(informationPost: widget.publicationsPost,)
               ],
             ),

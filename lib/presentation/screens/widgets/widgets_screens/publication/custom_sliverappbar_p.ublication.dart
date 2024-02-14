@@ -44,9 +44,9 @@ class _CustomSliverAppBarState extends State<CustomSliverAppBar> {
               child: PageView.builder(
                 controller: scrollerPage,
                 scrollDirection: Axis.horizontal,
-                itemCount: widget.publicationPost.imagenes.length,
+                itemCount: widget.publicationPost.images.length,
                 itemBuilder: (context, index) {
-                  final imagePost = widget.publicationPost.imagenes[index];
+                  final imagePost = widget.publicationPost.images[index];
                   return Image.network(
                   imagePost,
                   fit: BoxFit.cover,
@@ -71,7 +71,7 @@ class _CustomSliverAppBarState extends State<CustomSliverAppBar> {
                 width: size.width * 1 * 0.16,
                 child: Center(child: 
                 Text(
-                  '$actualPage/${widget.publicationPost.imagenes.length}',
+                  '$actualPage/${widget.publicationPost.images.length}',
                   style: const TextStyle(
                     color: Colors.white,
                     fontSize: 12,
