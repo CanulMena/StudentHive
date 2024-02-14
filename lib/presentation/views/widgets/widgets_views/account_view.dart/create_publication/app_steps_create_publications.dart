@@ -52,7 +52,7 @@ class _AppStepsCreatePublicationsState
                   HouseAddTittle(),
                   HouseAddDescription(),
                   HousePrice(),
-                  MakeReservationView(),
+                  MakeReservationView(), //esto se debe de subir a la vista de la publicacion
 
                 ],
               ),
