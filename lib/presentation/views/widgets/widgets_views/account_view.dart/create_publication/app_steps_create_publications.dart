@@ -53,6 +53,7 @@ class _AppStepsCreatePublicationsState
                   HouseAddDescription(),
                   HousePrice(),
                   MakeReservationView(),
+
                 ],
               ),
             ),
