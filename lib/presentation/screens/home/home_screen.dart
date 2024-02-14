@@ -6,6 +6,7 @@ import 'package:studenthive/presentation/screens/widgets/widgets_screens/home/cu
 import 'package:studenthive/presentation/views/home_views.dart';
 
 class HomeScreen extends StatelessWidget {
+  
   const HomeScreen({super.key});
 
   @override
@@ -16,9 +17,9 @@ class HomeScreen extends StatelessWidget {
 
     List<Widget> screens = [
       PublicationsView(
-        listPublications: homeProvider.publications,
+        listPublications: homeProvider.publications, 
       ),
-      FavoriteView(favoriteProvider: favoriteProvider),
+      FavoriteView(favoriteProvider: favoriteProvider, ),
       const NotificationView(),
       const AcountView(),
     ];

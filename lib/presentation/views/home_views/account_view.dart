@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:studenthive/config/router/app_router.dart';
+import 'package:provider/provider.dart';
+import 'package:studenthive/presentation/provider/auth_provider.dart';
 import 'package:studenthive/presentation/views/widgets/widgets_views/account_view.dart/logged_menu_items.dart';
 import 'package:studenthive/presentation/views/widgets/widgets_views/account_view.dart/not_logged_menu_items.dart';
 
@@ -8,10 +9,11 @@ class AcountView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final bool isLogged = context.watch<AuthProvider>().isLogged;
     return Container(
-        margin: const EdgeInsets.symmetric(horizontal: 20),
-        child: isLogged ? const LoggedAppMenuItems() : const NoLoggedMenuItems()
-      );
+      margin: const EdgeInsets.symmetric(horizontal: 20),
+      child: isLogged ? const LoggedAppMenuItems() : const NoLoggedMenuItems(),
+    );
   }
 }
 

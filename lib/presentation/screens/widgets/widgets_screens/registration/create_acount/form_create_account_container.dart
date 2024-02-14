@@ -1,13 +1,22 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:provider/provider.dart';
+import 'package:studenthive/presentation/provider/user_provider.dart';
 import 'package:studenthive/presentation/screens/widgets/widgets_screens/registration/input_decoration.dart';
 
 class FormularioContainer extends StatelessWidget {
-  const FormularioContainer({super.key});
+  FormularioContainer({super.key});
+
+  final nameController = TextEditingController();
+  final lastNameController = TextEditingController();
+  final emailController = TextEditingController();
+  final passwordController = TextEditingController();
+  final ageController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
-    return Container( //?Amarro todo el formulario en un contenedor que tedría todos los textFormField
+    final loginProvider = context.watch<UserProvider>();
+    return Container( 
       margin: const EdgeInsets.symmetric(horizontal: 30),
       child: Form(
         child: Column(
@@ -17,12 +26,14 @@ class FormularioContainer extends StatelessWidget {
               label: "Nombre",
               prefixIcon: const Icon(Icons.person, color: Color(0xFF159A9C)),
               validator: (value) => _validateField(value, "nombre"),
+              controller: nameController
             ),
             const SizedBox(height: 20),
             _buildTextFormField(
               label: "Apellido",
               prefixIcon: const Icon(Icons.people, color: Color(0xFF159A9C)),
               validator: (value) => _validateField(value, "apellido"),
+              controller: lastNameController
             ),
             const SizedBox(height: 20),
             _buildTextFormField(
@@ -30,6 +41,7 @@ class FormularioContainer extends StatelessWidget {
               prefixIcon: const Icon(Icons.numbers, color: Color(0xFF159A9C)),
               keyboardType: TextInputType.number,
               validator: (value) => _validateNumber(value, "edad"),
+              controller: ageController
             ),
             const SizedBox(height: 20),
             _buildTextFormField(
@@ -37,6 +49,7 @@ class FormularioContainer extends StatelessWidget {
               prefixIcon: const Icon(Icons.email, color: Color(0xFF159A9C)),
               keyboardType: TextInputType.emailAddress,
               validator: (value) => _validateEmail(value),
+              controller: emailController
             ),
             const SizedBox(height: 20),
             _buildTextFormField(
@@ -44,19 +57,20 @@ class FormularioContainer extends StatelessWidget {
               prefixIcon: const Icon(Icons.lock, color: Color(0xFF159A9C)),
               obscureText: true,
               validator: (value) => _validatePassword(value),
+              controller: passwordController
             ),
-            const SizedBox(height: 20),
-            _buildTextFormField(
-              label: "Confirmar Contraseña",
-              prefixIcon: const Icon(Icons.lock, color: Color(0xFF159A9C)),
-              obscureText: true,
-              validator: (value) => _validatePassword(value),
-            ),
+            // const SizedBox(height: 20),
+            // _buildTextFormField(
+            //   label: "Confirmar Contraseña",
+            //   prefixIcon: const Icon(Icons.lock, color: Color(0xFF159A9C)),
+            //   obscureText: true,
+            //   validator: (value) => _validatePassword(value),
+            // ),
             const SizedBox(height: 10),
             _buildCheckbox("Acepto los términos y condiciones"),
             _buildCheckbox("Acepto las políticas de privacidad"),
             const SizedBox(height: 10),
-            _buildCreateAccountButton(context),
+            _buildCreateAccountButton(context , loginProvider),
           ],
         ),
       ),
@@ -69,20 +83,32 @@ class FormularioContainer extends StatelessWidget {
     bool obscureText = false,
     TextInputType keyboardType = TextInputType.text,
     required String? Function(String?) validator,
+    required TextEditingController controller
   }) {
+    final FocusNode focusNode = FocusNode();
     return TextFormField(
       autovalidateMode: AutovalidateMode.onUserInteraction,
       cursorWidth: 1,
       cursorColor: Colors.black,
       autocorrect: false,
-      decoration: InputDecorations2.inputDecoration2(
-        hintText: "",
-        labelText: label,
-        prefixIcon: prefixIcon,
+      decoration: InputDecorations2.inputDecoration2(//*Este es el textFormfield que cree para poder usar este.
+        hintText: "", //Es el texto que aparece luego de hacer click en el textformfield
+        labelText: label, //Esto es lo que aparece en la parte superior del textformfield
+        prefixIcon: prefixIcon, //Este es el icon que aparece en la parte izquierda del textformfield.
       ),
       obscureText: obscureText,
       keyboardType: keyboardType,
-      validator: validator,
+      validator: validator, //*lo que escribio se lo devolverá a una funcion que lo validará.
+      focusNode: focusNode,
+      controller: controller,
+      onTapOutside: (event) {
+        focusNode.unfocus(); //*Esto es para que se cierre el form si toco afuera de la pantala
+      },
+      // onFieldSubmitted: (value){
+      //   onValue(controller.value.text);
+      //   controller.clear();
+
+      // },
     );
   }
 
@@ -113,8 +139,8 @@ class FormularioContainer extends StatelessWidget {
   );
 }
 
+  Widget _buildCreateAccountButton(BuildContext context, UserProvider loginProvider) { //Hasta que no termine de llenar todo no mandaré el post en la api.
 
-  Widget _buildCreateAccountButton(BuildContext context) {
     return MaterialButton(
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
       disabledColor: Colors.indigo,
@@ -127,10 +153,33 @@ class FormularioContainer extends StatelessWidget {
         ),
       ),
       onPressed: () {
+        // Validar si los campos están vacíos
+      if (nameController.text.isEmpty ||
+          lastNameController.text.isEmpty ||
+          ageController.text.isEmpty ||
+          emailController.text.isEmpty ||
+          passwordController.text.isEmpty) {
+        // Mostrar mensaje de error si algún campo está vacío
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(content: Text('Todos los campos son obligatorios')),
+        );
+      } else {
+        // Si todos los campos están completos, agregar usuario y redirigir a la pantalla de inicio de sesión
+        loginProvider.addUser(
+          nameController.text, 
+          lastNameController.text,
+          ageController.text,
+          emailController.text,
+          passwordController.text,
+        );
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(content: Text('Cuenta creada correctamente')),
+        );
         context.push('/login');
-      },
-    );
-  }
+      }
+    },
+  );
+}
 
   String? _validateField(String? value, String fieldName) {
     if (value!.isEmpty) {
