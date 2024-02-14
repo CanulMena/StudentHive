@@ -1,13 +1,23 @@
+import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:studenthive/config/router/app_router.dart';
+import 'package:provider/provider.dart';
+import 'package:studenthive/domain/entities/user.dart';
+import 'package:studenthive/presentation/provider/auth_provider.dart';
+import 'package:studenthive/presentation/provider/user_provider.dart';
 import 'package:studenthive/presentation/screens/widgets/widgets_screens/registration/input_decoration.dart';
 
 class LogginFormContainer extends StatelessWidget {
-  const LogginFormContainer({super.key});
+  LogginFormContainer({super.key});
+
+  final emailController = TextEditingController();
+
+  final passwordController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
+    final AuthProvider authProvider = context.watch<AuthProvider>();
+    final UserProvider userProvider = context.watch<UserProvider>();
     return Container(
       margin: const EdgeInsets.symmetric(horizontal: 22),
       child: Form(
@@ -20,6 +30,10 @@ class LogginFormContainer extends StatelessWidget {
               validator: (value) {
                 return validateEmail(value);
               },
+              controller: emailController, 
+              userProvider: userProvider,
+              authProvider: authProvider,
+              context: context
             ),
 
             const SizedBox(height: 30),
@@ -32,15 +46,34 @@ class LogginFormContainer extends StatelessWidget {
               validator: (value) {
                 return validatePassword(value);
               },
+              controller:  passwordController,
+              userProvider: userProvider,
+              authProvider: authProvider,
+              context: context
             ),
 
             const SizedBox(height: 30),
 
-            buildMaterialButton(
+              buildMaterialButton(
               label: "Ingresar",
               onPressed: () {
-                isLogged = true;
-                context.go('/home');
+                // Verificar el inicio de sesión
+                User? loginSuccess = userProvider.loginUser(emailController.text, passwordController.text);
+                if( loginSuccess != null ){
+                  Map<String, dynamic> userMap = loginSuccess.toJson();
+                  String userJson = jsonEncode(userMap);
+                  authProvider.login();
+                  userProvider.addCurrentuser(userJson);
+                  // SharedPreferences.getInstance().then((prefs) {
+                  //   prefs.setBool('isLogged', true);
+                  //   prefs.setString('userData', userJson);
+                  // });
+                  context.go('/home');
+                } else { 
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    const SnackBar(content: Text('Correo o contraseña incorrectos'))
+                  );
+                }
               },
             ),
 
@@ -55,12 +88,17 @@ class LogginFormContainer extends StatelessWidget {
   }
 
   Widget buildTextFormField({
+    required BuildContext context,
+    required UserProvider userProvider,
+    required AuthProvider authProvider,
     required String labelText,
     required String hintText,
     required Icon prefixIcon,
     bool isPassword = false,
     String? Function(String?)? validator,
+    required TextEditingController controller
   }) {
+    final FocusNode focusNode = FocusNode();
     return TextFormField(
       keyboardType: isPassword ? TextInputType.visiblePassword : TextInputType.emailAddress,
       autovalidateMode: AutovalidateMode.onUserInteraction,
@@ -74,6 +112,29 @@ class LogginFormContainer extends StatelessWidget {
         prefixIcon: prefixIcon,
       ),
       validator: validator,
+      controller: controller,
+      focusNode: focusNode,
+      onFieldSubmitted: (value) {
+        User? loginSuccess = userProvider.loginUser(emailController.text, passwordController.text);
+        if( loginSuccess != null ){
+          Map<String, dynamic> userMap = loginSuccess.toJson();
+          String userJson = jsonEncode(userMap);
+          authProvider.login();
+          userProvider.addCurrentuser(userJson);
+          // SharedPreferences.getInstance().then((prefs) {
+          //   prefs.setBool('isLogged', true);
+          //   prefs.setString('userData', userJson);
+          // });
+          context.go('/home');
+        } else { 
+          ScaffoldMessenger.of(context).showSnackBar(
+            const SnackBar(content: Text('Correo o contraseña incorrectos'))
+          );
+        }
+      },
+      onTapOutside: (event) {
+        focusNode.unfocus();
+      },
     );
   }
 

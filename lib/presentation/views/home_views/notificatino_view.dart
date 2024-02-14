@@ -1,32 +1,32 @@
 import 'package:flutter/material.dart';
 
-//! test user entity
-class User {
-  final int userId;
-  final int contactNumber;
-  final String firstName;
-  final String lastName;
-  final String urlPhoto;
+// //! test user entity
+// class User {
+//   final int userId;
+//   final int? contactNumber;
+//   final String firstName;
+//   final String lastName;
+//   final String? urlPhoto;
 
-  User({
-    required this.contactNumber,
-    required this.firstName,
-    required this.lastName,
-    required this.urlPhoto,
-    required this.userId,
-  });
-}
+//   User({
+//     this.contactNumber,
+//     required this.firstName,
+//     required this.lastName,
+//     this.urlPhoto,
+//     required this.userId,
+//   });
+// }
 
 enum NotificationType { reserve, accepted, notAccepted }
 //! test notification entity
 class Notification {
-  final User user;
+  // final User user;
   final String title;
   final int notificationTime;
   final NotificationType type;
 
   Notification({
-    required this.user,
+    // required this.user,
     required this.title,
     required this.notificationTime,
     required this.type,
