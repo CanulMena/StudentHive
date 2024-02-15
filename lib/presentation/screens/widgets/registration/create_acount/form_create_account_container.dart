@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
 import 'package:studenthive/presentation/provider/user_provider.dart';
-import 'package:studenthive/presentation/screens/widgets/widgets_screens/registration/input_decoration.dart';
+import 'package:studenthive/presentation/screens/widgets/registration/input_decoration.dart';
 
 class FormularioContainer extends StatelessWidget {
   FormularioContainer({super.key});

@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
 import 'package:studenthive/config/menu/menu_item.dart';
-import 'package:studenthive/presentation/provider/auth_provider.dart';
 import 'package:studenthive/presentation/provider/providers.dart';
 import 'package:studenthive/presentation/views/widgets/widgets_views/account_view.dart/custom_list_tile.dart';
 
@@ -107,6 +106,8 @@ class LoggedAppMenuItems extends StatelessWidget {
             openDialog(context, authProvider, userProvider); 
           },
         ),
+        const SizedBox(height: 25,),
+        _HorizontalLine()
       ],
     );
   }
@@ -119,7 +120,7 @@ class _CreatePublicationListTile extends StatelessWidget {
   Widget build(BuildContext context) {
     return CustomListTile(
       menuItem: MenuItem(
-        icon: Icons.add_home_rounded,
+        icon: Icons.home_work_outlined,
         title: 'Create a publication',
         linkRoute: '/createPublication',
       ),
@@ -135,13 +136,32 @@ class _ProfileListTile extends StatelessWidget {
     final colors = Theme.of(context).colorScheme;
     return ListTile(
       contentPadding: EdgeInsets.zero,
-      leading: const Icon(Icons.person),
+      leading: const Icon(Icons.person_outline),
       title: const Text('Name profile'),
-      subtitle: const Text('show profile'),
       trailing: Icon(
         Icons.arrow_forward_ios_rounded,
         color: colors.primary,
       ),
+      shape: const Border(
+        bottom: BorderSide(
+          color: Color.fromARGB(255, 201, 197, 197),
+          width: 0.75
+        )
+
+      ),
+    );
+  }
+}
+
+class _HorizontalLine extends StatelessWidget {
+  final double height = .75;
+  final Color color = const Color.fromARGB(255, 201, 197, 197);
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      height: height,
+      color: color,
     );
   }
 }

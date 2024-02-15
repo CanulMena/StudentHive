@@ -5,7 +5,7 @@ import 'package:provider/provider.dart';
 import 'package:studenthive/domain/entities/user.dart';
 import 'package:studenthive/presentation/provider/auth_provider.dart';
 import 'package:studenthive/presentation/provider/user_provider.dart';
-import 'package:studenthive/presentation/screens/widgets/widgets_screens/registration/input_decoration.dart';
+import 'package:studenthive/presentation/screens/widgets/registration/input_decoration.dart';
 
 class LogginFormContainer extends StatelessWidget {
   LogginFormContainer({super.key});

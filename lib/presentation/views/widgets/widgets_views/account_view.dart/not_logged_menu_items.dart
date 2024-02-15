@@ -9,18 +9,16 @@ class NoLoggedMenuItems extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final colors = Theme.of(context).colorScheme;
+    final textStyle = Theme.of(context).textTheme;
     return ListView(
           children: [
             
             const SizedBox(height: 50,),
             
-            const Text(
-              'Profile',
-              style: TextStyle(
-                fontSize: 30,
-                fontWeight: FontWeight.w500
-                ),
-              ),
+            Text(
+            'Profile',
+            style: textStyle.bodyLarge?.copyWith(fontSize: 32, fontWeight: FontWeight.w600)
+            ),
 
             const SizedBox(height: 15,),
 

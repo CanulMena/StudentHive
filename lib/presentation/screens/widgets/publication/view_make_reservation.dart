@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:studenthive/presentation/screens/widgets/widgets_screens/publication/view_confirmed_reservation/view_details_pay.dart';
-import 'package:studenthive/presentation/screens/widgets/widgets_screens/publication/view_confirmed_reservation/view_details_reservation.dart';
-import 'package:studenthive/presentation/screens/widgets/widgets_screens/publication/view_confirmed_reservation/view_imagenad_title_publication.dart';
-import 'package:studenthive/presentation/screens/widgets/widgets_screens/publication/view_confirmed_reservation/view_pay_reservation.dart';
+import 'package:studenthive/presentation/screens/widgets/publication/view_confirmed_reservation/view_details_pay.dart';
+import 'package:studenthive/presentation/screens/widgets/publication/view_confirmed_reservation/view_details_reservation.dart';
+import 'package:studenthive/presentation/screens/widgets/publication/view_confirmed_reservation/view_imagenad_title_publication.dart';
+import 'package:studenthive/presentation/screens/widgets/publication/view_confirmed_reservation/view_pay_reservation.dart';
 
 class MakeReservationView extends StatelessWidget {
   const MakeReservationView({

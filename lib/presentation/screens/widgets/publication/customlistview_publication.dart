@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:studenthive/domain/entities/publication.dart';
-import 'package:studenthive/presentation/screens/widgets/widgets_screens/publication/custom_sliverappbar_p.ublication.dart';
+import 'package:studenthive/presentation/screens/widgets/publication/custom_sliverappbar_p.ublication.dart';
 
 class CustomListView extends StatelessWidget {
   final Publication publicationPost;
@@ -172,8 +172,8 @@ class _CustomServices extends StatelessWidget {
 }
 
 class _HorizontalLine extends StatelessWidget {
-  final double height = 1;
-  final Color color = Colors.grey;
+  final double height = .75;
+  final Color color = const Color.fromARGB(255, 201, 197, 197);
 
   @override
   Widget build(BuildContext context) {

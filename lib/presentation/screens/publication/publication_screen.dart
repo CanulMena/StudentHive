@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:studenthive/domain/entities/publication.dart';
-import 'package:studenthive/presentation/screens/widgets/widgets_screens/publication/bottom_publication.dart';
-import 'package:studenthive/presentation/screens/widgets/widgets_screens/publication/customlistview_publication.dart';
+import 'package:studenthive/presentation/screens/widgets/publication/bottom_publication.dart';
+import 'package:studenthive/presentation/screens/widgets/publication/customlistview_publication.dart';
 
 class PublicationScreen extends StatelessWidget {
   final Publication publicationPost;

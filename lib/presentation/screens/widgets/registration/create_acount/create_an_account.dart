@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:studenthive/presentation/screens/widgets/widgets_screens/registration/create_acount/form_create_account_container.dart';
+import 'package:studenthive/presentation/screens/widgets/registration/create_acount/form_create_account_container.dart';
 
 class CreateAnAccountForm extends StatelessWidget {
   const CreateAnAccountForm({super.key});

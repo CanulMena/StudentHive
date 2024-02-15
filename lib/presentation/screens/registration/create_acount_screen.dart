@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:studenthive/presentation/screens/widgets/widgets_screens/registration/create_acount/create_an_account.dart';
-import 'package:studenthive/presentation/screens/widgets/widgets_screens/registration/login/blue_box.dart';
-import 'package:studenthive/presentation/screens/widgets/widgets_screens/registration/login/hive_icon.dart';
+import 'package:studenthive/presentation/screens/widgets/registration/create_acount/create_an_account.dart';
+import 'package:studenthive/presentation/screens/widgets/registration/login/blue_box.dart';
+import 'package:studenthive/presentation/screens/widgets/registration/login/hive_icon.dart';
 
 class CreateAnAccountScreen extends StatelessWidget {
   const CreateAnAccountScreen({Key? key}) : super(key: key);
