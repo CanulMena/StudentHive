@@ -1,56 +1,101 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_keyboard_visibility/flutter_keyboard_visibility.dart';
+import 'package:studenthive/presentation/views/widgets/widgets_views/account_view.dart/create_publication/utils_for_creation_publication/buttom_steps_creationp.dart';
 import 'package:studenthive/presentation/views/widgets/widgets_views/account_view.dart/create_publication/utils_for_creation_publication/container_title_appbar.dart';
 
-class WhoElse extends StatelessWidget {
-  const WhoElse({super.key});
+class WhoElse extends StatefulWidget {
+  final PageController pageController;
+  const WhoElse({super.key, required this.pageController,});
 
   @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.all(10),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          //? clase que se encuentra en el archivo container_title_appbar.dart
-          const TitleAppbar(title: '¿Qué otras personas estarán presentes?'),
-          _messageInPage(),
-          const SizedBox(
-            height: 30,
-          ),
-          _buildOptionRow([
-            const ContainerOptionWhoElse(
-              text: 'Yo',
-              icon: Icons.person_outline,
-            ),
-            const ContainerOptionWhoElse(
-              text: 'Familia',
-              icon: Icons.groups_outlined,
-            ),
-          ]),
-          const SizedBox(
-            height: 20,
-          ),
-          _buildOptionRow([
-            const ContainerOptionWhoElse(
-              text: 'Amigos',
-              icon: Icons.group_outlined,
-            ),
-            const ContainerOptionWhoElse(
-              text: 'Compañeros',
-              icon: Icons.group_add_outlined,
-            ),
-          ]),
-        ],
-      ),
-    );
-  }
+  State<WhoElse> createState() => _WhoElseState();
+}
 
-  Widget _messageInPage() {
-    return const Padding(
-      padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-      child: Text(
-        'Establece quiénes ya están utilizando el espacio para evitar problemas o conflictos.',
-        style: TextStyle(fontSize: 15, color: Colors.grey),
+class _WhoElseState extends State<WhoElse> {
+  bool mine = false;
+  bool myFamily = false;
+  bool friends = false;
+  bool rommies = false;
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: Padding(
+        padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 12),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            //? clase que se encuentra en el archivo container_title_appbar.dart
+            const TitleAppbar(title: '¿Qué otras personas estarán presentes?'),
+            const Padding(
+              padding: EdgeInsets.all(8),
+              child: Text(
+              'Establece quiénes ya están utilizando el espacio para evitar problemas o conflictos.',
+              style: TextStyle(fontSize: 15, color: Colors.grey),
+              ),
+            ),
+            const SizedBox(
+              height: 30,
+            ),
+    
+          _buildOptionRow([
+              ContainerOptionWhoElse(
+                text: 'Yo',
+                icon: Icons.person_outline, 
+                isSelected: mine = mine, 
+                onTap: () { 
+                  setState(() {
+                    mine = !mine;
+                  });
+                  },
+              ),
+    
+              ContainerOptionWhoElse(
+                text: 'Familia',
+                icon: Icons.groups_outlined,
+                isSelected: myFamily = myFamily, 
+                onTap: () { 
+                  setState(() {
+                    myFamily = !myFamily;
+                  });
+                }, 
+              ),
+    
+            ]),
+    
+            const SizedBox(
+              height: 20,
+            ),
+    
+            _buildOptionRow([
+              ContainerOptionWhoElse(
+                text: 'Amigos',
+                icon: Icons.group_outlined,
+                isSelected: friends = friends, 
+                onTap: () { 
+                  setState(() {
+                    friends = !friends;
+                  });
+                }, 
+              ),
+              ContainerOptionWhoElse(
+                text: 'Compañeros',
+                icon: Icons.group_add_outlined,
+                isSelected: rommies = rommies, 
+                onTap: () { 
+                  setState(() {
+                  rommies = !rommies;
+                  });
+                }, 
+              ),
+            ]),
+          ],
+        ),
+      ),
+      bottomNavigationBar: KeyboardVisibilityBuilder(
+        builder: (context, isKeyboardVisible) {
+          // Mostrar el bottomNavigationBar solo si el teclado no está abierto
+          return isKeyboardVisible ? const SizedBox() : ButtomStepscreateP( pageController: widget.pageController, );
+        },
       ),
     );
   }
@@ -63,59 +108,51 @@ class WhoElse extends StatelessWidget {
   }
 }
 
-class ContainerOptionWhoElse extends StatefulWidget {
-  const ContainerOptionWhoElse({
-    super.key,
-    required this.text,
-    required this.icon,
-  });
+class ContainerOptionWhoElse extends StatelessWidget {
 
   final String text;
   final IconData icon;
+  final bool isSelected;
+  final VoidCallback onTap;
 
-  @override
-  State<ContainerOptionWhoElse> createState() => _ContainerOptionWhoElseState();
-}
+  const ContainerOptionWhoElse({
+    super.key,
+    required this.text,
+    required this.icon, 
+    required this.isSelected, 
+    required this.onTap,
+  });
 
-class _ContainerOptionWhoElseState extends State<ContainerOptionWhoElse> {
-  bool isSelected = false;
 
   @override
   Widget build(BuildContext context) {
-    final screenSize = MediaQuery.of(context).size;
-    final buttonWidth = screenSize.width * 0.4;
-    final iconSize = screenSize.width * 0.2;
+    
+    final size = MediaQuery.of(context).size;
 
-    return SizedBox(
-      width: buttonWidth,
-      height: screenSize.height * 0.2 * 0.8,
-      child: TextButton(
-        style: ButtonStyle(
-          overlayColor: MaterialStateProperty.all(Colors.grey[200]),
-          shape: MaterialStateProperty.all(
-            const RoundedRectangleBorder(
-              borderRadius: BorderRadius.all(Radius.circular(10)),
-            ),
+    return GestureDetector(
+      onTap: onTap,
+      child: Container(
+        width: size.width * 0.4,
+        height: size.height * 0.2 * 0.8,
+        decoration: BoxDecoration(
+          color: isSelected ? Colors.grey.shade200.withOpacity(0.4) : Colors.white10,
+          border: Border.all(
+            color: isSelected ? Colors.black54 : Colors.grey,
+            width: isSelected ? 1.4 : 0.75,
           ),
-          foregroundColor: MaterialStateProperty.all(Colors.black),
-          side: MaterialStateProperty.all(
-              BorderSide(color: isSelected ? Colors.amber : Colors.grey)),
+          borderRadius: BorderRadius.circular(10),
         ),
-        onPressed: () {
-          setState(() {
-            isSelected = !isSelected;
-          });
-        },
         child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Icon(
-              widget.icon,
-              size: iconSize,
+              icon,
+              size: size.width * 0.1,
             ),
             Text(
-              widget.text,
-              style: const TextStyle(fontSize: 20),
-            ),
+              text,
+              style: const TextStyle( fontSize: 18),
+            )
           ],
         ),
       ),

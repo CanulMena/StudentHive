@@ -5,15 +5,11 @@ class TitleAppbar extends StatelessWidget {
   final String title;
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.all(15),
-      child: Text(
+    final textStyle = Theme.of(context).textTheme;
+    return
+      Text(
         title,  
-        style: const TextStyle(
-          fontSize: 30,
-          fontWeight: FontWeight.bold,
-        ),
-      ),
-    );
+        style: textStyle.titleLarge?.copyWith(fontSize: 26, fontWeight: FontWeight.w600)
+      );
   }
 }

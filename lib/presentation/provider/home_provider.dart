@@ -52,7 +52,8 @@ class HomeProvider extends ChangeNotifier {
             postalCode: '97277',
             neighborhood: 'Mercedes Barrera'
             ),
-        idUser: '1'),
+        idUser: '1'
+        ),
 
     Publication(
         idPublication: 2,

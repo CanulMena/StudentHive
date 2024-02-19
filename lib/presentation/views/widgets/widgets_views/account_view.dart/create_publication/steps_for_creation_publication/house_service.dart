@@ -1,19 +1,22 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_keyboard_visibility/flutter_keyboard_visibility.dart';
+import 'package:studenthive/presentation/views/widgets/widgets_views/account_view.dart/create_publication/utils_for_creation_publication/buttom_steps_creationp.dart';
 import 'package:studenthive/presentation/views/widgets/widgets_views/account_view.dart/create_publication/utils_for_creation_publication/container_title_appbar.dart';
 
 class HouseService extends StatelessWidget {
-  const HouseService({super.key});
+  final PageController pageController;
+  const HouseService({super.key, required this.pageController,});
 
   @override
   Widget build(BuildContext context) {
-    return Center(
-      child: ListView(children: const [
-        Column(children: [
-          //? clase que se encuentra en el archivo container_title_appbar.dart
-          TitleAppbar(title: 'Dale un toque distinto a tu espacio'),
-          SizedBox(height: 30),
-          Column(
+    return Scaffold(
+      body: const Padding(
+        padding: EdgeInsets.symmetric(vertical: 0, horizontal: 12),
+        child: SingleChildScrollView( 
+          child:Column(
             children: [
+              TitleAppbar(title: 'Dale un toque distinto a tu espacio'),
+              SizedBox( height: 20, ),
               SwitchListTileExample(
                 iconChanged: Icons.signal_wifi_4_bar,
                 text: 'Wifi',
@@ -21,7 +24,7 @@ class HouseService extends StatelessWidget {
               ),
               SizedBox(height: 15),
               SwitchListTileExample(
-                icon: Icons.kitchen_outlined,
+                icon: Icons.kitchen_outlined, 
                 text: 'Cocina',
                 iconChanged: Icons.kitchen,
               ),
@@ -55,10 +58,17 @@ class HouseService extends StatelessWidget {
                 text: 'Gas',
                 iconChanged: Icons.gas_meter,
               ),
+              SizedBox( height: 15, )
             ],
           ),
-        ]),
-      ]),
+        ),
+      ),
+      bottomNavigationBar: KeyboardVisibilityBuilder(
+        builder: (context, isKeyboardVisible) {
+          // Mostrar el bottomNavigationBar solo si el teclado no está abierto
+          return isKeyboardVisible ? const SizedBox() : ButtomStepscreateP(  pageController: pageController, );
+        },
+      ),
     );
   }
 }
