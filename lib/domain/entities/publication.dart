@@ -1,32 +1,33 @@
-class Publication {
+class RentalHouse {
   final int idPublication;
   final String title;
   final String description;
   final bool status;
   final List<String> images;
   final int rentPrice;
+  final String typeHouseRental;
   final DateTime publicationDate;
   final RentalHouseDetail rentalHouseDetail;
   final HouseService houseService;
-  final TypeHouseRental typeHouseRental;
   final HouseLocation houseLocation;
   final String idUser;
 
-  Publication({
-    required this.idPublication,
+  RentalHouse({
+    int? idPublication,
     required this.title,
     required this.description,
     required this.images,
     required this.status,
     required this.rentPrice,
+    required this.typeHouseRental,
     required this.publicationDate,
     required this.houseService,
     required this.rentalHouseDetail,
-    required this.typeHouseRental,
     required this.houseLocation,
     required this.idUser,
-  });
+  }) : idPublication = idPublication ?? 1;
 }
+
 
 class RentalHouseDetail {
   final int idRentalHouseDetail;
@@ -34,13 +35,15 @@ class RentalHouseDetail {
   final int numberOfBathrooms;
   final int numberOfRooms;
   final int numberOfHammocks;
+  final int numberOfBedrooms;
 
   RentalHouseDetail({
-    required this.idRentalHouseDetail,
+    this.idRentalHouseDetail = 1,
     required this.numberOfGuests,
     required this.numberOfBathrooms,
     required this.numberOfRooms,
-    required this.numberOfHammocks
+    required this.numberOfHammocks,
+    this.numberOfBedrooms = 1,
     });
 }
 
@@ -55,7 +58,7 @@ class HouseService {
   final bool television;
 
   HouseService({
-    required this.idHouseService,
+    this.idHouseService = 1,
     required this.wifi,
     required this.kitchen,
     required this.washer,
@@ -63,20 +66,6 @@ class HouseService {
     required this.water,
     required this.gas,
     required this.television
-    });
-}
-
-class TypeHouseRental {
-  final int idTypeHouseRental;
-  final bool ownHouse;
-  final bool sharedRoom;
-  final bool singleRoom;
-
-  TypeHouseRental({
-    required this.idTypeHouseRental,
-    required this.ownHouse,
-    required this.sharedRoom,
-    required this.singleRoom
     });
 }
 
@@ -90,7 +79,7 @@ class HouseLocation {
   final String neighborhood;
 
   HouseLocation({
-    required this.idLocation,
+    this.idLocation = 1,
     required this.address,
     required this.city,
     required this.state,

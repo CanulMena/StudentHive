@@ -8,9 +8,9 @@ class HomeProvider extends ChangeNotifier {
 
   bool isLoading = false;
 
-  List<Publication> publications = [
-    Publication(
-        idPublication: 1,
+  List<RentalHouse> publications = [
+    RentalHouse(
+        idPublication: 2,
         title: 'Cuarto en buenas condiciones cerca de la utm',
         description:
             'Irure dolor minim officia ea fugiat eu excepteur magna et nulla ullamco. Ipsum dolor ex laboris incididunt ex elit ipsum. Enim nostrud officia Lorem magna proident enim laborum. Labore est voluptate non ea magna minim sit laborum duis qui.',
@@ -38,11 +38,6 @@ class HomeProvider extends ChangeNotifier {
           gas: true, 
           television: true
           ),
-        typeHouseRental: TypeHouseRental(
-            idTypeHouseRental: 1,
-            ownHouse: true,
-            sharedRoom: false,
-            singleRoom: false),
         houseLocation: HouseLocation(
             idLocation: 1,  
             address: 'C. 59 472',
@@ -52,11 +47,11 @@ class HomeProvider extends ChangeNotifier {
             postalCode: '97277',
             neighborhood: 'Mercedes Barrera'
             ),
-        idUser: '1'
+        idUser: '1', typeHouseRental: ''
         ),
 
-    Publication(
-        idPublication: 2,
+    RentalHouse(
+        idPublication: 1,
         title: 'Busco Gente responsable',
         description:
             'Irure dolor minim officia ea fugiat eu excepteur magna et nulla ullamco. Ipsum dolor ex laboris incididunt ex elit ipsum. Enim nostrud officia Lorem magna proident enim laborum. Labore est voluptate non ea magna minim sit laborum duis qui.',
@@ -84,11 +79,6 @@ class HomeProvider extends ChangeNotifier {
           gas: true, 
           television: true
         ),
-        typeHouseRental: TypeHouseRental(
-            idTypeHouseRental: 1,
-            ownHouse: true,
-            sharedRoom: false,
-            singleRoom: false),
         houseLocation: HouseLocation(
             idLocation: 2,  
             address: 'C. 59 472',
@@ -98,9 +88,9 @@ class HomeProvider extends ChangeNotifier {
             postalCode: '97277',
             neighborhood: 'Mercedes Barrera'
             ),
-        idUser: '1'),
+        idUser: '1', typeHouseRental: ''),
 
-    Publication(
+    RentalHouse(
         idPublication: 2,
         title: 'Busco Gente responsable',
         description:
@@ -129,11 +119,6 @@ class HomeProvider extends ChangeNotifier {
           gas: false, 
           television: false
         ),
-        typeHouseRental: TypeHouseRental(
-            idTypeHouseRental: 1,
-            ownHouse: true,
-            sharedRoom: false,
-            singleRoom: false),
         houseLocation: HouseLocation(
             idLocation: 2,  
             address: 'C. 59 472',
@@ -143,7 +128,7 @@ class HomeProvider extends ChangeNotifier {
             postalCode: '97277',
             neighborhood: 'Mercedes Barrera'
             ),
-        idUser: '1'),
+        idUser: '1', typeHouseRental: ''),
 
 
 

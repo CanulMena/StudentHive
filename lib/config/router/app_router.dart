@@ -39,7 +39,7 @@ final GoRouter router = GoRouter(
     GoRoute(
       path: '/publication',
       builder: (BuildContext context, GoRouterState state) {
-        final Publication publicationPost = GoRouterState.of(context).extra! as Publication;
+        final RentalHouse publicationPost = GoRouterState.of(context).extra! as RentalHouse;
         return PublicationScreen(
           publicationPost: publicationPost,
         );

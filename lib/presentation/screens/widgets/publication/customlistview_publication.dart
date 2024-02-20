@@ -3,7 +3,7 @@ import 'package:studenthive/domain/entities/publication.dart';
 import 'package:studenthive/presentation/screens/widgets/publication/custom_sliverappbar_p.ublication.dart';
 
 class CustomListView extends StatelessWidget {
-  final Publication publicationPost;
+  final RentalHouse publicationPost;
 
   const CustomListView({super.key, required this.publicationPost});
 
@@ -27,7 +27,7 @@ class CustomListView extends StatelessWidget {
 
 
 class _RentalHouseDetils extends StatelessWidget {
-  final Publication publicationPost;
+  final RentalHouse publicationPost;
   const _RentalHouseDetils({required this.publicationPost});
 
   @override

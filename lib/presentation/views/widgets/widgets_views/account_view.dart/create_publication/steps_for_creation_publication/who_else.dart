@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_keyboard_visibility/flutter_keyboard_visibility.dart';
+import 'package:provider/provider.dart';
+import 'package:studenthive/presentation/provider/create_publication_provider.dart';
 import 'package:studenthive/presentation/views/widgets/widgets_views/account_view.dart/create_publication/utils_for_creation_publication/buttom_steps_creationp.dart';
 import 'package:studenthive/presentation/views/widgets/widgets_views/account_view.dart/create_publication/utils_for_creation_publication/container_title_appbar.dart';
 
@@ -12,12 +14,10 @@ class WhoElse extends StatefulWidget {
 }
 
 class _WhoElseState extends State<WhoElse> {
-  bool mine = false;
-  bool myFamily = false;
-  bool friends = false;
-  bool rommies = false;
   @override
   Widget build(BuildContext context) {
+    final createPublicationProvider = context.watch<CreatePublicationProvider>();
+
     return Scaffold(
       body: Padding(
         padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 12),
@@ -41,10 +41,10 @@ class _WhoElseState extends State<WhoElse> {
               ContainerOptionWhoElse(
                 text: 'Yo',
                 icon: Icons.person_outline, 
-                isSelected: mine = mine, 
+                isSelected: createPublicationProvider.mine = createPublicationProvider.mine, 
                 onTap: () { 
                   setState(() {
-                    mine = !mine;
+                    createPublicationProvider.mine = !createPublicationProvider.mine;
                   });
                   },
               ),
@@ -52,10 +52,10 @@ class _WhoElseState extends State<WhoElse> {
               ContainerOptionWhoElse(
                 text: 'Familia',
                 icon: Icons.groups_outlined,
-                isSelected: myFamily = myFamily, 
+                isSelected: createPublicationProvider.myFamily = createPublicationProvider.myFamily, 
                 onTap: () { 
                   setState(() {
-                    myFamily = !myFamily;
+                    createPublicationProvider.myFamily = !createPublicationProvider.myFamily;
                   });
                 }, 
               ),
@@ -70,20 +70,20 @@ class _WhoElseState extends State<WhoElse> {
               ContainerOptionWhoElse(
                 text: 'Amigos',
                 icon: Icons.group_outlined,
-                isSelected: friends = friends, 
+                isSelected: createPublicationProvider.friends = createPublicationProvider.friends, 
                 onTap: () { 
                   setState(() {
-                    friends = !friends;
+                    createPublicationProvider.friends = !createPublicationProvider.friends;
                   });
                 }, 
               ),
               ContainerOptionWhoElse(
                 text: 'Compañeros',
                 icon: Icons.group_add_outlined,
-                isSelected: rommies = rommies, 
+                isSelected: createPublicationProvider.rommies = createPublicationProvider.rommies, 
                 onTap: () { 
                   setState(() {
-                  rommies = !rommies;
+                  createPublicationProvider.rommies = !createPublicationProvider.rommies;
                   });
                 }, 
               ),
@@ -94,7 +94,7 @@ class _WhoElseState extends State<WhoElse> {
       bottomNavigationBar: KeyboardVisibilityBuilder(
         builder: (context, isKeyboardVisible) {
           // Mostrar el bottomNavigationBar solo si el teclado no está abierto
-          return isKeyboardVisible ? const SizedBox() : ButtomStepscreateP( pageController: widget.pageController, );
+          return isKeyboardVisible ? const SizedBox() : ButtomStepscreateP( pageController: widget.pageController, isButtonEnabled: true, );
         },
       ),
     );

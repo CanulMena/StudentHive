@@ -3,21 +3,21 @@ import 'package:studenthive/domain/entities/publication.dart';
 
 class ReserveProvider extends ChangeNotifier{
   
-  List<Publication> listReservation = [];
+  List<RentalHouse> listReservation = [];
 
-  void addReservation( Publication reservation){
+  void addReservation( RentalHouse reservation){
     if (!containsReservation(reservation)) {
       listReservation.add(reservation);
       notifyListeners();
     }
   }
 
-  void deleteReservation(Publication reservation){
+  void deleteReservation(RentalHouse reservation){
     listReservation.remove(reservation);
     notifyListeners();
   }
 
-  bool containsReservation(Publication reservation) {
+  bool containsReservation(RentalHouse reservation) {
     return listReservation.any((e) => reservation.idPublication == e.idPublication);
   }
 

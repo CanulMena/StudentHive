@@ -6,7 +6,7 @@ import 'package:studenthive/presentation/provider/home_provider.dart';
 import 'package:studenthive/presentation/screens/widgets/home/publications/publication_container.dart';
 
 class PublicationsView extends StatelessWidget {
-  final List<Publication> listPublications;
+  final List<RentalHouse> listPublications;
   const PublicationsView({
     super.key,
     required this.listPublications,

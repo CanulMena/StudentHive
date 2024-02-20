@@ -3,15 +3,26 @@ import 'package:studenthive/domain/entities/publication.dart';
 
 class CreatePublicationProvider extends ChangeNotifier {
 
-  List<Publication> publications = []; //TODO: This list will add new data to the publication list from HomeScreen
-
+  List<RentalHouse> publications = []; //TODO: This list will add new data to the publication list from HomeScreen
 //* desde mi pantalla guardaré todos los datos que necesito para crear publicaciones. 
 
+  // --HouseServices--
+  bool wifi = false;
+  bool kitchen = false;
+  bool washer = false;
+  bool airConditioning = false;
+  bool water = false;
+  bool gas = false;
+  bool television = false;
 
   // --TypeOfSpace--
-  String typeOfSpace = '';
+  String typeHouseRental= '';
 
   // --WhoElse--
+  bool mine = false;
+  bool myFamily = false;
+  bool friends = false;
+  bool rommies = false;
 
   // --Location--
   String country = '';
@@ -79,7 +90,7 @@ class CreatePublicationProvider extends ChangeNotifier {
   }
   
   //*Add new publication.
-  void addPublication(Publication newPublication) {
+  void addPublication(RentalHouse newPublication) {
     publications.add(newPublication);
     notifyListeners();
   }

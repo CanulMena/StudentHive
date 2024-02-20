@@ -10,7 +10,7 @@ import 'package:studenthive/presentation/screens/widgets/home/publications/image
 import 'package:studenthive/presentation/screens/widgets/home/publications/information_container.dart';
 
 class PublicationContainer extends StatefulWidget {
-  final Publication publicationsPost; 
+  final RentalHouse publicationsPost; 
 
   const PublicationContainer({
     super.key, 

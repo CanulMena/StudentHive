@@ -8,7 +8,7 @@ import 'package:studenthive/presentation/provider/user_provider.dart';
 import 'package:studenthive/presentation/screens/widgets/auth_register_dialog.dart';
 
 class BottomPublication extends StatelessWidget {
-  final Publication publicationPost;
+  final RentalHouse publicationPost;
   const BottomPublication({super.key, required this.publicationPost});
 
   @override

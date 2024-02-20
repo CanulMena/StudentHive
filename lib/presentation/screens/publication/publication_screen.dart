@@ -4,7 +4,7 @@ import 'package:studenthive/presentation/screens/widgets/publication/bottom_publ
 import 'package:studenthive/presentation/screens/widgets/publication/customlistview_publication.dart';
 
 class PublicationScreen extends StatelessWidget {
-  final Publication publicationPost;
+  final RentalHouse publicationPost;
   const PublicationScreen({
     super.key,
     required this.publicationPost,
