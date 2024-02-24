@@ -1,14 +1,28 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_keyboard_visibility/flutter_keyboard_visibility.dart';
+import 'package:image_picker/image_picker.dart';
+import 'package:provider/provider.dart';
+import 'package:studenthive/presentation/provider/create_publication_provider.dart';
 import 'package:studenthive/presentation/views/widgets/widgets_views/account_view.dart/create_publication/utils_for_creation_publication/buttom_steps_creationp.dart';
 import 'package:studenthive/presentation/views/widgets/widgets_views/account_view.dart/create_publication/utils_for_creation_publication/container_title_appbar.dart';
 
-class AddHouseImages extends StatelessWidget {
+class AddHouseImages extends StatefulWidget {
   final PageController pageController;
-  const AddHouseImages({super.key, required this.pageController});
+  const AddHouseImages({Key? key, required this.pageController}) : super(key: key);
+
+  @override
+  State<AddHouseImages> createState() => _AddHouseImagesState();
+}
+
+class _AddHouseImagesState extends State<AddHouseImages> {
+  final ImagePicker _picker = ImagePicker();
+  dynamic pickImageError;
+  bool isButtomEnable = false;
+  int imageCount = 0; // Contador de imágenes
 
   @override
   Widget build(BuildContext context) {
+    final CreatePublicationProvider createPublicationProvider = context.watch<CreatePublicationProvider>();
     Size screenSize = MediaQuery.of(context).size;
     return Scaffold(
       body: Padding(
@@ -21,9 +35,7 @@ class AddHouseImages extends StatelessWidget {
                   title:
                       'Da a conocer tu espacio'), //? clase que se encuentra en el archivo container_title_appbar.dart
               _message('Al principio, toma 3 fotos estos lo puedes cambiar despues'),
-              const SizedBox(
-                height: 20,
-              ),
+              const SizedBox(height: 20,),
               SizedBox(
                 width: screenSize.width * 0.8,
                 height: screenSize.height * 0.1,
@@ -35,7 +47,9 @@ class AddHouseImages extends StatelessWidget {
                       foregroundColor: MaterialStateProperty.all(Colors.black),
                       side: MaterialStateProperty.all(
                           const BorderSide(color: Colors.grey))),
-                  onPressed: () {},
+                  onPressed: () {
+                    _onImageButtonPressed(ImageSource.gallery, createPublicationProvider: createPublicationProvider);
+                  },
                   child: const Row(
                     children: [
                       SizedBox(
@@ -65,7 +79,9 @@ class AddHouseImages extends StatelessWidget {
                       foregroundColor: MaterialStateProperty.all(Colors.black),
                       side: MaterialStateProperty.all(
                           const BorderSide(color: Colors.grey))),
-                  onPressed: () {},
+                  onPressed: () {
+                    _onImageButtonPressed(ImageSource.camera, createPublicationProvider: createPublicationProvider);
+                  },
                   child: Column(
                     children: [
                       Icon(
@@ -83,7 +99,12 @@ class AddHouseImages extends StatelessWidget {
       bottomNavigationBar: KeyboardVisibilityBuilder(
         builder: (context, isKeyboardVisible) {
           // Mostrar el bottomNavigationBar solo si el teclado no está abierto
-          return isKeyboardVisible ? const SizedBox() : ButtomStepscreateP( pageController: pageController, );
+          return isKeyboardVisible 
+          ? const SizedBox() 
+          : ButtomStepscreateP( 
+            pageController: widget.pageController,
+            isButtonEnabled: isButtomEnable, // Pasa el valor de isButtomEnable
+          );
         },
       ),
     );
@@ -97,5 +118,30 @@ class AddHouseImages extends StatelessWidget {
         style: const TextStyle(fontSize: 15, color: Colors.grey),
       ),
     );
+  }
+
+  _onImageButtonPressed(ImageSource source,{ required CreatePublicationProvider createPublicationProvider}) async {
+    try {
+      final pickedFile = await _picker.pickImage(
+        source: source,
+        maxWidth: 1080,
+        maxHeight: 1080,
+        imageQuality: 100,
+      );
+      if (pickedFile != null) {
+        createPublicationProvider.setListXFile(pickedFile);
+        imageCount++; // Incrementa el contador de imágenes
+        if (imageCount >= 3) {
+          setState(() {
+            isButtomEnable = true; // Habilita el botón cuando se agregan al menos 3 imágenes
+          });
+        }
+      }
+    } catch (e) {
+      debugPrint(e.toString());
+      setState(() {
+        pickImageError = e;
+      });
+    }
   }
 }

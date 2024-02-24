@@ -1,14 +1,51 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_keyboard_visibility/flutter_keyboard_visibility.dart';
+import 'package:provider/provider.dart';
+import 'package:studenthive/presentation/provider/create_publication_provider.dart';
 import 'package:studenthive/presentation/views/widgets/widgets_views/account_view.dart/create_publication/utils_for_creation_publication/buttom_steps_creationp.dart';
 import 'package:studenthive/presentation/views/widgets/widgets_views/account_view.dart/create_publication/utils_for_creation_publication/container_title_appbar.dart';
 
-class HouseAddDescription extends StatelessWidget {
+class HouseAddDescription extends StatefulWidget {
   final PageController pageController;
   const HouseAddDescription({super.key, required this.pageController});
 
   @override
+  State<HouseAddDescription> createState() => _HouseAddDescriptionState();
+}
+
+class _HouseAddDescriptionState extends State<HouseAddDescription> {
+  final TextEditingController descriptionController = TextEditingController();
+
+  bool isButtonEnabled = false;
+
+  void _checkFields() {
+    setState(() {
+      isButtonEnabled = descriptionController.text.isNotEmpty;
+    });
+  }
+
+  void _addListeners() {
+    descriptionController.addListener(_checkFields);
+  }
+
+  void _removeListeners(){
+    descriptionController.removeListener(_checkFields);
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    _addListeners();
+  }
+
+  @override
+  void dispose() {
+    _removeListeners();
+    super.dispose();
+  }
+  @override
   Widget build(BuildContext context) {
+    final createPublicationProvider = context.watch<CreatePublicationProvider>();
     Size size = MediaQuery.of(context).size;
     return Scaffold(
       body: Padding(
@@ -24,12 +61,16 @@ class HouseAddDescription extends StatelessWidget {
                 width: size.width * 1,
                 padding:
                     const EdgeInsets.only(top: 20, bottom: 20, left: 20, right: 20),
-                child: const TextField(
+                child: TextFormField(
+                  controller: descriptionController,
                   maxLines: 5,
-                  decoration: InputDecoration(
+                  decoration: const InputDecoration(
                     border: OutlineInputBorder(
                         borderRadius: BorderRadius.all(Radius.circular(10))),
                   ),
+                onChanged: (value) {
+                  createPublicationProvider.description= value;
+                  },
                 ),
               ),
             ],
@@ -39,7 +80,7 @@ class HouseAddDescription extends StatelessWidget {
       bottomNavigationBar: KeyboardVisibilityBuilder(
         builder: (context, isKeyboardVisible) {
           // Mostrar el bottomNavigationBar solo si el teclado no está abierto
-          return isKeyboardVisible ? const SizedBox() : ButtomStepscreateP(  pageController: pageController, );
+          return isKeyboardVisible ? const SizedBox() : ButtomStepscreateP(  pageController: widget.pageController, isButtonEnabled: isButtonEnabled,);
         },
       ),
     );

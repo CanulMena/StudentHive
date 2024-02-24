@@ -14,7 +14,8 @@ class DetailsSingleHouse extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final createPublication = context.watch<CreatePublicationProvider>();
-    bool isButtonEnabled = createPublication.batrooms > 0 && createPublication.beeds > 0 && createPublication.hammocks > 0;
+    bool isButtonEnabled = 
+    createPublication.batrooms > 0 ;
     return Scaffold(
       body: Padding(
         padding: const EdgeInsets.symmetric(vertical: 0, horizontal: 12),
@@ -65,7 +66,9 @@ class DetailsSingleHouse extends StatelessWidget {
       bottomNavigationBar: KeyboardVisibilityBuilder(
         builder: (context, isKeyboardVisible) {
           // Mostrar el bottomNavigationBar solo si el teclado no está abierto
-          return isKeyboardVisible ? const SizedBox() : ButtomStepscreateP( pageController: pageController, isButtonEnabled: isButtonEnabled, );
+          return isKeyboardVisible 
+          ? const SizedBox() 
+          : ButtomStepscreateP( pageController: pageController, isButtonEnabled: isButtonEnabled,);
         },
       ),
     );

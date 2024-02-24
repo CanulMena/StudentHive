@@ -1,9 +1,12 @@
+import 'package:image_picker/image_picker.dart';
+
 class RentalHouse {
   final int idPublication;
   final String title;
   final String description;
   final bool status;
   final List<String> images;
+  final List<XFile> imagesf;
   final int rentPrice;
   final String typeHouseRental;
   final DateTime publicationDate;
@@ -14,9 +17,11 @@ class RentalHouse {
 
   RentalHouse({
     int? idPublication,
+    List<String>? images,
+    List<XFile>? imagesf,
+    String? idUser,
     required this.title,
     required this.description,
-    required this.images,
     required this.status,
     required this.rentPrice,
     required this.typeHouseRental,
@@ -24,8 +29,11 @@ class RentalHouse {
     required this.houseService,
     required this.rentalHouseDetail,
     required this.houseLocation,
-    required this.idUser,
-  }) : idPublication = idPublication ?? 1;
+  }) 
+  : idPublication = idPublication ?? 1, 
+  images = images ?? [],
+  imagesf = imagesf ?? [],
+  idUser = idUser ?? '';
 }
 
 
