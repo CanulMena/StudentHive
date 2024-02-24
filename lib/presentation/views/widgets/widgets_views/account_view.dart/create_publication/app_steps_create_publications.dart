@@ -79,7 +79,8 @@ class _AppStepsCreatePublicationsState
                 ),
                 MakeReservationView(
                   pageController: pageController,
-                ),
+                ), //esto se debe de subir a la vista de la publicacion
+
               ],
             ),
           ),
