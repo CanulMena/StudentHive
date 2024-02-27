@@ -119,6 +119,7 @@ class _SwitchListTileExampleState extends State<SwitchListTileExample> {
               });
             },
             secondary: Icon(_selectOption ? widget.iconChanged : widget.icon,
+            
                 size: 45, color: iconColor),
           ),
         ),

@@ -35,13 +35,12 @@ class RentalHouseDetail {
   final int numberOfRooms;
   final int numberOfHammocks;
 
-  RentalHouseDetail({
-    required this.idRentalHouseDetail,
-    required this.numberOfGuests,
-    required this.numberOfBathrooms,
-    required this.numberOfRooms,
-    required this.numberOfHammocks
-    });
+  RentalHouseDetail(
+      {required this.idRentalHouseDetail,
+      required this.numberOfGuests,
+      required this.numberOfBathrooms,
+      required this.numberOfRooms,
+      required this.numberOfHammocks});
 }
 
 class HouseService {
@@ -54,16 +53,15 @@ class HouseService {
   final bool gas;
   final bool television;
 
-  HouseService({
-    required this.idHouseService,
-    required this.wifi,
-    required this.kitchen,
-    required this.washer,
-    required this.airConditioning,
-    required this.water,
-    required this.gas,
-    required this.television
-    });
+  HouseService(
+      {required this.idHouseService,
+      required this.wifi,
+      required this.kitchen,
+      required this.washer,
+      required this.airConditioning,
+      required this.water,
+      required this.gas,
+      required this.television});
 }
 
 class TypeHouseRental {
@@ -72,12 +70,11 @@ class TypeHouseRental {
   final bool sharedRoom;
   final bool singleRoom;
 
-  TypeHouseRental({
-    required this.idTypeHouseRental,
-    required this.ownHouse,
-    required this.sharedRoom,
-    required this.singleRoom
-    });
+  TypeHouseRental(
+      {required this.idTypeHouseRental,
+      required this.ownHouse,
+      required this.sharedRoom,
+      required this.singleRoom});
 }
 
 class HouseLocation {
@@ -89,13 +86,12 @@ class HouseLocation {
   final String postalCode;
   final String neighborhood;
 
-  HouseLocation({
-    required this.idLocation,
-    required this.address,
-    required this.city,
-    required this.state,
-    required this.country,
-    required this.postalCode,
-    required this.neighborhood
-    });
+  HouseLocation(
+      {required this.idLocation,
+      required this.address,
+      required this.city,
+      required this.state,
+      required this.country,
+      required this.postalCode,
+      required this.neighborhood});
 }
