@@ -39,13 +39,13 @@ class ContainerDetailHouse extends StatelessWidget {
           Row(
             children: [
               IconButton(
-                onPressed: onIncrement,
-                icon: Icon(iconMore, size: 25),
+                onPressed: onDecrement,
+                icon: Icon(iconLess, size: 25),
               ),
               Text(counter.toString(), style: const TextStyle(fontSize: 20)),
               IconButton(
-                onPressed: onDecrement,
-                icon: Icon(iconLess, size: 25),
+                onPressed: onIncrement,
+                icon: Icon(iconMore, size: 25),
               ),
             ],
           )

@@ -24,7 +24,7 @@ class CustomListTile extends StatelessWidget {
 
       leading: Icon(
         menuItem.icon,
-        color: Colors.blueGrey,
+        color: Colors.black54,
         ),
 
       trailing: Icon(

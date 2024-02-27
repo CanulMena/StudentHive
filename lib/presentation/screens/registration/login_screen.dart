@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
 import 'package:studenthive/presentation/provider/providers.dart';
-import 'package:studenthive/presentation/screens/widgets/widgets_screens/registration/login/blue_box.dart';
-import 'package:studenthive/presentation/screens/widgets/widgets_screens/registration/login/loggin_form_container.dart';
-import 'package:studenthive/presentation/screens/widgets/widgets_screens/registration/login/hive_icon.dart';
+import 'package:studenthive/presentation/screens/widgets/registration/login/blue_box.dart';
+import 'package:studenthive/presentation/screens/widgets/registration/login/loggin_form_container.dart';
+import 'package:studenthive/presentation/screens/widgets/registration/login/hive_icon.dart';
 
 class LoginScreen extends StatelessWidget {
   const LoginScreen({Key? key}) : super(key: key);

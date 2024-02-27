@@ -1,33 +1,87 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_keyboard_visibility/flutter_keyboard_visibility.dart';
+import 'package:provider/provider.dart';
+import 'package:studenthive/presentation/provider/create_publication_provider.dart';
+import 'package:studenthive/presentation/views/widgets/widgets_views/account_view.dart/create_publication/utils_for_creation_publication/buttom_steps_creationp.dart';
 import 'package:studenthive/presentation/views/widgets/widgets_views/account_view.dart/create_publication/utils_for_creation_publication/container_title_appbar.dart';
 
-class HouseAddDescription extends StatelessWidget {
-  const HouseAddDescription({super.key});
+class HouseAddDescription extends StatefulWidget {
+  final PageController pageController;
+  const HouseAddDescription({super.key, required this.pageController});
 
   @override
+  State<HouseAddDescription> createState() => _HouseAddDescriptionState();
+}
+
+class _HouseAddDescriptionState extends State<HouseAddDescription> {
+  final TextEditingController descriptionController = TextEditingController();
+
+  bool isButtonEnabled = false;
+
+  void _checkFields() {
+    setState(() {
+      isButtonEnabled = descriptionController.text.isNotEmpty;
+    });
+  }
+
+  void _addListeners() {
+    descriptionController.addListener(_checkFields);
+  }
+
+  void _removeListeners(){
+    descriptionController.removeListener(_checkFields);
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    _addListeners();
+  }
+
+  @override
+  void dispose() {
+    _removeListeners();
+    super.dispose();
+  }
+  @override
   Widget build(BuildContext context) {
+    final createPublicationProvider = context.watch<CreatePublicationProvider>();
     Size size = MediaQuery.of(context).size;
-    return Padding(
-      padding: const EdgeInsets.all(15),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          //? clase que se encuentra en el archivo container_title_appbar.dart
-          const TitleAppbar(title: 'Describe tu espacio'),
-          _message(),
-          Container(
-            width: size.width * 1,
-            padding:
-                const EdgeInsets.only(top: 20, bottom: 20, left: 20, right: 20),
-            child: const TextField(
-              maxLines: 5,
-              decoration: InputDecoration(
-                border: OutlineInputBorder(
-                    borderRadius: BorderRadius.all(Radius.circular(10))),
+    return Scaffold(
+      body: Padding(
+        padding: const EdgeInsets.symmetric( horizontal: 12, vertical: 0),
+        child: SingleChildScrollView(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              //? clase que se encuentra en el archivo container_title_appbar.dart
+              const TitleAppbar(title: 'Describe tu espacio'),
+              _message(),
+              Container(
+                width: size.width * 1,
+                padding:
+                    const EdgeInsets.only(top: 20, bottom: 20, left: 20, right: 20),
+                child: TextFormField(
+                  controller: descriptionController,
+                  maxLines: 5,
+                  decoration: const InputDecoration(
+                    border: OutlineInputBorder(
+                        borderRadius: BorderRadius.all(Radius.circular(10))),
+                  ),
+                onChanged: (value) {
+                  createPublicationProvider.description= value;
+                  },
+                ),
               ),
-            ),
+            ],
           ),
-        ],
+        ),
+      ),
+      bottomNavigationBar: KeyboardVisibilityBuilder(
+        builder: (context, isKeyboardVisible) {
+          // Mostrar el bottomNavigationBar solo si el teclado no está abierto
+          return isKeyboardVisible ? const SizedBox() : ButtomStepscreateP(  pageController: widget.pageController, isButtonEnabled: isButtonEnabled,);
+        },
       ),
     );
   }

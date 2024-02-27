@@ -27,8 +27,7 @@ class UserProvider extends ChangeNotifier {
         lastName: 'Canul')
   ];
 
-  void addUser(
-      String name, String lastName, String age, String email, String password) {
+  void addUser(String name, String lastName, String age, String email, String password) {
     final User user = User(
       userAge: age,
       email: email,

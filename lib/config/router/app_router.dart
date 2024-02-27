@@ -15,7 +15,7 @@ final GoRouter router = GoRouter(
       builder: (context, state) {
         final authProvider = Provider.of<AuthProvider>(context);
         if(authProvider.isLoading) return const Scaffold(body: Center(child: CircularProgressIndicator(),),);
-        return authProvider.isLogged ? const HomeScreen() : const LoginScreen();//Con esto el conection state dejará de estar comprobaciones
+        return authProvider.isLogged ? const HomeScreen() : const LoginScreen();
       },
     ),
     GoRoute(
@@ -39,7 +39,7 @@ final GoRouter router = GoRouter(
     GoRoute(
       path: '/publication',
       builder: (BuildContext context, GoRouterState state) {
-        final Publication publicationPost = GoRouterState.of(context).extra! as Publication;
+        final RentalHouse publicationPost = GoRouterState.of(context).extra! as RentalHouse;
         return PublicationScreen(
           publicationPost: publicationPost,
         );

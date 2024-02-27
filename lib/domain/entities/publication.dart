@@ -1,32 +1,41 @@
-class Publication {
+import 'package:image_picker/image_picker.dart';
+
+class RentalHouse {
   final int idPublication;
   final String title;
   final String description;
   final bool status;
   final List<String> images;
+  final List<XFile> imagesf;
   final int rentPrice;
+  final String typeHouseRental;
   final DateTime publicationDate;
   final RentalHouseDetail rentalHouseDetail;
   final HouseService houseService;
-  final TypeHouseRental typeHouseRental;
   final HouseLocation houseLocation;
   final String idUser;
 
-  Publication({
-    required this.idPublication,
+  RentalHouse({
+    int? idPublication,
+    List<String>? images,
+    List<XFile>? imagesf,
+    String? idUser,
     required this.title,
     required this.description,
-    required this.images,
     required this.status,
     required this.rentPrice,
+    required this.typeHouseRental,
     required this.publicationDate,
     required this.houseService,
     required this.rentalHouseDetail,
-    required this.typeHouseRental,
     required this.houseLocation,
-    required this.idUser,
-  });
+  }) 
+  : idPublication = idPublication ?? 1, 
+  images = images ?? [],
+  imagesf = imagesf ?? [],
+  idUser = idUser ?? '';
 }
+
 
 class RentalHouseDetail {
   final int idRentalHouseDetail;
@@ -34,13 +43,25 @@ class RentalHouseDetail {
   final int numberOfBathrooms;
   final int numberOfRooms;
   final int numberOfHammocks;
+  final int numberOfBedrooms;
 
+<<<<<<< HEAD
   RentalHouseDetail(
       {required this.idRentalHouseDetail,
       required this.numberOfGuests,
       required this.numberOfBathrooms,
       required this.numberOfRooms,
       required this.numberOfHammocks});
+=======
+  RentalHouseDetail({
+    this.idRentalHouseDetail = 1,
+    required this.numberOfGuests,
+    required this.numberOfBathrooms,
+    required this.numberOfRooms,
+    required this.numberOfHammocks,
+    this.numberOfBedrooms = 1,
+    });
+>>>>>>> 60dac41e66e1127d72af4417ff8bedcc517abbed
 }
 
 class HouseService {
@@ -53,6 +74,7 @@ class HouseService {
   final bool gas;
   final bool television;
 
+<<<<<<< HEAD
   HouseService(
       {required this.idHouseService,
       required this.wifi,
@@ -77,6 +99,20 @@ class TypeHouseRental {
       required this.singleRoom});
 }
 
+=======
+  HouseService({
+    this.idHouseService = 1,
+    required this.wifi,
+    required this.kitchen,
+    required this.washer,
+    required this.airConditioning,
+    required this.water,
+    required this.gas,
+    required this.television
+    });
+}
+
+>>>>>>> 60dac41e66e1127d72af4417ff8bedcc517abbed
 class HouseLocation {
   final int idLocation;
   final String address;
@@ -86,6 +122,7 @@ class HouseLocation {
   final String postalCode;
   final String neighborhood;
 
+<<<<<<< HEAD
   HouseLocation(
       {required this.idLocation,
       required this.address,
@@ -94,4 +131,15 @@ class HouseLocation {
       required this.country,
       required this.postalCode,
       required this.neighborhood});
+=======
+  HouseLocation({
+    this.idLocation = 1,
+    required this.address,
+    required this.city,
+    required this.state,
+    required this.country,
+    required this.postalCode,
+    required this.neighborhood
+    });
+>>>>>>> 60dac41e66e1127d72af4417ff8bedcc517abbed
 }
