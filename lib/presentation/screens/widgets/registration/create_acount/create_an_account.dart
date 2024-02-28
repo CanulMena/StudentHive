@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:studenthive/presentation/screens/widgets/widgets_screens/registration/create_acount/form_create_account_container.dart';
+import 'package:studenthive/presentation/screens/widgets/registration/create_acount/form_create_account_container.dart';
 
 class CreateAnAccountForm extends StatelessWidget {
   const CreateAnAccountForm({super.key});
@@ -26,12 +26,12 @@ class CreateAnAccountForm extends StatelessWidget {
                 )
               ],
             ),
-            child: const Column(
+            child: Column(
               children: [
 
-                SizedBox(height: 10),
+                const SizedBox(height: 10),
 
-                Text(
+                const Text(
                   'Crear Cuenta',
                   style: TextStyle(
                     color: Colors.blueGrey,
@@ -40,7 +40,7 @@ class CreateAnAccountForm extends StatelessWidget {
                   ),
                 ),
 
-                SizedBox(height: 30),
+                const SizedBox(height: 30),
 
                 FormularioContainer(),
                 

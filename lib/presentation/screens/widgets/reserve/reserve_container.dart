@@ -3,7 +3,7 @@ import 'package:studenthive/domain/entities/publication.dart';
 import 'package:studenthive/presentation/provider/reserve_provider.dart';
 
 class ReserveContainer extends StatelessWidget {
-  final Publication publicationReserved;
+  final RentalHouse publicationReserved;
   final ReserveProvider reserveProvider;
   const ReserveContainer({
     super.key, 

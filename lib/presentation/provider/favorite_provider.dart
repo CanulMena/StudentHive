@@ -3,9 +3,9 @@ import 'package:studenthive/domain/entities/publication.dart';
 
 class FavoriteProvider extends ChangeNotifier {
 
-  List<Publication> listFavorites = [];
+  List<RentalHouse> listFavorites = [];
 
-  void addFavorites( Publication favorite){
+  void addFavorites( RentalHouse favorite){
     if(!containsFavorites(favorite)){
       listFavorites.add(favorite);
       notifyListeners();
@@ -13,12 +13,12 @@ class FavoriteProvider extends ChangeNotifier {
 
   }
 
-  void deleteFavorites( Publication favorite ){
+  void deleteFavorites( RentalHouse favorite ){
     listFavorites.remove(favorite);
     notifyListeners();
   }
 
-  bool containsFavorites( Publication favorite) {
+  bool containsFavorites( RentalHouse favorite) {
     return listFavorites.any((favorite) => favorite.idPublication == favorite.idPublication);
   }
 

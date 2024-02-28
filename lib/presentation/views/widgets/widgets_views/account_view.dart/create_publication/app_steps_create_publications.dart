@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:studenthive/presentation/screens/widgets/widgets_screens/publication/view_make_reservation.dart';
-import 'package:studenthive/presentation/views/widgets/widgets_views/account_view.dart/create_publication/routerAnimation/navbar_button.dart';
+import 'package:studenthive/presentation/screens/widgets/publication/view_make_reservation.dart';
 import 'package:studenthive/presentation/views/widgets/widgets_views/account_view.dart/create_publication/screen_create_publication.dart';
+import 'package:studenthive/presentation/views/widgets/widgets_views/account_view.dart/create_publication/steps_for_creation_publication/house_detail_singler.dart';
 
 class AppStepsCreatePublications extends StatefulWidget {
   const AppStepsCreatePublications({super.key});
@@ -13,16 +13,16 @@ class AppStepsCreatePublications extends StatefulWidget {
 
 class _AppStepsCreatePublicationsState
     extends State<AppStepsCreatePublications> {
-  final PageController _pageController = PageController();
+  final PageController pageController = PageController();
 
-  double _currentPage = 0;
+  double currentPage = 0;
 
   @override
   void initState() {
     super.initState();
-    _pageController.addListener(() {
+    pageController.addListener(() {
       setState(() {
-        _currentPage = _pageController.page!;
+        currentPage = pageController.page!;
       });
     });
   }
@@ -30,37 +30,62 @@ class _AppStepsCreatePublicationsState
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        body: Column(
-          children: [
-            const SizedBox(
-              height: 20,
-            ),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 32),
-              child: StepProgess(currentStep: _currentPage, steps: 10),
-            ),
-            Expanded(
-              child: PageView(
-                controller: _pageController,
-                children: const [
-                  HouseLocation(),
-                  DetailsHouse(),
-                  WhoElse(),
-                  HouseService(),
-                  AddHouseImages(),
-                  ViewImages(),
-                  HouseAddTittle(),
-                  HouseAddDescription(),
-                  HousePrice(),
-                  MakeReservationView(), //esto se debe de subir a la vista de la publicacion
-
-                ],
-              ),
-            ),
-          ],
+      appBar: AppBar(
+        leading: const SizedBox(),
+        flexibleSpace: FlexibleSpaceBar(
+          titlePadding: const EdgeInsets.all(0),
+          title: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 10),
+            child: StepProgess(currentStep: currentPage, steps: 10),
+          ),
         ),
-        bottomNavigationBar: BottomButtons(
-          pageController: _pageController,
-        ));
+      ),
+      body: Column(
+        children: [
+          const SizedBox(
+            height: 20,
+          ),
+          Expanded(
+            child: PageView(
+              physics: const NeverScrollableScrollPhysics(),
+              controller: pageController,
+              children: [
+                HouseLocation(
+                  pageController: pageController,
+                ),
+                DetailsSingleHouse(
+                  pageController: pageController,
+                ),
+                WhoElse(
+                  pageController: pageController,
+                ),
+                HouseService(
+                  pageController: pageController,
+                ),
+                AddHouseImages(
+                  pageController: pageController,
+                ),
+                ViewImages(
+                  pageController: pageController,
+                ),
+                HouseAddTittle(
+                  pageController: pageController,
+                ),
+                HouseAddDescription(
+                  pageController: pageController,
+                ),
+                HousePrice(
+                  pageController: pageController,
+                ),
+                MakeReservationView(
+                  pageController: pageController,
+                ), //esto se debe de subir a la vista de la publicacion
+
+              ],
+            ),
+          ),
+        ],
+      ),
+    );
   }
 }
