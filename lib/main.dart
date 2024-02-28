@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:studenthive/config/router/app_router.dart';
 import 'package:studenthive/config/themes/theme_app.dart';
-import 'package:studenthive/infrastructure/repositories/publication_repositories_impl.dart';
 import 'package:studenthive/presentation/provider/favorite_provider.dart';
 import 'package:studenthive/presentation/provider/home_provider.dart';
 import 'package:studenthive/presentation/provider/reserve_provider.dart';
