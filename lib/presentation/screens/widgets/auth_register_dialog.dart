@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:studenthive/presentation/provider/auth_provider.dart';
-import 'package:studenthive/presentation/provider/user_provider.dart';
+import 'package:studenthive/presentation/provider/users/user_provider.dart';
 
 class DialogUtils {
   static void openDialog(BuildContext context, AuthProvider authProvider, UserProvider userProvider) {

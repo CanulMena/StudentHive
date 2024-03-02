@@ -4,7 +4,7 @@ import 'package:provider/provider.dart';
 import 'package:studenthive/domain/entities/publication.dart';
 import 'package:studenthive/presentation/provider/auth_provider.dart';
 import 'package:studenthive/presentation/provider/reserve_provider.dart';
-import 'package:studenthive/presentation/provider/user_provider.dart';
+import 'package:studenthive/presentation/provider/users/user_provider.dart';
 import 'package:studenthive/presentation/screens/widgets/auth_register_dialog.dart';
 
 class BottomPublication extends StatelessWidget {

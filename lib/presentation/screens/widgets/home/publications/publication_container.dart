@@ -4,7 +4,7 @@ import 'package:provider/provider.dart';
 import 'package:studenthive/domain/entities/publication.dart';
 import 'package:studenthive/presentation/provider/auth_provider.dart';
 import 'package:studenthive/presentation/provider/favorite_provider.dart';
-import 'package:studenthive/presentation/provider/user_provider.dart';
+import 'package:studenthive/presentation/provider/users/user_provider.dart';
 import 'package:studenthive/presentation/screens/widgets/auth_register_dialog.dart';
 import 'package:studenthive/presentation/screens/widgets/home/publications/image_container.dart';
 import 'package:studenthive/presentation/screens/widgets/home/publications/information_container.dart';

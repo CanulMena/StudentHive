@@ -4,7 +4,7 @@ import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
 import 'package:studenthive/domain/entities/user.dart';
 import 'package:studenthive/presentation/provider/auth_provider.dart';
-import 'package:studenthive/presentation/provider/user_provider.dart';
+import 'package:studenthive/presentation/provider/users/user_provider.dart';
 import 'package:studenthive/presentation/screens/widgets/registration/input_decoration.dart';
 
 class LogginFormContainer extends StatelessWidget {
@@ -64,10 +64,6 @@ class LogginFormContainer extends StatelessWidget {
                   String userJson = jsonEncode(userMap);
                   authProvider.login();
                   userProvider.addCurrentuser(userJson);
-                  // SharedPreferences.getInstance().then((prefs) {
-                  //   prefs.setBool('isLogged', true);
-                  //   prefs.setString('userData', userJson);
-                  // });
                   context.go('/home');
                 } else { 
                   ScaffoldMessenger.of(context).showSnackBar(
@@ -98,7 +94,7 @@ class LogginFormContainer extends StatelessWidget {
     String? Function(String?)? validator,
     required TextEditingController controller
   }) {
-    final FocusNode focusNode = FocusNode();
+    // final FocusNode focusNode = FocusNode();
     return TextFormField(
       keyboardType: isPassword ? TextInputType.visiblePassword : TextInputType.emailAddress,
       autovalidateMode: AutovalidateMode.onUserInteraction,
@@ -113,7 +109,7 @@ class LogginFormContainer extends StatelessWidget {
       ),
       validator: validator,
       controller: controller,
-      focusNode: focusNode,
+      // focusNode: focusNode,
       onFieldSubmitted: (value) {
         User? loginSuccess = userProvider.loginUser(emailController.text, passwordController.text);
         if( loginSuccess != null ){
@@ -132,9 +128,9 @@ class LogginFormContainer extends StatelessWidget {
           );
         }
       },
-      onTapOutside: (event) {
-        focusNode.unfocus();
-      },
+      // onTapOutside: (event) {
+      //   focusNode.unfocus();
+      // },
     );
   }
 

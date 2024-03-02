@@ -1,8 +1,11 @@
+import 'package:studenthive/domain/entities/entities.dart';
 
-import 'package:studenthive/domain/entities/publication.dart';
-
-abstract class PublicationRepository {
+abstract class UserRepository {
   
-  Future<List<RentalHouse>> getInformationPublication();
+  Future<void> postUser( String userName, String password, String email ); 
+
+  Future<User> getUserById( int id );
+
+  Future <User> getUserByEmail( String email );
 
 }
