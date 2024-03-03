@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:provider/provider.dart';
 import 'package:studenthive/presentation/provider/providers.dart';
 import 'package:studenthive/presentation/screens/widgets/registration/login/blue_box.dart';
 import 'package:studenthive/presentation/screens/widgets/registration/login/loggin_form_container.dart';
@@ -11,7 +10,6 @@ class LoginScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final UserProvider userProvider = context.watch<UserProvider>();
     final size = MediaQuery.of(context).size;
     return Scaffold(
       body: SizedBox(
@@ -22,7 +20,7 @@ class LoginScreen extends StatelessWidget {
             BlueBox(boxHeigh: size.height * 0.75, circularRadius: 200),
             HiveIcon(size: size.height * 0.001, iconSize: 200),
             loginForm(context),
-            closeButton(context, userProvider),
+            // closeButton(context, userProvider),
           ],
         ),
       ),
@@ -76,7 +74,7 @@ class LoginScreen extends StatelessWidget {
       left: 30,
       child: GestureDetector(
         onTap: () {
-          userProvider.loadCurrentUser();
+          // userProvider.loadCurrentUser();
           context.go('/home');
         },
         child: const Icon(Icons.close),

@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
+
 import 'package:studenthive/presentation/provider/users/riverpod_user_provider.dart';
 import 'package:studenthive/presentation/screens/widgets/registration/input_decoration.dart';
-//*i´m creating proviers here!!!. wow xd --> if i want i dont need another file to do this.
 
 class FormularioContainer extends ConsumerWidget {
   FormularioContainer({super.key});
@@ -14,7 +14,7 @@ class FormularioContainer extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref, ) {
-    final createAccountFunction = ref.read(createUserProvider); // Obtener la función postUser
+    final createAccountFunction = ref.read(createUserSesionProvider); // Obtener la función postUser
     return Container( 
       margin: const EdgeInsets.symmetric(horizontal: 30),
       child: Form(
@@ -54,7 +54,7 @@ class FormularioContainer extends ConsumerWidget {
     );
   }
 
-  Widget _buildTextFormField({
+  TextFormField _buildTextFormField({
     required String label,
     required Icon prefixIcon,
     bool obscureText = false,
@@ -81,11 +81,6 @@ class FormularioContainer extends ConsumerWidget {
       onTapOutside: (event) {
         focusNode.unfocus(); //*Esto es para que se cierre el form si toco afuera de la pantala
       },
-      // onFieldSubmitted: (value){
-      //   onValue(controller.value.text);
-      //   controller.clear();
-
-      // },
     );
   }
 
@@ -151,10 +146,11 @@ Widget _buildCreateAccountButton(BuildContext context, Future<void> Function(Str
         );
         
         navigator('/login');
+        
       } catch (e) {
-        //manejo el error 
+        // Manejar otros errores
         scaffoldMessenger.showSnackBar(
-          SnackBar(content: Text('Error al crear la cuenta: $e')),
+          const SnackBar(content: Text('Error al crear la cuenta. Inténtalo de nuevo más tarde')),
         );
       }
     },

@@ -29,7 +29,8 @@ class AuthProvider extends ChangeNotifier {
 
   Future<void> logout() async {
     _isLogged = false;
-    await _prefs.remove('userData');//?Como remover un dato, tiene que ser una funcion asyncrona?
+    await _prefs.remove('token');//?Como remover un dato, tiene que ser una funcion asyncrona?
+    await _prefs.remove('token_timestamp');
     await _prefs.setBool('isLogged', false); //?Como agregar un dato. Tiene que tener una fucion asyncrona?
     notifyListeners();
   }

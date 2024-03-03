@@ -31,7 +31,7 @@ class LoggedAppMenuItems extends StatelessWidget {
           FilledButton(
             onPressed: () {
               authProvider.logout();
-              userProvider.loadCurrentUser();
+              // userProvider.loadCurrentUser();
               context.go('/login');
             },
             child: const Text('Aceptar'),

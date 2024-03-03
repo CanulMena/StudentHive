@@ -16,7 +16,7 @@ class FavoriteView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final bool isLoading = context.watch<UserProvider>().isLoading;
-    final User currentUser = context.watch<UserProvider>().currentUser;
+    // final User currentUser = context.watch<UserProvider>().currentUser;
 
     final bool isLogged = context.watch<AuthProvider>().isLogged;
 
@@ -26,25 +26,25 @@ class FavoriteView extends StatelessWidget {
       appBar: AppBar(
         backgroundColor: Colors.white,
         elevation: 0,
-        actions: [
-          GestureDetector(
-            onTap: () {},
-            child: Padding(
-              padding: const EdgeInsets.fromLTRB(0, 20, 20, 0),
-              child: Text(
-                isLoading ? '' : currentUser.name, //currentUser es un tipo late. Pero entiendo que no puedo usar un late en tiempo de ejecucion si es que aún no tiene la promesa..
-                style: const TextStyle(
-                  color: Colors.black,
-                  fontSize: 15,
-                  decoration: TextDecoration.underline,
-                  decorationColor: Colors.black,
-                  decorationThickness: 2.0,
-                  decorationStyle: TextDecorationStyle.solid,
-                ),
-              ),
-            ),
-          )
-        ],
+        // actions: [
+        //   GestureDetector(
+        //     onTap: () {},
+        //     child: Padding(
+        //       padding: const EdgeInsets.fromLTRB(0, 20, 20, 0),
+        //       child: Text(
+        //         isLoading ? '' : currentUser.name, //currentUser es un tipo late. Pero entiendo que no puedo usar un late en tiempo de ejecucion si es que aún no tiene la promesa..
+        //         style: const TextStyle(
+        //           color: Colors.black,
+        //           fontSize: 15,
+        //           decoration: TextDecoration.underline,
+        //           decorationColor: Colors.black,
+        //           decorationThickness: 2.0,
+        //           decorationStyle: TextDecorationStyle.solid,
+        //         ),
+        //       ),
+        //     ),
+        //   )
+        // ],
       ),
       body: RefreshIndicator(
         strokeWidth: 2,
