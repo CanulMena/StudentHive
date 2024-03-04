@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:studenthive/presentation/provider/favorite_provider.dart';
+import 'package:studenthive/presentation/provider/publication/favorite_publication_provider.dart';
 
 class ListNoEmpty extends StatelessWidget {
   final FavoriteProvider favoriteProvider;

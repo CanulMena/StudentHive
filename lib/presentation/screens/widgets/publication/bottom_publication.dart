@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
 import 'package:studenthive/domain/entities/publication.dart';
-import 'package:studenthive/presentation/provider/auth_provider.dart';
+import 'package:studenthive/presentation/provider/auth/auth_token_provider.dart';
 import 'package:studenthive/presentation/provider/reserve_provider.dart';
-import 'package:studenthive/presentation/provider/users/user_provider.dart';
+import 'package:studenthive/presentation/provider/user/user_provider.dart';
 import 'package:studenthive/presentation/screens/widgets/auth_register_dialog.dart';
 
 class BottomPublication extends StatelessWidget {
@@ -17,7 +17,7 @@ class BottomPublication extends StatelessWidget {
     final size = MediaQuery.of(context).size;
     final reserveProvider = context.watch<ReserveProvider>();
     final userProvider = context.watch<UserProvider>();
-    final authProvider = context.watch<AuthProvider>();
+    // final authProvider = context.watch<AuthProvider>();
     return Container(
       height: size.height * 0.10,
       decoration: const BoxDecoration(
@@ -53,12 +53,12 @@ class BottomPublication extends StatelessWidget {
     
             ElevatedButton(
               onPressed: () {
-                if(authProvider.isLogged){
-                context.push('/reserve',);
-                reserveProvider.addReservation(publicationPost);
-                } else {
-                  DialogUtils.openDialog(context, authProvider, userProvider);
-                }
+                // if(authProvider.isLogged){
+                // context.push('/reserve',);
+                // reserveProvider.addReservation(publicationPost);
+                // } else {
+                //   DialogUtils.openDialog(context, authProvider, userProvider);
+                // }
               },
               style: ElevatedButton.styleFrom(
                 backgroundColor: colors.primary,

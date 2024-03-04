@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:studenthive/config/router/app_router.dart';
 import 'package:studenthive/config/themes/theme_app.dart';
-import 'package:studenthive/presentation/provider/riverpod_auth_provider.dart';
+import 'package:studenthive/presentation/provider/auth/auth_token_provider.dart';
 
 void main() async {
   runApp(
@@ -26,11 +26,11 @@ class _MyAppState extends ConsumerState<MyApp> {
     _initializeTokenAuth();
   }
 
-  void _initializeTokenAuth() {
+  void _initializeTokenAuth() { //! No entiendo esta parte del codigo - me la dio chat
     ref.read(isTokenAuthProvider.notifier).isTokenAuth().then((_) {
       // Aquí puedes realizar acciones adicionales después de que isTokenAuth haya terminado
       // Por ejemplo, actualizar el estado o redibujar el widget si es necesario
-      setState(() {}); // Redibujar el widget
+      setState(() {}); //*Esto solo es para escuchar al provider que ha cambaido su valor.
     });
   }
 

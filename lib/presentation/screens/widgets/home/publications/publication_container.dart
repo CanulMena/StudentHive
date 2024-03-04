@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
 import 'package:studenthive/domain/entities/publication.dart';
-import 'package:studenthive/presentation/provider/auth_provider.dart';
-import 'package:studenthive/presentation/provider/favorite_provider.dart';
-import 'package:studenthive/presentation/provider/users/user_provider.dart';
+import 'package:studenthive/presentation/provider/auth/auth_token_provider.dart';
+import 'package:studenthive/presentation/provider/publication/favorite_publication_provider.dart';
+import 'package:studenthive/presentation/provider/user/user_provider.dart';
 import 'package:studenthive/presentation/screens/widgets/auth_register_dialog.dart';
 import 'package:studenthive/presentation/screens/widgets/home/publications/image_container.dart';
 import 'package:studenthive/presentation/screens/widgets/home/publications/information_container.dart';
@@ -29,7 +29,7 @@ class _PublicationContainerState extends State<PublicationContainer> {
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
     final favoriteProvider = context.watch<FavoriteProvider>();
-    final authProvider = context.watch<AuthProvider>();
+    // final authProvider = context.watch<AuthProvider>();
     final userProvider = context.watch<UserProvider>();
 
     return GestureDetector(
@@ -68,15 +68,16 @@ class _PublicationContainerState extends State<PublicationContainer> {
             child: GestureDetector(
               onTap: () {
                 setState(() {
-                  if( authProvider.isLogged){
-                    isLiked = !isLiked;
-                    isLiked 
-                    ? favoriteProvider.addFavorites(widget.publicationsPost) 
-                    : favoriteProvider.deleteFavorites(widget.publicationsPost);
-                  } else {
-                    DialogUtils.openDialog(context, authProvider, userProvider);
+                  // if( authProvider.isLogged){
+                  //   isLiked = !isLiked;
+                  //   isLiked 
+                  //   ? favoriteProvider.addFavorites(widget.publicationsPost) 
+                  //   : favoriteProvider.deleteFavorites(widget.publicationsPost);
+                  // } else {
+                  //   DialogUtils.openDialog(context, authProvider, /* userProvider */);
+                  // }
                   }
-                  });
+                    );
                 },
               child: Icon(
                 isLiked 

@@ -8,7 +8,7 @@ import 'package:studenthive/presentation/views/widgets/widgets_views/account_vie
 class LoggedAppMenuItems extends StatelessWidget {
   const LoggedAppMenuItems({super.key});
 
-  void openDialog(BuildContext context, AuthProvider authProvider, UserProvider userProvider) {
+  void openDialog(BuildContext context, /* AuthProvider authProvider ,*/ UserProvider userProvider) { //este es el baner
   showDialog( //*showDialog personalizado
     barrierDismissible: false,
     context: context,
@@ -30,7 +30,7 @@ class LoggedAppMenuItems extends StatelessWidget {
           ),
           FilledButton(
             onPressed: () {
-              authProvider.logout();
+              // authProvider.logout();
               // userProvider.loadCurrentUser();
               context.go('/login');
             },
@@ -46,7 +46,7 @@ class LoggedAppMenuItems extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final authProvider = context.watch<AuthProvider>(); //*Siempre que crear un provider desde un contexto directo.
+    // final authProvider = context.watch<AuthProvider>(); //*Siempre que crear un provider desde un contexto directo.
     final UserProvider userProvider = context.watch<UserProvider>();
     final textStyle = Theme.of(context).textTheme;
     return ListView(
@@ -103,7 +103,7 @@ class LoggedAppMenuItems extends StatelessWidget {
             style: TextStyle(fontSize: 18, fontWeight: FontWeight.w600, decoration: TextDecoration.underline),
           ),
           onTap: () {
-            openDialog(context, authProvider, userProvider); 
+            openDialog(context, /* authProvider, */ userProvider); 
           },
         ),
         const SizedBox(height: 25,),
