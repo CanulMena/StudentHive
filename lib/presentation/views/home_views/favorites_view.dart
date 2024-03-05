@@ -1,17 +1,16 @@
 import 'package:flutter/material.dart';
-import 'package:studenthive/domain/entities/user.dart';
-import 'package:studenthive/presentation/provider/providers.dart';
+import 'package:studenthive/domain/entities/rentalhouse.dart';
 import 'package:studenthive/presentation/views/widgets/widgets_views/favorites_view/favorite_view_logged.dart'; //agregar en un archivo de barril
 import 'package:studenthive/presentation/views/widgets/widgets_views/favorites_view/favorite_view_no_logged.dart'; //agregar en un archivo de barril
 
 class FavoriteView extends StatelessWidget {
   final bool isTokenAut;
-  // final FavoriteProvider favoriteProvider;
+  final List<RentalHouse> favorites;
 
   const FavoriteView({
     super.key,
-    required this.isTokenAut,
-    // required this.favoriteProvider,
+    required this.isTokenAut, 
+    required this.favorites,
   });
 
   @override
@@ -36,7 +35,7 @@ class FavoriteView extends StatelessWidget {
             child: !isTokenAut
                 ? const FavoriteViewNoLogged()
                 : FavoriteViewLogged(
-                    // favoriteProvider: favoriteProvider, 
+                    favorites: favorites,
                     size: size,
                   )),
       ),

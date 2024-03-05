@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:provider/provider.dart';
-import 'package:studenthive/domain/entities/publication.dart';
+import 'package:studenthive/domain/entities/rentalhouse.dart';
 import 'package:studenthive/presentation/provider/auth/auth_token_provider.dart';
 import 'package:studenthive/presentation/provider/publication/favorite_publication_provider.dart';
 import 'package:studenthive/presentation/provider/user/user_provider.dart';
@@ -28,14 +27,14 @@ class _PublicationContainerState extends State<PublicationContainer> {
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
-    final favoriteProvider = context.watch<FavoriteProvider>();
+    // final favoriteProvider = context.watch<FavoriteProvider>();
     // final authProvider = context.watch<AuthProvider>();
-    final userProvider = context.watch<UserProvider>();
+    // final userProvider = context.watch<UserProvider>();
 
     return GestureDetector(
 
       onTap: (){
-        context.push('/publication', extra: widget.publicationsPost);
+        context.push('/publication', /* extra: widget.publicationsPost */);
       },
       
       child: Stack(
@@ -50,8 +49,8 @@ class _PublicationContainerState extends State<PublicationContainer> {
           ),
           child: Column(
             children: [
-              ImageContainer( imagesPost: widget.publicationsPost.images,),
-              InformationContainer(informationPost: widget.publicationsPost,)
+              // ImageContainer( imagesPost: widget.publicationsPost.images,),
+              // InformationContainer(informationPost: widget.publicationsPost,)
               ],
             ),
           ),
@@ -67,7 +66,7 @@ class _PublicationContainerState extends State<PublicationContainer> {
             right: 20,
             child: GestureDetector(
               onTap: () {
-                setState(() {
+                setState(() { //TODO: validar isTokenAuth
                   // if( authProvider.isLogged){
                   //   isLiked = !isLiked;
                   //   isLiked 

@@ -75,7 +75,7 @@ Future<void> loginUser(String email, String password) async {
   Future<User> getUserByEmail( String email ) async {
     final response = await dio.get('/User/email/$email');
 
-    final users = Users.fromJson(response.data);//* Here i convert the json to Users 
+    final users = UserModel.fromJson(response.data);//* Here i convert the json to Users 
     //i need to convert users to my entity user.
     final User user = UserMapper.userToEntity(users);
     return user;
@@ -85,7 +85,7 @@ Future<void> loginUser(String email, String password) async {
   Future<User> getUserById( int id ) async {
     final response = await dio.get('/User/id/$id');
 
-    final users = Users.fromJson(response.data);//* Here i convert the json to Users 
+    final users = UserModel.fromJson(response.data);//* Here i convert the json to Users 
     //i need to convert users to my entity user.
     final User user = UserMapper.userToEntity(users);
     return user;

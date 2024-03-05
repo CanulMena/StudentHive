@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:studenthive/domain/entities/publication.dart';
+import 'package:studenthive/domain/entities/rentalhouse.dart';
 import 'package:studenthive/presentation/screens/screens.dart';
 
 class MyRoute {
@@ -36,22 +36,22 @@ class MyRoute {
             return const HomeScreen();
           },
         ),
-        GoRoute(
-          path: '/publication',
-          builder: (BuildContext context, GoRouterState state) {
-            final RentalHouse publicationPost =
-                GoRouterState.of(context).extra! as RentalHouse;
-            return PublicationScreen(
-              publicationPost: publicationPost,
-            );
-          },
-        ),
-        GoRoute(
-          path: '/reserve',
-          builder: (BuildContext context, GoRouterState state) {
-            return const ReserveScreen();
-          },
-        ),
+        // GoRoute(
+        //   path: '/publication',
+        //   builder: (BuildContext context, GoRouterState state) {
+        //     final RentalHouse publicationPost =
+        //         GoRouterState.of(context).extra! as RentalHouse;
+        //     return PublicationScreen(
+        //       publicationPost: publicationPost,
+        //     );
+        //   },
+        // ),
+        // GoRoute(
+        //   path: '/reserve',
+        //   builder: (BuildContext context, GoRouterState state) {
+        //     return const ReserveScreen();
+        //   },
+        // ),
         GoRoute(
             path: '/createPublication',
             builder: (BuildContext context, GoRouterState state) {

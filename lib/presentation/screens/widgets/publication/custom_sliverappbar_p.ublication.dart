@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:studenthive/domain/entities/publication.dart';
+import 'package:studenthive/domain/entities/rentalhouse.dart';
 class CustomSliverAppBar extends StatefulWidget {
-  final RentalHouse publicationPost;
-  const CustomSliverAppBar({super.key, required this.publicationPost});
+  // final RentalHouse publicationPost;
+  const CustomSliverAppBar({super.key, /* required this.publicationPost */});
 
   @override
   State<CustomSliverAppBar> createState() => _CustomSliverAppBarState();
@@ -32,7 +32,7 @@ class _CustomSliverAppBarState extends State<CustomSliverAppBar> {
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
-    return SliverAppBar(
+    return SizedBox(); /* SliverAppBar(
       floating: true,
       expandedHeight: size.height * 0.5,
       foregroundColor: Colors.white,
@@ -69,19 +69,19 @@ class _CustomSliverAppBarState extends State<CustomSliverAppBar> {
                 ),
                 height: size.height * 0.5 * 0.075,
                 width: size.width * 1 * 0.16,
-                child: Center(child: 
-                Text(
+                child: const Center(child: SizedBox()
+/*                 Text(
                   '$actualPage/${widget.publicationPost.images.length}',
                   style: const TextStyle(
                     color: Colors.white,
                     fontSize: 12,
                   ),
-                ))
+                ) */)
               )
             )
           ],
         ),
       )
-    );
+    ); */
   }
 }

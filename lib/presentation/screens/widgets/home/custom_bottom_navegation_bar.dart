@@ -17,10 +17,10 @@ class _CustomButtomNavegationBarState extends State<CustomButtomNavegationBar> {
     return BottomNavigationBar( 
       fixedColor: Colors.amber, //This is to add colors when i select an options
       elevation: 0,
-      currentIndex: widget.selectedIndex,
+      currentIndex: widget.selectedIndex, //*Se pasa en index actual que le pasamos en el homescreen
       onTap: (value) {
         setState(() {
-          widget.selectIndex(value);
+          widget.selectIndex(value); //* --> manda el numero por medio del ValueChanged
         });
       },
       items: [

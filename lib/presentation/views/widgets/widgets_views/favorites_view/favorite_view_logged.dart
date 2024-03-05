@@ -1,38 +1,36 @@
 import 'package:flutter/material.dart';
-import 'package:studenthive/presentation/provider/publication/favorite_publication_provider.dart';
+import 'package:studenthive/domain/entities/rentalhouse.dart';
 import 'package:studenthive/presentation/views/widgets/widgets_views/favorites_view/list_empty.dart'; //meter en un archivo de barril
 import 'package:studenthive/presentation/views/widgets/widgets_views/favorites_view/list_no_empty.dart'; //meter en un archivo de barril
 
 class FavoriteViewLogged extends StatelessWidget {
-  // final FavoriteProvider favoriteProvider;
+  final List<RentalHouse> favorites;
   final Size size;
 
   const FavoriteViewLogged({
     super.key, 
-    // required this.favoriteProvider, 
-    required this.size
+    required this.size, 
+    required this.favorites
     });
 
   @override
   Widget build(BuildContext context) {
     return ListView(
-      children: const [
+      children: [
         Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(
+            const Text(
               'FavoriteList',
               style: TextStyle(
                 fontSize: 30,
                 fontWeight: FontWeight.w600,
               ),
             ),
-            SizedBox(
+            const SizedBox(
               height: 20,
-            ), //TODO: Autentificar si es lista de favoritos no esta vacia.
-            // favoriteProvider.listFavorites.isEmpty
-            //     ? const ListEmpty()
-            //     : ListNoEmpty(favoriteProvider: favoriteProvider, size: size),
+            ),
+            favorites.isEmpty ? const ListEmpty() : ListNoEmpty(size: size, favorites: favorites,)
           ],
         ),
       ],

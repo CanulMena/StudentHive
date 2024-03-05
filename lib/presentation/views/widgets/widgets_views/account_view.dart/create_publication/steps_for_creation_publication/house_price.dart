@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_keyboard_visibility/flutter_keyboard_visibility.dart';
-import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
-import 'package:studenthive/domain/entities/publication.dart';
 import 'package:studenthive/presentation/provider/create_publication_provider.dart';
 import 'package:studenthive/presentation/views/widgets/widgets_views/account_view.dart/create_publication/utils_for_creation_publication/buttom_steps_creationp.dart';
 import 'package:studenthive/presentation/views/widgets/widgets_views/account_view.dart/create_publication/utils_for_creation_publication/container_title_appbar.dart';
@@ -85,48 +83,48 @@ class _HousePriceState extends State<HousePrice> {
               const SizedBox(
                 height: 50,
               ),
-              Center(
-                child: IconButton.filled(
-                    onPressed: () {
-                      context.go('/home');
-                      createPublicationProvider.addPublication(RentalHouse(
-                          title: createPublicationProvider.title,
-                          description: createPublicationProvider.description,
-                          imagesf: createPublicationProvider.getListXFile,
-                          status: false,
-                          rentPrice: createPublicationProvider.price,
-                          typeHouseRental:
-                              createPublicationProvider.typeHouseRental,
-                          publicationDate: DateTime.now(),
-                          houseService: HouseService(
-                              wifi: createPublicationProvider.wifi,
-                              kitchen: createPublicationProvider.kitchen,
-                              washer: createPublicationProvider.washer,
-                              airConditioning:
-                                  createPublicationProvider.airConditioning,
-                              water: createPublicationProvider.washer,
-                              gas: createPublicationProvider.gas,
-                              television: createPublicationProvider.television),
-                          rentalHouseDetail: RentalHouseDetail(
-                              numberOfGuests: createPublicationProvider.guests,
-                              numberOfBathrooms:
-                                  createPublicationProvider.batrooms,
-                              numberOfRooms: createPublicationProvider.rooms,
-                              numberOfHammocks:
-                                  createPublicationProvider.hammocks),
-                          houseLocation: HouseLocation(
-                              address: createPublicationProvider.address,
-                              city: createPublicationProvider.city,
-                              state: createPublicationProvider.state,
-                              country: createPublicationProvider.country,
-                              postalCode: createPublicationProvider.postalCode,
-                              neighborhood: createPublicationProvider.neighborhood
-                              ),
-                          // idUser: idUser
-                          ));
-                    },
-                    icon: const Icon(Icons.new_label)),
-              )
+              // Center(
+              //   child: IconButton.filled(
+              //       onPressed: () {
+              //         context.go('/home');
+              //         createPublicationProvider.addPublication(RentalHouse(
+              //             title: createPublicationProvider.title,
+              //             description: createPublicationProvider.description,
+              //             imagesf: createPublicationProvider.getListXFile,
+              //             status: false,
+              //             rentPrice: createPublicationProvider.price,
+              //             typeHouseRental:
+              //                 createPublicationProvider.typeHouseRental,
+              //             publicationDate: DateTime.now(),
+              //             houseService: HouseService(
+              //                 wifi: createPublicationProvider.wifi,
+              //                 kitchen: createPublicationProvider.kitchen,
+              //                 washer: createPublicationProvider.washer,
+              //                 airConditioning:
+              //                     createPublicationProvider.airConditioning,
+              //                 water: createPublicationProvider.washer,
+              //                 gas: createPublicationProvider.gas,
+              //                 television: createPublicationProvider.television),
+              //             rentalHouseDetail: RentalHouseDetail(
+              //                 numberOfGuests: createPublicationProvider.guests,
+              //                 numberOfBathrooms:
+              //                     createPublicationProvider.batrooms,
+              //                 numberOfRooms: createPublicationProvider.rooms,
+              //                 numberOfHammocks:
+              //                     createPublicationProvider.hammocks),
+              //             houseLocation: HouseLocation(
+              //                 address: createPublicationProvider.address,
+              //                 city: createPublicationProvider.city,
+              //                 state: createPublicationProvider.state,
+              //                 country: createPublicationProvider.country,
+              //                 postalCode: createPublicationProvider.postalCode,
+              //                 neighborhood: createPublicationProvider.neighborhood
+              //                 ),
+              //             // idUser: idUser
+              //             ));
+              //       },
+              //       icon: const Icon(Icons.new_label)),
+              // )
             ],
           ),
         ),

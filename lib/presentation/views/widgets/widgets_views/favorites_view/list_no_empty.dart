@@ -1,11 +1,15 @@
 import 'package:flutter/material.dart';
-import 'package:studenthive/presentation/provider/publication/favorite_publication_provider.dart';
+import 'package:studenthive/domain/entities/rentalhouse.dart';
 
 class ListNoEmpty extends StatelessWidget {
-  final FavoriteProvider favoriteProvider;
+  final List<RentalHouse> favorites;
   final Size size;
 
-  const ListNoEmpty({super.key, required this.favoriteProvider, required this.size});
+  const ListNoEmpty({
+    super.key, 
+    required this.size, 
+    required this.favorites
+    });
 
   @override
   Widget build(BuildContext context) {
@@ -13,9 +17,9 @@ class ListNoEmpty extends StatelessWidget {
       spacing: 10,
       direction: Axis.horizontal,
       children: List.generate(
-        favoriteProvider.listFavorites.length,
+        favorites.length,
         (index) {
-          final favoritePublication = favoriteProvider.listFavorites[index];
+          final favorite = favorites[index];
           const Radius radius = Radius.circular(20);
           return Padding(
             padding: const EdgeInsets.only(top: 10),
@@ -37,18 +41,18 @@ class ListNoEmpty extends StatelessWidget {
                       color: Colors.green,
                       borderRadius: BorderRadius.all(Radius.circular(20)),
                     ),
-                    child: const ClipRRect(
-                      borderRadius: BorderRadius.all(Radius.circular(20)),
-                      // child: Image.network(
-                      //   favoritePublication.imagenes,
-                      //   width: double.infinity,
-                      //   fit: BoxFit.cover,
-                      // ),
+                    child: ClipRRect(
+                      borderRadius: const BorderRadius.all(Radius.circular(20)),
+                      child: Image.network(
+                        favorite.image.urlImageHouse,
+                        width: double.infinity,
+                        fit: BoxFit.cover,
+                      ),
                     ),
                   ),
                   const SizedBox(height: 5),
                   Text(
-                    favoritePublication.title,
+                    favorite.title,
                     style: const TextStyle(
                       fontSize: 15,
                       fontWeight: FontWeight.w500,

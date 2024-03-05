@@ -2,7 +2,7 @@ import 'package:studenthive/domain/entities/user.dart';
 import 'package:studenthive/infrastructure/models/studenthivedb/studenthivedb_users.dart';
 
 class UserMapper {
-  static User userToEntity(Users user) => User(
+  static User userToEntity(UserModel user) => User(
       idUser: user.idRol,
       name: user.name,
       email: user.email,
