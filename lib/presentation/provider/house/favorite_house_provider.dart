@@ -2,31 +2,31 @@ import 'dart:convert';
 
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:studenthive/domain/entities/rentalhouse.dart';
+import 'package:studenthive/domain/entities/house.dart';
 
-final favoritesPostsProvider = StateNotifierProvider<FavoritesPostsNotifier, List<RentalHouse>>((ref){
+final favoritesHousesProvider = StateNotifierProvider<FavoritesPostsNotifier, List<House>>((ref){
   return FavoritesPostsNotifier();
 });
 
-class FavoritesPostsNotifier extends StateNotifier<List<RentalHouse>>{
+class FavoritesPostsNotifier extends StateNotifier<List<House>>{
   FavoritesPostsNotifier() : super([]);
 
   Future<void> loadFavoritesFromSharedPreferences() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     List<String> favoritesListString = prefs.getStringList('favorites') ?? [];
 
-    List<RentalHouse> favorites = [];
+    List<House> favorites = [];
 
     for (String jsonString in favoritesListString) {
       Map<String, dynamic> rentalHouseMap = jsonDecode(jsonString);
-      RentalHouse rentalHouse = RentalHouse.fromJson(rentalHouseMap);
+      House rentalHouse = House.fromJson(rentalHouseMap);
       favorites.add(rentalHouse);
     }
 
     state = favorites;
   }
 
-  void addFavorites( RentalHouse rentalHouse ) async {
+  void addFavorites( House rentalHouse ) async {
     SharedPreferences prefs = await SharedPreferences.getInstance(); 
     //*Llamo a toda la lista de strings --> mis favoritos guardados en formato json
     List<String> favoritesListString = prefs.getStringList('favorites') ?? <String>[];

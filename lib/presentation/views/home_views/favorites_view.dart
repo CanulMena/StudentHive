@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:studenthive/domain/entities/rentalhouse.dart';
+import 'package:studenthive/domain/entities/house.dart';
 import 'package:studenthive/presentation/views/widgets/widgets_views/favorites_view/favorite_view_logged.dart'; //agregar en un archivo de barril
 import 'package:studenthive/presentation/views/widgets/widgets_views/favorites_view/favorite_view_no_logged.dart'; //agregar en un archivo de barril
 
 class FavoriteView extends StatelessWidget {
   final bool isTokenAut;
-  final List<RentalHouse> favorites;
+  final List<House> favorites;
 
   const FavoriteView({
     super.key,

@@ -1,19 +1,17 @@
 import 'package:flutter/material.dart';
-import 'package:studenthive/domain/entities/rentalhouse.dart';
+import 'package:studenthive/domain/entities/entities.dart';
 import 'package:studenthive/presentation/delegates/search_publication_delegate.dart';
 import 'package:studenthive/presentation/screens/widgets/home/publications/publication_container.dart';
 
 class PublicationsView extends StatelessWidget {
-  final List<RentalHouse> listPublications;
+  final List<HousePreview> listHousePreview;
   const PublicationsView({
     super.key,
-    required this.listPublications,
+    required this.listHousePreview,
   });
 
   @override
   Widget build(BuildContext context) {
-    // final homeProvider = context.watch<HomeProvider>();
-    // final createPublicationProvider = context.watch<CreatePublicationProvider>();
     return  CustomScrollView(
             //This is similar to an ListView within others ListView
             slivers: [
@@ -28,14 +26,14 @@ class PublicationsView extends StatelessWidget {
               ),
               SliverList(
                   delegate: SliverChildBuilderDelegate(
-                      childCount: listPublications.length, (context, index) {
-                final publicationsPost = listPublications[index];
+                      childCount: listHousePreview.length, (context, index) {
+                final housePreview = listHousePreview[index];
                 return Column(
                   children: [
                     Padding(
                       padding: const EdgeInsets.symmetric(vertical: 15),
                       child: PublicationContainer(
-                          publicationsPost: publicationsPost),
+                          housePreview: housePreview),
                     ),
                   ],
                 );

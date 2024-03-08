@@ -1,6 +1,6 @@
 import 'package:studenthive/domain/datasource/user_datasource.dart';
 import 'package:studenthive/domain/entities/entities.dart';
-import 'package:studenthive/domain/repositories/publication_repository.dart';
+import 'package:studenthive/domain/repositories/user_repository.dart';
 
 class UserRepositoryImpl extends UserRepository{
 

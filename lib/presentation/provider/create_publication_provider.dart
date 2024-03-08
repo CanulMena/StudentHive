@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:studenthive/domain/entities/rentalhouse.dart';
 
 class CreatePublicationProvider extends ChangeNotifier {
 
-  // List<RentalHouse> publications = []; //TODO: This list will add new data to the publication list from HomeScreen
+
 //* desde mi pantalla guardaré todos los datos que necesito para crear publicaciones. 
 
   // --Price--

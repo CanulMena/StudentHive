@@ -1,4 +1,4 @@
-class RentalHouse {
+class House {
   final int idPublication;
   final String title;
   final String description;
@@ -10,9 +10,9 @@ class RentalHouse {
   final HouseService houseService;
   final Location location;
   final RentalHouseDetail rentalHouseDetail;
-  final HouseImage image;
+  final List<String> images;
 
-  RentalHouse({
+  House({
     required this.idPublication,
     required this.title,
     required this.description,
@@ -24,11 +24,11 @@ class RentalHouse {
     required this.houseService,
     required this.location,
     required this.rentalHouseDetail,
-    required this.image,
+    required this.images,
   });
 
-  factory RentalHouse.fromJson(Map<String, dynamic> json) {
-    return RentalHouse(
+    factory House.fromJson(Map<String, dynamic> json) {
+    return House(
       idPublication: json['idPublication'],
       title: json['title'],
       description: json['description'],
@@ -40,7 +40,7 @@ class RentalHouse {
       houseService: HouseService.fromJson(json['houseService']),
       location: Location.fromJson(json['location']),
       rentalHouseDetail: RentalHouseDetail.fromJson(json['rentalHouseDetail']),
-      image: HouseImage.fromJson(json['image']),
+      images: List<String>.from(json['images']),
     );
   }
 
@@ -57,9 +57,10 @@ class RentalHouse {
       'houseService': houseService.toJson(),
       'location': location.toJson(),
       'rentalHouseDetail': rentalHouseDetail.toJson(),
-      'image': image.toJson(),
+      'images': images,
     };
   }
+
 }
 
 class Location {
@@ -194,26 +195,3 @@ class RentalHouseDetail {
   }
 }
 
-class HouseImage {
-  final int idImage;
-  final String urlImageHouse;
-  
-  HouseImage({
-    required this.idImage,
-    required this.urlImageHouse,
-  });
-
-  factory HouseImage.fromJson(Map<String, dynamic> json) {
-    return HouseImage(
-      idImage: json['idImage'],
-      urlImageHouse: json['urlImageHouse'],
-    );
-  }
-
-  Map<String, dynamic> toJson() {
-    return {
-      'idImage': idImage,
-      'urlImageHouse': urlImageHouse,
-    };
-  }
-}

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
-import 'package:studenthive/domain/entities/rentalhouse.dart';
+import 'package:studenthive/domain/entities/house.dart';
 import 'package:studenthive/presentation/provider/auth/auth_token_provider.dart';
 import 'package:studenthive/presentation/provider/reserve_provider.dart';
 import 'package:studenthive/presentation/provider/user/user_provider.dart';

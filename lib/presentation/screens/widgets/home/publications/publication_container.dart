@@ -1,19 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:studenthive/domain/entities/rentalhouse.dart';
-import 'package:studenthive/presentation/provider/auth/auth_token_provider.dart';
-import 'package:studenthive/presentation/provider/publication/favorite_publication_provider.dart';
-import 'package:studenthive/presentation/provider/user/user_provider.dart';
+import 'package:studenthive/domain/entities/entities.dart';
 import 'package:studenthive/presentation/screens/widgets/auth_register_dialog.dart';
 import 'package:studenthive/presentation/screens/widgets/home/publications/image_container.dart';
 import 'package:studenthive/presentation/screens/widgets/home/publications/information_container.dart';
 
 class PublicationContainer extends StatefulWidget {
-  final RentalHouse publicationsPost; 
+  final HousePreview housePreview; 
 
   const PublicationContainer({
     super.key, 
-    required this.publicationsPost,  
+    required this.housePreview,  
     });
 
   @override
@@ -49,8 +46,8 @@ class _PublicationContainerState extends State<PublicationContainer> {
           ),
           child: Column(
             children: [
-              // ImageContainer( imagesPost: widget.publicationsPost.images,),
-              // InformationContainer(informationPost: widget.publicationsPost,)
+              ImageContainer( imagesHousePreview: widget.housePreview.images,),
+              InformationContainer(informationHousePreview: widget.housePreview,)
               ],
             ),
           ),

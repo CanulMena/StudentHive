@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:studenthive/domain/entities/rentalhouse.dart';
 import 'package:studenthive/presentation/screens/screens.dart';
 
 class MyRoute {

@@ -14,8 +14,11 @@ class LogginFormContainer extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+
+    final go = context.go;
     final scaffoldMessenger = ScaffoldMessenger.of(context);
     final loginProvider = ref.watch(loginUserProvider);
+    
     return Container(
       margin: const EdgeInsets.symmetric(horizontal: 22),
       child: Form(
@@ -67,6 +70,8 @@ class LogginFormContainer extends ConsumerWidget {
                   scaffoldMessenger.showSnackBar(
                   const SnackBar(content: Text('El inicio de sesion fue exitoso')), 
                   );
+
+                  go('/home');
 
                 } catch( error ) {
                   scaffoldMessenger.showSnackBar(

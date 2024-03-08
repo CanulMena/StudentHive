@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:studenthive/domain/entities/rentalhouse.dart';
+import 'package:studenthive/domain/entities/entities.dart';
 
 class InformationContainer extends StatelessWidget {
-  // final RentalHouse informationPost;
-  const InformationContainer({super.key,/*  required this.informationPost */});
+  final HousePreview informationHousePreview;
+  const InformationContainer({super.key, required this.informationHousePreview});
 
   @override
   Widget build(BuildContext context) {
@@ -19,24 +19,24 @@ class InformationContainer extends StatelessWidget {
             // Padding(
             //   padding: const EdgeInsets.only(top: 8),
             //   child: Text(
-            //     '${informationPost.houseLocation.city}, ${informationPost.houseLocation.neighborhood}', 
+            //     '${informationHousePreview.location.city}, ${informationHousePreview.location.neighborhood}', 
             //     style: textStyle.titleMedium?.copyWith( fontWeight: FontWeight.w600, fontSize: 16 )
             //   )
             // ),
-            // Padding(
-            //   padding: const EdgeInsets.only(top: 3),
-            //   child: Text(
-            //     '${informationPost.publicationDate.year}-0${informationPost.publicationDate.month}-${informationPost.publicationDate.weekday}', 
-            //     style: textStyle.labelLarge,)
-            // ),
-            // Padding(
-            //   padding: const EdgeInsets.only(top: 3),
-            //   child: _CustomText(
-            //     imagePost: ' \$${informationPost.rentPrice.toString()} MXN',
-            //     fontSize: 16,
-            //     fontWeight: FontWeight.w600,
-            //     ),
-            // )
+            Padding(
+              padding: const EdgeInsets.only(top: 3),
+              child: Text(
+                '${informationHousePreview.publicationDate.year}-0${informationHousePreview.publicationDate.month}-${informationHousePreview.publicationDate.weekday}', 
+                style: textStyle.labelLarge,)
+            ),
+            Padding(
+              padding: const EdgeInsets.only(top: 3),
+              child: _CustomText(
+                imagePost: ' \$${informationHousePreview.rentPrice.toString()} MXN',
+                fontSize: 16,
+                fontWeight: FontWeight.w600,
+                ),
+            )
           ],
         ),
       ),

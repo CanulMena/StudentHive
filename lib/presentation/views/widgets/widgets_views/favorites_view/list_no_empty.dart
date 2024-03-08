@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:studenthive/domain/entities/rentalhouse.dart';
+import 'package:studenthive/domain/entities/house.dart';
 
 class ListNoEmpty extends StatelessWidget {
-  final List<RentalHouse> favorites;
+  final List<House> favorites;
   final Size size;
 
   const ListNoEmpty({
@@ -13,7 +13,7 @@ class ListNoEmpty extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Wrap(
+    return SizedBox(); /* Wrap(
       spacing: 10,
       direction: Axis.horizontal,
       children: List.generate(
@@ -64,6 +64,6 @@ class ListNoEmpty extends StatelessWidget {
           );
         },
       ),
-    );
+    ); */
   }
 }

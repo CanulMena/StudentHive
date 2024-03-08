@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:studenthive/domain/entities/rentalhouse.dart';
+import 'package:studenthive/domain/entities/house.dart';
 class CustomSliverAppBar extends StatefulWidget {
   // final RentalHouse publicationPost;
   const CustomSliverAppBar({super.key, /* required this.publicationPost */});

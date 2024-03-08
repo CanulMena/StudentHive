@@ -3,8 +3,9 @@ import 'package:card_swiper/card_swiper.dart';
 import 'package:flutter/material.dart';
 
 class ImageContainer extends StatelessWidget {
-  final List<String> imagesPost;
-  const ImageContainer({super.key, required this.imagesPost});
+  
+  final List<String> imagesHousePreview;
+  const ImageContainer({super.key, required this.imagesHousePreview});
 
   @override
   Widget build(BuildContext context) {
@@ -26,12 +27,12 @@ class ImageContainer extends StatelessWidget {
       //! Contenedor de imagen
       height: size.height * 0.51 * 0.75,
       decoration: decoration,
-      child: Swiper(
-        itemCount: imagesPost.length,
+      child: Swiper( //*Este es el carrusel
+        itemCount: imagesHousePreview.length,
         scale: .9,
         itemBuilder: (context, index) {
-          final imagenPost = imagesPost[index];
-          return _Slide(imagenPost: imagenPost, decoration: decoration,);
+          final image = imagesHousePreview[index];
+          return _Slide(image: image, decoration: decoration,);
         },
         pagination: const SwiperPagination(
           builder: DotSwiperPaginationBuilder(
@@ -45,10 +46,10 @@ class ImageContainer extends StatelessWidget {
 }
 
 class _Slide extends StatelessWidget {
-  final String imagenPost;
+  final String image;
   final BoxDecoration decoration;
   const _Slide({
-    required this.imagenPost, required this.decoration
+    required this.image, required this.decoration
   });
 
   @override
@@ -56,7 +57,7 @@ class _Slide extends StatelessWidget {
     return ClipRRect(
       borderRadius: BorderRadius.circular(20),
       child: Image.network(
-        imagenPost, 
+        image, 
         fit: BoxFit.cover,
         loadingBuilder: (context, child, loadingProgress) {
           if( loadingProgress != null){
