@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
+import 'package:studenthive/presentation/provider/auth/auth_token_provider.dart';
 import 'package:studenthive/presentation/screens/screens.dart';
 
 class MyRoute {
-  final bool isTokenAut;
+  final WidgetRef ref;
 
-  MyRoute({required this.isTokenAut});
+  MyRoute(this.ref);
 
   RouterConfig<Object>? router() {
     return GoRouter(
@@ -14,10 +16,10 @@ class MyRoute {
         GoRoute(
           path: '/',
           builder: (context, state) {
-            if( isTokenAut ){
-              return const HomeScreen();
-            }
-            return const LoginScreen();
+            final isTokenAuth = ref.read(isTokenAuthProvider);
+            final isLoading = ref.read(isTokenAuthProvider.notifier).isLoading;
+            if( isLoading ) return const Scaffold( body: Center( child: CircularProgressIndicator(),),);
+            return isTokenAuth ? const HomeScreen() : const LoginScreen();
           },
           routes: [
             GoRoute(

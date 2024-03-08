@@ -20,25 +20,24 @@ class MyApp extends ConsumerStatefulWidget {
 }
 
 class _MyAppState extends ConsumerState<MyApp> {
+
+
   @override
   void initState() {
     super.initState();
     _initializeTokenAuth();
   }
 
-  void _initializeTokenAuth() { //! No entiendo esta parte del codigo - me la dio chat
+  void _initializeTokenAuth() {
     ref.read(isTokenAuthProvider.notifier).isTokenAuth().then((_) {
-      // Aquí puedes realizar acciones adicionales después de que isTokenAuth haya terminado
-      // Por ejemplo, actualizar el estado o redibujar el widget si es necesario
-      setState(() {}); //*Esto solo es para escuchar al provider que ha cambaido su valor.
+      setState(() {}); 
     });
   }
 
   @override
   Widget build(BuildContext context) {
-
-    final isTokenAut = ref.read(isTokenAuthProvider);
-    final MyRoute myRoute = MyRoute(isTokenAut: isTokenAut);
+    
+    MyRoute myRoute = MyRoute( ref );
 
     return MaterialApp.router(
       routerConfig: myRoute.router(),
