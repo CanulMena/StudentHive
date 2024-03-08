@@ -3,20 +3,20 @@ import 'package:studenthive/domain/entities/entities.dart';
 import 'package:studenthive/presentation/screens/widgets/publication/custom_sliverappbar_p.ublication.dart';
 
 class CustomListView extends StatelessWidget {
-  final House house;
+  final House houseDetail;
 
-  const CustomListView({super.key, required this.house});
+  const CustomListView({super.key, required this.houseDetail});
 
   @override
   Widget build(BuildContext context) {
     return CustomScrollView(
       slivers: [
-        CustomSliverAppBar(publicationPost: publicationPost),
+        CustomSliverAppBar( images: houseDetail.images, ),
         SliverList(
             delegate:
                 SliverChildBuilderDelegate(childCount: 1, (context, index) {
           return _RentalHouseDetils(
-            publicationPost: publicationPost,
+            houseDetail: houseDetail,
           );
         }))
       ],
@@ -27,8 +27,8 @@ class CustomListView extends StatelessWidget {
 
 
 class _RentalHouseDetils extends StatelessWidget {
-  final RentalHouse publicationPost;
-  const _RentalHouseDetils({required this.publicationPost});
+  final House houseDetail;
+  const _RentalHouseDetils({required this.houseDetail});
 
   @override
   Widget build(BuildContext context) {
@@ -51,7 +51,7 @@ class _RentalHouseDetils extends StatelessWidget {
               Padding(//title
                 padding: const EdgeInsets.symmetric( vertical: 12, horizontal: 6 ),
                 child: Text(
-                  publicationPost.title,
+                  houseDetail.title,
                   style:
                       textStyle.titleLarge?.copyWith(
                         fontWeight: FontWeight.w600,
@@ -61,7 +61,7 @@ class _RentalHouseDetils extends StatelessWidget {
               ),
 
               Text(//hubication
-                '${publicationPost.houseLocation.city} ${publicationPost.houseLocation.state} - ${publicationPost.houseLocation.neighborhood} - CP:${publicationPost.houseLocation.postalCode}',
+                '${houseDetail.location.city} ${houseDetail.location.state} - ${houseDetail.location.neighborhood} - CP:${houseDetail.location.postalCode}',
                 style: textStyle.bodyMedium?.copyWith(fontWeight: FontWeight.w600, color: Colors.black87),
               ),
               const SizedBox(
@@ -69,7 +69,7 @@ class _RentalHouseDetils extends StatelessWidget {
               ),
 
               Text(//house details
-                '$numberOfGuests . $numberOfRooms . $numberOfBathrooms . $numberOfHammocks',
+                '${houseDetail.rentalHouseDetail.numberOfGuests} . ${houseDetail.rentalHouseDetail.numberOfBathrooms} . ${houseDetail.rentalHouseDetail.numberOfRooms} . ${houseDetail.rentalHouseDetail.numberOfHammocks} . ${houseDetail.rentalHouseDetail.numbersOfBed}',
                 style: textStyle.bodyMedium?.copyWith(fontWeight: FontWeight.w600, color: Colors.black54),
               ),
 
@@ -86,13 +86,13 @@ class _RentalHouseDetils extends StatelessWidget {
                 ),
               ),
 
-              if (!publicationPost.houseService.wifi &&
-              !publicationPost.houseService.kitchen &&
-              !publicationPost.houseService.washer &&
-              !publicationPost.houseService.water &&
-              !publicationPost.houseService.airConditioning &&
-              !publicationPost.houseService.television &&
-              !publicationPost.houseService.gas)
+              if (!houseDetail.houseService.wifi &&
+              !houseDetail.houseService.kitchen &&
+              !houseDetail.houseService.washer &&
+              !houseDetail.houseService.water &&
+              !houseDetail.houseService.airConditioning &&
+              !houseDetail.houseService.television &&
+              !houseDetail.houseService.gas)
 
               Text(
                 'Esta casa no tiene servicios',
@@ -102,31 +102,31 @@ class _RentalHouseDetils extends StatelessWidget {
                 ),
               ),
               
-              publicationPost.houseService.wifi
+              houseDetail.houseService.wifi
               ? const _CustomServices(icon: Icons.wifi, serviceName: 'Wifi')
               : const SizedBox(),
 
-              publicationPost.houseService.kitchen
+              houseDetail.houseService.kitchen
               ? const _CustomServices(serviceName: 'Refrigerador', icon: Icons.kitchen_rounded)
               : const SizedBox(),
 
-              publicationPost.houseService.washer
+              houseDetail.houseService.washer
               ? const _CustomServices(serviceName: 'Lavadora', icon: Icons.wash_rounded)
               : const SizedBox(),
 
-              publicationPost.houseService.water
+              houseDetail.houseService.water
               ? const _CustomServices(serviceName: 'Agua', icon: Icons.water_drop_rounded)
               : const SizedBox(),
 
-              publicationPost.houseService.airConditioning
+              houseDetail.houseService.airConditioning
               ? const _CustomServices(serviceName: 'Aire acondicionado', icon: Icons.air_rounded)
               : const SizedBox(),
 
-              publicationPost.houseService.television
+              houseDetail.houseService.television
               ? const _CustomServices(serviceName: 'Television', icon: Icons.tv)
               : const SizedBox(),
 
-              publicationPost.houseService.gas
+              houseDetail.houseService.gas
               ? const _CustomServices(serviceName: 'Gas', icon: Icons.gas_meter)
               : const SizedBox(),
               

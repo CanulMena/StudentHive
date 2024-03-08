@@ -17,6 +17,15 @@ class MyRoute {
             if( !isTokenAut ) return const Scaffold();
             return isTokenAut ? const HomeScreen() : const LoginScreen();
           },
+          routes: [
+            GoRoute(
+              path: 'house/:id',
+              builder: (context, state){
+                final houseId = state.pathParameters['id'] ?? 'no-id';
+                return PublicationScreen(idHouse: houseId);
+              }
+            )
+          ]
         ),
         GoRoute(
           path: '/login',
@@ -36,12 +45,12 @@ class MyRoute {
             return const HomeScreen();
           },
         ),
-        GoRoute(
-          path: '/publication',
-          builder: (BuildContext context, GoRouterState state) {
-            return PublicationScreen();
-          },
-        ),
+        // GoRoute(
+        //   path: '/publication',
+        //   builder: (BuildContext context, GoRouterState state) {
+        //     return PublicationScreen();
+        //   },
+        // ),
         // GoRoute(
         //   path: '/reserve',
         //   builder: (BuildContext context, GoRouterState state) {

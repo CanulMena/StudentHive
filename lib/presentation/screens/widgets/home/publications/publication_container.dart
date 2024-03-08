@@ -28,7 +28,7 @@ class _PublicationContainerState extends State<PublicationContainer> {
     return GestureDetector(
 
       onTap: (){
-        context.push('/publication' );
+        context.push('/house/${widget.housePreview.idPublication}' );
       },
       
       child: Stack(

@@ -1,23 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
-import 'package:provider/provider.dart';
 import 'package:studenthive/domain/entities/house.dart';
-import 'package:studenthive/presentation/provider/auth/auth_token_provider.dart';
-import 'package:studenthive/presentation/provider/reserve_provider.dart';
-import 'package:studenthive/presentation/provider/user/user_provider.dart';
-import 'package:studenthive/presentation/screens/widgets/auth_register_dialog.dart';
 
 class BottomPublication extends StatelessWidget {
-  // final RentalHouse publicationPost;
-  const BottomPublication({super.key, /* required this.publicationPost */});
+  final House houseDetail;
+  const BottomPublication({super.key, required this.houseDetail});
 
   @override
   Widget build(BuildContext context) {
     final colors = Theme.of(context).colorScheme;
     final size = MediaQuery.of(context).size;
-    // final reserveProvider = context.watch<ReserveProvider>();
-    final userProvider = context.watch<UserProvider>();
-    // final authProvider = context.watch<AuthProvider>();
     return Container(
       height: size.height * 0.10,
       decoration: const BoxDecoration(
@@ -34,13 +25,13 @@ class BottomPublication extends StatelessWidget {
             Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                // Text(
-                //   '\$${publicationPost.rentPrice} MXN',
-                //   style: const TextStyle(
-                //     fontSize: 15,
-                //     color: Colors.black,
-                //   ),
-                // ),
+                Text(
+                  '\$${houseDetail.rentPrice} MXN',
+                  style: const TextStyle(
+                    fontSize: 15,
+                    color: Colors.black,
+                  ),
+                ),
                 const Text(
                   'AL MES',
                   style: TextStyle(
@@ -53,7 +44,7 @@ class BottomPublication extends StatelessWidget {
     
             ElevatedButton(
               onPressed: () {
-                // if(authProvider.isLogged){
+                // if(authProvider.isLogged){ //TODO: Terminar la validacino
                 // context.push('/reserve',);
                 // reserveProvider.addReservation(publicationPost);
                 // } else {

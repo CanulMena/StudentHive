@@ -16,8 +16,7 @@ class HouseRepositoryImpl extends HouseRepository{
   
   @override
   Future<House> getHouseById({int id = 1}) {
-    // TODO: implement getHouseById
-    throw UnimplementedError();
+    return houseDataSource.getHouseById(id: id);
   }
   
   @override
