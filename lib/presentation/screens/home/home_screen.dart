@@ -3,7 +3,9 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:studenthive/domain/entities/entities.dart';
 import 'package:studenthive/domain/entities/house.dart';
 import 'package:studenthive/presentation/provider/house/house_provider.dart';
+import 'package:studenthive/presentation/provider/initial_loading_provider.dart';
 import 'package:studenthive/presentation/provider/providers.dart';
+import 'package:studenthive/presentation/screens/home/home_loading_fetchs.dart';
 import 'package:studenthive/presentation/screens/widgets/home/custom_bottom_navegation_bar.dart';
 import 'package:studenthive/presentation/views/home_views.dart';
 
@@ -34,7 +36,6 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
     final bool isTokenAut = ref.read(isTokenAuthProvider); //*Mientras estoy en el home se lee la variable cuando se construye el widget
     final List<House> favorites = ref.watch(favoritesHousesProvider);
     final List<HousePreview> houses = ref.watch(allHousesPreviewProvider);
-  
 
     List<Widget> screens = [
       PublicationsView(
@@ -49,6 +50,9 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
       const AcountView(),
     ];
 
+    final initialLoading = ref.watch(initialLoadingProvider);
+    if( initialLoading ) return const FullScreenLoading();
+
     return Scaffold(
       body: IndexedStack(
         index: ref.watch(
@@ -56,9 +60,8 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
         children: screens,
       ),
       bottomNavigationBar: CustomButtomNavegationBar(
-        selectIndex: (value) => ref.read(selectedViewProvider.notifier).state =
-            value, //*Por que este es ref.read?
-        selectedIndex: ref.watch(selectedViewProvider),
+        selectIndex: (value) => ref.read(selectedViewProvider.notifier).state = value, 
+        selectedIndex: ref.watch(selectedViewProvider), // --> activamos la funcion
       ),
     );
   }
