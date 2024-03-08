@@ -36,16 +36,12 @@ class MyRoute {
             return const HomeScreen();
           },
         ),
-        // GoRoute(
-        //   path: '/publication',
-        //   builder: (BuildContext context, GoRouterState state) {
-        //     final RentalHouse publicationPost =
-        //         GoRouterState.of(context).extra! as RentalHouse;
-        //     return PublicationScreen(
-        //       publicationPost: publicationPost,
-        //     );
-        //   },
-        // ),
+        GoRoute(
+          path: '/publication',
+          builder: (BuildContext context, GoRouterState state) {
+            return PublicationScreen();
+          },
+        ),
         // GoRoute(
         //   path: '/reserve',
         //   builder: (BuildContext context, GoRouterState state) {

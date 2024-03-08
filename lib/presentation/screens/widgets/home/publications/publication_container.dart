@@ -24,14 +24,11 @@ class _PublicationContainerState extends State<PublicationContainer> {
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
-    // final favoriteProvider = context.watch<FavoriteProvider>();
-    // final authProvider = context.watch<AuthProvider>();
-    // final userProvider = context.watch<UserProvider>();
 
     return GestureDetector(
 
       onTap: (){
-        context.push('/publication', /* extra: widget.publicationsPost */);
+        context.push('/publication' );
       },
       
       child: Stack(

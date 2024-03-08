@@ -8,6 +8,7 @@ final allHousesPreviewProvider = StateNotifierProvider<HousesNotifier, List<Hous
 });
 
 
+
 typedef HousePreviewCallBack = Future<List<HousePreview>> Function({int pageSize, int pagenNumber});
 
 

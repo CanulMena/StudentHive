@@ -1,5 +1,5 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:studenthive/presentation/provider/house/house_provider.dart';
+import 'package:studenthive/presentation/provider/house/house_preview_provider.dart';
 
 final initialLoadingProvider = Provider<bool>((ref) {
     final step1 = ref.watch(allHousesPreviewProvider).isEmpty;
