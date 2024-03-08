@@ -3,17 +3,44 @@ import 'package:studenthive/domain/entities/entities.dart';
 import 'package:studenthive/presentation/delegates/search_publication_delegate.dart';
 import 'package:studenthive/presentation/screens/widgets/home/publications/publication_container.dart';
 
-class PublicationsView extends StatelessWidget {
+class PublicationsView extends StatefulWidget {
   final List<HousePreview> listHousePreview;
+  final VoidCallback? loadNextPage; 
   const PublicationsView({
     super.key,
-    required this.listHousePreview,
+    required this.listHousePreview, 
+    required this.loadNextPage,
   });
+
+  @override
+  State<PublicationsView> createState() => _PublicationsViewState();
+}
+
+class _PublicationsViewState extends State<PublicationsView> {
+
+  final ScrollController scrollController = ScrollController();
+
+  @override
+  void initState() {
+    super.initState();
+    scrollController.addListener(() { 
+      if (widget.loadNextPage == null) return;
+      if(scrollController.position.pixels + 200 >= scrollController.position.maxScrollExtent){
+        widget.loadNextPage!();//si cumple la condicion, ejecutamos la función que le agregaremos al parametro
+      }
+    });
+  }
+
+  @override
+  void dispose() {
+    scrollController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
     return  CustomScrollView(
-            
+            controller: scrollController,
             slivers: [
               const SliverAppBar(
                 pinned: true, //this is to show persistence the color of the appbar
@@ -26,8 +53,8 @@ class PublicationsView extends StatelessWidget {
               ),
               SliverList(
                   delegate: SliverChildBuilderDelegate(
-                      childCount: listHousePreview.length, (context, index) {
-                final housePreview = listHousePreview[index];
+                      childCount: widget.listHousePreview.length, (context, index) {
+                final housePreview = widget.listHousePreview[index];
                 return Column(
                   children: [
                     Padding(

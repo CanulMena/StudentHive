@@ -39,6 +39,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
     List<Widget> screens = [
       PublicationsView(
         listHousePreview: houses,
+        loadNextPage: () => ref.read(allHousesPreviewProvider.notifier).loadNextPage(),
       ),
       FavoriteView(
         isTokenAut: isTokenAut,
