@@ -36,8 +36,10 @@ class _MyAppState extends ConsumerState<MyApp> {
 
   @override
   Widget build(BuildContext context) {
+
     final isTokenAut = ref.read(isTokenAuthProvider);
     final MyRoute myRoute = MyRoute(isTokenAut: isTokenAut);
+
     return MaterialApp.router(
       routerConfig: myRoute.router(),
       title: 'StudentHive',
