@@ -3,7 +3,7 @@ import 'package:studenthive/domain/datasource/house_datasource.dart';
 import 'package:studenthive/domain/entities/house.dart';
 import 'package:studenthive/domain/entities/house_preview.dart';
 import 'package:studenthive/infrastructure/mappers/rentalhouse_mapper.dart';
-import 'package:studenthive/infrastructure/models/studenthivedb/housePreview_studenthivedb.dart';
+import 'package:studenthive/infrastructure/models/studenthivedb/house_Preview_studenthivedb.dart';
 
 class HouseDataSourceImpl extends HouseDataSource{
 
@@ -26,7 +26,7 @@ class HouseDataSourceImpl extends HouseDataSource{
   }
 
   @override
-  Future<House> getHouseById(int id) {
+  Future<House> getHouseById({int id = 1}) {
     // TODO: implement getHouseById
     throw UnimplementedError();
   }

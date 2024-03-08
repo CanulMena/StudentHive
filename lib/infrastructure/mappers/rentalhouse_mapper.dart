@@ -1,5 +1,5 @@
 import 'package:studenthive/domain/entities/entities.dart';
-import 'package:studenthive/infrastructure/models/studenthivedb/housePreview_studenthivedb.dart';
+import 'package:studenthive/infrastructure/models/studenthivedb/house_Preview_studenthivedb.dart';
 
 class HouseMapper {
   //Todo: Tendremos que mapear el response que mostraremos al igual que los detalles.
