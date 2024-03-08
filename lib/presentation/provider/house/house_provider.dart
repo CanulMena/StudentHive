@@ -14,14 +14,14 @@ typedef HousePreviewCallBack = Future<List<HousePreview>> Function({int pageSize
 class HousesNotifier extends StateNotifier<List<HousePreview>>{
 
   final HousePreviewCallBack fetchMoreHousesPreview;
-  int currentPage = 1;
+  int currentPage = 0;
 
   HousesNotifier({required this.fetchMoreHousesPreview}) : super( [] );
 
   
   Future<void> loadNextPage() async {
     currentPage++;
-    final List<HousePreview> houses = await fetchMoreHousesPreview(pageSize: 10, pagenNumber: currentPage);
+    final List<HousePreview> houses = await fetchMoreHousesPreview(pageSize: 3, pagenNumber: currentPage);
     state = [ ...state, ...houses];
   }
 

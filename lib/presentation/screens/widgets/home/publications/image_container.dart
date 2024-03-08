@@ -65,6 +65,9 @@ class _Slide extends StatelessWidget {
           }
             return child;
         },
+        errorBuilder: (context, error, stackTrace) {
+          return Image.network('https://uxwing.com/wp-content/themes/uxwing/download/web-app-development/image-not-found-icon.png');
+        },
       ),
     );
   }

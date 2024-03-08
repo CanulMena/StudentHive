@@ -13,7 +13,7 @@ class PublicationsView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return  CustomScrollView(
-            //This is similar to an ListView within others ListView
+            
             slivers: [
               const SliverAppBar(
                 pinned: true, //this is to show persistence the color of the appbar

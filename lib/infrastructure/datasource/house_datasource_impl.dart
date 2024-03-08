@@ -7,12 +7,16 @@ import 'package:studenthive/infrastructure/models/studenthivedb/housePreview_stu
 
 class HouseDataSourceImpl extends HouseDataSource{
 
-  final Dio dio = Dio();
+  final Dio dio = Dio(
+    BaseOptions(
+      baseUrl: "https://studenthivepro.somee.com/api/v1/RentalHouse",
+    )
+  );
 
   @override //* Tenemos que agregar los datos
-  Future<List<HousePreview>> getAllHouses({int pageSize = 1, int pagenNumber = 1}) async {
+  Future<List<HousePreview>> getAllHouses({int pageSize = 10, int pagenNumber = 1}) async {
 
-    final response = await dio.get("https://studenthivepro.somee.com/api/v1/RentalHouse/Publications?pageNumber=1&pageSize=10");
+    final response = await dio.get("/Publications?pageNumber=$pagenNumber&pageSize=$pageSize");
     
     final studenthiveDbResponse = StudentHiveDbResponse.fromJson(response.data);
 
