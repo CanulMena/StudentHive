@@ -14,7 +14,7 @@ class MyRoute {
         GoRoute(
           path: '/',
           builder: (context, state) {
-            if( !isTokenAut ) return const Scaffold();
+            // if( !isTokenAut ) return const Scaffold();
             return isTokenAut ? const HomeScreen() : const LoginScreen();
           },
           routes: [

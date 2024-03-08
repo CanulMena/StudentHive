@@ -14,7 +14,7 @@ class AuthNotifier extends StateNotifier<bool> {
     SharedPreferences prefs = await SharedPreferences.getInstance();
 
     String? token = prefs.getString('Jwt');
-    int? tokenTimestamp = prefs.getInt('token_timestamp');
+    int? tokenTimestamp = prefs.getInt('token_timestamp'); 
 
     if (token != null && tokenTimestamp != null) {
       //* Compara la fecha actual con la fecha de expiración del token
@@ -31,5 +31,14 @@ class AuthNotifier extends StateNotifier<bool> {
       }
     }
     state = false; //*No se encontró algún token o el token_timestamp es invalido
+  }
+
+  //TODO: Hacer el loggout del usuario. tenemos que eliminar el toke y token_timestamp para que podamos hacer loggout
+  Future<void> desavowToken() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+
+    await prefs.remove('Jwt');
+    await prefs.remove('token_timestamp');
+    state = false;
   }
 }

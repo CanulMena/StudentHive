@@ -1,20 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:provider/provider.dart';
 import 'package:studenthive/config/menu/menu_item.dart';
-import 'package:studenthive/presentation/provider/providers.dart';
 import 'package:studenthive/presentation/views/widgets/widgets_views/account_view.dart/custom_list_tile.dart';
 
-class LoggedAppMenuItems extends StatelessWidget {
-  const LoggedAppMenuItems({super.key});
+class LoggedAppMenuItems extends StatelessWidget { //* Parece que tendre que hacer un getbyid de usaurios para poder tener su infromacion
+  final Future<void> Function() desavowToken;
+  const LoggedAppMenuItems({super.key, required this.desavowToken});
 
-  void openDialog(BuildContext context, /* AuthProvider authProvider ,*/ UserProvider userProvider) { //este es el baner
+  void openDialog(BuildContext context) {
+  final go = context.go;
   showDialog( //*showDialog personalizado
     barrierDismissible: false,
     context: context,
     builder: (context) {
       return AlertDialog(
-        // title: const Text('¿Estás seguro?'), //this is the title of the show dialog.
+        title: const Text('¿Estás seguro?'),
         content: const Text(
           '¿Estas seguro que quires salir de tu cuenta?',     
         ),
@@ -29,10 +29,9 @@ class LoggedAppMenuItems extends StatelessWidget {
             child: const Text('Cancelar'),
           ),
           FilledButton(
-            onPressed: () {
-              // authProvider.logout();
-              // userProvider.loadCurrentUser();
-              context.go('/login');
+            onPressed: () async {
+              await desavowToken();
+              go('/login');
             },
             child: const Text('Aceptar'),
           ),
@@ -46,8 +45,6 @@ class LoggedAppMenuItems extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // final authProvider = context.watch<AuthProvider>(); //*Siempre que crear un provider desde un contexto directo.
-    final UserProvider userProvider = context.watch<UserProvider>();
     final textStyle = Theme.of(context).textTheme;
     return ListView(
       
@@ -97,13 +94,13 @@ class LoggedAppMenuItems extends StatelessWidget {
         const SizedBox(
           height: 25,
         ),
-        InkWell(
+        InkWell( //* This is the loggout
           child: const Text(
             'Log Out',
             style: TextStyle(fontSize: 18, fontWeight: FontWeight.w600, decoration: TextDecoration.underline),
           ),
           onTap: () {
-            openDialog(context, /* authProvider, */ userProvider); 
+            openDialog(context); 
           },
         ),
         const SizedBox(height: 25,),

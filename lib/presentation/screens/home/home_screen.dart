@@ -1,9 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:studenthive/domain/entities/entities.dart';
-import 'package:studenthive/domain/entities/house.dart';
-import 'package:studenthive/presentation/provider/house/house_preview_provider.dart';
-import 'package:studenthive/presentation/provider/home/initial_loading_provider.dart';
 import 'package:studenthive/presentation/provider/providers.dart';
 import 'package:studenthive/presentation/screens/home/home_loading_fetchs.dart';
 import 'package:studenthive/presentation/screens/widgets/home/custom_bottom_navegation_bar.dart';
@@ -25,7 +22,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
     super.initState();
   }
 
-  void _loadFavoritesFromSharedPreferences() {
+  void _loadFavoritesFromSharedPreferences() { //TODO: Ver la parte de favoritos despues
     ref
         .read(favoritesHousesProvider.notifier)
         .loadFavoritesFromSharedPreferences();
