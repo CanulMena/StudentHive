@@ -1,7 +1,7 @@
 import 'package:studenthive/domain/entities/entities.dart';
 import 'package:studenthive/infrastructure/models/studenthivedb/house_Preview_studenthivedb.dart';
 
-class HouseMapper {
+class HousePreviewMapper {
   //Todo: Tendremos que mapear el response que mostraremos al igual que los detalles.
   static HousePreview housePreviewStudentHiveDbToEntity(HousePreviewStudentHiveDb house) {
     return HousePreview(
@@ -13,7 +13,4 @@ class HouseMapper {
         publicationDate: house.publicationDate);
   }
 
-  // static RentalHouse RentalHouseDetailToEntity( RentalHouseModel rentalhouse ){
-
-  // }
 }

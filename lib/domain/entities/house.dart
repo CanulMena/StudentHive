@@ -69,7 +69,7 @@ class Location {
   final String city;
   final String state;
   final String country;
-  final int postalCode;
+  final String postalCode;
   final String neighborhood;
 
   Location({

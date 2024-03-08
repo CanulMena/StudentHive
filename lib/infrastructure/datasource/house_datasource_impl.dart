@@ -1,9 +1,10 @@
 import 'package:dio/dio.dart';
 import 'package:studenthive/domain/datasource/house_datasource.dart';
-import 'package:studenthive/domain/entities/house.dart';
-import 'package:studenthive/domain/entities/house_preview.dart';
-import 'package:studenthive/infrastructure/mappers/rentalhouse_mapper.dart';
+import 'package:studenthive/domain/entities/entities.dart';
+import 'package:studenthive/infrastructure/mappers/house_detail_mapper.dart';
+import 'package:studenthive/infrastructure/mappers/house_preview_mapper.dart';
 import 'package:studenthive/infrastructure/models/studenthivedb/house_Preview_studenthivedb.dart';
+import 'package:studenthive/infrastructure/models/studenthivedb/house_details.dart';
 
 class HouseDataSourceImpl extends HouseDataSource{
 
@@ -20,15 +21,20 @@ class HouseDataSourceImpl extends HouseDataSource{
     
     final studenthiveDbResponse = StudentHiveDbResponse.fromJson(response.data);
 
-    final List<HousePreview> houses = studenthiveDbResponse.results.map((e) => HouseMapper.housePreviewStudentHiveDbToEntity(e)).toList();
+    final List<HousePreview> houses = studenthiveDbResponse.results.map((e) => HousePreviewMapper.housePreviewStudentHiveDbToEntity(e)).toList();
 
     return houses;
   }
 
   @override
-  Future<House> getHouseById({int id = 1}) {
-    // TODO: implement getHouseById
-    throw UnimplementedError();
+  Future<House> getHouseById({int id = 1}) async {
+    final response = await dio.get('/$id');
+    
+    final houseDetails = HouseDetails.fromJson(response.data);
+
+    final House house  = HouseMapper.houseDetailtoEntity(houseDetails);
+
+    return house;
   }
 
   @override
