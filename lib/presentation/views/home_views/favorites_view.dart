@@ -21,9 +21,7 @@ class _FavoriteViewState extends ConsumerState<FavoriteView> {
 
   @override
   void initState() {
-    ref
-        .read(favoritesHousesProvider.notifier)
-        .loadFavoritesFromSharedPreferences();
+    ref.read(favoritesHousesProvider.notifier).loadFavoritesFromSharedPreferences();
     super.initState();
   }
 

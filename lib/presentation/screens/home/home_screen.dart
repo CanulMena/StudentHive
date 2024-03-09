@@ -14,15 +14,23 @@ class HomeScreen extends ConsumerStatefulWidget {
 }
 
 class _HomeScreenState extends ConsumerState<HomeScreen> {
+  late final PageController _pageController;
 
   @override
   void initState() {
-    ref.read(allHousesPreviewProvider.notifier).loadNextPage();
     super.initState();
+    _pageController = PageController(initialPage: ref.read(selectedViewProvider));
+    ref.read(allHousesPreviewProvider.notifier).loadNextPage();
   }
 
   @override
-  build(BuildContext context) {
+  void dispose() {
+    _pageController.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
     final bool isTokenAut = ref.read(isTokenAuthProvider);
     final List<HousePreview> houses = ref.watch(allHousesPreviewProvider);
 
@@ -37,17 +45,17 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
     ];
 
     final initialLoading = ref.watch(initialLoadingProvider);
-    if( initialLoading ) return const FullScreenLoading();
+    if (initialLoading) return const FullScreenLoading();
 
     return Scaffold(
-      body: IndexedStack(
-        index: ref.watch(
-            selectedViewProvider), //* Esta como whats por que estará pendiente de los cambios?
+      body: PageView(
+        controller: _pageController,
+        onPageChanged: (value) => ref.read(selectedViewProvider.notifier).state = value,
         children: screens,
       ),
       bottomNavigationBar: CustomButtomNavegationBar(
-        selectIndex: (value) => ref.read(selectedViewProvider.notifier).state = value, 
-        selectedIndex: ref.watch(selectedViewProvider), // --> activamos la funcion
+        selectIndex: (value) => _pageController.jumpToPage(value),
+        selectedIndex: ref.watch(selectedViewProvider),
       ),
     );
   }
