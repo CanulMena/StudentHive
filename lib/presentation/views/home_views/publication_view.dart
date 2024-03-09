@@ -60,7 +60,9 @@ class _PublicationsViewState extends State<PublicationsView> {
                     Padding(
                       padding: const EdgeInsets.symmetric(vertical: 15),
                       child: PublicationContainer(
-                          housePreview: housePreview),
+                          housePreview: housePreview,
+                          isTokenAut: true,
+                          ),
                     ),
                   ],
                 );
