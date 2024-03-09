@@ -8,11 +8,15 @@ import 'package:studenthive/presentation/screens/widgets/home/publications/infor
 class PublicationContainer extends StatefulWidget {
   final HousePreview housePreview;
   final bool isTokenAut;
+  final Future<void> Function(HousePreview) addFavoritesHouses;
+  final Future<void> Function(HousePreview) removeFavoritesHouses;
 
   const PublicationContainer({
     super.key,
     required this.housePreview,
-    required this.isTokenAut,
+    required this.isTokenAut, 
+    required this.addFavoritesHouses, 
+    required this.removeFavoritesHouses,
   });
 
   @override
@@ -21,6 +25,20 @@ class PublicationContainer extends StatefulWidget {
 
 class _PublicationContainerState extends State<PublicationContainer> {
   bool isLiked = false;
+
+  void toggleFavorite() async {
+    if (widget.isTokenAut) {
+      isLiked = !isLiked;
+      if (isLiked) {
+        await widget.addFavoritesHouses(widget.housePreview);
+      } else {
+        await widget.removeFavoritesHouses(widget.housePreview);
+      }
+      setState(() {});
+    } else {
+      DialogUtils.openDialog(context);
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -60,21 +78,7 @@ class _PublicationContainerState extends State<PublicationContainer> {
             top: 15,
             right: 20,
             child: GestureDetector(
-              onTap: () async {
-                setState(() {
-                  if (widget.isTokenAut) {
-                    isLiked = !isLiked;
-                    isLiked
-                        ? print('Agregado a favoritos')
-                        : print('Eliminado de favoritos');
-                    // isLiked
-                    // ? favoriteProvider.addFavorites(widget.publicationsPost)
-                    // : favoriteProvider.deleteFavorites(widget.publicationsPost);
-                  } else {
-                    DialogUtils.openDialog(context);
-                  }
-                });
-              },
+              onTap: toggleFavorite,
               child: Icon(
                 isLiked ? Icons.favorite : Icons.favorite_border,
                 color: isLiked

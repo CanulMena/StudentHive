@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:studenthive/domain/entities/entities.dart';
 import 'package:studenthive/presentation/delegates/search_publication_delegate.dart';
+import 'package:studenthive/presentation/provider/providers.dart';
 import 'package:studenthive/presentation/screens/widgets/home/publications/publication_container.dart';
 
-class PublicationsView extends StatefulWidget {
+class PublicationsView extends ConsumerStatefulWidget {
   final List<HousePreview> listHousePreview;
   final VoidCallback? loadNextPage; 
   const PublicationsView({
@@ -13,10 +15,10 @@ class PublicationsView extends StatefulWidget {
   });
 
   @override
-  State<PublicationsView> createState() => _PublicationsViewState();
+  ConsumerState<PublicationsView> createState() => _PublicationsViewState();
 }
 
-class _PublicationsViewState extends State<PublicationsView> {
+class _PublicationsViewState extends ConsumerState<PublicationsView> {
 
   final ScrollController scrollController = ScrollController();
 
@@ -39,6 +41,8 @@ class _PublicationsViewState extends State<PublicationsView> {
 
   @override
   Widget build(BuildContext context) {
+    final addFavoritesHouses = ref.watch(favoritesHousesProvider.notifier).addFavorites;
+    final removeFavoritesHouses = ref.watch(favoritesHousesProvider.notifier).removeFavorite;
     return  CustomScrollView(
             controller: scrollController,
             slivers: [
@@ -60,9 +64,11 @@ class _PublicationsViewState extends State<PublicationsView> {
                     Padding(
                       padding: const EdgeInsets.symmetric(vertical: 15),
                       child: PublicationContainer(
-                          housePreview: housePreview,
-                          isTokenAut: true,
-                          ),
+                        addFavoritesHouses: addFavoritesHouses,
+                        removeFavoritesHouses: removeFavoritesHouses,
+                        housePreview: housePreview,
+                        isTokenAut: true,
+                        ),
                     ),
                   ],
                 );

@@ -17,21 +17,13 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
 
   @override
   void initState() {
-    _loadFavoritesFromSharedPreferences();
     ref.read(allHousesPreviewProvider.notifier).loadNextPage();
     super.initState();
-  }
-
-  void _loadFavoritesFromSharedPreferences() {
-    ref
-        .read(favoritesHousesProvider.notifier)
-        .loadFavoritesFromSharedPreferences();
   }
 
   @override
   build(BuildContext context) {
     final bool isTokenAut = ref.read(isTokenAuthProvider);
-    final List<HousePreview> favorites = ref.watch(favoritesHousesProvider);
     final List<HousePreview> houses = ref.watch(allHousesPreviewProvider);
 
     List<Widget> screens = [
@@ -39,10 +31,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
         listHousePreview: houses,
         loadNextPage: () => ref.read(allHousesPreviewProvider.notifier).loadNextPage(),
       ),
-      FavoriteView(
-        isTokenAut: isTokenAut,
-        favorites: favorites,
-      ),
+      FavoriteView(isTokenAut: isTokenAut),
       const NotificationView(),
       const AcountView(),
     ];

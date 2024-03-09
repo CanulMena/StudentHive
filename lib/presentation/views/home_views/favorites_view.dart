@@ -1,21 +1,35 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:studenthive/domain/entities/entities.dart';
+import 'package:studenthive/presentation/provider/providers.dart';
 import 'package:studenthive/presentation/views/widgets/widgets_views/favorites_view/favorite_view_logged.dart'; //agregar en un archivo de barril
 import 'package:studenthive/presentation/views/widgets/widgets_views/favorites_view/favorite_view_no_logged.dart'; //agregar en un archivo de barril
 
-class FavoriteView extends StatelessWidget {
+class FavoriteView extends ConsumerStatefulWidget {
   final bool isTokenAut;
-  final List<HousePreview> favorites;
 
   const FavoriteView({
     super.key,
     required this.isTokenAut, 
-    required this.favorites,
   });
 
   @override
-  Widget build(BuildContext context) {
+  ConsumerState<FavoriteView> createState() => _FavoriteViewState();
+}
 
+class _FavoriteViewState extends ConsumerState<FavoriteView> {
+
+  @override
+  void initState() {
+    ref
+        .read(favoritesHousesProvider.notifier)
+        .loadFavoritesFromSharedPreferences();
+    super.initState();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final List<HousePreview> favorites = ref.watch(favoritesHousesProvider);
     final size = MediaQuery.of(context).size;
     return Scaffold(
       backgroundColor: Colors.white,
@@ -29,10 +43,10 @@ class FavoriteView extends StatelessWidget {
           return Future(() {});
         },
         child: Padding(
-            padding: isTokenAut
+            padding: widget.isTokenAut
                 ? const EdgeInsets.symmetric(horizontal: 20)
                 : const EdgeInsets.symmetric(horizontal: 25),
-            child: !isTokenAut
+            child: !widget.isTokenAut
                 ? const FavoriteViewNoLogged()
                 : FavoriteViewLogged(
                     favorites: favorites,

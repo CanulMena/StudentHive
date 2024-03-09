@@ -13,7 +13,7 @@ class ListNoEmpty extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(); /* Wrap(
+    return Wrap(
       spacing: 10,
       direction: Axis.horizontal,
       children: List.generate(
@@ -44,7 +44,7 @@ class ListNoEmpty extends StatelessWidget {
                     child: ClipRRect(
                       borderRadius: const BorderRadius.all(Radius.circular(20)),
                       child: Image.network(
-                        favorite.image.urlImageHouse,
+                        favorite.images[0],
                         width: double.infinity,
                         fit: BoxFit.cover,
                       ),
@@ -64,6 +64,6 @@ class ListNoEmpty extends StatelessWidget {
           );
         },
       ),
-    ); */
+    );
   }
 }
