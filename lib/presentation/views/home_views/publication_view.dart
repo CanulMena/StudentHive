@@ -43,6 +43,7 @@ class _PublicationsViewState extends ConsumerState<PublicationsView> {
   Widget build(BuildContext context) {
     final addFavoritesHouses = ref.watch(favoritesHousesProvider.notifier).addFavorites;
     final removeFavoritesHouses = ref.watch(favoritesHousesProvider.notifier).removeFavorite;
+    final isFavoriteHouse = ref.watch(favoritesHousesProvider.notifier).isFavorite;
     return  CustomScrollView(
             controller: scrollController,
             slivers: [
@@ -64,6 +65,7 @@ class _PublicationsViewState extends ConsumerState<PublicationsView> {
                     Padding(
                       padding: const EdgeInsets.symmetric(vertical: 15),
                       child: PublicationContainer(
+                        isFavoriteHouse: isFavoriteHouse,
                         addFavoritesHouses: addFavoritesHouses,
                         removeFavoritesHouses: removeFavoritesHouses,
                         housePreview: housePreview,

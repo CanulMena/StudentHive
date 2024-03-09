@@ -10,13 +10,15 @@ class PublicationContainer extends StatefulWidget {
   final bool isTokenAut;
   final Future<void> Function(HousePreview) addFavoritesHouses;
   final Future<void> Function(HousePreview) removeFavoritesHouses;
+  final Future<bool> Function(HousePreview) isFavoriteHouse;
 
   const PublicationContainer({
     super.key,
     required this.housePreview,
     required this.isTokenAut, 
     required this.addFavoritesHouses, 
-    required this.removeFavoritesHouses,
+    required this.removeFavoritesHouses, 
+    required this.isFavoriteHouse,
   });
 
   @override
@@ -41,6 +43,15 @@ class _PublicationContainerState extends State<PublicationContainer> {
   }
 
   @override
+  void initState() {
+    super.initState();
+    widget.isFavoriteHouse(widget.housePreview).then((value) {
+      isLiked = value;
+      setState(() {});
+    });
+  }
+
+  @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
 
@@ -49,8 +60,7 @@ class _PublicationContainerState extends State<PublicationContainer> {
         context.push('/house/${widget.housePreview.idPublication}');
       },
       child: Stack(children: [
-        Container(
-          //this box have the boxshadow
+        Container(          
           //! Publication container
           height: size.height * 0.51,
           width: size.width * 0.86,

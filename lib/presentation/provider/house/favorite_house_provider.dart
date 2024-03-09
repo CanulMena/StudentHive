@@ -56,4 +56,15 @@ class FavoritesPostsNotifier extends StateNotifier<List<HousePreview>>{
     }
   }
 
+  Future<bool> isFavorite(HousePreview housePreview) async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    List<String> favoritesListString = prefs.getStringList('favorites') ?? <String>[];
+
+    HousePreviewStudentHiveDb housePreviewStudentHiveDb = HousePreviewMapper.entityToHousePreviewStudentHiveDb(housePreview);
+    Map<String, dynamic> housePreviewMap = housePreviewStudentHiveDb.toJson();
+    String housePreviewJson = jsonEncode(housePreviewMap);
+
+    return favoritesListString.contains(housePreviewJson);
+  }
+
 }
