@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
-// import 'package:go_router/go_router.dart';
-import 'package:studenthive/presentation/views/widgets/widgets_views/account_view.dart/create_publication/routerAnimation/router_animation.dart';
-import 'package:studenthive/presentation/views/widgets/widgets_views/account_view.dart/create_publication/steps_for_creation_publication/type_house.dart';
+import 'package:go_router/go_router.dart';
 import 'package:studenthive/presentation/views/widgets/widgets_views/account_view.dart/create_publication/utils_for_creation_publication/container_title_appbar.dart';
 
 class CreatePublicationInit extends StatelessWidget {
@@ -50,8 +48,7 @@ class CreatePublicationInit extends StatelessWidget {
               children: [
                 GestureDetector(
                   onTap: () {
-                    Navigator.of(context)
-                        .push(createPageRoute(const TypeHouse()));
+                    context.push('/create-publication/type-house');
                   },
                   child: Container(
                     decoration: BoxDecoration(

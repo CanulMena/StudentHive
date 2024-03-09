@@ -119,7 +119,7 @@ class _CreatePublicationListTile extends StatelessWidget {
       menuItem: MenuItem(
         icon: Icons.home_work_outlined,
         title: 'Create a publication',
-        linkRoute: '/createPublication',
+        linkRoute: '/create-publication',
       ),
     );
   }

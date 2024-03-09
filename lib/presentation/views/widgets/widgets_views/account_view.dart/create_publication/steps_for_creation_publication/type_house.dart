@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:studenthive/presentation/provider/create_publication_provider.dart';
-import 'package:studenthive/presentation/views/widgets/widgets_views/account_view.dart/create_publication/app_steps_create_publications.dart';
+import 'package:studenthive/presentation/views/widgets/widgets_views/account_view.dart/create_publication/app_steps_create_publications.dart';//TODO: Refactorizar esto
 import 'package:studenthive/presentation/views/widgets/widgets_views/account_view.dart/create_publication/routerAnimation/router_animation.dart';
 import 'package:studenthive/presentation/views/widgets/widgets_views/account_view.dart/create_publication/app_steps_singler_createpu.dart';
 import 'package:studenthive/presentation/views/widgets/widgets_views/account_view.dart/create_publication/utils_for_creation_publication/container_title_appbar.dart';
@@ -92,8 +92,7 @@ class TypeHouseState extends State<TypeHouse> {
 }
 
 void saveSelectedOption() {
-  // Aquí puedes realizar la lógica para guardar la opción seleccionada mediante una API.
-  // Puedes utilizar el valor de `selectedOption` para enviarlo a la API.
+
 }
 
 class OptionsContainerSelector extends StatelessWidget {
