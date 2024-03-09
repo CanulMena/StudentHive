@@ -60,10 +60,13 @@ class _PublicationContainerState extends State<PublicationContainer> {
             top: 15,
             right: 20,
             child: GestureDetector(
-              onTap: () {
+              onTap: () async {
                 setState(() {
                   if (widget.isTokenAut) {
                     isLiked = !isLiked;
+                    isLiked
+                        ? print('Agregado a favoritos')
+                        : print('Eliminado de favoritos');
                     // isLiked
                     // ? favoriteProvider.addFavorites(widget.publicationsPost)
                     // : favoriteProvider.deleteFavorites(widget.publicationsPost);

@@ -1,70 +1,59 @@
 import 'dart:convert';
-
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:studenthive/domain/entities/house.dart';
+import 'package:studenthive/domain/entities/entities.dart';
+import 'package:studenthive/infrastructure/mappers/house_preview_mapper.dart';
+import 'package:studenthive/infrastructure/models/studenthivedb/house_Preview_studenthivedb.dart';
 
-final favoritesHousesProvider = StateNotifierProvider<FavoritesPostsNotifier, List<House>>((ref){
+final favoritesHousesProvider = StateNotifierProvider<FavoritesPostsNotifier, List<HousePreview>>((ref){
   return FavoritesPostsNotifier();
 });
 
-class FavoritesPostsNotifier extends StateNotifier<List<House>>{
+class FavoritesPostsNotifier extends StateNotifier<List<HousePreview>>{
   FavoritesPostsNotifier() : super([]);
 
   Future<void> loadFavoritesFromSharedPreferences() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    List<String> favoritesListString = prefs.getStringList('favorites') ?? [];
+    List<String> favoritesListString = prefs.getStringList('favorites') ?? <String>[];
 
-    List<House> favorites = [];
+    List<HousePreview> favorites = [];
 
     for (String jsonString in favoritesListString) {
-      Map<String, dynamic> rentalHouseMap = jsonDecode(jsonString);
-      House rentalHouse = House.fromJson(rentalHouseMap);
-      favorites.add(rentalHouse);
+      Map<String, dynamic> housePreviewStudentHiveDbMap = jsonDecode(jsonString);
+      HousePreviewStudentHiveDb housePreviewStudentHiveDb = HousePreviewStudentHiveDb.fromJson(housePreviewStudentHiveDbMap); //lo mapea a HousePreviewStudentHiveDb
+      HousePreview housePreview = HousePreviewMapper.housePreviewStudentHiveDbToEntity(housePreviewStudentHiveDb); // lo convierte a mi entidad
+      favorites.add(housePreview);
     }
 
     state = favorites;
   }
-
-  void addFavorites( House rentalHouse ) async {
-    SharedPreferences prefs = await SharedPreferences.getInstance(); 
-    //*Llamo a toda la lista de strings --> mis favoritos guardados en formato json
+  
+  Future<void> addFavorites(HousePreview housePreview) async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
     List<String> favoritesListString = prefs.getStringList('favorites') ?? <String>[];
 
-    //*Convierto en un mapa al rentalhouse que agregue cuando ejecute la funcion
-    Map<String, dynamic> rentalHouseMap = rentalHouse.toJson();
+    HousePreviewStudentHiveDb housePreviewStudentHiveDb = HousePreviewMapper.entityToHousePreviewStudentHiveDb(housePreview);
+    Map<String, dynamic> housePreviewStudentHiveDbMap = housePreviewStudentHiveDb.toJson(); 
+    String housePreviewJson = jsonEncode(housePreviewStudentHiveDbMap); //Convierto el mapa a un json
 
-    //*Convierto el mapa a una cadena json
-    String rentalhouseJson = jsonEncode(rentalHouseMap);
-
-    //* Agrego la cadena JSON a la lista de favoritos
-    favoritesListString.add(rentalhouseJson);
-
-    //* Guardo la lista de favoritos actualizada en SharedPreferences -> la lista de strings
-    prefs.setStringList('favorites', favoritesListString);
+    if (!favoritesListString.contains(housePreviewJson)) {
+      favoritesListString.add(housePreviewJson);
+      prefs.setStringList('favorites', favoritesListString);
+    }
   }
+
+  Future<void> removeFavorite(HousePreview housePreview) async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    List<String> favoritesListString = prefs.getStringList('favorites') ?? <String>[];
+
+    HousePreviewStudentHiveDb housePreviewStudentHiveDb = HousePreviewMapper.entityToHousePreviewStudentHiveDb(housePreview);
+    Map<String, dynamic> housePreviewStudentHiveDbMap = housePreviewStudentHiveDb.toJson();
+    String housePreviewStudentHiveDbJson = jsonEncode(housePreviewStudentHiveDbMap);
+
+    if (favoritesListString.contains(housePreviewStudentHiveDbJson)) {
+      favoritesListString.remove(housePreviewStudentHiveDbJson);
+      prefs.setStringList('favorites', favoritesListString);
+    }
+  }
+
 }
-
-
-// class FavoriteProvider extends ChangeNotifier {//*Convertiré esto en un StateNotifierProvider
-
-//   List<RentalHouse> listFavorites = []; //*Guardaré estoy en shared-preferences
-
-//   void addFavorites( RentalHouse favorite){
-//     if(!containsFavorites(favorite)){
-//       listFavorites.add(favorite);
-//       notifyListeners();
-//     }    
-
-//   }
-
-//   void deleteFavorites( RentalHouse favorite ){
-//     listFavorites.remove(favorite);
-//     notifyListeners();
-//   }
-
-//   bool containsFavorites( RentalHouse favorite) {
-//     return listFavorites.any((favorite) => favorite.idPublication == favorite.idPublication);
-//   }
-
-// }

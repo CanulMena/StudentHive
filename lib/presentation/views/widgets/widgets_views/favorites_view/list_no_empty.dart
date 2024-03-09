@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:studenthive/domain/entities/house.dart';
+import 'package:studenthive/domain/entities/entities.dart';
 
 class ListNoEmpty extends StatelessWidget {
-  final List<House> favorites;
+  final List<HousePreview> favorites;
   final Size size;
 
   const ListNoEmpty({

@@ -22,7 +22,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
     super.initState();
   }
 
-  void _loadFavoritesFromSharedPreferences() { //TODO: Ver la parte de favoritos despues
+  void _loadFavoritesFromSharedPreferences() {
     ref
         .read(favoritesHousesProvider.notifier)
         .loadFavoritesFromSharedPreferences();
@@ -30,8 +30,8 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
 
   @override
   build(BuildContext context) {
-    final bool isTokenAut = ref.read(isTokenAuthProvider); //*Mientras estoy en el home se lee la variable cuando se construye el widget
-    final List<House> favorites = ref.watch(favoritesHousesProvider);
+    final bool isTokenAut = ref.read(isTokenAuthProvider);
+    final List<HousePreview> favorites = ref.watch(favoritesHousesProvider);
     final List<HousePreview> houses = ref.watch(allHousesPreviewProvider);
 
     List<Widget> screens = [

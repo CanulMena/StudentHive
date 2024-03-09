@@ -100,7 +100,6 @@ class CustomAppbar extends StatelessWidget {
                   color: Colors.amber.shade800,
                   fontSize: 20, // Tamaño del texto
                   fontWeight: FontWeight.w500  // Grosor del texto
-
               ),
             ),
 

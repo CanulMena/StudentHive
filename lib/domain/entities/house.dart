@@ -26,41 +26,6 @@ class House {
     required this.rentalHouseDetail,
     required this.images,
   });
-
-    factory House.fromJson(Map<String, dynamic> json) {
-    return House(
-      idPublication: json['idPublication'],
-      title: json['title'],
-      description: json['description'],
-      whoElse: json['whoElse'],
-      rentPrice: json['rentPrice'],
-      typeHouse: json['typeHouse'],
-      idUser: json['idUser'],
-      publicationDate: DateTime.parse(json['publicationDate']),
-      houseService: HouseService.fromJson(json['houseService']),
-      location: Location.fromJson(json['location']),
-      rentalHouseDetail: RentalHouseDetail.fromJson(json['rentalHouseDetail']),
-      images: List<String>.from(json['images']),
-    );
-  }
-
-  Map<String, dynamic> toJson() {
-    return {
-      'idPublication': idPublication,
-      'title': title,
-      'description': description,
-      'whoElse': whoElse,
-      'rentPrice': rentPrice,
-      'typeHouse': typeHouse,
-      'idUser': idUser,
-      'publicationDate': publicationDate.toIso8601String(),
-      'houseService': houseService.toJson(),
-      'location': location.toJson(),
-      'rentalHouseDetail': rentalHouseDetail.toJson(),
-      'images': images,
-    };
-  }
-
 }
 
 class Location {
@@ -81,30 +46,6 @@ class Location {
     required this.postalCode,
     required this.neighborhood,
   });
-
-  factory Location.fromJson(Map<String, dynamic> json) {
-    return Location(
-      idLocation: json['idLocation'],
-      address: json['address'],
-      city: json['city'],
-      state: json['state'],
-      country: json['country'],
-      postalCode: json['postalCode'],
-      neighborhood: json['neighborhood'],
-    );
-  }
-
-  Map<String, dynamic> toJson() {
-    return {
-      'idLocation': idLocation,
-      'address': address,
-      'city': city,
-      'state': state,
-      'country': country,
-      'postalCode': postalCode,
-      'neighborhood': neighborhood,
-    };
-  }
 }
 
 class HouseService {
@@ -127,32 +68,6 @@ class HouseService {
     required this.gas,
     required this.television,
   });
-
-  factory HouseService.fromJson(Map<String, dynamic> json) {
-    return HouseService(
-      idHouseService: json['idHouseService'],
-      wifi: json['wifi'],
-      kitchen: json['kitchen'],
-      washer: json['washer'],
-      airConditioning: json['airConditioning'],
-      water: json['water'],
-      gas: json['gas'],
-      television: json['television'],
-    );
-  }
-
-  Map<String, dynamic> toJson() {
-    return {
-      'idHouseService': idHouseService,
-      'wifi': wifi,
-      'kitchen': kitchen,
-      'washer': washer,
-      'airConditioning': airConditioning,
-      'water': water,
-      'gas': gas,
-      'television': television,
-    };
-  }
 }
 
 class RentalHouseDetail {
@@ -171,27 +86,4 @@ class RentalHouseDetail {
     required this.numbersOfBed,
     required this.numberOfHammocks,
   });
-
-  factory RentalHouseDetail.fromJson(Map<String, dynamic> json) {
-    return RentalHouseDetail(
-      idRentalHouseDetail: json['idRentalHouseDetail'],
-      numberOfGuests: json['numberOfGuests'],
-      numberOfBathrooms: json['numberOfBathrooms'],
-      numberOfRooms: json['numberOfRooms'],
-      numbersOfBed: json['numbersOfBed'],
-      numberOfHammocks: json['numberOfHammocks'],
-    );
-  }
-
-  Map<String, dynamic> toJson() {
-    return {
-      'idRentalHouseDetail': idRentalHouseDetail,
-      'numberOfGuests': numberOfGuests,
-      'numberOfBathrooms': numberOfBathrooms,
-      'numberOfRooms': numberOfRooms,
-      'numbersOfBed': numbersOfBed,
-      'numberOfHammocks': numberOfHammocks,
-    };
-  }
 }
-

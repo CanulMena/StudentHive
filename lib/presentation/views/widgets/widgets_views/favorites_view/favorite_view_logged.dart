@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:studenthive/domain/entities/house.dart';
+import 'package:studenthive/domain/entities/entities.dart';
 import 'package:studenthive/presentation/views/widgets/widgets_views/favorites_view/list_empty.dart'; //meter en un archivo de barril
 import 'package:studenthive/presentation/views/widgets/widgets_views/favorites_view/list_no_empty.dart'; //meter en un archivo de barril
 
 class FavoriteViewLogged extends StatelessWidget {
-  final List<House> favorites;
+  final List<HousePreview> favorites;
   final Size size;
 
   const FavoriteViewLogged({
