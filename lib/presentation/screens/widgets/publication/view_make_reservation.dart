@@ -55,8 +55,7 @@ class MakeReservationView extends StatelessWidget {
       ),
       bottomNavigationBar: KeyboardVisibilityBuilder(
         builder: (context, isKeyboardVisible) {
-          // Mostrar el bottomNavigationBar solo si el teclado no está abierto
-          return isKeyboardVisible ? const SizedBox() : ButtomStepscreateP(  pageController: pageController, );
+          return isKeyboardVisible ? const SizedBox() : ButtomStepscreateP(  pageController: pageController, onNext: () {  }, );
         },
       ),
     );

@@ -1,13 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_keyboard_visibility/flutter_keyboard_visibility.dart';
-import 'package:provider/provider.dart';
-import 'package:studenthive/presentation/provider/create_publication_provider.dart';
 import 'package:studenthive/presentation/views/widgets/widgets_views/account_view.dart/create_publication/utils_for_creation_publication/buttom_steps_creationp.dart';
 import 'package:studenthive/presentation/views/widgets/widgets_views/account_view.dart/create_publication/utils_for_creation_publication/container_title_appbar.dart';
 
 class HouseAddDescription extends StatefulWidget {
+  final Function(String) onNext;
   final PageController pageController;
-  const HouseAddDescription({super.key, required this.pageController});
+  const HouseAddDescription({super.key, required this.pageController, required this.onNext});
 
   @override
   State<HouseAddDescription> createState() => _HouseAddDescriptionState();
@@ -17,6 +16,8 @@ class _HouseAddDescriptionState extends State<HouseAddDescription> {
   final TextEditingController descriptionController = TextEditingController();
 
   bool isButtonEnabled = false;
+
+  String description = '';
 
   void _checkFields() {
     setState(() {
@@ -45,7 +46,6 @@ class _HouseAddDescriptionState extends State<HouseAddDescription> {
   }
   @override
   Widget build(BuildContext context) {
-    final createPublicationProvider = context.watch<CreatePublicationProvider>();
     Size size = MediaQuery.of(context).size;
     return Scaffold(
       body: Padding(
@@ -69,7 +69,7 @@ class _HouseAddDescriptionState extends State<HouseAddDescription> {
                         borderRadius: BorderRadius.all(Radius.circular(10))),
                   ),
                 onChanged: (value) {
-                  createPublicationProvider.description= value;
+                  description = value;
                   },
                 ),
               ),
@@ -79,8 +79,15 @@ class _HouseAddDescriptionState extends State<HouseAddDescription> {
       ),
       bottomNavigationBar: KeyboardVisibilityBuilder(
         builder: (context, isKeyboardVisible) {
-          // Mostrar el bottomNavigationBar solo si el teclado no está abierto
-          return isKeyboardVisible ? const SizedBox() : ButtomStepscreateP(  pageController: widget.pageController, isButtonEnabled: isButtonEnabled,);
+          return isKeyboardVisible 
+          ? const SizedBox() 
+          : ButtomStepscreateP( 
+            pageController: widget.pageController, 
+            isButtonEnabled: isButtonEnabled,
+            onNext: () {
+              widget.onNext(description);
+            },
+            );
         },
       ),
     );

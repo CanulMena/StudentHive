@@ -1,13 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_keyboard_visibility/flutter_keyboard_visibility.dart';
-import 'package:provider/provider.dart';
-import 'package:studenthive/presentation/provider/create_publication_provider.dart';
 import 'package:studenthive/presentation/views/widgets/widgets_views/account_view.dart/create_publication/utils_for_creation_publication/buttom_steps_creationp.dart';
 import 'package:studenthive/presentation/views/widgets/widgets_views/account_view.dart/create_publication/utils_for_creation_publication/container_title_appbar.dart';
 
 class HouseService extends StatefulWidget {
+  final Function(bool, bool, bool, bool, bool, bool, bool) onNext;
   final PageController pageController;
-  const HouseService({super.key, required this.pageController,});
+  const HouseService({super.key, required this.pageController, required this.onNext,});
 
   @override
   State<HouseService> createState() => _HouseServiceState();
@@ -15,10 +14,17 @@ class HouseService extends StatefulWidget {
 
 class _HouseServiceState extends State<HouseService> {
 
+  bool isWifiAvailable = false;
+  bool isKitchenAvailable = false;
+  bool isWasherAvailable = false;
+  bool isTvAvailable = false;
+  bool isAirConditionerAvailable = false;
+  bool isWaterAvailable = false;
+  bool isGasAvailable = false;
+
   @override
   Widget build(BuildContext context) {
-    final createPublicationProvider = context.watch<CreatePublicationProvider>();
-    
+  
     return Scaffold(
       body: Padding(
         padding: const EdgeInsets.symmetric(vertical: 0, horizontal: 12),
@@ -34,7 +40,9 @@ class _HouseServiceState extends State<HouseService> {
                 text: 'Wifi',
                 icon: Icons.signal_wifi_0_bar_outlined, 
                 onChanged: (value) { 
-                  createPublicationProvider.wifi = value;
+                  setState(() {
+                    isWifiAvailable = value;
+                  });
                 },  
               ),
 
@@ -45,7 +53,9 @@ class _HouseServiceState extends State<HouseService> {
                 text: 'Cocina',
                 iconChanged: Icons.kitchen,
                 onChanged: (value) {
-                  createPublicationProvider.kitchen = value;
+                  setState(() {
+                    isKitchenAvailable = value;
+                  });
                 },
               ),
 
@@ -56,7 +66,9 @@ class _HouseServiceState extends State<HouseService> {
                 text: 'Lavadora',
                 iconChanged: Icons.wash,
                 onChanged: (value) {
-                  createPublicationProvider.washer = value;
+                  setState(() {
+                    isWasherAvailable = value;
+                  });
                 },
                 
               ),
@@ -68,7 +80,9 @@ class _HouseServiceState extends State<HouseService> {
                 text: 'Televisión',
                 iconChanged: Icons.tv,
                 onChanged: (value) {
-                  createPublicationProvider.television = value;
+                  setState(() {
+                    isTvAvailable = value;
+                  });
                 },
                 
               ),
@@ -80,7 +94,9 @@ class _HouseServiceState extends State<HouseService> {
                 text: 'Aire Acondicionado',
                 iconChanged: Icons.air,
                 onChanged: (value) {
-                  createPublicationProvider.airConditioning = value;
+                  setState(() {
+                    isAirConditionerAvailable = value;
+                  });
                 },
                 
               ),
@@ -92,7 +108,9 @@ class _HouseServiceState extends State<HouseService> {
                 text: 'Agua',
                 iconChanged: Icons.water_drop,
                 onChanged: (value) {
-                  createPublicationProvider.water = value;
+                  setState(() {
+                    isWaterAvailable = value;
+                  });
                 },
               ),
 
@@ -103,7 +121,9 @@ class _HouseServiceState extends State<HouseService> {
                 text: 'Gas',
                 iconChanged: Icons.gas_meter,
                 onChanged: (value) {
-                  createPublicationProvider.gas = value;
+                  setState(() {
+                    isGasAvailable = value;
+                  });
                 },
               ),
 
@@ -120,6 +140,17 @@ class _HouseServiceState extends State<HouseService> {
           : ButtomStepscreateP(
             pageController: widget.pageController, 
             isButtonEnabled: true,
+            onNext: () {
+              widget.onNext(
+                isWifiAvailable,
+                isKitchenAvailable,
+                isWasherAvailable,
+                isTvAvailable,
+                isAirConditionerAvailable,
+                isWaterAvailable,
+                isGasAvailable,
+              );
+            },
             );
         },
       ),

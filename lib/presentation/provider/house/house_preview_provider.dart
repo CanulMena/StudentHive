@@ -3,7 +3,7 @@ import 'package:studenthive/domain/entities/house_preview.dart';
 import 'package:studenthive/presentation/provider/house/house_repository_provider.dart';
 
 final allHousesPreviewProvider = StateNotifierProvider<HousesNotifier, List<HousePreview>>((ref){
-  final fetchMoreHousesPreview = ref.watch( housesRepositoryProvider ).getAllHousesPreview;
+  final fetchMoreHousesPreview = ref.watch( housesRepositoryProvider ).getAllHouses;
   return HousesNotifier(fetchMoreHousesPreview: fetchMoreHousesPreview);
 });
 

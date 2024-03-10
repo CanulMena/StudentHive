@@ -3,11 +3,14 @@ import 'package:flutter/material.dart';
 class ButtomStepscreateP extends StatelessWidget {
   final PageController pageController;
   final bool isButtonEnabled;
+  final VoidCallback onNext;
+
   const ButtomStepscreateP({
-    super.key,
+    Key? key,
     this.isButtonEnabled = false,
     required this.pageController,
-  });
+    required this.onNext,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -45,12 +48,13 @@ class ButtomStepscreateP extends StatelessWidget {
           const SizedBox(width: 2),
           InkWell(
             onTap: () {
-              isButtonEnabled 
-              ? pageController.nextPage(
-                duration: const Duration(milliseconds: 500),
-                curve: Curves.ease,
-              )
-              : null;
+              if (isButtonEnabled) {
+                onNext();
+                pageController.nextPage(
+                  duration: const Duration(milliseconds: 500),
+                  curve: Curves.ease,
+                );
+              }
             },
             child: ClipRRect(
               borderRadius: BorderRadius.circular(6),

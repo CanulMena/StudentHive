@@ -1,14 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_keyboard_visibility/flutter_keyboard_visibility.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:provider/provider.dart';
-import 'package:studenthive/presentation/provider/create_publication_provider.dart';
 import 'package:studenthive/presentation/views/widgets/widgets_views/account_view.dart/create_publication/utils_for_creation_publication/buttom_steps_creationp.dart';
 import 'package:studenthive/presentation/views/widgets/widgets_views/account_view.dart/create_publication/utils_for_creation_publication/container_title_appbar.dart';
 
 class AddHouseImages extends StatefulWidget {
+  final Function(List<XFile>) onNext;
   final PageController pageController;
-  const AddHouseImages({Key? key, required this.pageController}) : super(key: key);
+  const AddHouseImages({ super.key, required this.pageController, required this.onNext});
 
   @override
   State<AddHouseImages> createState() => _AddHouseImagesState();
@@ -16,13 +15,15 @@ class AddHouseImages extends StatefulWidget {
 
 class _AddHouseImagesState extends State<AddHouseImages> {
   final ImagePicker _picker = ImagePicker();
+
+  final List<XFile> _imageFileList = [];
+
   dynamic pickImageError;
   bool isButtomEnable = false;
-  int imageCount = 0; // Contador de imágenes
+  int imageCount = 0; 
 
   @override
   Widget build(BuildContext context) {
-    final CreatePublicationProvider createPublicationProvider = context.watch<CreatePublicationProvider>();
     Size screenSize = MediaQuery.of(context).size;
     return Scaffold(
       body: Padding(
@@ -32,8 +33,7 @@ class _AddHouseImagesState extends State<AddHouseImages> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               const TitleAppbar(
-                  title:
-                      'Da a conocer tu espacio'), //? clase que se encuentra en el archivo container_title_appbar.dart
+                title:'Da a conocer tu espacio'),
               _message('Al principio, toma 3 fotos estos lo puedes cambiar despues'),
               const SizedBox(height: 20,),
               SizedBox(
@@ -48,7 +48,7 @@ class _AddHouseImagesState extends State<AddHouseImages> {
                       side: MaterialStateProperty.all(
                           const BorderSide(color: Colors.grey))),
                   onPressed: () {
-                    _onImageButtonPressed(ImageSource.gallery, createPublicationProvider: createPublicationProvider);
+                    _onImageButtonPressed(ImageSource.gallery);
                   },
                   child: const Row(
                     children: [
@@ -80,7 +80,7 @@ class _AddHouseImagesState extends State<AddHouseImages> {
                       side: MaterialStateProperty.all(
                           const BorderSide(color: Colors.grey))),
                   onPressed: () {
-                    _onImageButtonPressed(ImageSource.camera, createPublicationProvider: createPublicationProvider);
+                    _onImageButtonPressed(ImageSource.camera);
                   },
                   child: Column(
                     children: [
@@ -98,12 +98,14 @@ class _AddHouseImagesState extends State<AddHouseImages> {
       ),
       bottomNavigationBar: KeyboardVisibilityBuilder(
         builder: (context, isKeyboardVisible) {
-          // Mostrar el bottomNavigationBar solo si el teclado no está abierto
           return isKeyboardVisible 
           ? const SizedBox() 
           : ButtomStepscreateP( 
             pageController: widget.pageController,
-            isButtonEnabled: isButtomEnable, // Pasa el valor de isButtomEnable
+            isButtonEnabled: isButtomEnable, 
+            onNext: () {
+              widget.onNext(_imageFileList);
+            },
           );
         },
       ),
@@ -120,7 +122,7 @@ class _AddHouseImagesState extends State<AddHouseImages> {
     );
   }
 
-  _onImageButtonPressed(ImageSource source,{ required CreatePublicationProvider createPublicationProvider}) async {
+  _onImageButtonPressed(ImageSource source) async {
     try {
       final pickedFile = await _picker.pickImage(
         source: source,
@@ -129,8 +131,10 @@ class _AddHouseImagesState extends State<AddHouseImages> {
         imageQuality: 100,
       );
       if (pickedFile != null) {
-        createPublicationProvider.setListXFile(pickedFile);
-        imageCount++; // Incrementa el contador de imágenes
+        setState(() {
+          _imageFileList.add(pickedFile);
+        });
+        imageCount++;
         if (imageCount >= 3) {
           setState(() {
             isButtomEnable = true; // Habilita el botón cuando se agregan al menos 3 imágenes

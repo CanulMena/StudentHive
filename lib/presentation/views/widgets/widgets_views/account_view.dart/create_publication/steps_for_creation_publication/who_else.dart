@@ -1,13 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_keyboard_visibility/flutter_keyboard_visibility.dart';
-import 'package:provider/provider.dart';
-import 'package:studenthive/presentation/provider/create_publication_provider.dart';
 import 'package:studenthive/presentation/views/widgets/widgets_views/account_view.dart/create_publication/utils_for_creation_publication/buttom_steps_creationp.dart';
 import 'package:studenthive/presentation/views/widgets/widgets_views/account_view.dart/create_publication/utils_for_creation_publication/container_title_appbar.dart';
 
 class WhoElse extends StatefulWidget {
+  final Function(String) onNext;
   final PageController pageController;
-  const WhoElse({super.key, required this.pageController,});
+  const WhoElse({super.key, required this.pageController, required this.onNext,});
 
   @override
   State<WhoElse> createState() => _WhoElseState();
@@ -16,7 +15,8 @@ class WhoElse extends StatefulWidget {
 class _WhoElseState extends State<WhoElse> {
   @override
   Widget build(BuildContext context) {
-    final createPublicationProvider = context.watch<CreatePublicationProvider>();
+
+    String whoElse = '';
 
     return Scaffold(
       body: Padding(
@@ -36,26 +36,26 @@ class _WhoElseState extends State<WhoElse> {
             const SizedBox(
               height: 30,
             ),
-    
+          
           _buildOptionRow([
               ContainerOptionWhoElse(
-                text: 'Yo',
+                text: 'IAm',
                 icon: Icons.person_outline, 
-                isSelected: createPublicationProvider.mine = createPublicationProvider.mine, 
+                isSelected: whoElse == 'IAm' ? true : false, 
                 onTap: () { 
                   setState(() {
-                    createPublicationProvider.mine = !createPublicationProvider.mine;
+                    whoElse = 'IAm';
                   });
                   },
               ),
     
               ContainerOptionWhoElse(
-                text: 'Familia',
+                text: 'Family',
                 icon: Icons.groups_outlined,
-                isSelected: createPublicationProvider.myFamily = createPublicationProvider.myFamily, 
+                isSelected: whoElse == 'Family' ? true : false, 
                 onTap: () { 
                   setState(() {
-                    createPublicationProvider.myFamily = !createPublicationProvider.myFamily;
+                    whoElse = 'Family';
                   });
                 }, 
               ),
@@ -68,22 +68,22 @@ class _WhoElseState extends State<WhoElse> {
     
             _buildOptionRow([
               ContainerOptionWhoElse(
-                text: 'Amigos',
+                text: 'Other People',
                 icon: Icons.group_outlined,
-                isSelected: createPublicationProvider.friends = createPublicationProvider.friends, 
+                isSelected: whoElse == 'Other People' ? true : false, 
                 onTap: () { 
                   setState(() {
-                    createPublicationProvider.friends = !createPublicationProvider.friends;
+                    whoElse = 'Other People';
                   });
                 }, 
               ),
               ContainerOptionWhoElse(
-                text: 'Compañeros',
+                text: 'Companions',
                 icon: Icons.group_add_outlined,
-                isSelected: createPublicationProvider.rommies = createPublicationProvider.rommies, 
+                isSelected: whoElse == 'Companions' ? true : false, 
                 onTap: () { 
                   setState(() {
-                  createPublicationProvider.rommies = !createPublicationProvider.rommies;
+                    whoElse = 'Companions';
                   });
                 }, 
               ),
@@ -94,7 +94,15 @@ class _WhoElseState extends State<WhoElse> {
       bottomNavigationBar: KeyboardVisibilityBuilder(
         builder: (context, isKeyboardVisible) {
           // Mostrar el bottomNavigationBar solo si el teclado no está abierto
-          return isKeyboardVisible ? const SizedBox() : ButtomStepscreateP( pageController: widget.pageController, isButtonEnabled: true, );
+          return isKeyboardVisible 
+          ? const SizedBox() : 
+          ButtomStepscreateP( 
+            pageController: widget.pageController, 
+            isButtonEnabled: true,
+            onNext: () {
+              widget.onNext(whoElse);
+            },
+            );
         },
       ),
     );

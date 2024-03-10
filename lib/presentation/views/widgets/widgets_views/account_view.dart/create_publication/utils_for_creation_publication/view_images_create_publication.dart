@@ -2,22 +2,18 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_keyboard_visibility/flutter_keyboard_visibility.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:provider/provider.dart';
-import 'package:studenthive/presentation/provider/create_publication_provider.dart';
 import 'package:studenthive/presentation/views/widgets/widgets_views/account_view.dart/create_publication/utils_for_creation_publication/buttom_steps_creationp.dart';
 import 'package:studenthive/presentation/views/widgets/widgets_views/account_view.dart/create_publication/utils_for_creation_publication/container_title_appbar.dart';
 
 class ViewImages extends StatelessWidget {
+  final List<XFile> imageFileList;
   final PageController pageController;
 
-  const ViewImages({Key? key, required this.pageController}) : super(key: key);
+  const ViewImages({super.key, required this.pageController, required this.imageFileList});
 
   @override
   Widget build(BuildContext context) {
-    final Size screenSize = MediaQuery.of(context).size;
-    final CreatePublicationProvider createPublicationProvider =
-        context.watch<CreatePublicationProvider>();
-
+    final Size screenSize = MediaQuery.of(context).size;        
     return Scaffold(
       body: Padding(
         padding: const EdgeInsets.symmetric(vertical: 0, horizontal: 12),
@@ -32,7 +28,7 @@ class ViewImages extends StatelessWidget {
                 ContainerImages(
                   width: screenSize.width * 0.9,
                   height: screenSize.height * 0.3,
-                  image: createPublicationProvider.getListXFile[0],
+                  image: imageFileList[1],
                 ),
 
               const SizedBox(height: 10,),
@@ -45,7 +41,7 @@ class ViewImages extends StatelessWidget {
                       width: screenSize.width * 0.45,
                       height: screenSize.height * 0.2,
                       child: ContainerImages(
-                        image: createPublicationProvider.getListXFile.length > i ? createPublicationProvider.getListXFile[i] : null,
+                        image: imageFileList.length > i ? imageFileList[i] : null,
                         height: screenSize.height * 0.2,
                         width: screenSize.width * 0.45,
                       ),
@@ -118,7 +114,13 @@ class ViewImages extends StatelessWidget {
       ),
       bottomNavigationBar: KeyboardVisibilityBuilder(
         builder: (context, isKeyboardVisible) {
-          return isKeyboardVisible ? const SizedBox() : ButtomStepscreateP(pageController: pageController, isButtonEnabled: true);
+          return isKeyboardVisible 
+          ? const SizedBox() 
+          : ButtomStepscreateP(
+            pageController: pageController, 
+            isButtonEnabled: true,
+            onNext: () {},
+            );
         },
       ),
     );

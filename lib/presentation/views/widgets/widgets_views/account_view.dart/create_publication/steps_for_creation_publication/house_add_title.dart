@@ -1,13 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_keyboard_visibility/flutter_keyboard_visibility.dart';
-import 'package:provider/provider.dart';
-import 'package:studenthive/presentation/provider/create_publication_provider.dart';
 import 'package:studenthive/presentation/views/widgets/widgets_views/account_view.dart/create_publication/utils_for_creation_publication/buttom_steps_creationp.dart';
 import 'package:studenthive/presentation/views/widgets/widgets_views/account_view.dart/create_publication/utils_for_creation_publication/container_title_appbar.dart';
 
 class HouseAddTittle extends StatefulWidget {
+  final Function( String ) onNext;
   final PageController pageController;
-  const HouseAddTittle({super.key, required this.pageController});
+  const HouseAddTittle({super.key, required this.pageController, required this.onNext});
 
   @override
   State<HouseAddTittle> createState() => _HouseAddTittleState();
@@ -18,6 +17,8 @@ class _HouseAddTittleState extends State<HouseAddTittle> {
   final TextEditingController titleController = TextEditingController();
 
   bool isButtonEnabled = false;
+
+  String title = '';
 
   void _checkFields() {
     setState(() {
@@ -48,7 +49,6 @@ class _HouseAddTittleState extends State<HouseAddTittle> {
   @override
   Widget build(BuildContext context) {
     Size screenSize = MediaQuery.of(context).size;
-    final createPublicationProvider = context.watch<CreatePublicationProvider>();
     return Scaffold(
       body: Padding(
         padding: const EdgeInsets.symmetric( horizontal: 12, vertical: 0, ),
@@ -72,7 +72,7 @@ class _HouseAddTittleState extends State<HouseAddTittle> {
                         borderRadius: BorderRadius.all(Radius.circular(10))),
                   ),
                   onChanged: (value) {
-                    createPublicationProvider.title = value;
+                    title = value;
                   },
                 ),
               ),
@@ -83,8 +83,15 @@ class _HouseAddTittleState extends State<HouseAddTittle> {
       ),
       bottomNavigationBar: KeyboardVisibilityBuilder(
         builder: (context, isKeyboardVisible) {
-          // Mostrar el bottomNavigationBar solo si el teclado no está abierto
-          return isKeyboardVisible ? const SizedBox() : ButtomStepscreateP(  pageController: widget.pageController, isButtonEnabled: isButtonEnabled, );
+          return isKeyboardVisible 
+          ? const SizedBox() 
+          : ButtomStepscreateP( 
+            pageController: widget.pageController, 
+            isButtonEnabled: isButtonEnabled, 
+            onNext: () {
+              
+            },
+            );
         },
       ),
     );

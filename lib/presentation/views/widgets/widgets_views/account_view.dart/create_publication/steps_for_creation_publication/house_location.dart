@@ -1,23 +1,35 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_keyboard_visibility/flutter_keyboard_visibility.dart';
-import 'package:provider/provider.dart';
-import 'package:studenthive/presentation/provider/create_publication_provider.dart';
 import 'package:studenthive/presentation/views/widgets/widgets_views/account_view.dart/create_publication/utils_for_creation_publication/buttom_steps_creationp.dart';
 import 'package:studenthive/presentation/views/widgets/widgets_views/account_view.dart/create_publication/utils_for_creation_publication/container_title_appbar.dart';
 
-class HouseLocation extends StatelessWidget {
+class HouseLocation extends StatefulWidget {
+  final Function(String, String, String, String, String, String) onNext;
   final PageController pageController;
   
   const HouseLocation({
     Key? key,  
-    required this.pageController
+    required this.pageController, 
+    required this.onNext
   }) : super(key: key);
 
   @override
+  State<HouseLocation> createState() => _HouseLocationState();
+}
+
+class _HouseLocationState extends State<HouseLocation> {
+
+  String postalCode = '';
+  String country = '';
+  String city = '';
+  String state = '';
+  String address = '';
+  String neighborhood = '';
+  bool isButtonEnabled = false;
+
+  @override
   Widget build(BuildContext context) {
-    final CreatePublicationProvider createPublicationProvider = context.watch<CreatePublicationProvider>();
-    bool isButtonEnabled = false;
     return Scaffold(
       body: Padding(
         padding: const EdgeInsets.symmetric(vertical: 0, horizontal: 12),
@@ -29,13 +41,15 @@ class HouseLocation extends StatelessWidget {
               ),
               ContainerFormLocation(
                 onFieldChanged: (pc, co, ci, st, ad, ne, isb) {
-                  createPublicationProvider.postalCode = pc;
-                  createPublicationProvider.country = co;
-                  createPublicationProvider.city = ci;
-                  createPublicationProvider.state = st;
-                  createPublicationProvider.address = ad;
-                  createPublicationProvider.neighborhood = ne;
+                  setState(() {
+                  postalCode = pc;
+                  country = co;
+                  city = ci;
+                  state = st;
+                  address = ad;
+                  neighborhood = ne;
                   isButtonEnabled = isb;
+                });
                 },
               ),              
             ],
@@ -48,8 +62,19 @@ class HouseLocation extends StatelessWidget {
           return isKeyboardVisible 
           ? const SizedBox() 
           : ButtomStepscreateP(
-            pageController: pageController, 
-            isButtonEnabled: isButtonEnabled,
+            pageController: widget.pageController, 
+            isButtonEnabled: isButtonEnabled, 
+            onNext: () { 
+              widget.onNext(
+                postalCode,
+                country,
+                city,
+                state,
+                address,
+                neighborhood
+              );
+            },
+            
             );
         },
       ),
@@ -183,7 +208,7 @@ class _ContainerFormLocationState extends State<ContainerFormLocation> {
           labelText: label,
         ),
         onChanged: (_) {
-          // Llama a la función de devolución de llamada cada vez que cambia el texto
+          //* Llama a la función de devolución de llamada cada vez que cambia el texto
           widget.onFieldChanged(
             postalCodeController.text,
             countryController.text,

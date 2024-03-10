@@ -1,9 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
-import 'package:studenthive/presentation/provider/create_publication_provider.dart';
 import 'package:studenthive/presentation/views/widgets/widgets_views/account_view.dart/create_publication/app_steps_create_publications.dart';//TODO: Refactorizar esto
 import 'package:studenthive/presentation/views/widgets/widgets_views/account_view.dart/create_publication/routerAnimation/router_animation.dart';
-import 'package:studenthive/presentation/views/widgets/widgets_views/account_view.dart/create_publication/app_steps_singler_createpu.dart';
 import 'package:studenthive/presentation/views/widgets/widgets_views/account_view.dart/create_publication/utils_for_creation_publication/container_title_appbar.dart';
 
 class TypeHouse extends StatefulWidget {
@@ -15,12 +12,14 @@ class TypeHouse extends StatefulWidget {
 }
 
 class TypeHouseState extends State<TypeHouse> {
+
+  String typeHouseRental = '';
+
   int selectedOption = 0;
   bool isSelected = false;  
 
   @override
   Widget build(BuildContext context) {
-    final createPublicationProvider = context.watch<CreatePublicationProvider>();
     return Scaffold(
       appBar: AppBar(),
       body: Padding(
@@ -41,9 +40,8 @@ class TypeHouseState extends State<TypeHouse> {
               onTap: () {
                 setState(() {
                   selectedOption = 1;
-                  createPublicationProvider.typeHouseRental = 'OwnHouse';
+                  typeHouseRental  = 'OwnHouse';
                 });
-                saveSelectedOption();
               },
               route: createPageRoute(const AppStepsCreatePublications()),
             ),
@@ -59,11 +57,10 @@ class TypeHouseState extends State<TypeHouse> {
               onTap: () {
                 setState(() {
                   selectedOption = 2;
-                  createPublicationProvider.typeHouseRental = 'Room';
+                  typeHouseRental = 'Room';
                 });
-                saveSelectedOption();
               },
-              route: createPageRoute(const AppStepsCreateSinglePublications()),
+              route: createPageRoute(const AppStepsCreatePublications()),
             ),
             
             const SizedBox(height: 25),
@@ -77,11 +74,10 @@ class TypeHouseState extends State<TypeHouse> {
               onTap: () {
                 setState(() {
                   selectedOption = 3;
-                  createPublicationProvider.typeHouseRental = 'SharedRoom';
+                  typeHouseRental  = 'SharedRoom';
                 });
-                saveSelectedOption();
               },
-              route: createPageRoute(const AppStepsCreateSinglePublications()),
+              route: createPageRoute(const AppStepsCreatePublications()),
             )
 
           ]),
@@ -89,10 +85,6 @@ class TypeHouseState extends State<TypeHouse> {
       ),
     );
   }
-}
-
-void saveSelectedOption() {
-
 }
 
 class OptionsContainerSelector extends StatelessWidget {

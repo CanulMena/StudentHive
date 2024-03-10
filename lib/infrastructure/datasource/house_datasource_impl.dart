@@ -38,9 +38,69 @@ class HouseDataSourceImpl extends HouseDataSource{
   }
 
   @override
-  Future<void> postHouse() {
-    // TODO: implement postHouse
-    throw UnimplementedError();
-  }
+  Future<void> postHouse({
+    required int idUser,
+    required String title,
+    required String description,
+    bool status = false,
+    required String whoElse,
+    required int rentPrice,
+    required String typeHouse,
+    required int numberOfGuests,
+    required int numberOfBathrooms,
+    required int numberOfRooms,
+    required int numberOfHammocks,
+    required bool wifi,
+    required bool kitchen,
+    required bool washer,
+    required bool airConditioning,
+    required bool water,
+    required bool gas,
+    required bool television,
+    required String address,
+    required String city,
+    required String state,
+    required String country,
+    required String postalCode,
+    required String neighborhood,
+    required List<String> imagePaths,
+    }) async {
+
+    List<MultipartFile> imageFiles = [];
+    for (var path in imagePaths) {
+      MultipartFile file = await MultipartFile.fromFile(path);
+      imageFiles.add(file);
+    }
+
+    final formData = FormData.fromMap({
+      "IdUser": idUser,
+      "Title": title,
+      "Description": description,
+      "Status": status,
+      "WhoElse": whoElse,
+      "RentPrice": rentPrice,
+      "TypeHouse": typeHouse,
+      "DetailRentalHouse.NumberOfGuests": numberOfGuests,
+      "DetailRentalHouse.NumberOfBathrooms": numberOfBathrooms,
+      "DetailRentalHouse.NumberOfRooms": numberOfRooms,
+      "DetailRentalHouse.NumberOfHammocks": numberOfHammocks,
+      "HouseService.Wifi": wifi,
+      "HouseService.Kitchen": kitchen,
+      "HouseService.Washer": washer,
+      "HouseService.AirConditioning": airConditioning,
+      "HouseService.Water": water,
+      "HouseService.Gas": gas,
+      "HouseService.Television": television,
+      "HouseLocation.Address": address,
+      "HouseLocation.City": city,
+      "HouseLocation.State": state,
+      "HouseLocation.Country": country,
+      "HouseLocation.PostalCode": postalCode,
+      "HouseLocation.Neighborhood": neighborhood,
+      "ImagesFiles": imageFiles,
+  });
+
+  await dio.post('', data: formData);
+}
 
 }
