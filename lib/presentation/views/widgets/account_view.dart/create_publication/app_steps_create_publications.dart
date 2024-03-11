@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:studenthive/presentation/provider/house/house_repository_provider.dart';
-import 'package:studenthive/presentation/views/widgets/widgets_views/account_view.dart/create_publication/screen_create_publication.dart';
-import 'package:studenthive/presentation/views/widgets/widgets_views/account_view.dart/create_publication/steps_for_creation_publication/house_detail_single.dart';
+import 'package:studenthive/presentation/views/widgets/account_view.dart/create_publication/screen_create_publication.dart';
+import 'package:studenthive/presentation/views/widgets/account_view.dart/create_publication/steps_for_creation_publication/house_detail_single.dart';
 
 class AppStepsCreatePublications extends ConsumerStatefulWidget {
 

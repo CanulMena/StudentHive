@@ -3,7 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:studenthive/presentation/provider/auth/auth_token_provider.dart';
 import 'package:studenthive/presentation/screens/screens.dart';
-import 'package:studenthive/presentation/views/widgets/widgets_views/account_view.dart/create_publication/steps_for_creation_publication/type_house.dart';
+import 'package:studenthive/presentation/views/widgets/account_view.dart/create_publication/steps_for_creation_publication/type_house.dart';
 
 class MyRoute {
   final WidgetRef ref;

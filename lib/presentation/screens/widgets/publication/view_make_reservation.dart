@@ -4,7 +4,7 @@ import 'package:studenthive/presentation/screens/widgets/publication/view_confir
 import 'package:studenthive/presentation/screens/widgets/publication/view_confirmed_reservation/view_details_reservation.dart';
 import 'package:studenthive/presentation/screens/widgets/publication/view_confirmed_reservation/view_imagenad_title_publication.dart';
 import 'package:studenthive/presentation/screens/widgets/publication/view_confirmed_reservation/view_pay_reservation.dart';
-import 'package:studenthive/presentation/views/widgets/widgets_views/account_view.dart/create_publication/utils_for_creation_publication/buttom_steps_creationp.dart';
+import 'package:studenthive/presentation/views/widgets/account_view.dart/create_publication/utils_for_creation_publication/buttom_steps_creationp.dart';
 
 class MakeReservationView extends StatelessWidget {
   final PageController pageController;

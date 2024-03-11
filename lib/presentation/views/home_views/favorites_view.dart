@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:studenthive/domain/entities/entities.dart';
 import 'package:studenthive/presentation/provider/providers.dart';
-import 'package:studenthive/presentation/views/widgets/widgets_views/favorites_view/favorite_view_logged.dart'; //agregar en un archivo de barril
-import 'package:studenthive/presentation/views/widgets/widgets_views/favorites_view/favorite_view_no_logged.dart'; //agregar en un archivo de barril
+import 'package:studenthive/presentation/views/widgets/favorites_view/favorite_view_logged.dart'; //agregar en un archivo de barril
+import 'package:studenthive/presentation/views/widgets/favorites_view/favorite_view_no_logged.dart'; //agregar en un archivo de barril
 
 class FavoriteView extends ConsumerStatefulWidget {
   final bool isTokenAut;
