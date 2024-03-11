@@ -105,7 +105,7 @@ class _HousePriceState extends State<HousePrice> {
     return Container(
       padding: const EdgeInsets.only(top: 10, bottom: 10, left: 20, right: 20),
       child: const Text(
-        'Se peude cambiar caundo tu quieras.',
+        'Se puede cambiar caundo tu quieras.',
         style: TextStyle(fontSize: 15, color: Colors.grey),
       ),
     );
