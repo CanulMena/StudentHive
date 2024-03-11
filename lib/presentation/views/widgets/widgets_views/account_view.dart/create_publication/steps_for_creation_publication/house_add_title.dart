@@ -89,7 +89,7 @@ class _HouseAddTittleState extends State<HouseAddTittle> {
             pageController: widget.pageController, 
             isButtonEnabled: isButtonEnabled, 
             onNext: () {
-              
+              widget.onNext(title);
             },
             );
         },

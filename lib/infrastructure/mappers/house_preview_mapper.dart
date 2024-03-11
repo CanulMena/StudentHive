@@ -1,5 +1,5 @@
 import 'package:studenthive/domain/entities/entities.dart';
-import 'package:studenthive/infrastructure/models/studenthivedb/house_Preview_studenthivedb.dart';
+import 'package:studenthive/infrastructure/models/studenthivedb/house_preview_studenthivedb.dart';
 
 class HousePreviewMapper {
 

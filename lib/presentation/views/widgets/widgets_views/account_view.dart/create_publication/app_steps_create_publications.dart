@@ -1,18 +1,21 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:studenthive/presentation/provider/house/house_repository_provider.dart';
 import 'package:studenthive/presentation/views/widgets/widgets_views/account_view.dart/create_publication/screen_create_publication.dart';
 import 'package:studenthive/presentation/views/widgets/widgets_views/account_view.dart/create_publication/steps_for_creation_publication/house_detail_single.dart';
 
-class AppStepsCreatePublications extends StatefulWidget {
-  const AppStepsCreatePublications({super.key});
+class AppStepsCreatePublications extends ConsumerStatefulWidget {
+
+  final String typeHouseRental;
+
+  const AppStepsCreatePublications(this.typeHouseRental, {super.key});
 
   @override
-  State<AppStepsCreatePublications> createState() =>
-      _AppStepsCreatePublicationsState();
+  ConsumerState<AppStepsCreatePublications> createState() => _AppStepsCreatePublicationsState();
 }
 
-class _AppStepsCreatePublicationsState
-    extends State<AppStepsCreatePublications> {
+class _AppStepsCreatePublicationsState extends ConsumerState<AppStepsCreatePublications> {
   final PageController pageController = PageController();
 
   double currentPage = 0;
@@ -59,6 +62,7 @@ class _AppStepsCreatePublicationsState
 
   @override
   Widget build(BuildContext context) {
+    final postHouse = ref.read(housesRepositoryProvider).postHouse;
     return Scaffold(
       appBar: AppBar(
         leading: const SizedBox(),
@@ -152,8 +156,35 @@ class _AppStepsCreatePublicationsState
                 ),
                 HousePrice(
                   pageController: pageController,
-                  onNext: (p0) {
+                  onNext: (p0) async {
                     price = int.parse(p0);
+                    await postHouse(
+                      address: address,
+                      city: city,
+                      country: country,
+                      description: description,
+                      gas: isGasAvailable,
+                      airConditioning: isAirConditionerAvailable,
+                      imagePaths: imageFileList.map((e) => e.path).toList(),
+                      kitchen: isKitchenAvailable,
+                      numberOfBathrooms: numberOfBathrooms,
+                      numberOfGuests: numberOfVisitors,
+                      numberOfHammocks: numberOfHammocks,
+                      numberOfRooms: numberOfBeds,
+                      postalCode: postalCode,
+                      state: state,
+                      title: title,
+                      typeHouse: widget.typeHouseRental,
+                      washer: isWasherAvailable,
+                      water: isWaterAvailable,
+                      wifi: isWifiAvailable,
+                      idUser: 6,
+                      neighborhood: neighborhood,
+                      rentPrice: price,
+                      status: false,
+                      television: isTvAvailable,
+                      whoElse: 'IAm',
+                    );
                   },
                 ),
                 // MakeReservationView

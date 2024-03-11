@@ -3,7 +3,7 @@ import 'package:studenthive/domain/datasource/house_datasource.dart';
 import 'package:studenthive/domain/entities/entities.dart';
 import 'package:studenthive/infrastructure/mappers/house_detail_mapper.dart';
 import 'package:studenthive/infrastructure/mappers/house_preview_mapper.dart';
-import 'package:studenthive/infrastructure/models/studenthivedb/house_Preview_studenthivedb.dart';
+import 'package:studenthive/infrastructure/models/studenthivedb/house_preview_studenthivedb.dart';
 import 'package:studenthive/infrastructure/models/studenthivedb/house_details.dart';
 
 class HouseDataSourceImpl extends HouseDataSource{
@@ -100,7 +100,32 @@ class HouseDataSourceImpl extends HouseDataSource{
       "ImagesFiles": imageFiles,
   });
 
-  await dio.post('', data: formData);
+  await dio.post(
+    '?IdUser=$idUser'
+    '&Title=$title'
+    '&Description=$description'
+    '&Status=$status'
+    '&WhoElse=$whoElse'
+    '&RentPrice=$rentPrice'
+    '&TypeHouse=$typeHouse'
+    '&DetailRentalHouse.NumberOfGuests=$numberOfGuests'
+    '&DetailRentalHouse.NumberOfBathrooms=$numberOfBathrooms'
+    '&DetailRentalHouse.NumberOfRooms=$numberOfRooms'
+    '&DetailRentalHouse.NumberOfHammocks=$numberOfHammocks'
+    '&HouseService.Wifi=$wifi'
+    '&HouseService.Kitchen=$kitchen'
+    '&HouseService.Washer=$washer'
+    '&HouseService.AirConditioning=$airConditioning'
+    '&HouseService.Water=$water'
+    '&HouseService.Gas=$gas'
+    '&HouseService.Television=$television'
+    '&HouseLocation.Address=$address'
+    '&HouseLocation.City=$city'
+    '&HouseLocation.State=$state'
+    '&HouseLocation.Country=$country'
+    '&HouseLocation.PostalCode=$postalCode'
+    '&HouseLocation.Neighborhood=$neighborhood',
+    data: formData);
 }
 
 }

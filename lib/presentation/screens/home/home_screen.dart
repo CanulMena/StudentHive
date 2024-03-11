@@ -47,6 +47,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
     final initialLoading = ref.watch(initialLoadingProvider);
     if (initialLoading) return const FullScreenLoading();
 
+
     return Scaffold(
       body: PageView(
         controller: _pageController,

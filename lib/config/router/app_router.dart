@@ -18,8 +18,8 @@ class MyRoute {
           path: '/',
           builder: (context, state) {
             final isTokenAuth = ref.read(isTokenAuthProvider);
-            final isLoading = ref.read(isTokenAuthProvider.notifier).isLoading;
-            if( isLoading ) return const Scaffold( body: Center( child: CircularProgressIndicator(),),);
+            // final isLoading = ref.read(isTokenAuthProvider.notifier).isLoading;
+            // if( isLoading ) return const Scaffold( body: Center( child: CircularProgressIndicator(),),);
             return isTokenAuth ? const HomeScreen() : const LoginScreen();
           },
           routes: [

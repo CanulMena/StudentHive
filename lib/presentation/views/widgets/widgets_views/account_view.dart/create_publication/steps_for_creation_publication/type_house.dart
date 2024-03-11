@@ -43,7 +43,7 @@ class TypeHouseState extends State<TypeHouse> {
                   typeHouseRental  = 'OwnHouse';
                 });
               },
-              route: createPageRoute(const AppStepsCreatePublications()),
+              route: createPageRoute(AppStepsCreatePublications( typeHouseRental )),
             ),
 
             const SizedBox(height: 25),
@@ -60,7 +60,7 @@ class TypeHouseState extends State<TypeHouse> {
                   typeHouseRental = 'Room';
                 });
               },
-              route: createPageRoute(const AppStepsCreatePublications()),
+              route: createPageRoute(AppStepsCreatePublications( typeHouseRental )),
             ),
             
             const SizedBox(height: 25),
@@ -77,7 +77,7 @@ class TypeHouseState extends State<TypeHouse> {
                   typeHouseRental  = 'SharedRoom';
                 });
               },
-              route: createPageRoute(const AppStepsCreatePublications()),
+              route: createPageRoute(AppStepsCreatePublications( typeHouseRental )),
             )
 
           ]),

@@ -3,7 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:studenthive/domain/entities/entities.dart';
 import 'package:studenthive/infrastructure/mappers/house_preview_mapper.dart';
-import 'package:studenthive/infrastructure/models/studenthivedb/house_Preview_studenthivedb.dart';
+import 'package:studenthive/infrastructure/models/studenthivedb/house_preview_studenthivedb.dart';
 
 final favoritesHousesProvider = StateNotifierProvider<FavoritesPostsNotifier, List<HousePreview>>((ref){
   return FavoritesPostsNotifier();
