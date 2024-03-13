@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
-import 'package:image_picker/image_picker.dart';
-import 'package:studenthive/presentation/provider/house/house_preview_provider.dart';
-import 'package:studenthive/presentation/provider/house/house_repository_provider.dart';
+import 'package:studenthive/presentation/provider/providers.dart';
 import 'package:studenthive/presentation/views/widgets/account_view.dart/create_publication/screen_create_publication.dart';
 import 'package:studenthive/presentation/views/widgets/account_view.dart/create_publication/steps_for_creation_publication/house_detail_single.dart';
 
@@ -54,7 +52,7 @@ class _AppStepsCreatePublicationsState extends ConsumerState<AppStepsCreatePubli
   bool isWaterAvailable = false;
   bool isGasAvailable = false;
 
-  List<XFile> imageFileList = [];
+  // List<XFile> imageFileList = [];
 
   String description = '';
 
@@ -64,8 +62,12 @@ class _AppStepsCreatePublicationsState extends ConsumerState<AppStepsCreatePubli
 
   @override
   Widget build(BuildContext context) {
+    //! Every time the widget is built the request it makes the request to the provider
+    final addHouseImages = ref.read(imagesHouseProvider.notifier).addImage;
+
     final postHouse = ref.read(housesRepositoryProvider).postHouse;
     final onRefresh = ref.read(allHousesPreviewProvider.notifier).refreshData;
+    final imageFileList = ref.read(imagesHouseProvider).images;
     final scaffoldMessenger = ScaffoldMessenger.of(context);
     final go = context.go;
     final pop = context.pop;
@@ -141,9 +143,8 @@ class _AppStepsCreatePublicationsState extends ConsumerState<AppStepsCreatePubli
 
                 AddHouseImages(
                   pageController: pageController,
-                  onNext: (p0) {
-                    imageFileList = p0;
-                  },
+                  addHouseImages: addHouseImages,
+                  // Ya no tengo que devolver el imageFileList
                 ),
 
                 ViewImages(
@@ -200,6 +201,8 @@ class _AppStepsCreatePublicationsState extends ConsumerState<AppStepsCreatePubli
                       const SnackBar(content: Text('Casa publicada con exito')),
                     );
 
+                    ref.read(imagesHouseProvider.notifier).reset();
+                    
                     go('/');
 
                     onRefresh();
@@ -216,7 +219,6 @@ class _AppStepsCreatePublicationsState extends ConsumerState<AppStepsCreatePubli
                     });
                   },
                 ),
-                // MakeReservationView
               ],
             ),
           ),

@@ -1,30 +1,30 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_keyboard_visibility/flutter_keyboard_visibility.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:studenthive/presentation/provider/providers.dart';
 import 'package:studenthive/presentation/views/widgets/account_view.dart/create_publication/utils_for_creation_publication/buttom_steps_creationp.dart';
 import 'package:studenthive/presentation/views/widgets/account_view.dart/create_publication/utils_for_creation_publication/container_title_appbar.dart';
 
-class AddHouseImages extends StatefulWidget {
-  final Function(List<XFile>) onNext;
+class AddHouseImages extends ConsumerStatefulWidget {
+  final void Function(ImageSource) addHouseImages;
   final PageController pageController;
-  const AddHouseImages({ super.key, required this.pageController, required this.onNext});
+  const AddHouseImages({ 
+    super.key, 
+    required this.pageController, 
+    required this.addHouseImages,
+    });
 
   @override
-  State<AddHouseImages> createState() => _AddHouseImagesState();
+  ConsumerState<AddHouseImages> createState() => _AddHouseImagesState();
 }
 
-class _AddHouseImagesState extends State<AddHouseImages> {
-  final ImagePicker _picker = ImagePicker();
-
-  final List<XFile> _imageFileList = [];
-
-  dynamic pickImageError;
-  bool isButtomEnable = false;
-  int imageCount = 0; 
+class _AddHouseImagesState extends ConsumerState<AddHouseImages> {
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context,) {
     Size screenSize = MediaQuery.of(context).size;
+    bool isButtonEnabled = ref.watch(imagesHouseProvider.select((state) => state.isButtonEnabled));
     return Scaffold(
       body: Padding(
         padding: const EdgeInsets.symmetric(vertical: 0, horizontal: 12),
@@ -32,10 +32,21 @@ class _AddHouseImagesState extends State<AddHouseImages> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
+
               const TitleAppbar(
-                title:'Da a conocer tu espacio'),
-              _message('Al principio, toma 3 fotos estos lo puedes cambiar despues'),
+                title:'Da a conocer tu espacio'
+                ),
+
+                Container(
+                  padding: const EdgeInsets.symmetric(horizontal: 25, vertical: 10),
+                  child: const Text(
+                    'Agrega fotos de tu espacio para que los visitantes puedan verlo antes de reservar.',
+                    style: TextStyle(fontSize: 15, color: Colors.grey),
+                  ),
+                ),
+
               const SizedBox(height: 20,),
+
               SizedBox(
                 width: screenSize.width * 0.8,
                 height: screenSize.height * 0.1,
@@ -48,7 +59,7 @@ class _AddHouseImagesState extends State<AddHouseImages> {
                       side: MaterialStateProperty.all(
                           const BorderSide(color: Colors.grey))),
                   onPressed: () {
-                    onImageButtonPressed(ImageSource.gallery);
+                    widget.addHouseImages(ImageSource.gallery);
                   },
                   child: const Row(
                     children: [
@@ -80,7 +91,7 @@ class _AddHouseImagesState extends State<AddHouseImages> {
                       side: MaterialStateProperty.all(
                           const BorderSide(color: Colors.grey))),
                   onPressed: () {
-                    onImageButtonPressed(ImageSource.camera);
+                    widget.addHouseImages(ImageSource.camera);
                   },
                   child: Column(
                     children: [
@@ -102,50 +113,12 @@ class _AddHouseImagesState extends State<AddHouseImages> {
           ? const SizedBox() 
           : ButtomStepscreateP( 
             pageController: widget.pageController,
-            isButtonEnabled: isButtomEnable, 
-            onNext: () {
-              widget.onNext(_imageFileList);
-            },
+            isButtonEnabled: isButtonEnabled, 
+            onNext: () {},
           );
         },
       ),
     );
   }
 
-  Widget _message(String message) {
-    return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 25, vertical: 10),
-      child: Text(
-        message,
-        style: const TextStyle(fontSize: 15, color: Colors.grey),
-      ),
-    );
-  }
-
-  onImageButtonPressed(ImageSource source) async {
-    try {
-      final pickedFile = await _picker.pickImage(
-        source: source,
-        maxWidth: 1080,
-        maxHeight: 1080,
-        imageQuality: 100,
-      );
-      if (pickedFile != null) {
-        setState(() {
-          _imageFileList.add(pickedFile);
-        });
-        imageCount++;
-        if (imageCount >= 3) {
-          setState(() {
-            isButtomEnable = true; // Habilita el botón cuando se agregan al menos 3 imágenes
-          });
-        }
-      }
-    } catch (e) {
-      debugPrint(e.toString());
-      setState(() {
-        pickImageError = e;
-      });
-    }
-  }
 }

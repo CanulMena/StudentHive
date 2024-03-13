@@ -7,3 +7,4 @@ export 'package:studenthive/presentation/provider/home/initial_loading_provider.
 export 'package:studenthive/presentation/provider/house/house_preview_provider.dart';
 export 'package:studenthive/presentation/provider/house/house_detail_provider.dart';
 export 'package:studenthive/presentation/provider/house/house_repository_provider.dart';
+export 'package:studenthive/presentation/provider/house/images_house_provider.dart';
