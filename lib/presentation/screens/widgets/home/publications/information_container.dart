@@ -16,13 +16,13 @@ class InformationContainer extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            // Padding(
-            //   padding: const EdgeInsets.only(top: 8),
-            //   child: Text(
-            //     '${informationHousePreview.location.city}, ${informationHousePreview.location.neighborhood}', 
-            //     style: textStyle.titleMedium?.copyWith( fontWeight: FontWeight.w600, fontSize: 16 )
-            //   )
-            // ),
+            Padding(
+              padding: const EdgeInsets.only(top: 8),
+              child: Text(
+                '${informationHousePreview.houseLocation.city}, ${informationHousePreview.houseLocation.neighborhood}', 
+                style: textStyle.titleMedium?.copyWith( fontWeight: FontWeight.w600, fontSize: 16 )
+              )
+            ),
             Padding(
               padding: const EdgeInsets.only(top: 3),
               child: Text(

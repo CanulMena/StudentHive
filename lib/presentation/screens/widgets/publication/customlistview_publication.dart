@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:studenthive/domain/entities/entities.dart';
 import 'package:studenthive/presentation/screens/widgets/publication/custom_sliverappbar_p.ublication.dart';
-
+//TODO: Refactorizar esto
 class CustomListView extends StatelessWidget {
   final House houseDetail;
 
@@ -33,10 +33,11 @@ class _RentalHouseDetils extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final textStyle = Theme.of(context).textTheme;
-    // final String numberOfGuests = (publicationPost.rentalHouseDetail.numberOfGuests > 1) ? '${publicationPost.rentalHouseDetail.numberOfGuests} invitados' : '1 invitado';
-    // final String numberOfBathrooms = (publicationPost.rentalHouseDetail.numberOfBathrooms > 1) ? '${publicationPost.rentalHouseDetail.numberOfBathrooms} baños' : '1 baño';
-    // final String numberOfRooms = (publicationPost.rentalHouseDetail.numberOfRooms > 1) ? '${publicationPost.rentalHouseDetail.numberOfRooms} cuartos' : '1 cuarto';
-    // final String numberOfHammocks = (publicationPost.rentalHouseDetail.numberOfHammocks > 1) ? '${publicationPost.rentalHouseDetail.numberOfHammocks} hamacas' : '1 hamaca';
+    final String numberOfGuests = (houseDetail.rentalHouseDetail.numberOfGuests > 1) ? '${houseDetail.rentalHouseDetail.numberOfGuests} invitados' : '1 invitado';
+    final String numberOfBathrooms = (houseDetail.rentalHouseDetail.numberOfBathrooms > 1) ? '${houseDetail.rentalHouseDetail.numberOfBathrooms} baños' : '1 baño';
+    final String numberOfRooms = (houseDetail.rentalHouseDetail.numberOfRooms > 1) ? '${houseDetail.rentalHouseDetail.numberOfRooms} cuartos' : '1 cuarto';
+    final String numberOfHammocks = (houseDetail.rentalHouseDetail.numberOfHammocks > 1) ? '${houseDetail.rentalHouseDetail.numberOfHammocks} hamacas' : '1 hamaca';
+    final String numbersOfBed = (houseDetail.rentalHouseDetail.numbersOfBed > 1) ? '${houseDetail.rentalHouseDetail.numbersOfBed} camas' : '1 cama';
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -69,7 +70,7 @@ class _RentalHouseDetils extends StatelessWidget {
               ),
 
               Text(//house details
-                '${houseDetail.rentalHouseDetail.numberOfGuests} . ${houseDetail.rentalHouseDetail.numberOfBathrooms} . ${houseDetail.rentalHouseDetail.numberOfRooms} . ${houseDetail.rentalHouseDetail.numberOfHammocks} . ${houseDetail.rentalHouseDetail.numbersOfBed}',
+                '$numberOfGuests ${houseDetail.rentalHouseDetail.numberOfGuests} . $numberOfBathrooms ${houseDetail.rentalHouseDetail.numberOfBathrooms} . $numberOfRooms ${houseDetail.rentalHouseDetail.numberOfRooms} . $numberOfHammocks ${houseDetail.rentalHouseDetail.numberOfHammocks} . $numbersOfBed ${houseDetail.rentalHouseDetail.numbersOfBed}',
                 style: textStyle.bodyMedium?.copyWith(fontWeight: FontWeight.w600, color: Colors.black54),
               ),
 

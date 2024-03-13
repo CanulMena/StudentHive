@@ -9,10 +9,10 @@ class HouseLocation extends StatefulWidget {
   final PageController pageController;
   
   const HouseLocation({
-    Key? key,  
+    super.key,  
     required this.pageController, 
     required this.onNext
-  }) : super(key: key);
+  });
 
   @override
   State<HouseLocation> createState() => _HouseLocationState();

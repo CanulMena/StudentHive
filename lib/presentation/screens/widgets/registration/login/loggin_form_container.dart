@@ -71,7 +71,7 @@ class LogginFormContainer extends ConsumerWidget {
                   const SnackBar(content: Text('El inicio de sesion fue exitoso')), 
                   );
 
-                  go('/home');
+                  go('/');
 
                 } catch( error ) {
                   scaffoldMessenger.showSnackBar(

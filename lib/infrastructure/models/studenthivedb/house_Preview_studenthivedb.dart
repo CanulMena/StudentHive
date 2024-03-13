@@ -39,6 +39,7 @@ class HousePreviewStudentHiveDb {
     final List<String> images;
     final int rentPrice;
     final DateTime publicationDate;
+    final HouseLocation houseLocation;
 
     HousePreviewStudentHiveDb({
         required this.idPublication,
@@ -47,6 +48,7 @@ class HousePreviewStudentHiveDb {
         required this.images,
         required this.rentPrice,
         required this.publicationDate,
+        required this.houseLocation
     });
 
     factory HousePreviewStudentHiveDb.fromJson(Map<String, dynamic> json) => HousePreviewStudentHiveDb(
@@ -55,7 +57,8 @@ class HousePreviewStudentHiveDb {
         nameofUser: json["nameofUser"],
         images: List<String>.from(json["images"].map((x) => x)),
         rentPrice: json["rentPrice"],
-        publicationDate: DateTime.parse(json["publicationDate"]),
+        publicationDate: DateTime.parse(json["publicationDate"]), 
+        houseLocation: HouseLocation.fromJson(json["houseLocation"]),
     );
 
     Map<String, dynamic> toJson() => {
@@ -65,5 +68,47 @@ class HousePreviewStudentHiveDb {
         "images": List<dynamic>.from(images.map((x) => x)),
         "rentPrice": rentPrice,
         "publicationDate": publicationDate.toIso8601String(),
+        "houseLocation": houseLocation.toJson(),
     };
 }
+
+class HouseLocation {
+    final int idLocation;
+    final String address;
+    final String city;
+    final String state;
+    final String country;
+    final String postalCode;
+    final String neighborhood;
+
+    HouseLocation({
+        required this.idLocation,
+        required this.address,
+        required this.city,
+        required this.state,
+        required this.country,
+        required this.postalCode,
+        required this.neighborhood,
+    });
+
+    factory HouseLocation.fromJson(Map<String, dynamic> json) => HouseLocation(
+        idLocation: json["idLocation"],
+        address: json["address"],
+        city: json["city"],
+        state: json["state"],
+        country: json["country"],
+        postalCode: json["postalCode"],
+        neighborhood: json["neighborhood"],
+    );
+
+    Map<String, dynamic> toJson() => {
+        "idLocation": idLocation,
+        "address": address,
+        "city": city,
+        "state": state,
+        "country": country,
+        "postalCode": postalCode,
+        "neighborhood": neighborhood,
+    };
+}
+

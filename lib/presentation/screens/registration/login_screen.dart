@@ -5,30 +5,50 @@ import 'package:studenthive/presentation/screens/widgets/registration/login/blue
 import 'package:studenthive/presentation/screens/widgets/registration/login/loggin_form_container.dart';
 import 'package:studenthive/presentation/screens/widgets/registration/login/hive_icon.dart';
 
-class LoginScreen extends StatelessWidget {
-  const LoginScreen({Key? key}) : super(key: key);
+class LoginScreen extends StatefulWidget {
+  const LoginScreen({super.key});
+
+  @override
+  State<LoginScreen> createState() => _LoginScreenState();
+}
+
+class _LoginScreenState extends State<LoginScreen> {
+  final ScrollController scrollController = ScrollController();
 
   @override
   Widget build(BuildContext context) {
+
     final size = MediaQuery.of(context).size;
+
+    if (MediaQuery.of(context).viewInsets.bottom > 0) {
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      scrollController.animateTo(
+        220,
+        duration: const Duration(milliseconds: 300),
+        curve: Curves.easeOut,
+      );
+    });
+  }
+
     return Scaffold(
       body: SizedBox(
-        width: double.infinity,
-        height: double.infinity,
-        child: Stack(
-          children: [
-            BlueBox(boxHeigh: size.height * 0.75, circularRadius: 200),
-            HiveIcon(size: size.height * 0.001, iconSize: 200),
-            loginForm(context),
-            // closeButton(context, userProvider),
-          ],
+          width: double.infinity,
+          height: double.infinity,
+          child: Stack(
+            children: [
+              BlueBox(boxHeigh: size.height * 0.75, circularRadius: 200),
+              HiveIcon(size: size.height * 0.001, iconSize: 200),
+              loginForm(context)
+              // closeButton(context, userProvider),
+            ],
+          ),
         ),
-      ),
     );
   } 
 
   Widget loginForm(BuildContext context) {
     return SingleChildScrollView(
+      controller: scrollController,
       child: Column(
         children: [
           const SizedBox(height: 250),
