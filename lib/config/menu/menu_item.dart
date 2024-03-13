@@ -13,7 +13,7 @@ class MenuItem {
     });
 }
 
- List<MenuItem> noLoggedMenuItems = [//!No logged menu items
+List<MenuItem> noLoggedMenuItems = [//!No logged menu items
   MenuItem(
     icon: Icons.settings_outlined, 
     title: 'Settings', 

@@ -13,11 +13,11 @@ class WhoElse extends StatefulWidget {
 }
 
 class _WhoElseState extends State<WhoElse> {
+
+  String whoElse = '';
+
   @override
   Widget build(BuildContext context) {
-
-    String whoElse = '';
-
     return Scaffold(
       body: Padding(
         padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 12),

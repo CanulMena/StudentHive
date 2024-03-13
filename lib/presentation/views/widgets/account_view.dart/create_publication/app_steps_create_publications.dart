@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:studenthive/presentation/provider/house/house_preview_provider.dart';
 import 'package:studenthive/presentation/provider/house/house_repository_provider.dart';
 import 'package:studenthive/presentation/views/widgets/account_view.dart/create_publication/screen_create_publication.dart';
 import 'package:studenthive/presentation/views/widgets/account_view.dart/create_publication/steps_for_creation_publication/house_detail_single.dart';
@@ -20,7 +21,7 @@ class _AppStepsCreatePublicationsState extends ConsumerState<AppStepsCreatePubli
   final PageController pageController = PageController();
 
   double currentPage = 0;
-
+  bool isUploading = false;
   @override
   void initState() {
     super.initState();
@@ -64,10 +65,11 @@ class _AppStepsCreatePublicationsState extends ConsumerState<AppStepsCreatePubli
   @override
   Widget build(BuildContext context) {
     final postHouse = ref.read(housesRepositoryProvider).postHouse;
+    final onRefresh = ref.read(allHousesPreviewProvider.notifier).refreshData;
     final scaffoldMessenger = ScaffoldMessenger.of(context);
     final go = context.go;
     final pop = context.pop;
-    return Scaffold(
+    return isUploading ? const Scaffold( body: Center(child: CircularProgressIndicator()),) : Scaffold(
       appBar: AppBar(
         leading: const SizedBox(),
         flexibleSpace: FlexibleSpaceBar(
@@ -162,6 +164,9 @@ class _AppStepsCreatePublicationsState extends ConsumerState<AppStepsCreatePubli
                   pageController: pageController,
                   onNext: (p0) async {
                     price = int.parse(p0);
+                    setState(() {
+                      isUploading = true;
+                    });
                     try{
                       await postHouse(
                       address: address,
@@ -190,12 +195,14 @@ class _AppStepsCreatePublicationsState extends ConsumerState<AppStepsCreatePubli
                       television: isTvAvailable,
                       whoElse: 'IAm',
                     );
-                    
+
                     scaffoldMessenger.showSnackBar(
                       const SnackBar(content: Text('Casa publicada con exito')),
                     );
-                    //TODO: Convertir esto en un gestor de estado
+
                     go('/');
+
+                    onRefresh();
 
                     }  catch (e) {
                       scaffoldMessenger.showSnackBar(
@@ -204,6 +211,9 @@ class _AppStepsCreatePublicationsState extends ConsumerState<AppStepsCreatePubli
 
                     pop();
                     }
+                    setState(() {
+                    isUploading = false;
+                    });
                   },
                 ),
                 // MakeReservationView
