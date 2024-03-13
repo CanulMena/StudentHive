@@ -70,7 +70,7 @@ class _RentalHouseDetils extends StatelessWidget {
               ),
 
               Text(//house details
-                '$numberOfGuests ${houseDetail.rentalHouseDetail.numberOfGuests} . $numberOfBathrooms ${houseDetail.rentalHouseDetail.numberOfBathrooms} . $numberOfRooms ${houseDetail.rentalHouseDetail.numberOfRooms} . $numberOfHammocks ${houseDetail.rentalHouseDetail.numberOfHammocks} . $numbersOfBed ${houseDetail.rentalHouseDetail.numbersOfBed}',
+                '$numberOfGuests . $numberOfBathrooms . $numberOfRooms . $numberOfHammocks . $numbersOfBed',
                 style: textStyle.bodyMedium?.copyWith(fontWeight: FontWeight.w600, color: Colors.black54),
               ),
 
