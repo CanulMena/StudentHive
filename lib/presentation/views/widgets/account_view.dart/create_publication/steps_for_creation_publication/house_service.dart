@@ -188,40 +188,32 @@ class _SwitchListTileExampleState extends State<SwitchListTileExample> {
       iconColor = Colors.amber;
     }
 
-    return GestureDetector(
-      onTap: () {
-        setState(() {
-          _selectOption = !_selectOption;
-          widget.onChanged(_selectOption);
-        });
-      },
-      child: Container(
-        width: size.width * 0.9,
-        height: size.height * 0.1,
-        decoration: BoxDecoration(
-          border: Border.all(
-            color: _selectOption ? Colors.amber : Colors.grey,
-            width: 1,
-          ),
-          borderRadius: BorderRadius.circular(10),
+    return Container(
+      width: size.width * 0.9,
+      height: size.height * 0.1,
+      decoration: BoxDecoration(
+        border: Border.all(
+          color: _selectOption ? Colors.amber : Colors.grey,
+          width: 1,
         ),
-        child: Center(
-          child: SwitchListTile(
-            activeColor: iconColor,
-            title: Text(
-              widget.text,
-              style: const TextStyle(fontSize: 25),
-            ),
-            value: _selectOption,
-            onChanged: (bool value) {
-              setState(() {
-                _selectOption = value;
-                
-              });
-            },
-            secondary: Icon(_selectOption ? widget.iconChanged : widget.icon,
-                size: 45, color: iconColor),
+        borderRadius: BorderRadius.circular(10),
+      ),
+      child: Center(
+        child: SwitchListTile(
+          activeColor: iconColor,
+          title: Text(
+            widget.text,
+            style: const TextStyle(fontSize: 25),
           ),
+          value: _selectOption,
+          onChanged: (bool value) {
+            setState(() {
+              _selectOption = value;              
+            });
+            widget.onChanged(_selectOption);
+          },
+          secondary: Icon(_selectOption ? widget.iconChanged : widget.icon,
+              size: 45, color: iconColor),
         ),
       ),
     );

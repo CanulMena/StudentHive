@@ -41,10 +41,19 @@ class _PublicationsViewState extends ConsumerState<PublicationsView> {
 
   @override
   Widget build(BuildContext context) {
-    final addFavoritesHouses = ref.watch(favoritesHousesProvider.notifier).addFavorites;
-    final removeFavoritesHouses = ref.watch(favoritesHousesProvider.notifier).removeFavorite;
-    final isFavoriteHouse = ref.watch(favoritesHousesProvider.notifier).isFavorite;
-    return  CustomScrollView(
+
+  final addFavoritesHouses = ref.watch(favoritesHousesProvider.notifier).addFavorites;
+  final removeFavoritesHouses = ref.watch(favoritesHousesProvider.notifier).removeFavorite;
+  final isFavoriteHouse = ref.watch(favoritesHousesProvider.notifier).isFavorite;
+
+  Future<void> onRefresh() async {
+    await Future.delayed(const Duration(milliseconds: 300));
+    await ref.read(allHousesPreviewProvider.notifier).loadNextPage();
+  }
+
+  return RefreshIndicator(
+    onRefresh: onRefresh,
+    child: CustomScrollView(
             controller: scrollController,
             slivers: [
               const SliverAppBar(
@@ -76,7 +85,8 @@ class _PublicationsViewState extends ConsumerState<PublicationsView> {
                 );
               })),
             ],
-          );
+          ),
+    );
   }
 }
 
