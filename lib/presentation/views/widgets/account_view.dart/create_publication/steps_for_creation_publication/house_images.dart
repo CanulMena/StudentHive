@@ -48,7 +48,7 @@ class _AddHouseImagesState extends State<AddHouseImages> {
                       side: MaterialStateProperty.all(
                           const BorderSide(color: Colors.grey))),
                   onPressed: () {
-                    _onImageButtonPressed(ImageSource.gallery);
+                    onImageButtonPressed(ImageSource.gallery);
                   },
                   child: const Row(
                     children: [
@@ -80,7 +80,7 @@ class _AddHouseImagesState extends State<AddHouseImages> {
                       side: MaterialStateProperty.all(
                           const BorderSide(color: Colors.grey))),
                   onPressed: () {
-                    _onImageButtonPressed(ImageSource.camera);
+                    onImageButtonPressed(ImageSource.camera);
                   },
                   child: Column(
                     children: [
@@ -122,7 +122,7 @@ class _AddHouseImagesState extends State<AddHouseImages> {
     );
   }
 
-  _onImageButtonPressed(ImageSource source) async {
+  onImageButtonPressed(ImageSource source) async {
     try {
       final pickedFile = await _picker.pickImage(
         source: source,

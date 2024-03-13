@@ -25,7 +25,7 @@ class ViewImages extends StatelessWidget {
 
               const SizedBox(height: 10,),
               
-                ContainerImages(
+                ContainerImages( // This is the main image, the one that is bigger
                   width: screenSize.width * 0.9,
                   height: screenSize.height * 0.3,
                   image: imageFileList[1],
@@ -33,7 +33,7 @@ class ViewImages extends StatelessWidget {
 
               const SizedBox(height: 10,),
 
-              Row(
+              Row( // This is the row of the two images below the main image
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
                   for (int i = 1; i <= 2; i++)
@@ -67,7 +67,9 @@ class ViewImages extends StatelessWidget {
                       const BorderSide(color: Colors.grey),
                     ),
                   ),
-                  onPressed: () {},
+                  onPressed: () {
+                    // _onImageButtonPressed(ImageSource.gallery);
+                  },
                   child: const Row(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
@@ -97,7 +99,9 @@ class ViewImages extends StatelessWidget {
                       const BorderSide(color: Colors.grey),
                     ),
                   ),
-                  onPressed: () {},
+                  onPressed: () {
+                    // _onImageButtonPressed(ImageSource.camera);
+                  },
                   child: Column(
                     children: [
                       Icon(
@@ -119,7 +123,7 @@ class ViewImages extends StatelessWidget {
           : ButtomStepscreateP(
             pageController: pageController, 
             isButtonEnabled: true,
-            onNext: () {},
+            onNext: () {}, // This is the function that is called when the button is pressed
             );
         },
       ),
@@ -133,26 +137,25 @@ class ContainerImages extends StatelessWidget {
   final XFile? image;
 
   const ContainerImages({
-    Key? key,
+    super.key,
     required this.width,
     required this.height,
     required this.image,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(10),
-        border: Border.all(color: Colors.grey),
-      ),
+    return SizedBox(
       width: width,
       height: height,
-      child: image != null
-          ? Image.file(
-              File(image!.path),
-              fit: BoxFit.cover,
-            )
+      child: image != null // This is the image that is shown in the container
+          ? ClipRRect(
+            borderRadius: BorderRadius.circular(10),
+            child: Image.file(
+                File(image!.path),
+                fit: BoxFit.cover,
+              ),
+          )
           : const Center(child: Icon(Icons.image)),
     );
   }
