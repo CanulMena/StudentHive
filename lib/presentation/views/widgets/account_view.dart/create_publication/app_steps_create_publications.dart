@@ -190,7 +190,7 @@ class _AppStepsCreatePublicationsState extends ConsumerState<AppStepsCreatePubli
                       television: isTvAvailable,
                       whoElse: 'IAm',
                     );
-
+                    
                     scaffoldMessenger.showSnackBar(
                       const SnackBar(content: Text('Casa publicada con exito')),
                     );

@@ -33,5 +33,14 @@ class HousesNotifier extends StateNotifier<List<HousePreview>>{
     isLoading = false;
   }
 
-  
+  Future<void> refreshData() async {
+    if( isLoading ) return;
+
+    isLoading = true;
+    currentPage = 1; // Restablece la página a la inicial
+    final List<HousePreview> houses = await fetchMoreHousesPreview(pageSize: 3, pagenNumber: currentPage);
+    state = houses; // Reemplaza las publicaciones existentes con las nuevas
+    await Future.delayed( const Duration(milliseconds: 300) );
+    isLoading = false;
+  }
 }

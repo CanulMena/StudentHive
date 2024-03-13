@@ -15,7 +15,7 @@ class HouseDataSourceImpl extends HouseDataSource{
   );
 
   @override //* Tenemos que agregar los datos
-  Future<List<HousePreview>> getAllHouses({int pageSize = 10, int pagenNumber = 1}) async {
+  Future<List<HousePreview>> getAllHouses({int pageSize = 3, int pagenNumber = 1}) async {
 
     final response = await dio.get("/Publications?pageNumber=$pagenNumber&pageSize=$pageSize");
     

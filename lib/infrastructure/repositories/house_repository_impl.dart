@@ -10,7 +10,7 @@ class HouseRepositoryImpl extends HouseRepository {
 
   @override
   Future<List<HousePreview>> getAllHouses(
-      {int pageSize = 1, int pagenNumber = 1}) {
+      {int pageSize = 3, int pagenNumber = 1}) {
     return houseDataSource.getAllHouses(
         pageSize: pageSize, pagenNumber: pagenNumber);
   }

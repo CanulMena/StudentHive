@@ -45,14 +45,17 @@ class _PublicationsViewState extends ConsumerState<PublicationsView> {
   final addFavoritesHouses = ref.watch(favoritesHousesProvider.notifier).addFavorites;
   final removeFavoritesHouses = ref.watch(favoritesHousesProvider.notifier).removeFavorite;
   final isFavoriteHouse = ref.watch(favoritesHousesProvider.notifier).isFavorite;
+  
 
   Future<void> onRefresh() async {
     await Future.delayed(const Duration(milliseconds: 300));
-    await ref.read(allHousesPreviewProvider.notifier).loadNextPage();
+    await ref.read(allHousesPreviewProvider.notifier).refreshData();
   }
 
   return RefreshIndicator(
     onRefresh: onRefresh,
+    edgeOffset: 2,
+    strokeWidth: 1,
     child: CustomScrollView(
             controller: scrollController,
             slivers: [
