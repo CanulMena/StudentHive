@@ -1,15 +1,21 @@
-import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_keyboard_visibility/flutter_keyboard_visibility.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:studenthive/presentation/views/widgets/account_view.dart/create_publication/utils_for_creation_publication/buttom_steps_creationp.dart';
 import 'package:studenthive/presentation/views/widgets/account_view.dart/create_publication/utils_for_creation_publication/container_title_appbar.dart';
+import 'package:studenthive/presentation/views/widgets/account_view.dart/create_publication/utils_for_creation_publication/image_container.dart'; // refactor this|
 
 class ViewImages extends StatelessWidget {
+  final void Function(ImageSource) addHouseImages;
   final List<XFile> imageFileList;
   final PageController pageController;
 
-  const ViewImages({super.key, required this.pageController, required this.imageFileList});
+  const ViewImages({
+    super.key, 
+    required this.pageController, 
+    required this.imageFileList, 
+    required this.addHouseImages
+    });
 
   @override
   Widget build(BuildContext context) {
@@ -33,22 +39,22 @@ class ViewImages extends StatelessWidget {
 
               const SizedBox(height: 10,),
 
-              Row( // This is the row of the two images below the main image
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: [
-                  ...imageFileList.skip(1).map((e){
-                    return SizedBox(
-                      width: screenSize.width * 0.45,
-                      height: screenSize.height * 0.2,
-                      child: ContainerImages(
-                        image: e,
-                        height: screenSize.height * 0.2,
-                        width: screenSize.width * 0.45,
-                      ),
-                    );
-                  },)
-                ],
-              ),
+              GridView.count(
+              crossAxisCount: 2, // Number of columns
+              childAspectRatio: 1, // Aspect ratio of each item
+              shrinkWrap: true, // If true, the extent of the scroll view in the scrollDirection is determined by the contents being viewed
+              physics: const NeverScrollableScrollPhysics(), // Disables scrolling in the GridView
+              children: imageFileList.skip(1).map((e) {
+                return Padding(
+                  padding: const EdgeInsets.all(8.0), // Add some padding around each image
+                  child: ContainerImages(
+                    image: e,
+                    height: screenSize.height * 0.2,
+                    width: screenSize.width * 0.45,
+                  ),
+                );
+              }).toList(),
+            ),
 
               const SizedBox(height: 20,),
 
@@ -69,7 +75,7 @@ class ViewImages extends StatelessWidget {
                     ),
                   ),
                   onPressed: () {
-                    // _onImageButtonPressed(ImageSource.gallery);
+                    addHouseImages(ImageSource.gallery);
                   },
                   child: const Row(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -101,7 +107,7 @@ class ViewImages extends StatelessWidget {
                     ),
                   ),
                   onPressed: () {
-                    // _onImageButtonPressed(ImageSource.camera);
+                    addHouseImages(ImageSource.camera);
                   },
                   child: Column(
                     children: [
@@ -128,36 +134,6 @@ class ViewImages extends StatelessWidget {
             );
         },
       ),
-    );
-  }
-}
-
-class ContainerImages extends StatelessWidget {
-  final double width;
-  final double height;
-  final XFile? image;
-
-  const ContainerImages({
-    super.key,
-    required this.width,
-    required this.height,
-    required this.image,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return SizedBox(
-      width: width,
-      height: height,
-      child: image != null // This is the image that is shown in the container
-          ? ClipRRect(
-            borderRadius: BorderRadius.circular(10),
-            child: Image.file(
-                File(image!.path),
-                fit: BoxFit.cover,
-              ),
-          )
-          : const Center(child: Icon(Icons.image)),
     );
   }
 }

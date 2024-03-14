@@ -144,12 +144,12 @@ class _AppStepsCreatePublicationsState extends ConsumerState<AppStepsCreatePubli
                 AddHouseImages(
                   pageController: pageController,
                   addHouseImages: addHouseImages,
-                  // Ya no tengo que devolver el imageFileList
                 ),
 
                 ViewImages(
                   pageController: pageController,
                   imageFileList: imageFileList,
+                  addHouseImages: addHouseImages,
                 ),
                 HouseAddTittle(
                   pageController: pageController,
@@ -194,7 +194,7 @@ class _AppStepsCreatePublicationsState extends ConsumerState<AppStepsCreatePubli
                       rentPrice: price,
                       status: false,
                       television: isTvAvailable,
-                      whoElse: 'IAm',
+                      whoElse: whoElse,
                     );
 
                     scaffoldMessenger.showSnackBar(

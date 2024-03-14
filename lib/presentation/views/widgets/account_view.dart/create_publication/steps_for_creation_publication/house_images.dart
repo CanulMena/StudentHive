@@ -5,6 +5,7 @@ import 'package:image_picker/image_picker.dart';
 import 'package:studenthive/presentation/provider/providers.dart';
 import 'package:studenthive/presentation/views/widgets/account_view.dart/create_publication/utils_for_creation_publication/buttom_steps_creationp.dart';
 import 'package:studenthive/presentation/views/widgets/account_view.dart/create_publication/utils_for_creation_publication/container_title_appbar.dart';
+import 'package:studenthive/presentation/views/widgets/account_view.dart/create_publication/utils_for_creation_publication/image_container.dart';
 
 class AddHouseImages extends ConsumerStatefulWidget {
   final void Function(ImageSource) addHouseImages;
@@ -25,6 +26,8 @@ class _AddHouseImagesState extends ConsumerState<AddHouseImages> {
   Widget build(BuildContext context,) {
     Size screenSize = MediaQuery.of(context).size;
     bool isButtonEnabled = ref.watch(imagesHouseProvider.select((state) => state.isButtonEnabled));
+    List<XFile> imageFileList = ref.watch(imagesHouseProvider.select((state) => state.images));
+    
     return Scaffold(
       body: Padding(
         padding: const EdgeInsets.symmetric(vertical: 0, horizontal: 12),
@@ -97,10 +100,24 @@ class _AddHouseImagesState extends ConsumerState<AddHouseImages> {
                     size: screenSize.width * 0.2,
                   ),
                 ),
-              )
+              ),
 
-              //todo: add the images to the screen
-
+              GridView.count(
+              crossAxisCount: 2, // Number of columns
+              childAspectRatio: 1, // Aspect ratio of each item
+              shrinkWrap: true, // If true, the extent of the scroll view in the scrollDirection is determined by the contents being viewed
+              physics: const NeverScrollableScrollPhysics(), // Disables scrolling in the GridView
+              children: imageFileList.map((e) {
+                return Padding(
+                  padding: const EdgeInsets.all(8.0), // Add some padding around each image
+                  child: ContainerImages(
+                    image: e,
+                    height: screenSize.height * 0.2,
+                    width: screenSize.width * 0.45,
+                  ),
+                );
+              }).toList(),
+            )
 
             ],
           ),
