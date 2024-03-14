@@ -37,17 +37,17 @@ class _AddHouseImagesState extends ConsumerState<AddHouseImages> {
                 title:'Da a conocer tu espacio'
                 ),
 
-                Container(
-                  padding: const EdgeInsets.symmetric(horizontal: 25, vertical: 10),
-                  child: const Text(
-                    'Agrega fotos de tu espacio para que los visitantes puedan verlo antes de reservar.',
-                    style: TextStyle(fontSize: 15, color: Colors.grey),
-                  ),
+              Container(
+                padding: const EdgeInsets.symmetric(horizontal: 25, vertical: 10),
+                child: const Text(
+                  'Agrega fotos de tu espacio para que los visitantes puedan verlo antes de reservar.',
+                  style: TextStyle(fontSize: 15, color: Colors.grey),
                 ),
+              ),
 
               const SizedBox(height: 20,),
 
-              SizedBox(
+              SizedBox( // This is the gallery button
                 width: screenSize.width * 0.8,
                 height: screenSize.height * 0.1,
                 child: TextButton(
@@ -63,25 +63,24 @@ class _AddHouseImagesState extends ConsumerState<AddHouseImages> {
                   },
                   child: const Row(
                     children: [
-                      SizedBox(
-                        width: 30,
-                      ),
                       Icon(
                         Icons.add,
                         size: 30,
                       ),
-                      SizedBox(
-                        width: 40,
-                      ),
-                      Text('Agregar fotos', style: TextStyle(fontSize: 20))
+                      Padding(
+                        padding: EdgeInsets.fromLTRB(40, 0, 0, 0),
+                        child: Text('Agregar fotos', style: TextStyle(fontSize: 20)),
+                      )
                     ],
                   ),
                 ),
               ),
+
               SizedBox(
-                height: screenSize.height * 0.07,
+                height: screenSize.height * 0.03,
               ),
-              SizedBox(
+
+              SizedBox( // This is the camera button
                 child: TextButton(
                   style: ButtonStyle(
                       overlayColor: MaterialStateProperty.all(Colors.grey[200]),
@@ -93,16 +92,16 @@ class _AddHouseImagesState extends ConsumerState<AddHouseImages> {
                   onPressed: () {
                     widget.addHouseImages(ImageSource.camera);
                   },
-                  child: Column(
-                    children: [
-                      Icon(
-                        Icons.camera_alt_outlined,
-                        size: screenSize.width * 0.2,
-                      )
-                    ],
+                  child: Icon(
+                    Icons.camera_alt_outlined,
+                    size: screenSize.width * 0.2,
                   ),
                 ),
               )
+
+              //todo: add the images to the screen
+
+
             ],
           ),
         ),

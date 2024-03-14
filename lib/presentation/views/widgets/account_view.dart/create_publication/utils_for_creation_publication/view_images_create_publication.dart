@@ -28,7 +28,7 @@ class ViewImages extends StatelessWidget {
                 ContainerImages( // This is the main image, the one that is bigger
                   width: screenSize.width * 0.9,
                   height: screenSize.height * 0.3,
-                  image: imageFileList[1],
+                  image: imageFileList[0],
                 ),
 
               const SizedBox(height: 10,),
@@ -36,16 +36,17 @@ class ViewImages extends StatelessWidget {
               Row( // This is the row of the two images below the main image
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
-                  for (int i = 1; i <= 2; i++)
-                    SizedBox(
+                  ...imageFileList.skip(1).map((e){
+                    return SizedBox(
                       width: screenSize.width * 0.45,
                       height: screenSize.height * 0.2,
                       child: ContainerImages(
-                        image: imageFileList.length > i ? imageFileList[i] : null,
+                        image: e,
                         height: screenSize.height * 0.2,
                         width: screenSize.width * 0.45,
                       ),
-                    ),
+                    );
+                  },)
                 ],
               ),
 
