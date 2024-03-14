@@ -3,51 +3,52 @@ import 'package:go_router/go_router.dart';
 import 'package:studenthive/config/menu/menu_item.dart';
 import 'package:studenthive/presentation/views/widgets/account_view.dart/custom_list_tile.dart';
 
-class LoggedAppMenuItems extends StatelessWidget { //* Parece que tendre que hacer un getbyid de usaurios para poder tener su infromacion
+class LoggedAppMenuItems extends StatelessWidget {
+  //* Parece que tendre que hacer un getbyid de usaurios para poder tener su infromacion
   final Future<void> Function() desavowToken;
   const LoggedAppMenuItems({super.key, required this.desavowToken});
 
   void openDialog(BuildContext context) {
-  final go = context.go;
-  showDialog( //*showDialog personalizado
-    barrierDismissible: false,
-    context: context,
-    builder: (context) {
-      return AlertDialog(
-        title: const Text('¿Estás seguro?'),
-        content: const Text(
-          '¿Estas seguro que quires salir de tu cuenta?',     
-        ),
-        actions: [
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            FilledButton(
-            onPressed: () {
-            context.pop();
-            },
-            child: const Text('Cancelar'),
+    final go = context.go;
+    showDialog(
+      //*showDialog personalizado
+      barrierDismissible: false,
+      context: context,
+      builder: (context) {
+        return AlertDialog(
+          title: const Text('¿Estás seguro?'),
+          content: const Text(
+            '¿Estas seguro que quires salir de tu cuenta?',
           ),
-          FilledButton(
-            onPressed: () async {
-              await desavowToken();
-              go('/login');
-            },
-            child: const Text('Aceptar'),
-          ),
+          actions: [
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                FilledButton(
+                  onPressed: () {
+                    context.pop();
+                  },
+                  child: const Text('Cancelar'),
+                ),
+                FilledButton(
+                  onPressed: () async {
+                    await desavowToken();
+                    go('/login');
+                  },
+                  child: const Text('Aceptar'),
+                ),
+              ],
+            )
           ],
-        )
-        ],
-      );
-    },
-  );
-}
+        );
+      },
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
     final textStyle = Theme.of(context).textTheme;
     return ListView(
-      
       children: [
         const SizedBox(
           height: 20,
@@ -55,10 +56,9 @@ class LoggedAppMenuItems extends StatelessWidget { //* Parece que tendre que hac
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Text(
-              'Profile',
-              style: textStyle.bodyLarge?.copyWith(fontSize: 32, fontWeight: FontWeight.w600)
-            ),
+            Text('Profile',
+                style: textStyle.bodyLarge
+                    ?.copyWith(fontSize: 32, fontWeight: FontWeight.w600)),
             IconButton(
                 onPressed: () {
                   // context.go('/notification');
@@ -94,16 +94,22 @@ class LoggedAppMenuItems extends StatelessWidget { //* Parece que tendre que hac
         const SizedBox(
           height: 25,
         ),
-        InkWell( //* This is the loggout
+        InkWell(
+          //* This is the loggout
           child: const Text(
             'Log Out',
-            style: TextStyle(fontSize: 18, fontWeight: FontWeight.w600, decoration: TextDecoration.underline),
+            style: TextStyle(
+                fontSize: 18,
+                fontWeight: FontWeight.w600,
+                decoration: TextDecoration.underline),
           ),
           onTap: () {
-            openDialog(context); 
+            openDialog(context);
           },
         ),
-        const SizedBox(height: 25,),
+        const SizedBox(
+          height: 25,
+        ),
         _HorizontalLine()
       ],
     );
@@ -130,21 +136,12 @@ class _ProfileListTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final colors = Theme.of(context).colorScheme;
-    return ListTile(
-      contentPadding: EdgeInsets.zero,
-      leading: const Icon(Icons.person_outline),
-      title: const Text('Name profile'),
-      trailing: Icon(
-        Icons.arrow_forward_ios_rounded,
-        color: colors.primary,
-      ),
-      shape: const Border(
-        bottom: BorderSide(
-          color: Color.fromARGB(255, 201, 197, 197),
-          width: 0.75
-        )
-
+    // final colors = Theme.of(context).colorScheme;
+    return CustomListTile(
+      menuItem: MenuItem(
+        icon: Icons.person_outline_outlined,
+        title: 'Profile',
+        linkRoute: '/profile',
       ),
     );
   }
