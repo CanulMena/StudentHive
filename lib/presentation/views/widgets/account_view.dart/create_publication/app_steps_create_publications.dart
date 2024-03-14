@@ -78,7 +78,7 @@ class _AppStepsCreatePublicationsState extends ConsumerState<AppStepsCreatePubli
           titlePadding: const EdgeInsets.all(0),
           title: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 10),
-            child: StepProgess(currentStep: currentPage, steps: 10),
+            child: StepProgess(currentStep: currentPage, steps: 9),
           ),
         ),
       ),
@@ -146,11 +146,6 @@ class _AppStepsCreatePublicationsState extends ConsumerState<AppStepsCreatePubli
                   addHouseImages: addHouseImages,
                 ),
 
-                ViewImages(
-                  pageController: pageController,
-                  imageFileList: imageFileList,
-                  addHouseImages: addHouseImages,
-                ),
                 HouseAddTittle(
                   pageController: pageController,
                   onNext: (p0) => title = p0,

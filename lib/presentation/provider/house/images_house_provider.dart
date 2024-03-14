@@ -47,6 +47,13 @@ class ImagesHouseProvider extends StateNotifier<ImageState> {
     }
   }
 
+  void removeImage(int index) {
+    state = ImageState(
+      isButtonEnabled: state.images.length - 1 >= 3 ? true : false, 
+      images: state.images..removeAt(index),
+      );
+  }
+
   void reset(){
     state = ImageState(
       isButtonEnabled: false, 
@@ -54,7 +61,4 @@ class ImagesHouseProvider extends StateNotifier<ImageState> {
       );
   }
 
-  // void removeImage(XFile image) {
-  //   state = state.where((element) => element.path != image.path).toList();
-  // }
 }
