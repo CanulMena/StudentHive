@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
-
-import 'package:studenthive/presentation/provider/user/riverpod_user_provider.dart';
+import 'package:studenthive/presentation/provider/providers.dart';
 import 'package:studenthive/presentation/screens/widgets/registration/input_decoration.dart';
 //!NO se por qu este form tiene muchos errores. Tenemos que arreglarlos
 class LogginFormContainer extends ConsumerWidget {
@@ -18,6 +17,7 @@ class LogginFormContainer extends ConsumerWidget {
     final go = context.go;
     final scaffoldMessenger = ScaffoldMessenger.of(context);
     final loginProvider = ref.watch(loginUserProvider);
+    final isTokenAuth = ref.watch(isTokenAuthProvider.notifier).isTokenAuth;
     
     return Container(
       margin: const EdgeInsets.symmetric(horizontal: 22),
@@ -28,9 +28,6 @@ class LogginFormContainer extends ConsumerWidget {
               labelText: "Email",
               hintText: "ejemplo@gmail.com",
               prefixIcon: const Icon(Icons.person, color: Color(0xFF159A9C)),
-              // validator: (value) {
-              //   return validateEmail(value);
-              // },
               controller: emailController,
               
             ),
@@ -42,9 +39,6 @@ class LogginFormContainer extends ConsumerWidget {
               hintText: "********",
               prefixIcon: const Icon(Icons.lock, color: Color(0xFF159A9C)),
               isPassword: true,
-              // validator: (value) {
-              //   return validatePassword(value);
-              // },
               controller:  passwordController,
               
             ),
@@ -66,6 +60,8 @@ class LogginFormContainer extends ConsumerWidget {
                 try {
 
                   await loginProvider(email, password);
+
+                  await isTokenAuth();
 
                   scaffoldMessenger.showSnackBar(
                   const SnackBar(content: Text('El inicio de sesion fue exitoso')), 
@@ -165,15 +161,4 @@ class LogginFormContainer extends ConsumerWidget {
       ],
     );
   }
-
-  // String? validateEmail(String? value) {
-  //   const pattern =
-  //       r'(^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$)';
-  //   final regExp = RegExp(pattern);
-  //   return regExp.hasMatch(value ?? '') ? null : 'El correo no es válido';
-  // }
-
-  // String? validatePassword(String? value) {
-  //   return (value != null && value.length >= 6) ? null : 'La contraseña debe tener al menos 6 caracteres';
-  // }
 }

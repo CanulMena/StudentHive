@@ -16,10 +16,12 @@ class ContainerImages extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
-      width: width,
-      height: height,
-      child: image != null // This is the image that is shown in the container
+    return Stack(
+      children: [
+        SizedBox(
+        width: width,
+        height: height,
+        child: image != null // This is the image that is shown in the container
           ? ClipRRect(
             borderRadius: BorderRadius.circular(10),
             child: Image.file(
@@ -28,6 +30,25 @@ class ContainerImages extends StatelessWidget {
               ),
           )
           : const Center(child: Icon(Icons.image)),
+        ),
+
+        Positioned(
+          top: 5,
+          right: 5,
+          child: Container(
+            decoration: BoxDecoration(
+              color: Colors.white,
+              borderRadius: BorderRadius.circular(10),
+            ),
+            child: IconButton(
+              onPressed: () {
+                // removeHouseImage(index);
+              },
+              icon: const Icon(Icons.close, color: Colors.red,),
+            ),
+          ),
+        ),
+      ]
     );
   }
 }

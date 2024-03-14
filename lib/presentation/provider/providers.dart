@@ -8,3 +8,5 @@ export 'package:studenthive/presentation/provider/house/house_preview_provider.d
 export 'package:studenthive/presentation/provider/house/house_detail_provider.dart';
 export 'package:studenthive/presentation/provider/house/house_repository_provider.dart';
 export 'package:studenthive/presentation/provider/house/images_house_provider.dart';
+export 'package:studenthive/presentation/provider/user/user_respository_provider.dart';
+export 'package:studenthive/presentation/provider/user/riverpod_user_provider.dart';

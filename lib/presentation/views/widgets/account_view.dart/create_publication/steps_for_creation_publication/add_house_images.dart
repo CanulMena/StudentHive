@@ -9,11 +9,13 @@ import 'package:studenthive/presentation/views/widgets/account_view.dart/create_
 
 class AddHouseImages extends ConsumerStatefulWidget {
   final void Function(ImageSource) addHouseImages;
+  final void Function(int) removeHouseImage;
   final PageController pageController;
   const AddHouseImages({ 
     super.key, 
     required this.pageController, 
     required this.addHouseImages,
+    required this.removeHouseImage
     });
 
   @override
