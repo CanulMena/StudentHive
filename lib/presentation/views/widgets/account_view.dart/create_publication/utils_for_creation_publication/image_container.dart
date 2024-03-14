@@ -1,17 +1,20 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:studenthive/presentation/screens/widgets/auth_register_dialog.dart';
 
 class ContainerImages extends StatelessWidget {
   final double width;
   final double height;
   final XFile? image;
+  final VoidCallback deleteImage;
 
   const ContainerImages({
     super.key,
     required this.width,
     required this.height,
-    required this.image,
+    required this.image, 
+    required this.deleteImage,
   });
 
   @override
@@ -33,19 +36,17 @@ class ContainerImages extends StatelessWidget {
         ),
 
         Positioned(
-          top: 5,
-          right: 5,
-          child: Container(
-            decoration: BoxDecoration(
-              color: Colors.white,
-              borderRadius: BorderRadius.circular(10),
-            ),
-            child: IconButton(
-              onPressed: () {
-                // removeHouseImage(index);
-              },
-              icon: const Icon(Icons.close, color: Colors.red,),
-            ),
+          top: 3,
+          right: 2,
+          child: IconButton(
+            onPressed: () {
+              DialogUtils.openDialogImageAlert( context, deleteImage );
+            },
+            icon: const Icon(
+              Icons.more_vert_rounded, 
+              color: Colors.black87,
+              size: 20,
+              ),
           ),
         ),
       ]

@@ -48,10 +48,12 @@ class ImagesHouseProvider extends StateNotifier<ImageState> {
   }
 
   void removeImage(int index) {
-    state = ImageState(
-      isButtonEnabled: state.images.length - 1 >= 3 ? true : false, 
-      images: state.images..removeAt(index),
-      );
+  List<XFile> newImages = List.from(state.images); // Create a new list from the existing one
+  newImages.removeAt(index); // Remove the image from the new list
+  state = ImageState(
+    isButtonEnabled: newImages.length >= 3 ? true : false, 
+    images: newImages, // Update the state with the new list
+    );
   }
 
   void reset(){

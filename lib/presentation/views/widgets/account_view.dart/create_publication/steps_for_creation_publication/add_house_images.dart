@@ -58,6 +58,7 @@ class _AddHouseImagesState extends ConsumerState<AddHouseImages> {
                 width: screenSize.width * 0.9,
                 height: screenSize.height * 0.3,
                 image: imageFileList[0],
+                deleteImage: () => widget.removeHouseImage(0),
               ),
 
               const SizedBox( height: 20,),
@@ -74,6 +75,10 @@ class _AddHouseImagesState extends ConsumerState<AddHouseImages> {
                     image: e,
                     height: screenSize.height * 0.2,
                     width: screenSize.width * 0.45,
+                    deleteImage: (){
+                      int index = ref.read(imagesHouseProvider).images.indexOf(e);
+                      widget.removeHouseImage(index);
+                    },
                     ),
                   );
                 }).toList(),

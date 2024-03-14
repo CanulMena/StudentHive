@@ -38,7 +38,7 @@ class _PublicationContainerState extends State<PublicationContainer> {
       }
       setState(() {});
     } else {
-      DialogUtils.openDialog(context);
+      DialogUtils.openDialogAuth(context);
     }
   }
 
