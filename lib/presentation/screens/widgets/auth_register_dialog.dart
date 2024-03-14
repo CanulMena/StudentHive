@@ -8,7 +8,7 @@ class DialogUtils {
       context: context, 
       builder: (context) {
         return AlertDialog(
-          title: const Text('Are you sure you want to delete the photo?', style: TextStyle(fontWeight: FontWeight.bold)),
+          title: const Text('Sure?', style: TextStyle(fontWeight: FontWeight.bold)),
           actions: [
 
             TextButton(
@@ -18,10 +18,12 @@ class DialogUtils {
               child: const Text('Cancel', style: TextStyle(color: Colors.red)),
             ),
 
+            const SizedBox( width: 20,),
+
             TextButton(
               onPressed: () {
                 // deleteImage is a function that deletes the image
-                deleteImage();
+                deleteImage();  
                 context.pop();
               }, 
               child: const Text('Sure', style: TextStyle(color: Colors.blue)),

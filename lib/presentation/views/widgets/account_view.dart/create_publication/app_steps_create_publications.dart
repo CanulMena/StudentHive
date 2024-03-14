@@ -141,7 +141,7 @@ class _AppStepsCreatePublicationsState extends ConsumerState<AppStepsCreatePubli
                     });
                   },
                 ),
-
+  
                 AddHouseImages(
                   pageController: pageController,
                   addHouseImages: addHouseImages,
