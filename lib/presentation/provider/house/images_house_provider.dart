@@ -35,9 +35,9 @@ class ImagesHouseProvider extends StateNotifier<ImageState> {
         imageQuality: 100,
       );
       if (pickedFile != null) {
-        state = ImageState(
+        state = ImageState( //* Update the state with the new image
           isButtonEnabled: state.images.length + 1 >= 3 ? true : false, 
-          images: [...state.images, pickedFile],
+          images: [...state.images, pickedFile], // Add the new image to the private list
           );
         
       }

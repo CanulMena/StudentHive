@@ -66,9 +66,10 @@ class _AppStepsCreatePublicationsState extends ConsumerState<AppStepsCreatePubli
     final addHouseImages = ref.read(imagesHouseProvider.notifier).addImage;
     final removeHouseImage = ref.read(imagesHouseProvider.notifier).removeImage;
 
+    final imageFileList = ref.read(imagesHouseProvider).images;
+    
     final postHouse = ref.read(housesRepositoryProvider).postHouse;
     final onRefresh = ref.read(allHousesPreviewProvider.notifier).refreshData;
-    final imageFileList = ref.read(imagesHouseProvider).images;
     final scaffoldMessenger = ScaffoldMessenger.of(context);
     final go = context.go;
     final pop = context.pop;
@@ -173,7 +174,7 @@ class _AppStepsCreatePublicationsState extends ConsumerState<AppStepsCreatePubli
                       description: description,
                       gas: isGasAvailable,
                       airConditioning: isAirConditionerAvailable,
-                      imagePaths: imageFileList.map((e) => e.path).toList(),
+                      imagePaths: imageFileList.map((e) => e.path).toList(), //This is the list of images done by the user
                       kitchen: isKitchenAvailable,
                       numberOfBathrooms: numberOfBathrooms,
                       numberOfGuests: numberOfVisitors,
