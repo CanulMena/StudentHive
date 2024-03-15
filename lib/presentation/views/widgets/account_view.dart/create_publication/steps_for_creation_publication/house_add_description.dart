@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_keyboard_visibility/flutter_keyboard_visibility.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:studenthive/presentation/provider/house/description_house_provider.dart'; //todo: agergar esto al archivo de barril
+import 'package:studenthive/presentation/provider/providers.dart';
 import 'package:studenthive/presentation/views/widgets/account_view.dart/create_publication/utils_for_creation_publication/buttom_steps_creationp.dart';
 import 'package:studenthive/presentation/views/widgets/account_view.dart/create_publication/utils_for_creation_publication/container_title_appbar.dart';
 
@@ -35,6 +35,7 @@ class _HouseAddDescriptionState extends ConsumerState<HouseAddDescription> {
   @override
   void initState() {
     super.initState();
+    descriptionController.text = ref.read(descriptionHouseProvider);
     _addListeners();
   }
 

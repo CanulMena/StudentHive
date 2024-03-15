@@ -1,11 +1,11 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-final descriptionHouseProvider = StateNotifierProvider<TitleHouseNotifier, String>((ref) {
-  return TitleHouseNotifier();
+final descriptionHouseProvider = StateNotifierProvider<DescriptionHouseNotifier, String>((ref) {
+  return DescriptionHouseNotifier();
 });
 
-class TitleHouseNotifier extends StateNotifier<String> {
-  TitleHouseNotifier() : super('');
+class DescriptionHouseNotifier extends StateNotifier<String> {
+  DescriptionHouseNotifier() : super('');
 
   void setDescription(String description) {
     state = description;
