@@ -10,7 +10,7 @@ class AppStepsCreatePublications extends ConsumerStatefulWidget {
 
   final String typeHouseRental;
 
-  const AppStepsCreatePublications(this.typeHouseRental, {super.key});
+  const AppStepsCreatePublications({super.key, required this.typeHouseRental});
 
   @override
   ConsumerState<AppStepsCreatePublications> createState() => _AppStepsCreatePublicationsState();

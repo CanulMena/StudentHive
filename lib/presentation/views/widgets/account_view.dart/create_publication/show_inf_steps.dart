@@ -86,57 +86,57 @@ class _ShowInfoSteps extends StatelessWidget {
     required this.stepNumber,
   });
 
-  @override
-  Widget build(BuildContext context) {
-    final size = MediaQuery.of(context).size;
-    final textStyle = Theme.of(context).textTheme;
-    return Container(
-        margin: const EdgeInsets.symmetric(vertical: 5),
-        width: size.width * 1,
-        height: size.height * 0.18,
-        decoration: const BoxDecoration(
-          border: Border(bottom: BorderSide(color: Colors.grey, width: 0.75)),
-        ),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.start,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 8),
-              child: Text(
-                stepNumber,
-                style: const TextStyle(
-                  fontSize: 20,
-                  fontWeight: FontWeight.w500,
-                ),
+@override
+Widget build(BuildContext context) {
+  final size = MediaQuery.of(context).size;
+  final textStyle = Theme.of(context).textTheme;
+  return Container(
+      margin: const EdgeInsets.symmetric(vertical: 5),
+      width: size.width * 1,
+      height: size.height * 0.18,
+      decoration: const BoxDecoration(
+        border: Border(bottom: BorderSide(color: Colors.grey, width: 0.75)),
+      ),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 8),
+            child: Text(
+              stepNumber,
+              style: const TextStyle(
+                fontSize: 20,
+                fontWeight: FontWeight.w500,
               ),
             ),
-            const SizedBox(
-              width: 10,
-            ),
-            Expanded(
-              //*Gracias al expanded pueda hacer que esto sea flexible.
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    title,
-                    style: const TextStyle(
-                      fontSize: 20,
-                      fontWeight: FontWeight.w600,
-                    ),
-                    maxLines: null,
+          ),
+          const SizedBox(
+            width: 10,
+          ),
+          Expanded(
+            //*Gracias al expanded pueda hacer que esto sea flexible.
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  title,
+                  style: const TextStyle(
+                    fontSize: 20,
+                    fontWeight: FontWeight.w600,
                   ),
-                  Text(
-                    subtitle,
-                    style:
-                        textStyle.bodyMedium?.copyWith(color: Colors.black54),
-                  )
-                ],
-              ),
+                  maxLines: null,
+                ),
+                Text(
+                  subtitle,
+                  style:
+                      textStyle.bodyMedium?.copyWith(color: Colors.black54),
+                )
+              ],
             ),
-            Icon(icon)
-          ],
-        ));
-  }
+          ),
+          Icon(icon)
+        ],
+      ));
+}
 }

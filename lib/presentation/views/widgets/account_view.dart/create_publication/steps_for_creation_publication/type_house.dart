@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:studenthive/presentation/views/widgets/account_view.dart/create_publication/app_steps_create_publications.dart';//TODO: Refactorizar esto
-import 'package:studenthive/presentation/views/widgets/account_view.dart/create_publication/routerAnimation/router_animation.dart';
-import 'package:studenthive/presentation/views/widgets/account_view.dart/create_publication/utils_for_creation_publication/container_title_appbar.dart';
+import 'package:go_router/go_router.dart';
+import 'package:studenthive/presentation/views/widgets/account_view.dart/create_publication/utils_for_creation_publication/container_title_appbar.dart'; // refactor this
 
 class TypeHouse extends StatefulWidget {
   const TypeHouse({super.key});
@@ -43,7 +42,7 @@ class TypeHouseState extends State<TypeHouse> {
                   typeHouseRental  = 'OwnHouse';
                 });
               },
-              route: createPageRoute(AppStepsCreatePublications( typeHouseRental )),
+              path: '/create-publication/type-house/create-publication-steps/$typeHouseRental',
             ),
 
             const SizedBox(height: 25),
@@ -60,7 +59,7 @@ class TypeHouseState extends State<TypeHouse> {
                   typeHouseRental = 'Room';
                 });
               },
-              route: createPageRoute(AppStepsCreatePublications( typeHouseRental )),
+              path: '/create-publication/type-house/create-publication-steps/$typeHouseRental',
             ),
             
             const SizedBox(height: 25),
@@ -77,7 +76,7 @@ class TypeHouseState extends State<TypeHouse> {
                   typeHouseRental  = 'SharedRoom';
                 });
               },
-              route: createPageRoute(AppStepsCreatePublications( typeHouseRental )),
+              path: '/create-publication/type-house/create-publication-steps/$typeHouseRental',
             )
 
           ]),
@@ -89,21 +88,20 @@ class TypeHouseState extends State<TypeHouse> {
 
 class OptionsContainerSelector extends StatelessWidget {
   const OptionsContainerSelector(
-      {Key? key,
+      {super.key,
       required this.title,
       required this.desciption,
       required this.icon,
       required this.isSelected,
       required this.onTap,
-      required this.route})
-      : super(key: key);
+      required this.path});
 
   final String title;
   final String desciption;
   final IconData icon;
   final bool isSelected;
   final VoidCallback onTap;
-  final PageRoute route;
+  final String path;
 
   @override
   Widget build(BuildContext context) {
@@ -112,7 +110,7 @@ class OptionsContainerSelector extends StatelessWidget {
       onTap: () {
         onTap();
         if (isSelected) {
-          Navigator.of(context).push(route);
+          context.push(path);
         }
       },
       child: Container(
@@ -127,48 +125,46 @@ class OptionsContainerSelector extends StatelessWidget {
           borderRadius: BorderRadius.circular(10),
         ),
         child: 
-          Expanded(
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.start,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
+          Row(
+            mainAxisAlignment: MainAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
           
-                Expanded(
-                  child: Padding(
-                    padding: const EdgeInsets.only(left: 18),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                    
-                        Text(
-                        title,
-                        style: const TextStyle(
-                          fontSize: 20,
-                          fontWeight: FontWeight.w600,
-                          ),
+              Expanded(
+                child: Padding(
+                  padding: const EdgeInsets.only(left: 18),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                  
+                      Text(
+                      title,
+                      style: const TextStyle(
+                        fontSize: 20,
+                        fontWeight: FontWeight.w600,
                         ),
-                            
-                        Text(desciption, style: const TextStyle(color: Colors.black54),),
-                    
-                      ],
-                    
-                    ),
+                      ),
+                          
+                      Text(desciption, style: const TextStyle(color: Colors.black54),),
+                  
+                    ],
+                  
                   ),
                 ),
+              ),
 
-                Padding(
-                  padding: const EdgeInsets.all(6),
-                  child: Icon(
-                    icon,
-                    size: 40,
-                  ),
+              Padding(
+                padding: const EdgeInsets.all(6),
+                child: Icon(
+                  icon,
+                  size: 40,
                 ),
+              ),
           
-                const SizedBox(width: 10,),
+              const SizedBox(width: 10,),
 
-              ],
-            ),
+            ],
           ),
         ),
       );
