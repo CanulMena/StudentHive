@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
-import 'package:studenthive/presentation/provider/house/location_house_provider.dart';
 import 'package:studenthive/presentation/provider/providers.dart';
 import 'package:studenthive/presentation/views/widgets/account_view.dart/create_publication/screen_create_publication.dart';
 import 'package:studenthive/presentation/views/widgets/account_view.dart/create_publication/steps_for_creation_publication/house_detail_single.dart';
@@ -45,8 +44,6 @@ class _AppStepsCreatePublicationsState extends ConsumerState<AppStepsCreatePubli
   bool isAirConditionerAvailable = false;
   bool isWaterAvailable = false;
   bool isGasAvailable = false;
-
-  // List<XFile> imageFileList = [];
 
   String description = '';
 
