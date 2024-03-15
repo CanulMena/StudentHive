@@ -1,6 +1,14 @@
 import 'package:flutter/material.dart';
 
 class ContainerDetailHouse extends StatelessWidget {
+
+  final String text;
+  final IconData iconMore;
+  final IconData iconLess;
+  final int counter;
+  final VoidCallback onIncrement;
+  final VoidCallback onDecrement;
+
   const ContainerDetailHouse({
     super.key,
     required this.text,
@@ -10,13 +18,6 @@ class ContainerDetailHouse extends StatelessWidget {
     required this.onIncrement,
     required this.onDecrement,
   });
-
-  final String text;
-  final IconData iconMore;
-  final IconData iconLess;
-  final int counter;
-  final VoidCallback onIncrement;
-  final VoidCallback onDecrement;
 
   @override
   Widget build(BuildContext context) {

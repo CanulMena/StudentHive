@@ -30,11 +30,6 @@ class _AppStepsCreatePublicationsState extends ConsumerState<AppStepsCreatePubli
     });
   }
 
-  int numberOfVisitors = 0;
-  int numberOfBeds = 0;
-  int numberOfHammocks = 0;
-  int numberOfBathrooms = 0;
-
   String whoElse = '';
 
   String description = '';
@@ -66,6 +61,11 @@ class _AppStepsCreatePublicationsState extends ConsumerState<AppStepsCreatePubli
     final isAirConditionerAvailable = ref.read(houseServicesProvider).isAirConditionerAvailable;
     final isWaterAvailable = ref.read(houseServicesProvider).isWaterAvailable;
     final isGasAvailable = ref.read(houseServicesProvider).isGasAvailable;
+
+    final numberOfBathrooms = ref.read(detailHouseProvider).numberOfBathrooms;
+    final numberOfVisitors = ref.read(detailHouseProvider).numberOfVisitors;
+    final numberOfHammocks = ref.read(detailHouseProvider).numberOfHammocks;
+    final numberOfBeds = ref.read(detailHouseProvider).numberOfBeds;
 
     final postHouse = ref.read(housesRepositoryProvider).postHouse;
     final onRefresh = ref.read(allHousesPreviewProvider.notifier).refreshData;
@@ -101,14 +101,6 @@ class _AppStepsCreatePublicationsState extends ConsumerState<AppStepsCreatePubli
 
                 DetailsSingleHouse(
                   pageController: pageController, 
-                  onNext: (p0, p1, p2, p3) {
-                    setState(() {
-                      numberOfVisitors = p0;
-                      numberOfBeds = p1;
-                      numberOfHammocks = p2;
-                      numberOfBathrooms = p3;
-                    });
-                  },
                   ),
                   
                 WhoElse(
@@ -181,6 +173,7 @@ class _AppStepsCreatePublicationsState extends ConsumerState<AppStepsCreatePubli
                     ref.read(imagesHouseProvider.notifier).reset();
                     ref.read(locationHouseProvider.notifier).reset();
                     ref.read(houseServicesProvider.notifier).reset();
+                    ref.read(detailHouseProvider.notifier).reset();
                     
                     go('/');
 

@@ -12,3 +12,4 @@ export 'package:studenthive/presentation/provider/user/user_respository_provider
 export 'package:studenthive/presentation/provider/user/riverpod_user_provider.dart';
 export 'package:studenthive/presentation/provider/house/house_services_provider.dart';
 export 'package:studenthive/presentation/provider/house/location_house_provider.dart';
+export 'package:studenthive/presentation/provider/house/detail_house_provider.dart';
