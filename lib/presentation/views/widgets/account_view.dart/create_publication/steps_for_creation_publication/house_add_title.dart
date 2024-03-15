@@ -36,6 +36,7 @@ class _HouseAddTittleState extends ConsumerState<HouseAddTittle> {
   @override
   void initState() {
     super.initState();
+    titleController.text = ref.read(titleHouseProvider);
     _addListeners();
   }
 
@@ -71,7 +72,7 @@ class _HouseAddTittleState extends ConsumerState<HouseAddTittle> {
                         borderRadius: BorderRadius.all(Radius.circular(10))),
                   ),
                   onChanged: (value) {
-                    ref.read(titleHouseProvider.notifier).setTitle(value);
+                    ref.read(titleHouseProvider.notifier).setTitle(value); // i add the value from the title input to the provider 
                   },
                 ),
               ),
