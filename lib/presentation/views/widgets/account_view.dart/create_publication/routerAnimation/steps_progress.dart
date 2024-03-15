@@ -35,45 +35,43 @@ class _StepProgessState extends State<StepProgess> {
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
-    return Expanded(
-      child: Row(
-        children: [
-          Row(
-            children: [
-              Container(
-                height: size.height * 0.01,
-                width: size.width * 0.8,
-                decoration: BoxDecoration(
-                    color: Colors.grey.withOpacity(0.4),
-                    borderRadius: const BorderRadius.all(Radius.circular(8))),
-                child: Stack(
-                  children: [
-                    AnimatedContainer(
-                      width: longProgress * widget.currentStep,
-                      duration: const Duration(milliseconds: 300),
-                      decoration: BoxDecoration(
-                          color: Colors.yellow.shade800,
-                          borderRadius: const BorderRadius.all(Radius.circular(8))),
-                    ),
-                  ],
-                ),
+    return Row(
+      children: [
+        Row(
+          children: [
+            Container(
+              height: size.height * 0.01,
+              width: size.width * 0.8,
+              decoration: BoxDecoration(
+                  color: Colors.grey.withOpacity(0.4),
+                  borderRadius: const BorderRadius.all(Radius.circular(8))),
+              child: Stack(
+                children: [
+                  AnimatedContainer(
+                    width: longProgress * widget.currentStep,
+                    duration: const Duration(milliseconds: 300),
+                    decoration: BoxDecoration(
+                        color: Colors.yellow.shade800,
+                        borderRadius: const BorderRadius.all(Radius.circular(8))),
+                  ),
+                ],
               ),
-    
-            ],
-          ),
-
-          const Spacer(),
-
-          Text(
-            '${(widget.currentStep + 1).toInt()} / ${widget.steps.toInt()}',
-            style: const TextStyle(
-              fontSize: 12,
-              color: Colors.black54
             ),
-          ),
+    
+          ],
+        ),
 
-        ],
-      ),
+        const Spacer(),
+
+        Text(
+          '${(widget.currentStep + 1).toInt()} / ${widget.steps.toInt()}',
+          style: const TextStyle(
+            fontSize: 12,
+            color: Colors.black54
+          ),
+        ),
+
+      ],
     );
   } 
 

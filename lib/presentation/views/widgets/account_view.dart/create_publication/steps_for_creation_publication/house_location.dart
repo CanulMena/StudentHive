@@ -5,13 +5,13 @@ import 'package:studenthive/presentation/views/widgets/account_view.dart/create_
 import 'package:studenthive/presentation/views/widgets/account_view.dart/create_publication/utils_for_creation_publication/container_title_appbar.dart';
 
 class HouseLocation extends StatefulWidget {
-  final Function(String, String, String, String, String, String) onNext;
+  final void Function(String, String, String, String, String, String) locationHouse;
   final PageController pageController;
   
   const HouseLocation({
     super.key,  
     required this.pageController, 
-    required this.onNext
+    required this.locationHouse
   });
 
   @override
@@ -40,17 +40,20 @@ class _HouseLocationState extends State<HouseLocation> {
                 title: '¿Cuál es la ubicación de tu espacio?',
               ),
               ContainerFormLocation(
-                onFieldChanged: (pc, co, ci, st, ad, ne, isb) {
-                  setState(() {
-                  postalCode = pc;
-                  country = co;
-                  city = ci;
-                  state = st;
-                  address = ad;
-                  neighborhood = ne;
-                  isButtonEnabled = isb;
-                });
-                },
+                locationHouse: widget.locationHouse,
+              
+                // onFieldChanged: (pc, co, ci, st, ad, ne, isb) {
+                //   setState(() {
+                //   postalCode = pc;
+                //   country = co;
+                //   city = ci;
+                //   state = st;
+                //   address = ad;
+                //   neighborhood = ne;
+                //   isButtonEnabled = isb;
+                // });
+                // },
+                
               ),              
             ],
           ),
@@ -64,17 +67,7 @@ class _HouseLocationState extends State<HouseLocation> {
           : ButtomStepscreateP(
             pageController: widget.pageController, 
             isButtonEnabled: true, 
-            onNext: () { 
-              widget.onNext(
-                postalCode,
-                country,
-                city,
-                state,
-                address,
-                neighborhood
-              );
-            },
-            
+            onNext: () { },
             );
         },
       ),
@@ -83,10 +76,12 @@ class _HouseLocationState extends State<HouseLocation> {
 }
 
 class ContainerFormLocation extends StatefulWidget {
-  final Function(String, String, String, String, String, String, bool) onFieldChanged; //estoy enviando una funcion
 
+  final void Function(String, String, String, String, String, String) locationHouse;
+  // final Function(String, String, String, String, String, String, bool) onFieldChanged; //estoy enviando una funcion
+  
 
-  const ContainerFormLocation({ super.key, required this.onFieldChanged});
+  const ContainerFormLocation({ super.key, required this.locationHouse, /* required this.onFieldChanged */});
 
   @override
   State<ContainerFormLocation> createState() => _ContainerFormLocationState();
@@ -209,15 +204,23 @@ class _ContainerFormLocationState extends State<ContainerFormLocation> {
         ),
         onChanged: (_) {
           //* Llama a la función de devolución de llamada cada vez que cambia el texto
-          widget.onFieldChanged(
+          widget.locationHouse(
             postalCodeController.text,
             countryController.text,
             cityController.text,
             stateController.text,
             addressController.text,
             neighborhoodController.text,
-            isButtonEnabled
           );
+          // widget.onFieldChanged(
+          //   postalCodeController.text,
+          //   countryController.text,
+          //   cityController.text,
+          //   stateController.text,
+          //   addressController.text,
+          //   neighborhoodController.text,
+          //   isButtonEnabled
+          // );
         },
       ),
     );

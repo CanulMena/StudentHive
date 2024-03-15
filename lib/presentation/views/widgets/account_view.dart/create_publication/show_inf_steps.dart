@@ -9,9 +9,9 @@ class CreatePublicationInit extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(),
-        body: const SafeArea(
-          child: Padding(
-            padding: EdgeInsets.symmetric(vertical: 8, horizontal: 12),
+        body: const Padding(
+          padding: EdgeInsets.symmetric(vertical: 8, horizontal: 12),
+          child: SafeArea(
             child: SingleChildScrollView(
               child: Column(children: [
                 TitleAppbar(title: 'Comparte tu espacio de manera sencilla'),
@@ -127,12 +127,10 @@ class _ShowInfoSteps extends StatelessWidget {
                     ),
                     maxLines: null,
                   ),
-                  Flexible(
-                    child: Text(
-                      subtitle,
-                      style:
-                          textStyle.bodyMedium?.copyWith(color: Colors.black54),
-                    ),
+                  Text(
+                    subtitle,
+                    style:
+                        textStyle.bodyMedium?.copyWith(color: Colors.black54),
                   )
                 ],
               ),

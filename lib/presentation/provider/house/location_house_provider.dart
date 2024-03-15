@@ -18,8 +18,7 @@ class LocationHouseState {
   });
 }
 
-final locationHouseProvider =
-    StateNotifierProvider<LocationHouseNotifier, LocationHouseState>((ref) {
+final locationHouseProvider = StateNotifierProvider<LocationHouseNotifier, LocationHouseState>((ref) {
   return LocationHouseNotifier();
 });
 

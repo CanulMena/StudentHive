@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
+import 'package:studenthive/presentation/provider/house/location_house_provider.dart';
 import 'package:studenthive/presentation/provider/providers.dart';
 import 'package:studenthive/presentation/views/widgets/account_view.dart/create_publication/screen_create_publication.dart';
 import 'package:studenthive/presentation/views/widgets/account_view.dart/create_publication/steps_for_creation_publication/house_detail_single.dart';
@@ -30,12 +31,12 @@ class _AppStepsCreatePublicationsState extends ConsumerState<AppStepsCreatePubli
     });
   }
 
-  String postalCode = '';
-  String country = '';
-  String city = '';
-  String state = '';
-  String address = '';
-  String neighborhood = '';
+  // String postalCode = '';
+  // String country = '';
+  // String city = '';
+  // String state = '';
+  // String address = '';
+  // String neighborhood = '';
 
   int numberOfVisitors = 0;
   int numberOfBeds = 0;
@@ -66,8 +67,16 @@ class _AppStepsCreatePublicationsState extends ConsumerState<AppStepsCreatePubli
     final addHouseImages = ref.read(imagesHouseProvider.notifier).addImage;
     final removeHouseImage = ref.read(imagesHouseProvider.notifier).removeImage;
 
+    final locationHouse = ref.read(locationHouseProvider.notifier).setPostalCode;
+
     final imageFileList = ref.read(imagesHouseProvider).images;
-    
+    final postalCode = ref.read(locationHouseProvider).postalCode;
+    final country = ref.read(locationHouseProvider).country;
+    final city = ref.read(locationHouseProvider).city;
+    final state = ref.read(locationHouseProvider).state;
+    final address = ref.read(locationHouseProvider).address;
+    final neighborhood = ref.read(locationHouseProvider).neighborhood;
+
     final postHouse = ref.read(housesRepositoryProvider).postHouse;
     final onRefresh = ref.read(allHousesPreviewProvider.notifier).refreshData;
     final scaffoldMessenger = ScaffoldMessenger.of(context);
@@ -97,16 +106,7 @@ class _AppStepsCreatePublicationsState extends ConsumerState<AppStepsCreatePubli
 
                 HouseLocation(
                   pageController: pageController,
-                  onNext: (pc, co, ci, st, ad, ne) {
-                  setState(() {
-                    postalCode = pc;
-                    country = co;
-                    city = ci;
-                    state = st;
-                    address = ad;
-                    neighborhood = ne;
-                    });
-                  },
+                  locationHouse: locationHouse,
                 ),
 
                 DetailsSingleHouse(
@@ -168,9 +168,12 @@ class _AppStepsCreatePublicationsState extends ConsumerState<AppStepsCreatePubli
                     });
                     try{
                       await postHouse(
-                      address: address,
-                      city: city,
+                      postalCode: postalCode,
                       country: country,
+                      city: city,
+                      state: state,
+                      address: address,
+                      neighborhood: neighborhood,
                       description: description,
                       gas: isGasAvailable,
                       airConditioning: isAirConditionerAvailable,
@@ -180,15 +183,12 @@ class _AppStepsCreatePublicationsState extends ConsumerState<AppStepsCreatePubli
                       numberOfGuests: numberOfVisitors,
                       numberOfHammocks: numberOfHammocks,
                       numberOfRooms: numberOfBeds,
-                      postalCode: postalCode,
-                      state: state,
                       title: title,
                       typeHouse: widget.typeHouseRental,
                       washer: isWasherAvailable,
                       water: isWaterAvailable,
                       wifi: isWifiAvailable,
                       idUser: 6,
-                      neighborhood: neighborhood,
                       rentPrice: price,
                       status: false,
                       television: isTvAvailable,
