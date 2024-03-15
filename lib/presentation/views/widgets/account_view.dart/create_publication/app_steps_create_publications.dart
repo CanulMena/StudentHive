@@ -31,13 +31,6 @@ class _AppStepsCreatePublicationsState extends ConsumerState<AppStepsCreatePubli
     });
   }
 
-  // String postalCode = '';
-  // String country = '';
-  // String city = '';
-  // String state = '';
-  // String address = '';
-  // String neighborhood = '';
-
   int numberOfVisitors = 0;
   int numberOfBeds = 0;
   int numberOfHammocks = 0;
@@ -200,6 +193,7 @@ class _AppStepsCreatePublicationsState extends ConsumerState<AppStepsCreatePubli
                     );
 
                     ref.read(imagesHouseProvider.notifier).reset();
+                    ref.read(locationHouseProvider.notifier   ).reset();
                     
                     go('/');
 

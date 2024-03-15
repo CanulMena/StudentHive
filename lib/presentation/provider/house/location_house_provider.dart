@@ -50,4 +50,15 @@ class LocationHouseNotifier extends StateNotifier<LocationHouseState> {
       neighborhood: neighborhood,
     );
   }
+
+  void reset() {
+    state = LocationHouseState(
+      postalCode: '',
+      country: '',
+      city: '',
+      state: '',
+      address: '',
+      neighborhood: '',
+    );
+  }
 }

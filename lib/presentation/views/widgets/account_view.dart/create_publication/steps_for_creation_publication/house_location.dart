@@ -41,19 +41,6 @@ class _HouseLocationState extends State<HouseLocation> {
               ),
               ContainerFormLocation(
                 locationHouse: widget.locationHouse,
-              
-                // onFieldChanged: (pc, co, ci, st, ad, ne, isb) {
-                //   setState(() {
-                //   postalCode = pc;
-                //   country = co;
-                //   city = ci;
-                //   state = st;
-                //   address = ad;
-                //   neighborhood = ne;
-                //   isButtonEnabled = isb;
-                // });
-                // },
-                
               ),              
             ],
           ),
@@ -78,10 +65,8 @@ class _HouseLocationState extends State<HouseLocation> {
 class ContainerFormLocation extends StatefulWidget {
 
   final void Function(String, String, String, String, String, String) locationHouse;
-  // final Function(String, String, String, String, String, String, bool) onFieldChanged; //estoy enviando una funcion
-  
 
-  const ContainerFormLocation({ super.key, required this.locationHouse, /* required this.onFieldChanged */});
+  const ContainerFormLocation({ super.key, required this.locationHouse });
 
   @override
   State<ContainerFormLocation> createState() => _ContainerFormLocationState();
@@ -212,15 +197,6 @@ class _ContainerFormLocationState extends State<ContainerFormLocation> {
             addressController.text,
             neighborhoodController.text,
           );
-          // widget.onFieldChanged(
-          //   postalCodeController.text,
-          //   countryController.text,
-          //   cityController.text,
-          //   stateController.text,
-          //   addressController.text,
-          //   neighborhoodController.text,
-          //   isButtonEnabled
-          // );
         },
       ),
     );
