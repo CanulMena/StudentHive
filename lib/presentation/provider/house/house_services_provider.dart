@@ -19,6 +19,26 @@ class HouseServicesState {
     required this.isGasAvailable,
   });
 
+  HouseServicesState copyWith({
+    bool? isWifiAvailable,
+    bool? isKitchenAvailable,
+    bool? isWasherAvailable,
+    bool? isTvAvailable,
+    bool? isAirConditionerAvailable,
+    bool? isWaterAvailable,
+    bool? isGasAvailable,
+  }) {
+    return HouseServicesState(
+      isWifiAvailable: isWifiAvailable ?? this.isWifiAvailable,
+      isKitchenAvailable: isKitchenAvailable ?? this.isKitchenAvailable,
+      isWasherAvailable: isWasherAvailable ?? this.isWasherAvailable,
+      isTvAvailable: isTvAvailable ?? this.isTvAvailable,
+      isAirConditionerAvailable: isAirConditionerAvailable ?? this.isAirConditionerAvailable,
+      isWaterAvailable: isWaterAvailable ?? this.isWaterAvailable,
+      isGasAvailable: isGasAvailable ?? this.isGasAvailable,
+    );
+  }
+
 }
 
 
@@ -38,23 +58,32 @@ class HouseServicesNotifier extends StateNotifier<HouseServicesState>{
     isGasAvailable: false,
     ));
 
-    void setPostalCode({
-      required bool isWifiAvailable,
-      required bool isKitchenAvailable,
-      required bool isWasherAvailable,
-      required bool isTvAvailable,
-      required bool isAirConditionerAvailable,
-      required bool isWaterAvailable,
-      required bool isGasAvailable}){
-        state = HouseServicesState(
-          isWifiAvailable: isWifiAvailable,
-          isKitchenAvailable: isKitchenAvailable,
-          isWasherAvailable: isWasherAvailable,
-          isTvAvailable: isTvAvailable,
-          isAirConditionerAvailable: isAirConditionerAvailable,
-          isWaterAvailable: isWaterAvailable,
-          isGasAvailable: isGasAvailable,
-        );
+    void setWifiAvailable(bool isWifiAvailable){
+      state = state.copyWith(isWifiAvailable: isWifiAvailable);
+    }
+
+    void setKitchenAvailable(bool isKitchenAvailable){
+      state = state.copyWith(isKitchenAvailable: isKitchenAvailable);
+    }
+
+    void setWasherAvailable(bool isWasherAvailable){
+      state = state.copyWith(isWasherAvailable: isWasherAvailable);
+    }
+
+    void setTvAvailable(bool isTvAvailable){
+      state = state.copyWith(isTvAvailable: isTvAvailable);
+    }
+
+    void setAirConditionerAvailable(bool isAirConditionerAvailable){
+      state = state.copyWith(isAirConditionerAvailable: isAirConditionerAvailable);
+    }
+
+    void setWaterAvailable(bool isWaterAvailable){
+      state = state.copyWith(isWaterAvailable: isWaterAvailable);
+    }
+
+    void setGasAvailable(bool isGasAvailable){
+      state = state.copyWith(isGasAvailable: isGasAvailable);
     }
 
     void reset(){

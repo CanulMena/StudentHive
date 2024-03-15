@@ -37,14 +37,6 @@ class _AppStepsCreatePublicationsState extends ConsumerState<AppStepsCreatePubli
 
   String whoElse = '';
 
-  bool isWifiAvailable = false;
-  bool isKitchenAvailable = false;
-  bool isWasherAvailable = false;
-  bool isTvAvailable = false;
-  bool isAirConditionerAvailable = false;
-  bool isWaterAvailable = false;
-  bool isGasAvailable = false;
-
   String description = '';
 
   String title = '';
@@ -57,7 +49,7 @@ class _AppStepsCreatePublicationsState extends ConsumerState<AppStepsCreatePubli
     final addHouseImages = ref.read(imagesHouseProvider.notifier).addImage;
     final removeHouseImage = ref.read(imagesHouseProvider.notifier).removeImage;
 
-    final locationHouse = ref.read(locationHouseProvider.notifier).setPostalCode;
+    final saveLocationHouse = ref.read(locationHouseProvider.notifier).setPostalCode;
 
     final imageFileList = ref.read(imagesHouseProvider).images;
     final postalCode = ref.read(locationHouseProvider).postalCode;
@@ -66,6 +58,14 @@ class _AppStepsCreatePublicationsState extends ConsumerState<AppStepsCreatePubli
     final state = ref.read(locationHouseProvider).state;
     final address = ref.read(locationHouseProvider).address;
     final neighborhood = ref.read(locationHouseProvider).neighborhood;
+
+    final isWifiAvailable = ref.read(houseServicesProvider).isWifiAvailable;
+    final isKitchenAvailable = ref.read(houseServicesProvider).isKitchenAvailable;
+    final isWasherAvailable = ref.read(houseServicesProvider).isWasherAvailable;
+    final isTvAvailable = ref.read(houseServicesProvider).isTvAvailable;
+    final isAirConditionerAvailable = ref.read(houseServicesProvider).isAirConditionerAvailable;
+    final isWaterAvailable = ref.read(houseServicesProvider).isWaterAvailable;
+    final isGasAvailable = ref.read(houseServicesProvider).isGasAvailable;
 
     final postHouse = ref.read(housesRepositoryProvider).postHouse;
     final onRefresh = ref.read(allHousesPreviewProvider.notifier).refreshData;
@@ -96,7 +96,7 @@ class _AppStepsCreatePublicationsState extends ConsumerState<AppStepsCreatePubli
 
                 HouseLocation(
                   pageController: pageController,
-                  locationHouse: locationHouse,
+                  locationHouse: saveLocationHouse,
                 ),
 
                 DetailsSingleHouse(
@@ -120,17 +120,6 @@ class _AppStepsCreatePublicationsState extends ConsumerState<AppStepsCreatePubli
 
                 HouseService(
                   pageController: pageController,
-                  onNext: (p0, p1, p2, p3, p4, p5, p6) {
-                    setState(() {
-                      isWifiAvailable = p0;
-                      isKitchenAvailable = p1;
-                      isWasherAvailable = p2;
-                      isTvAvailable = p3;
-                      isAirConditionerAvailable = p4;
-                      isWaterAvailable = p5;
-                      isGasAvailable = p6;
-                    });
-                  },
                 ),
   
                 AddHouseImages(
@@ -190,7 +179,8 @@ class _AppStepsCreatePublicationsState extends ConsumerState<AppStepsCreatePubli
                     );
 
                     ref.read(imagesHouseProvider.notifier).reset();
-                    ref.read(locationHouseProvider.notifier   ).reset();
+                    ref.read(locationHouseProvider.notifier).reset();
+                    ref.read(houseServicesProvider.notifier).reset();
                     
                     go('/');
 

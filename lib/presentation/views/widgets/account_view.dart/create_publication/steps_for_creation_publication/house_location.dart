@@ -20,14 +20,6 @@ class HouseLocation extends StatefulWidget {
 
 class _HouseLocationState extends State<HouseLocation> {
 
-  String postalCode = '';
-  String country = '';
-  String city = '';
-  String state = '';
-  String address = '';
-  String neighborhood = '';
-  bool isButtonEnabled = false;
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(

@@ -1,157 +1,115 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_keyboard_visibility/flutter_keyboard_visibility.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:studenthive/presentation/provider/house/house_services_provider.dart';
 import 'package:studenthive/presentation/views/widgets/account_view.dart/create_publication/utils_for_creation_publication/buttom_steps_creationp.dart';
 import 'package:studenthive/presentation/views/widgets/account_view.dart/create_publication/utils_for_creation_publication/container_title_appbar.dart';
 
-class HouseService extends StatefulWidget {
-  final Function(bool, bool, bool, bool, bool, bool, bool) onNext;
+class HouseService extends ConsumerStatefulWidget {
+  
   final PageController pageController;
-  const HouseService({super.key, required this.pageController, required this.onNext,});
+
+  const HouseService({
+    super.key,
+    required this.pageController,
+  });
 
   @override
-  State<HouseService> createState() => _HouseServiceState();
+  ConsumerState<HouseService> createState() => _HouseServiceState();
 }
 
-class _HouseServiceState extends State<HouseService> {
-
-  bool isWifiAvailable = false;
-  bool isKitchenAvailable = false;
-  bool isWasherAvailable = false;
-  bool isTvAvailable = false;
-  bool isAirConditionerAvailable = false;
-  bool isWaterAvailable = false;
-  bool isGasAvailable = false;
+class _HouseServiceState extends ConsumerState<HouseService> {
 
   @override
   Widget build(BuildContext context) {
-  
     return Scaffold(
       body: Padding(
         padding: const EdgeInsets.symmetric(vertical: 0, horizontal: 12),
-        child: SingleChildScrollView( 
-          child:Column(
+        child: SingleChildScrollView(
+          child: Column(
             children: [
               const TitleAppbar(title: 'Dale un toque distinto a tu espacio'),
-
-              const SizedBox( height: 20, ),
-
+              const SizedBox(
+                height: 20,
+              ),
               SwitchListTileExample(
                 iconChanged: Icons.signal_wifi_4_bar,
                 text: 'Wifi',
-                icon: Icons.signal_wifi_0_bar_outlined, 
-                onChanged: (value) { 
-                  setState(() {
-                    isWifiAvailable = value;
-                  });
-                },  
+                icon: Icons.signal_wifi_0_bar_outlined,
+                onChanged: (value) {
+                  ref.read(houseServicesProvider.notifier).setWifiAvailable(value);
+                },
               ),
-
               const SizedBox(height: 15),
-
               SwitchListTileExample(
-                icon: Icons.kitchen_outlined, 
+                icon: Icons.kitchen_outlined,
                 text: 'Cocina',
                 iconChanged: Icons.kitchen,
                 onChanged: (value) {
-                  setState(() {
-                    isKitchenAvailable = value;
-                  });
+                  ref.read(houseServicesProvider.notifier).setKitchenAvailable(value);
                 },
               ),
-
               const SizedBox(height: 15),
-
               SwitchListTileExample(
                 icon: Icons.wash_outlined,
                 text: 'Lavadora',
                 iconChanged: Icons.wash,
                 onChanged: (value) {
-                  setState(() {
-                    isWasherAvailable = value;
-                  });
+                  ref.read(houseServicesProvider.notifier).setWasherAvailable(value);
                 },
-                
               ),
-
               const SizedBox(height: 15),
-
               SwitchListTileExample(
                 icon: Icons.tv,
                 text: 'Televisión',
                 iconChanged: Icons.tv,
                 onChanged: (value) {
-                  setState(() {
-                    isTvAvailable = value;
-                  });
+                  ref.read(houseServicesProvider.notifier).setTvAvailable(value);
                 },
-                
               ),
-
               const SizedBox(height: 15),
-
               SwitchListTileExample(
                 icon: Icons.air_outlined,
                 text: 'Aire Acondicionado',
                 iconChanged: Icons.air,
                 onChanged: (value) {
-                  setState(() {
-                    isAirConditionerAvailable = value;
-                  });
+                  ref.read(houseServicesProvider.notifier).setAirConditionerAvailable(value);
                 },
-                
               ),
-              
               const SizedBox(height: 15),
-
               SwitchListTileExample(
                 icon: Icons.water_drop_outlined,
                 text: 'Agua',
                 iconChanged: Icons.water_drop,
                 onChanged: (value) {
-                  setState(() {
-                    isWaterAvailable = value;
-                  });
+                  ref.read(houseServicesProvider.notifier).setWaterAvailable(value);
                 },
               ),
-
               const SizedBox(height: 15),
-
               SwitchListTileExample(
                 icon: Icons.gas_meter_outlined,
                 text: 'Gas',
                 iconChanged: Icons.gas_meter,
                 onChanged: (value) {
-                  setState(() {
-                    isGasAvailable = value;
-                  });
+                  ref.read(houseServicesProvider.notifier).setGasAvailable(value);
                 },
               ),
-
-              const SizedBox( height: 15, )
-
+              const SizedBox(
+                height: 15,
+              )
             ],
           ),
         ),
       ),
-    bottomNavigationBar: KeyboardVisibilityBuilder(
+      bottomNavigationBar: KeyboardVisibilityBuilder(
         builder: (context, isKeyboardVisible) {
-          return isKeyboardVisible 
-          ? const SizedBox() 
-          : ButtomStepscreateP(
-            pageController: widget.pageController, 
-            isButtonEnabled: true,
-            onNext: () {
-              widget.onNext(
-                isWifiAvailable,
-                isKitchenAvailable,
-                isWasherAvailable,
-                isTvAvailable,
-                isAirConditionerAvailable,
-                isWaterAvailable,
-                isGasAvailable,
-              );
-            },
-            );
+          return isKeyboardVisible
+              ? const SizedBox()
+              : ButtomStepscreateP(
+                  pageController: widget.pageController,
+                  isButtonEnabled: true,
+                  onNext: () {},
+                );
         },
       ),
     );
@@ -163,13 +121,13 @@ class SwitchListTileExample extends StatefulWidget {
     super.key,
     required this.icon,
     required this.text,
-    required this.iconChanged, 
+    required this.iconChanged,
     required this.onChanged,
   });
   final IconData icon;
   final String text;
   final IconData iconChanged;
-  final Function( bool ) onChanged;
+  final Function(bool) onChanged;
 
   @override
   State<SwitchListTileExample> createState() => _SwitchListTileExampleState();
@@ -178,8 +136,6 @@ class SwitchListTileExample extends StatefulWidget {
 class _SwitchListTileExampleState extends State<SwitchListTileExample> {
   bool _selectOption = false;
 
-
-  
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
@@ -208,7 +164,7 @@ class _SwitchListTileExampleState extends State<SwitchListTileExample> {
           value: _selectOption,
           onChanged: (bool value) {
             setState(() {
-              _selectOption = value;              
+              _selectOption = value;
             });
             widget.onChanged(_selectOption);
           },
