@@ -1,24 +1,23 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_keyboard_visibility/flutter_keyboard_visibility.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:studenthive/presentation/provider/providers.dart';
 import 'package:studenthive/presentation/views/widgets/account_view.dart/create_publication/utils_for_creation_publication/buttom_steps_creationp.dart';
 import 'package:studenthive/presentation/views/widgets/account_view.dart/create_publication/utils_for_creation_publication/container_title_appbar.dart';
 
-class HouseAddTittle extends StatefulWidget {
-  final Function( String ) onNext;
+class HouseAddTittle extends ConsumerStatefulWidget {
   final PageController pageController;
-  const HouseAddTittle({super.key, required this.pageController, required this.onNext});
+  const HouseAddTittle({super.key, required this.pageController});
 
   @override
-  State<HouseAddTittle> createState() => _HouseAddTittleState();
+  ConsumerState<HouseAddTittle> createState() => _HouseAddTittleState();
 }
 
-class _HouseAddTittleState extends State<HouseAddTittle> {
+class _HouseAddTittleState extends ConsumerState<HouseAddTittle> {
 
   final TextEditingController titleController = TextEditingController();
 
   bool isButtonEnabled = false;
-
-  String title = '';
 
   void _checkFields() {
     setState(() {
@@ -72,7 +71,7 @@ class _HouseAddTittleState extends State<HouseAddTittle> {
                         borderRadius: BorderRadius.all(Radius.circular(10))),
                   ),
                   onChanged: (value) {
-                    title = value;
+                    ref.read(titleHouseProvider.notifier).setTitle(value);
                   },
                 ),
               ),
@@ -88,9 +87,7 @@ class _HouseAddTittleState extends State<HouseAddTittle> {
           : ButtomStepscreateP( 
             pageController: widget.pageController, 
             isButtonEnabled: isButtonEnabled, 
-            onNext: () {
-              widget.onNext(title);
-            },
+            onNext: () {},
             );
         },
       ),

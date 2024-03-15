@@ -1,23 +1,22 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_keyboard_visibility/flutter_keyboard_visibility.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:studenthive/presentation/provider/house/description_house_provider.dart'; //todo: agergar esto al archivo de barril
 import 'package:studenthive/presentation/views/widgets/account_view.dart/create_publication/utils_for_creation_publication/buttom_steps_creationp.dart';
 import 'package:studenthive/presentation/views/widgets/account_view.dart/create_publication/utils_for_creation_publication/container_title_appbar.dart';
 
-class HouseAddDescription extends StatefulWidget {
-  final Function(String) onNext;
+class HouseAddDescription extends ConsumerStatefulWidget {
   final PageController pageController;
-  const HouseAddDescription({super.key, required this.pageController, required this.onNext});
+  const HouseAddDescription({super.key, required this.pageController});
 
   @override
-  State<HouseAddDescription> createState() => _HouseAddDescriptionState();
+  ConsumerState<HouseAddDescription> createState() => _HouseAddDescriptionState();
 }
 
-class _HouseAddDescriptionState extends State<HouseAddDescription> {
+class _HouseAddDescriptionState extends ConsumerState<HouseAddDescription> {
   final TextEditingController descriptionController = TextEditingController();
 
   bool isButtonEnabled = false;
-
-  String description = '';
 
   void _checkFields() {
     setState(() {
@@ -69,7 +68,7 @@ class _HouseAddDescriptionState extends State<HouseAddDescription> {
                         borderRadius: BorderRadius.all(Radius.circular(10))),
                   ),
                 onChanged: (value) {
-                  description = value;
+                  ref.read(descriptionHouseProvider.notifier).setDescription(value);
                   },
                 ),
               ),
@@ -85,7 +84,6 @@ class _HouseAddDescriptionState extends State<HouseAddDescription> {
             pageController: widget.pageController, 
             isButtonEnabled: isButtonEnabled,
             onNext: () {
-              widget.onNext(description);
             },
             );
         },

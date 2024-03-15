@@ -16,6 +16,8 @@ class LocationHouseState {
     required this.address,
     required this.neighborhood,
   });
+
+  
 }
 
 final locationHouseProvider = StateNotifierProvider<LocationHouseNotifier, LocationHouseState>((ref) {

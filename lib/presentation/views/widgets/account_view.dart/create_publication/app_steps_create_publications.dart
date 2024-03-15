@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
+import 'package:studenthive/presentation/provider/house/description_house_provider.dart';// todo: pasar a mi archivo de barril
 import 'package:studenthive/presentation/provider/providers.dart';
 import 'package:studenthive/presentation/views/widgets/account_view.dart/create_publication/screen_create_publication.dart';
 import 'package:studenthive/presentation/views/widgets/account_view.dart/create_publication/steps_for_creation_publication/house_detail_single.dart';
@@ -32,10 +33,6 @@ class _AppStepsCreatePublicationsState extends ConsumerState<AppStepsCreatePubli
 
   String whoElse = '';
 
-  String description = '';
-
-  String title = '';
-
   int price = 0;
 
   @override
@@ -43,8 +40,6 @@ class _AppStepsCreatePublicationsState extends ConsumerState<AppStepsCreatePubli
     //! Every time the widget is built the request it makes the request to the provider
     final addHouseImages = ref.read(imagesHouseProvider.notifier).addImage;
     final removeHouseImage = ref.read(imagesHouseProvider.notifier).removeImage;
-
-    final saveLocationHouse = ref.read(locationHouseProvider.notifier).setPostalCode;
 
     final imageFileList = ref.read(imagesHouseProvider).images;
     final postalCode = ref.read(locationHouseProvider).postalCode;
@@ -66,6 +61,10 @@ class _AppStepsCreatePublicationsState extends ConsumerState<AppStepsCreatePubli
     final numberOfVisitors = ref.read(detailHouseProvider).numberOfVisitors;
     final numberOfHammocks = ref.read(detailHouseProvider).numberOfHammocks;
     final numberOfBeds = ref.read(detailHouseProvider).numberOfBeds;
+
+    final title = ref.read(titleHouseProvider);
+
+    final description = ref.read(descriptionHouseProvider);
 
     final postHouse = ref.read(housesRepositoryProvider).postHouse;
     final onRefresh = ref.read(allHousesPreviewProvider.notifier).refreshData;
@@ -96,7 +95,6 @@ class _AppStepsCreatePublicationsState extends ConsumerState<AppStepsCreatePubli
 
                 HouseLocation(
                   pageController: pageController,
-                  locationHouse: saveLocationHouse,
                 ),
 
                 DetailsSingleHouse(
@@ -122,13 +120,10 @@ class _AppStepsCreatePublicationsState extends ConsumerState<AppStepsCreatePubli
 
                 HouseAddTittle(
                   pageController: pageController,
-                  onNext: (p0) => title = p0,
                 ),
+
                 HouseAddDescription(
                   pageController: pageController,
-                  onNext: (p0) {
-                    description = p0;
-                  },
                 ),
                 HousePrice(
                   pageController: pageController,
@@ -174,6 +169,8 @@ class _AppStepsCreatePublicationsState extends ConsumerState<AppStepsCreatePubli
                     ref.read(locationHouseProvider.notifier).reset();
                     ref.read(houseServicesProvider.notifier).reset();
                     ref.read(detailHouseProvider.notifier).reset();
+                    ref.read(titleHouseProvider.notifier).reset();
+                    ref.read(descriptionHouseProvider.notifier).reset();
                     
                     go('/');
 
