@@ -1,8 +1,3 @@
-import 'dart:convert';
-
-StudentHiveDbResponse houseStudenthiveDbFromJson(String str) => StudentHiveDbResponse.fromJson(json.decode(str));
-
-String houseStudenthiveDbToJson(StudentHiveDbResponse data) => json.encode(data.toJson());
 
 class StudentHiveDbResponse {
     final int page;

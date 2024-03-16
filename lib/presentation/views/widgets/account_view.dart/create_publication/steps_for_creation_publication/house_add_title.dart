@@ -21,7 +21,7 @@ class _HouseAddTittleState extends ConsumerState<HouseAddTittle> {
 
   void _checkFields() {
     setState(() {
-      isButtonEnabled = titleController.text.isNotEmpty;
+      isButtonEnabled = titleController.text.isNotEmpty || ref.read(titleHouseProvider).isNotEmpty;
     });
   }
 
@@ -59,7 +59,13 @@ class _HouseAddTittleState extends ConsumerState<HouseAddTittle> {
               
               const TitleAppbar(title: 'Dale un nombre a tu espacio'),
 
-              _message(),
+              Container(
+                padding: const EdgeInsets.only(top: 10, bottom: 10, left: 20, right: 20),
+                child: const Text(
+                  'Opta por títulos breves; no te inquietes, puedes cambiarlo cuando quieras.',
+                  style: TextStyle(fontSize: 15, color: Colors.grey),
+                ),
+              ),
 
               Container(
                 width: screenSize.width * 1,
@@ -91,16 +97,6 @@ class _HouseAddTittleState extends ConsumerState<HouseAddTittle> {
             onNext: () {},
             );
         },
-      ),
-    );
-  }
-
-  Widget _message() {
-    return Container(
-      padding: const EdgeInsets.only(top: 10, bottom: 10, left: 20, right: 20),
-      child: const Text(
-        'Opta por títulos breves; no te inquietes, puedes cambiarlo cuando quieras.',
-        style: TextStyle(fontSize: 15, color: Colors.grey),
       ),
     );
   }

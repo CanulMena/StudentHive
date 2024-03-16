@@ -6,11 +6,11 @@ class ButtomStepscreateP extends StatelessWidget {
   final VoidCallback onNext;
 
   const ButtomStepscreateP({
-    Key? key,
+    super.key,
     this.isButtonEnabled = false,
     required this.pageController,
     required this.onNext,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -31,7 +31,7 @@ class ButtomStepscreateP extends StatelessWidget {
           InkWell(
             onTap: () {
               pageController.previousPage( // Return to the previous page
-                duration: const Duration(milliseconds: 500),
+                duration: const Duration(milliseconds: 300),
                 curve: Curves.ease,
               );
             },
@@ -51,7 +51,7 @@ class ButtomStepscreateP extends StatelessWidget {
               if (isButtonEnabled) {
                 onNext();
                 pageController.nextPage( // Go to the next page
-                  duration: const Duration(milliseconds: 500),
+                  duration: const Duration(milliseconds: 300),
                   curve: Curves.ease,
                 );
               }

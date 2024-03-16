@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
-import 'package:studenthive/presentation/provider/house/description_house_provider.dart';// todo: pasar a mi archivo de barril
 import 'package:studenthive/presentation/provider/providers.dart';
 import 'package:studenthive/presentation/views/widgets/account_view.dart/create_publication/screen_create_publication.dart';
 import 'package:studenthive/presentation/views/widgets/account_view.dart/create_publication/steps_for_creation_publication/house_detail_single.dart';
@@ -66,6 +65,9 @@ class _AppStepsCreatePublicationsState extends ConsumerState<AppStepsCreatePubli
 
     final description = ref.read(descriptionHouseProvider);
 
+    final price = int.tryParse(ref.read(priceHouseProvider));
+  
+
     final postHouse = ref.read(housesRepositoryProvider).postHouse;
     final onRefresh = ref.read(allHousesPreviewProvider.notifier).refreshData;
     final scaffoldMessenger = ScaffoldMessenger.of(context);
@@ -120,15 +122,14 @@ class _AppStepsCreatePublicationsState extends ConsumerState<AppStepsCreatePubli
 
                 HouseAddTittle(
                   pageController: pageController,
-                ),
+                ),//
 
                 HouseAddDescription(
                   pageController: pageController,
-                ),
+                ),//
                 HousePrice(
                   pageController: pageController,
-                  onNext: (p0) async {
-                    price = int.parse(p0);
+                  onNext: () async {
                     setState(() {
                       isUploading = true;
                     });
@@ -155,7 +156,7 @@ class _AppStepsCreatePublicationsState extends ConsumerState<AppStepsCreatePubli
                       water: isWaterAvailable,
                       wifi: isWifiAvailable,
                       idUser: 6,
-                      rentPrice: price,
+                      rentPrice: price!,
                       status: false,
                       television: isTvAvailable,
                       whoElse: whoElse,
