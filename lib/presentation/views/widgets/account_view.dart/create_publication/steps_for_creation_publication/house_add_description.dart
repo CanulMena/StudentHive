@@ -18,32 +18,26 @@ class _HouseAddDescriptionState extends ConsumerState<HouseAddDescription> {
 
   bool isButtonEnabled = false;
 
-  void _checkFields() {
-    setState(() {
-      isButtonEnabled = descriptionController.text.isNotEmpty;
-    });
-  }
-
-  void _addListeners() {
-    descriptionController.addListener(_checkFields);
-  }
-
-  void _removeListeners(){
-    descriptionController.removeListener(_checkFields);
-  }
+  void _updateButtonState() {
+  setState(() {
+    isButtonEnabled = descriptionController.text.isNotEmpty || ref.read(descriptionHouseProvider).isNotEmpty;
+  });}
 
   @override
   void initState() {
     super.initState();
     descriptionController.text = ref.read(descriptionHouseProvider);
-    _addListeners();
+    descriptionController.addListener(_updateButtonState);
+    _updateButtonState(); // Llama a esta función aquí para inicializar el estado del botón
   }
 
-  @override
-  void dispose() {
-    _removeListeners();
-    super.dispose();
-  }
+@override
+void dispose() {
+  descriptionController.removeListener(_updateButtonState);
+  descriptionController.dispose();
+  super.dispose();
+}
+
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;

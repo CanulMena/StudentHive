@@ -20,30 +20,25 @@ class _HousePriceState extends ConsumerState<HousePrice> {
 
   bool isButtonEnabled = false;
 
-  void _checkFields() {
-    setState(() {
-      isButtonEnabled = priceController.text.isNotEmpty;
-    });
-  }
-
-  void _addListeners() {
-    priceController.addListener(_checkFields);
-  }
-
-  void _removeListeners() {
-    priceController.removeListener(_checkFields);
-  }
+  void _updateButtonState() {
+  setState(() {
+    isButtonEnabled = priceController.text.isNotEmpty || ref.read(priceHouseProvider).isNotEmpty;
+  });
+}
 
   @override
   void initState() {
     priceController.text = ref.read(priceHouseProvider);
     super.initState();
-    _addListeners();
+    priceController.text = ref.read(priceHouseProvider);
+    priceController.addListener(_updateButtonState);
+    _updateButtonState();
   }
 
   @override
   void dispose() {
-    _removeListeners();
+    priceController.removeListener(_updateButtonState);
+    priceController.dispose();
     super.dispose();
   }
 

@@ -18,32 +18,25 @@ class _HouseAddTittleState extends ConsumerState<HouseAddTittle> {
   final TextEditingController titleController = TextEditingController();
 
   bool isButtonEnabled = false;
-
+  
   void _checkFields() {
     setState(() {
       isButtonEnabled = titleController.text.isNotEmpty || ref.read(titleHouseProvider).isNotEmpty;
     });
   }
 
-  void _addListeners() {
-    titleController.addListener(_checkFields);
-  }
-
-  void _removeListeners(){
-    titleController.removeListener(_checkFields);
-  }
-
   @override
   void initState() {
     super.initState();
+    titleController.addListener(_checkFields);
     titleController.text = ref.read(titleHouseProvider);
-    _addListeners();
   }
 
   @override
   void dispose() {
-    _removeListeners();
     super.dispose();
+    titleController.removeListener(_checkFields);
+    titleController.dispose();
   }
 
   @override
