@@ -32,8 +32,6 @@ class _AppStepsCreatePublicationsState extends ConsumerState<AppStepsCreatePubli
 
   String whoElse = '';
 
-  int price = 0;
-
   @override
   Widget build(BuildContext context) {
     //! Every time the widget is built the request it makes the request to the provider
@@ -122,11 +120,11 @@ class _AppStepsCreatePublicationsState extends ConsumerState<AppStepsCreatePubli
 
                 HouseAddTittle(
                   pageController: pageController,
-                ),//
+                ),
 
                 HouseAddDescription(
                   pageController: pageController,
-                ),//
+                ),
                 HousePrice(
                   pageController: pageController,
                   onNext: () async {

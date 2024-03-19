@@ -1,18 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_keyboard_visibility/flutter_keyboard_visibility.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:studenthive/presentation/views/widgets/account_view.dart/create_publication/utils_for_creation_publication/buttom_steps_creationp.dart';
 import 'package:studenthive/presentation/views/widgets/account_view.dart/create_publication/utils_for_creation_publication/container_title_appbar.dart';
 
-class WhoElse extends StatefulWidget {
+class WhoElse extends ConsumerStatefulWidget {
   final Function(String) onNext;
   final PageController pageController;
   const WhoElse({super.key, required this.pageController, required this.onNext,});
 
   @override
-  State<WhoElse> createState() => _WhoElseState();
+  ConsumerState<WhoElse> createState() => _WhoElseState();
 }
 
-class _WhoElseState extends State<WhoElse> {
+class _WhoElseState extends ConsumerState<WhoElse> {
 
   String whoElse = '';
 
