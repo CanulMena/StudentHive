@@ -37,13 +37,20 @@ class _CreateProfileViewState extends State<CreateProfileView> {
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     // Padding(padding: const EdgeInsets.all(20)),
-                    SizedBox(
+                    Container(
                       height: size.height * 0.5 * 0.3,
                       width: size.width * 0.5 * 0.7,
-                      child: ClipOval(
-                        child: Image.network(
-                            'https://flutter.github.io/assets-for-api-docs/assets/widgets/owl.jpg',
-                            fit: BoxFit.cover),
+                      decoration: BoxDecoration(
+                        border: Border.all(
+                          color: Colors.amberAccent,
+                        ),
+                        borderRadius: BorderRadius.circular(70),
+                      ),
+                      child: const ClipOval(
+                        child: Icon(
+                          Icons.camera_alt_outlined,
+                          size: 100,
+                        ),
                       ),
                     ),
                     SizedBox(
