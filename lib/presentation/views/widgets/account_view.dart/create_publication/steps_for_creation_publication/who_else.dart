@@ -4,10 +4,11 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:studenthive/presentation/views/widgets/account_view.dart/create_publication/utils_for_creation_publication/buttom_steps_creationp.dart';
 import 'package:studenthive/presentation/views/widgets/account_view.dart/create_publication/utils_for_creation_publication/container_title_appbar.dart';
 
+import '../../../../../provider/providers.dart';
+
 class WhoElse extends ConsumerStatefulWidget {
-  final Function(String) onNext;
   final PageController pageController;
-  const WhoElse({super.key, required this.pageController, required this.onNext,});
+  const WhoElse({super.key, required this.pageController,});
 
   @override
   ConsumerState<WhoElse> createState() => _WhoElseState();
@@ -15,10 +16,10 @@ class WhoElse extends ConsumerStatefulWidget {
 
 class _WhoElseState extends ConsumerState<WhoElse> {
 
-  String whoElse = '';
-
   @override
   Widget build(BuildContext context) {
+    
+    String whoElse = ref.read(whoElseProvider); // i need than this variable is updated every time the provider changes
     return Scaffold(
       body: Padding(
         padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 12),
@@ -34,19 +35,19 @@ class _WhoElseState extends ConsumerState<WhoElse> {
               style: TextStyle(fontSize: 15, color: Colors.grey),
               ),
             ),
+
             const SizedBox(
               height: 30,
             ),
           
-          _buildOptionRow([
+          _buildOptionRow([ // se paramos en dos filas
               ContainerOptionWhoElse(
                 text: 'IAm',
                 icon: Icons.person_outline, 
                 isSelected: whoElse == 'IAm' ? true : false, 
                 onTap: () { 
-                  setState(() {
-                    whoElse = 'IAm';
-                  });
+                  setState(() {});
+                  ref.read(whoElseProvider.notifier).changeWhoElse('IAm');
                   },
               ),
     
@@ -55,9 +56,8 @@ class _WhoElseState extends ConsumerState<WhoElse> {
                 icon: Icons.groups_outlined,
                 isSelected: whoElse == 'Family' ? true : false, 
                 onTap: () { 
-                  setState(() {
-                    whoElse = 'Family';
-                  });
+                  setState(() {});
+                  ref.read(whoElseProvider.notifier).changeWhoElse('Family');
                 }, 
               ),
     
@@ -67,15 +67,14 @@ class _WhoElseState extends ConsumerState<WhoElse> {
               height: 20,
             ),
     
-            _buildOptionRow([
+            _buildOptionRow([ // se paramos en dos filas
               ContainerOptionWhoElse(
                 text: 'Other People',
                 icon: Icons.group_outlined,
                 isSelected: whoElse == 'Other People' ? true : false, 
                 onTap: () { 
-                  setState(() {
-                    whoElse = 'Other People';
-                  });
+                  setState(() {});
+                  ref.read(whoElseProvider.notifier).changeWhoElse('Other People');
                 }, 
               ),
               ContainerOptionWhoElse(
@@ -83,9 +82,8 @@ class _WhoElseState extends ConsumerState<WhoElse> {
                 icon: Icons.group_add_outlined,
                 isSelected: whoElse == 'Companions' ? true : false, 
                 onTap: () { 
-                  setState(() {
-                    whoElse = 'Companions';
-                  });
+                  setState(() {});
+                  ref.read(whoElseProvider.notifier).changeWhoElse('Companions');
                 }, 
               ),
             ]),
@@ -100,9 +98,7 @@ class _WhoElseState extends ConsumerState<WhoElse> {
           ButtomStepscreateP( 
             pageController: widget.pageController, 
             isButtonEnabled: true,
-            onNext: () {
-              widget.onNext(whoElse);
-            },
+            onNext: () {},
             );
         },
       ),

@@ -18,6 +18,7 @@ class AppStepsCreatePublications extends ConsumerStatefulWidget {
 class _AppStepsCreatePublicationsState extends ConsumerState<AppStepsCreatePublications> {
   final PageController pageController = PageController();
 
+  int price = 0;
   double currentPage = 0;
   bool isUploading = false;
   @override
@@ -29,8 +30,6 @@ class _AppStepsCreatePublicationsState extends ConsumerState<AppStepsCreatePubli
       });
     });
   }
-
-  String whoElse = '';
 
   @override
   Widget build(BuildContext context) {
@@ -63,7 +62,7 @@ class _AppStepsCreatePublicationsState extends ConsumerState<AppStepsCreatePubli
 
     final description = ref.read(descriptionHouseProvider);
 
-    final price = int.tryParse(ref.read(priceHouseProvider));
+    final whoElse = ref.read(whoElseProvider);
   
 
     final postHouse = ref.read(housesRepositoryProvider).postHouse;
@@ -103,9 +102,6 @@ class _AppStepsCreatePublicationsState extends ConsumerState<AppStepsCreatePubli
                   
                 WhoElse(
                   pageController: pageController,
-                  onNext: (p0) {
-                    whoElse = p0;
-                  },
                 ),
 
                 HouseService(
@@ -127,7 +123,9 @@ class _AppStepsCreatePublicationsState extends ConsumerState<AppStepsCreatePubli
                 ),
                 HousePrice(
                   pageController: pageController,
-                  onNext: () async {
+                
+                  onNext: (p) async {
+                    price = p;
                     setState(() {
                       isUploading = true;
                     });
@@ -154,7 +152,7 @@ class _AppStepsCreatePublicationsState extends ConsumerState<AppStepsCreatePubli
                       water: isWaterAvailable,
                       wifi: isWifiAvailable,
                       idUser: 6,
-                      rentPrice: price!,
+                      rentPrice: price,
                       status: false,
                       television: isTvAvailable,
                       whoElse: whoElse,
@@ -170,6 +168,8 @@ class _AppStepsCreatePublicationsState extends ConsumerState<AppStepsCreatePubli
                     ref.read(detailHouseProvider.notifier).reset();
                     ref.read(titleHouseProvider.notifier).reset();
                     ref.read(descriptionHouseProvider.notifier).reset();
+                    ref.read(priceHouseProvider.notifier).reset();
+                    ref.read(whoElseProvider.notifier).resetWhoElse();
                     
                     go('/');
 

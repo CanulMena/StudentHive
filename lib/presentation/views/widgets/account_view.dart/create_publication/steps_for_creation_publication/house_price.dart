@@ -7,7 +7,7 @@ import 'package:studenthive/presentation/views/widgets/account_view.dart/create_
 import 'package:studenthive/presentation/views/widgets/account_view.dart/create_publication/utils_for_creation_publication/container_title_appbar.dart';
 
 class HousePrice extends ConsumerStatefulWidget {
-  final Function() onNext;
+  final Function(int) onNext;
   final PageController pageController;
   const HousePrice({super.key, required this.pageController, required this.onNext});
 
@@ -70,7 +70,7 @@ class _HousePriceState extends ConsumerState<HousePrice> {
                         borderRadius: BorderRadius.all(Radius.circular(10))),
                   ),
                   onChanged: (value) {
-                    ref.read(priceHouseProvider.notifier).setPrice(value);
+                    ref.read(priceHouseProvider.notifier).setPrice(priceController.text);
                   },
                 ),
               ),
@@ -88,9 +88,9 @@ class _HousePriceState extends ConsumerState<HousePrice> {
               : ButtomStepscreateP(
                   pageController: widget.pageController,
                   isButtonEnabled: isButtonEnabled,
-                  onNext: () {
-                    ref.read(priceHouseProvider.notifier).setPrice(priceController.text);
-                    widget.onNext();
+                  onNext: () async {
+                    await Future.delayed(const Duration(milliseconds: 100));
+                    widget.onNext( int.parse(ref.read(priceHouseProvider)) );
                   },
                 );
         },
