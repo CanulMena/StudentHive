@@ -36,15 +36,15 @@
           ),
 
           Positioned(
-            top: 3,
-            right: 2,
+            top: 2,
+            right: 1.5,
             child: IconButton(
               onPressed: () {
                 DialogUtils.openDialogImageAlert( context, deleteImage );
               },
               icon: const Icon(
-                Icons.more_vert_rounded, 
-                color: Colors.black87,
+                Icons.close_rounded, 
+                color: Colors.white60,
                 size: 20,
                 ),
             ),
