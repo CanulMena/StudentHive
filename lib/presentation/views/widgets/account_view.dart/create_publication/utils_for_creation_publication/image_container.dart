@@ -28,9 +28,9 @@
             ? ClipRRect(
               borderRadius: BorderRadius.circular(10),
               child: Image.file(
-                  File(image!.path),
-                  fit: BoxFit.cover,
-                ),
+                File(image!.path),
+                fit: BoxFit.cover,
+              ),
             )
             : const Center(child: Icon(Icons.image)),
           ),

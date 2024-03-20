@@ -40,9 +40,9 @@ class TypeHouseState extends State<TypeHouse> {
                 setState(() {
                   selectedOption = 1;
                   typeHouseRental  = 'OwnHouse';
+                  context.go('/create-publication/type-house/create-publication-steps/$typeHouseRental');
                 });
               },
-              path: '/create-publication/type-house/create-publication-steps/$typeHouseRental',
             ),
 
             const SizedBox(height: 25),
@@ -57,9 +57,9 @@ class TypeHouseState extends State<TypeHouse> {
                 setState(() {
                   selectedOption = 2;
                   typeHouseRental = 'Room';
+                  context.go('/create-publication/type-house/create-publication-steps/$typeHouseRental');
                 });
               },
-              path: '/create-publication/type-house/create-publication-steps/$typeHouseRental',
             ),
             
             const SizedBox(height: 25),
@@ -74,9 +74,9 @@ class TypeHouseState extends State<TypeHouse> {
                 setState(() {
                   selectedOption = 3;
                   typeHouseRental  = 'SharedRoom';
+                  context.go('/create-publication/type-house/create-publication-steps/$typeHouseRental');
                 });
               },
-              path: '/create-publication/type-house/create-publication-steps/$typeHouseRental',
             )
 
           ]),
@@ -94,14 +94,13 @@ class OptionsContainerSelector extends StatelessWidget {
       required this.icon,
       required this.isSelected,
       required this.onTap,
-      required this.path});
+      });
 
   final String title;
   final String desciption;
   final IconData icon;
   final bool isSelected;
   final VoidCallback onTap;
-  final String path;
 
   @override
   Widget build(BuildContext context) {
@@ -109,9 +108,6 @@ class OptionsContainerSelector extends StatelessWidget {
     return GestureDetector(
       onTap: () {
         onTap();
-        if (isSelected) {
-          context.push(path);
-        }
       },
       child: Container(
         height: size.height * 0.15,
