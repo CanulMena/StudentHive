@@ -31,8 +31,8 @@ class ButtomStepscreateP extends StatelessWidget {
           InkWell(
             onTap: () {
               pageController.previousPage( // Return to the previous page
-                duration: const Duration(milliseconds: 300),
-                curve: Curves.ease,
+                duration: const Duration(milliseconds: 500),
+                curve: Curves.easeInOut,
               );
             },
             child: const Text(
@@ -51,8 +51,8 @@ class ButtomStepscreateP extends StatelessWidget {
               if (isButtonEnabled) {
                 onNext();
                 pageController.nextPage( // Go to the next page
-                  duration: const Duration(milliseconds: 300),
-                  curve: Curves.ease,
+                  duration: const Duration(milliseconds: 500),
+                  curve: Curves.easeInOut,
                 );
               }
             },

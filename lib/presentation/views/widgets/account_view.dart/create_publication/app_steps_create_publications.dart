@@ -33,7 +33,6 @@ class _AppStepsCreatePublicationsState extends ConsumerState<AppStepsCreatePubli
 
   @override
   Widget build(BuildContext context) {
-    //! Every time the widget is built the request it makes the request to the provider
     final addHouseImages = ref.read(imagesHouseProvider.notifier).addImage;
     final removeHouseImage = ref.read(imagesHouseProvider.notifier).removeImage;
 
@@ -63,7 +62,6 @@ class _AppStepsCreatePublicationsState extends ConsumerState<AppStepsCreatePubli
     final description = ref.read(descriptionHouseProvider);
 
     final whoElse = ref.read(whoElseProvider);
-  
 
     final postHouse = ref.read(housesRepositoryProvider).postHouse;
     final onRefresh = ref.read(allHousesPreviewProvider.notifier).refreshData;

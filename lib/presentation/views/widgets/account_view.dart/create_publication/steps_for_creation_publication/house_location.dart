@@ -21,6 +21,8 @@ class HouseLocation extends ConsumerStatefulWidget {
 
 class _HouseLocationState extends ConsumerState<HouseLocation> {
 
+  bool isButtonEnabled = false;
+
   @override
   Widget build(BuildContext context) {
     final addLocationHouse = ref.read(locationHouseProvider.notifier).setPostalCode;
@@ -48,7 +50,8 @@ class _HouseLocationState extends ConsumerState<HouseLocation> {
                 stateHouse : stateHouse,
                 addressHouse : addressHouse,
                 neighborhoodHouse : neighborhoodHouse,
-                addLocationHouse: (a, b, c, d, e, f) {
+                addLocationHouse: (a, b, c, d, e, f, i) {
+                  isButtonEnabled = i;
                   addLocationHouse(a, b, c, d, e, f);                
                 },
               ),              
@@ -63,7 +66,7 @@ class _HouseLocationState extends ConsumerState<HouseLocation> {
           ? const SizedBox() 
           : ButtomStepscreateP(
             pageController: widget.pageController, 
-            isButtonEnabled: true, 
+            isButtonEnabled: isButtonEnabled, 
             onNext: () {},
             );
         },
@@ -80,7 +83,7 @@ class ContainerFormLocation extends StatefulWidget {
   final String stateHouse;
   final String addressHouse;
   final String neighborhoodHouse;
-  final Function(String, String, String, String, String, String) addLocationHouse;
+  final Function(String, String, String, String, String, String, bool ) addLocationHouse;
 
   const ContainerFormLocation({ 
     super.key, 
@@ -228,6 +231,7 @@ class _ContainerFormLocationState extends State<ContainerFormLocation> {
             stateController.text,
             addressController.text,
             neighborhoodController.text,
+            isButtonEnabled,
           );
         },
       ),
