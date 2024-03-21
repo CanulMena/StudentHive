@@ -65,13 +65,15 @@ class _HouseAddTittleState extends ConsumerState<HouseAddTittle> {
                 padding:
                     const EdgeInsets.only(top: 20, bottom: 20, left: 20, right: 20),
                 child: TextFormField(
+                  maxLength: 40,
+                  maxLines: 1,
                   controller: titleController,
                   decoration: const InputDecoration(
                     border: OutlineInputBorder(
                         borderRadius: BorderRadius.all(Radius.circular(10))),
                   ),
                   onChanged: (value) {
-                    ref.read(titleHouseProvider.notifier).setTitle(value); // i add the value from the title input to the provider 
+                    ref.read(titleHouseProvider.notifier).setTitle(value.trim()); // i add the value from the title input to the provider 
                   },
                 ),
               ),

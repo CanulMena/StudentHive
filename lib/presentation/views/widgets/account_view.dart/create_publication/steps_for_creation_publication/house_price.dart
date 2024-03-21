@@ -56,21 +56,47 @@ class _HousePriceState extends ConsumerState<HousePrice> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               const TitleAppbar(title: 'Establece un precio para tu espacio'),
-              _message(),
+              Container(
+                padding: const EdgeInsets.only(top: 10, bottom: 10, left: 20, right: 20),
+                child: const Text(
+                  'Se puede cambiar caundo tu quieras.',
+                  style: TextStyle(fontSize: 15, color: Colors.grey),
+                ),
+              ),
               Container(
                 width: screenSize.width * 1,
                 padding: const EdgeInsets.only(
-                    top: 20, bottom: 20, left: 20, right: 20),
+                  top: 20, 
+                  bottom: 20, 
+                  left: 20, 
+                  right: 20
+                  ),
                 child: TextFormField(
                   controller: priceController,
                   inputFormatters: [FilteringTextInputFormatter.digitsOnly],
                   keyboardType: TextInputType.number,
+                  validator: (value) {
+                    if (value == null || value.isEmpty) {
+                      return 'Por favor ingresa un precio';
+                    }
+                    final number = int.tryParse(value);
+                    if (number == null) {
+                      return 'Por favor ingresa un número válido';
+                    }
+                    if (number <= 0) {
+                      return 'El precio debe ser mayor que cero';
+                    }
+                    if (number < 100 || number > 1000000) {
+                      return 'El precio debe estar entre 100 y 1M';
+                    }
+                    return null;
+                  },
                   decoration: const InputDecoration(
                     border: OutlineInputBorder(
                         borderRadius: BorderRadius.all(Radius.circular(10))),
                   ),
                   onChanged: (value) {
-                    ref.read(priceHouseProvider.notifier).setPrice(priceController.text);
+                    ref.read(priceHouseProvider.notifier).setPrice(value.trim());
                   },
                 ),
               ),
@@ -94,16 +120,6 @@ class _HousePriceState extends ConsumerState<HousePrice> {
                   },
                 );
         },
-      ),
-    );
-  }
-
-  Widget _message() {
-    return Container(
-      padding: const EdgeInsets.only(top: 10, bottom: 10, left: 20, right: 20),
-      child: const Text(
-        'Se puede cambiar caundo tu quieras.',
-        style: TextStyle(fontSize: 15, color: Colors.grey),
       ),
     );
   }

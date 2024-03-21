@@ -50,21 +50,29 @@ void dispose() {
             children: [
               //? clase que se encuentra en el archivo container_title_appbar.dart
               const TitleAppbar(title: 'Describe tu espacio'),
-              _message(),
+              Container(
+                padding: const EdgeInsets.only(top: 10, bottom: 10, left: 20, right: 20),
+                child: const Text(
+                  'Detalla qué hace único a tu espacio recuerda describirlo de la mejor manera posible para que los visitantes puedan apreciar completamente.',
+                  style: TextStyle(fontSize: 15, color: Colors.grey),
+                ),
+              ),
               Container(
                 width: size.width * 1,
                 padding:
                     const EdgeInsets.only(top: 20, bottom: 20, left: 20, right: 20),
                 child: TextFormField(
+                  maxLines: 1,
+                  maxLength: 100,
                   controller: descriptionController,
-                  maxLines: 5,
                   decoration: const InputDecoration(
                     border: OutlineInputBorder(
                         borderRadius: BorderRadius.all(Radius.circular(10))),
                   ),
                 onChanged: (value) {
-                  ref.read(descriptionHouseProvider.notifier).setDescription(value);
+                  ref.read(descriptionHouseProvider.notifier).setDescription(value.trim());
                   },
+                  
                 ),
               ),
             ],
@@ -81,16 +89,6 @@ void dispose() {
             onNext: () {},
             );
         },
-      ),
-    );
-  }
-
-  Widget _message() {
-    return Container(
-      padding: const EdgeInsets.only(top: 10, bottom: 10, left: 20, right: 20),
-      child: const Text(
-        'Detalla qué hace único a tu espacio recuerda describirlo de la mejor manera posible para que los visitantes puedan apreciar completamente.',
-        style: TextStyle(fontSize: 15, color: Colors.grey),
       ),
     );
   }

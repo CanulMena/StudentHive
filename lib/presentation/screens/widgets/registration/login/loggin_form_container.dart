@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:studenthive/presentation/provider/providers.dart';
+import 'package:studenthive/presentation/provider/user/riverpod_user_provider.dart';
 import 'package:studenthive/presentation/screens/widgets/registration/input_decoration.dart';
 //!NO se por qu este form tiene muchos errores. Tenemos que arreglarlos
 class LogginFormContainer extends ConsumerWidget {

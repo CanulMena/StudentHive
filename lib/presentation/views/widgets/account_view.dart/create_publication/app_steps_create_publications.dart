@@ -68,6 +68,7 @@ class _AppStepsCreatePublicationsState extends ConsumerState<AppStepsCreatePubli
     final scaffoldMessenger = ScaffoldMessenger.of(context);
     final go = context.go;
     final pop = context.pop;
+    
     return isUploading ? const Scaffold( body: Center(child: CircularProgressIndicator()),) : Scaffold(
       appBar: AppBar(
         leading: const SizedBox(),

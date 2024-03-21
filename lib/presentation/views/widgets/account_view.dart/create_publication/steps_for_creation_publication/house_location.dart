@@ -23,6 +23,23 @@ class _HouseLocationState extends ConsumerState<HouseLocation> {
 
   bool isButtonEnabled = false;
 
+  void _checkFields(){
+    setState(() {
+      isButtonEnabled = ref.read(locationHouseProvider).postalCode.isNotEmpty &&
+          ref.read(locationHouseProvider).country.isNotEmpty &&
+          ref.read(locationHouseProvider).city.isNotEmpty &&
+          ref.read(locationHouseProvider).state.isNotEmpty &&
+          ref.read(locationHouseProvider).address.isNotEmpty &&
+          ref.read(locationHouseProvider).neighborhood.isNotEmpty;
+    });
+  }
+
+  @override
+  void initState() {
+    _checkFields();
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     final addLocationHouse = ref.read(locationHouseProvider.notifier).setPostalCode;
@@ -225,12 +242,12 @@ class _ContainerFormLocationState extends State<ContainerFormLocation> {
         onChanged: (_) {
           //* Llama a la función de devolución de llamada cada vez que cambia el texto
           widget.addLocationHouse(
-            postalCodeController.text,
-            countryController.text,
-            cityController.text,
-            stateController.text,
-            addressController.text,
-            neighborhoodController.text,
+            postalCodeController.text.trim(),
+            countryController.text.trim(),
+            cityController.text.trim(),
+            stateController.text.trim(),
+            addressController.text.trim(),
+            neighborhoodController.text.trim(),
             isButtonEnabled,
           );
         },

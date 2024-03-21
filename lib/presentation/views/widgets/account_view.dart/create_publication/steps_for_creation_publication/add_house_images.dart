@@ -42,8 +42,15 @@ class _AddHouseImagesState extends ConsumerState<AddHouseImages> {
               title:'Da a conocer tu espacio'
               ),
 
-            const SizedBox(height: 8,),
+            Container(
+              padding: const EdgeInsets.symmetric(horizontal: 25, vertical: 10),
+              child: const Text(
+                'Agrega fotos de tu espacio para que los visitantes puedan verlo antes de reservar.',
+                style: TextStyle(fontSize: 15, color: Colors.grey),
+              ),
+            ),
 
+            
             Text(
               '${imageFileList.length} imágenes agregadas',
               style: const TextStyle(fontSize: 15, color: Colors.grey),
@@ -55,14 +62,6 @@ class _AddHouseImagesState extends ConsumerState<AddHouseImages> {
                 style: TextStyle(fontSize: 15, color: Colors.red[400]),
               ),
             ],
-
-            Container(
-              padding: const EdgeInsets.symmetric(horizontal: 25, vertical: 10),
-              child: const Text(
-                'Agrega fotos de tu espacio para que los visitantes puedan verlo antes de reservar.',
-                style: TextStyle(fontSize: 15, color: Colors.grey),
-              ),
-            ),
 
             const SizedBox(height: 20,),
 

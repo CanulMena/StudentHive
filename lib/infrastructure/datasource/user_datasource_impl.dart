@@ -42,9 +42,9 @@ Future<void> loginUser(String email, String password) async {
     }
   } catch (error) {
     // Manejar la excepción aquí
-    print('Error en el inicio de sesión: $error');
+    // print('Error en el inicio de sesión: $error');
     // Puedes lanzar la excepción nuevamente para que la capa superior la maneje si es necesario
-    throw error;
+    
   }
 }
 

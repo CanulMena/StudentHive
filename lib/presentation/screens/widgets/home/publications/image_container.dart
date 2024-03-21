@@ -21,7 +21,7 @@ class ImageContainer extends StatelessWidget {
         offset: const Offset(0, 3),  // Desplazamiento de la sombra
         ),
       ],
-    );
+    );    
 
     return Container(
       //! Contenedor de imagen
