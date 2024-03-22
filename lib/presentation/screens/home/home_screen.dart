@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:studenthive/domain/entities/entities.dart';
 import 'package:studenthive/presentation/provider/providers.dart';
+import 'package:studenthive/presentation/provider/user/user_provider.dart';
 import 'package:studenthive/presentation/screens/home/home_loading_fetchs.dart';
 import 'package:studenthive/presentation/screens/widgets/home/custom_bottom_navegation_bar.dart';
 import 'package:studenthive/presentation/views/home_views.dart';
@@ -21,6 +22,8 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
     super.initState();
     _pageController = PageController(initialPage: ref.read(selectedViewProvider));
     ref.read(allHousesPreviewProvider.notifier).loadNextPage();
+    
+    ref.read(userProvider.notifier).loadUserFromSharedPreferences();
   }
 
   @override

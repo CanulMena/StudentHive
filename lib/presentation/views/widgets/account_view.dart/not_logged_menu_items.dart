@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:studenthive/config/menu/menu_item.dart';
+import 'package:studenthive/config/constants/menu/menu_item.dart';
 import 'package:studenthive/presentation/views/widgets/account_view.dart/custom_list_tile.dart';
 
 class NoLoggedMenuItems extends StatelessWidget {

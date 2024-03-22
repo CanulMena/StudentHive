@@ -1,25 +1,54 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:studenthive/presentation/provider/providers.dart';
-import 'package:studenthive/presentation/provider/user/riverpod_user_provider.dart';
+import 'package:studenthive/presentation/provider/user/user_provider.dart';
 import 'package:studenthive/presentation/screens/widgets/registration/input_decoration.dart';
-//!NO se por qu este form tiene muchos errores. Tenemos que arreglarlos
-class LogginFormContainer extends ConsumerWidget {
-  LogginFormContainer({super.key});
 
-  final emailController = TextEditingController();
-
-  final passwordController = TextEditingController();
+class LogginFormContainer extends ConsumerStatefulWidget {
+  const LogginFormContainer({super.key});
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  ConsumerState<LogginFormContainer> createState() =>  _LogginFormContainerState();
+}
 
+class _LogginFormContainerState extends ConsumerState<LogginFormContainer> {
+  final emailController = TextEditingController();
+  final passwordController = TextEditingController();
+
+  late String token;
+  Map<String, dynamic> payload = {};
+
+@override
+void initState() {
+  super.initState();
+}
+
+Map<String, dynamic> decodePayload(String token) {
+  final parts = token.split('.');
+  if (parts.length != 3) {
+    throw Exception('Invalid token');
+  }
+
+  final payload = parts[1];
+  final normalized = base64Url.normalize(payload);
+  final resp = utf8.decode(base64Url.decode(normalized));
+  final payloadMap = json.decode(resp);
+  return payloadMap;
+}
+
+  @override
+  Widget build(BuildContext context) {
     final go = context.go;
     final scaffoldMessenger = ScaffoldMessenger.of(context);
-    final loginProvider = ref.watch(loginUserProvider);
+    final loginUser = ref.watch(loginUserProvider);
     final isTokenAuth = ref.watch(isTokenAuthProvider.notifier).isTokenAuth;
-    
+    final removeToken = ref.watch(isTokenAuthProvider.notifier).desavowToken;
+    final adduser = ref.watch(userProvider.notifier).setUser;
+
     return Container(
       margin: const EdgeInsets.symmetric(horizontal: 22),
       child: Form(
@@ -30,7 +59,6 @@ class LogginFormContainer extends ConsumerWidget {
               hintText: "ejemplo@gmail.com",
               prefixIcon: const Icon(Icons.person, color: Color(0xFF159A9C)),
               controller: emailController,
-              
             ),
 
             const SizedBox(height: 30),
@@ -40,49 +68,65 @@ class LogginFormContainer extends ConsumerWidget {
               hintText: "********",
               prefixIcon: const Icon(Icons.lock, color: Color(0xFF159A9C)),
               isPassword: true,
-              controller:  passwordController,
-              
+              controller: passwordController,
             ),
 
             const SizedBox(height: 30),
 
-              buildMaterialButton(
+            buildMaterialButton(
               label: "Ingresar",
               onPressed: () async {
                 final email = emailController.text.trim();
                 final password = passwordController.text.trim();
-                if( email.isEmpty || password.isEmpty ){
+                if (email.isEmpty || password.isEmpty) {
                   ScaffoldMessenger.of(context).showSnackBar(
-                  const SnackBar(content: Text('Todos los campos son obligatorios')),
-                  ); 
-                  return; //*Salir del metodo si hay campos vacios
-                } 
-                
-                try {
+                    const SnackBar(content: Text('Todos los campos son obligatorios')),
+                  );
+                  return;
+                }
 
-                  await loginProvider(email, password);
+                try {
+                  await loginUser(email, password);
+
+                  SharedPreferences prefs = await SharedPreferences.getInstance();
+                  token = prefs.getString('Jwt') ?? '';
+                  if (token.isNotEmpty) {
+                    Map<String, dynamic> payload = decodePayload(token);
+                    print('Payload: $payload');
+                  } else {
+                    print('No token found');
+                  }
+
+                  await Future.delayed(const Duration(seconds: 5));
+                  String? emailPayload = payload['http://schemas.xmlsoap.org/ws/2005/05/identity/claims/emailaddress'];
+                  if (emailPayload != null) {
+                    print(emailPayload);
+                    await adduser(emailPayload);
+                  } else {
+                    print('Email is null');
+                    throw Exception('Email is null');
+                  }
 
                   await isTokenAuth();
 
                   scaffoldMessenger.showSnackBar(
-                  const SnackBar(content: Text('El inicio de sesion fue exitoso')), 
+                    const SnackBar(content: Text('El inicio de sesion fue exitoso')),
                   );
 
                   go('/');
-
-                } catch( error ) {
+                } catch (error) {
+                  removeToken();
                   scaffoldMessenger.showSnackBar(
-                  const SnackBar(content: Text('Erorr en el inicio de sesión')),);
+                  const SnackBar(content: Text('Erorr en el inicio de sesión')),
+                  );
                   throw Exception('Erro al iniciar sesion intentalo mas tarde. $error');
-                  }
-
+                }
               },
             ),
 
             const SizedBox(height: 30),
 
             buildRegistrationLink(context),
-
           ],
         ),
       ),
@@ -90,13 +134,12 @@ class LogginFormContainer extends ConsumerWidget {
   }
 
   Widget buildTextFormField({
-    
     required String labelText,
     required String hintText,
     required Icon prefixIcon,
     bool isPassword = false,
     String? Function(String?)? validator,
-    required TextEditingController controller
+    required TextEditingController controller,
   }) {
     return TextFormField(
       keyboardType: isPassword ? TextInputType.visiblePassword : TextInputType.emailAddress,
@@ -112,9 +155,7 @@ class LogginFormContainer extends ConsumerWidget {
       ),
       validator: validator,
       controller: controller,
-      onChanged: (value) {
-        
-      },
+      onChanged: (value) {},
     );
   }
 
@@ -155,11 +196,17 @@ class LogginFormContainer extends ConsumerWidget {
             "Registrate",
             style: TextStyle(
               color: Color(0xFF159A9C),
-
             ),
           ),
         ),
       ],
     );
+  }
+
+  @override
+  void dispose() {
+    emailController.dispose();
+    passwordController.dispose();
+    super.dispose();
   }
 }

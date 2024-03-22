@@ -26,10 +26,10 @@ class AuthNotifier extends StateNotifier<bool> {
       //* Compara la fecha actual con la fecha de expiración del token
       DateTime now = DateTime.now();
       DateTime tokenExpiration = DateTime.fromMillisecondsSinceEpoch(tokenTimestamp);
-      if (now.isBefore(tokenExpiration.add(const Duration(days: 1)))) {
+      if (now.isBefore(tokenExpiration.add(const Duration(days: 365)))) {
         state = true;
         isLoading = false;
-        return; // *Sale de la función si el token es válido <-- Por esta puta madre no me estaba agarrando el puto codigo
+        return;
       } else {
         //* Token expirado, eliminar el token
         await prefs.remove('Jwt');
@@ -39,7 +39,7 @@ class AuthNotifier extends StateNotifier<bool> {
     state = false; //*No se encontró algún token o el token_timestamp es invalido
   }
 
-  Future<void> desavowToken() async {
+  Future<void> desavowToken() async { // here we remove the token from the shared preferences. loggout 
     SharedPreferences prefs = await SharedPreferences.getInstance();
 
     await prefs.remove('Jwt');
