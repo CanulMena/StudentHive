@@ -28,16 +28,21 @@ void initState() {
 }
 
 Map<String, dynamic> decodePayload(String token) {
-  final parts = token.split('.');
-  if (parts.length != 3) {
-    throw Exception('Invalid token');
-  }
+  try {
+    final parts = token.split('.');
+    if (parts.length != 3) {
+      throw Exception('Invalid token');
+    }
 
-  final payload = parts[1];
-  final normalized = base64Url.normalize(payload);
-  final resp = utf8.decode(base64Url.decode(normalized));
-  final payloadMap = json.decode(resp);
-  return payloadMap;
+    final payload = parts[1];
+    final normalized = base64Url.normalize(payload);
+    final resp = utf8.decode(base64Url.decode(normalized));
+    final payloadMap = json.decode(resp);
+    return payloadMap;
+  } catch (e) {
+    print('Error decoding token: $e');
+    return {}; // Devolver un mapa vacío en caso de error
+  }
 }
 
   @override
@@ -57,7 +62,7 @@ Map<String, dynamic> decodePayload(String token) {
             buildTextFormField(
               labelText: "Email",
               hintText: "ejemplo@gmail.com",
-              prefixIcon: const Icon(Icons.person, color: Color(0xFF159A9C)),
+              prefixIcon: const Icon(Icons.person, color: Color.fromRGBO(21, 154, 156, 1)),
               controller: emailController,
             ),
 
@@ -91,20 +96,16 @@ Map<String, dynamic> decodePayload(String token) {
                   SharedPreferences prefs = await SharedPreferences.getInstance();
                   token = prefs.getString('Jwt') ?? '';
                   if (token.isNotEmpty) {
-                    Map<String, dynamic> payload = decodePayload(token);
-                    print('Payload: $payload');
-                  } else {
-                    print('No token found');
+                    payload = decodePayload(token);
                   }
+                  
+                  final String emailPayload = payload['http://schemas.xmlsoap.org/ws/2005/05/identity/claims/emailaddress'];
 
-                  await Future.delayed(const Duration(seconds: 5));
-                  String? emailPayload = payload['http://schemas.xmlsoap.org/ws/2005/05/identity/claims/emailaddress'];
-                  if (emailPayload != null) {
-                    print(emailPayload);
+                  try{
                     await adduser(emailPayload);
-                  } else {
-                    print('Email is null');
-                    throw Exception('Email is null');
+                  } catch(e) {
+                    
+                    throw Exception('Error al guardar el usuario');
                   }
 
                   await isTokenAuth();
