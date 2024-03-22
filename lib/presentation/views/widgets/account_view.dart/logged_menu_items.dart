@@ -74,6 +74,7 @@ class LoggedAppMenuItems extends StatelessWidget {
         ),
         const _ProfileListTile(),
         const _CreatePublicationListTile(),
+        const _PublicationsListTile(),
         const SizedBox(
           height: 15,
         ),
@@ -142,6 +143,22 @@ class _ProfileListTile extends StatelessWidget {
         icon: Icons.person_outline_outlined,
         title: 'Profile',
         linkRoute: '/profile',
+      ),
+    );
+  }
+}
+
+//! Se agrega una nueva ruta para el poder ver las publicaciones del usuario
+class _PublicationsListTile extends StatelessWidget {
+  const _PublicationsListTile();
+
+  @override
+  Widget build(BuildContext context) {
+    return CustomListTile(
+      menuItem: MenuItem(
+        icon: Icons.home_outlined,
+        title: 'Mis Publicaciones',
+        linkRoute: '/publications',
       ),
     );
   }

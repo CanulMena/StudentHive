@@ -5,6 +5,7 @@ import 'package:studenthive/presentation/provider/auth/auth_token_provider.dart'
 import 'package:studenthive/presentation/screens/screens.dart';
 import 'package:studenthive/presentation/views/home_views/profile_view.dart';
 import 'package:studenthive/presentation/views/widgets/account_view.dart/create_publication/steps_for_creation_publication/type_house.dart';
+import 'package:studenthive/presentation/views/widgets/account_view.dart/my_publications/my_publications_view.dart';
 
 class MyRoute {
   final WidgetRef ref;
@@ -65,6 +66,12 @@ class MyRoute {
           path: '/profile',
           builder: (context, state) {
             return const ProfileView();
+          },
+        ),
+        GoRoute(
+          path: '/publications',
+          builder: (context, state) {
+            return const MyPublicationView();
           },
         ),
       ],

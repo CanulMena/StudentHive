@@ -5,6 +5,7 @@ import 'package:studenthive/presentation/provider/providers.dart';
 import 'package:studenthive/presentation/screens/home/home_loading_fetchs.dart';
 import 'package:studenthive/presentation/screens/widgets/home/custom_bottom_navegation_bar.dart';
 import 'package:studenthive/presentation/views/home_views.dart';
+import 'package:studenthive/presentation/views/home_views/request_view.dart';
 
 class HomeScreen extends ConsumerStatefulWidget {
   const HomeScreen({super.key});
@@ -19,7 +20,8 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
   @override
   void initState() {
     super.initState();
-    _pageController = PageController(initialPage: ref.read(selectedViewProvider));
+    _pageController =
+        PageController(initialPage: ref.read(selectedViewProvider));
     ref.read(allHousesPreviewProvider.notifier).loadNextPage();
   }
 
@@ -37,21 +39,25 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
     List<Widget> screens = [
       PublicationsView(
         listHousePreview: houses,
-        loadNextPage: () => ref.read(allHousesPreviewProvider.notifier).loadNextPage(),
+        loadNextPage: () =>
+            ref.read(allHousesPreviewProvider.notifier).loadNextPage(),
       ),
       FavoriteView(isTokenAut: isTokenAut),
-      const NotificationView(),
+      // const NotificationView(),
+      RequestView(
+        isTokenAut: isTokenAut,
+      ),
       const AcountView(),
     ];
 
     final initialLoading = ref.watch(initialLoadingProvider);
     if (initialLoading) return const FullScreenLoading();
 
-
     return Scaffold(
       body: PageView(
         controller: _pageController,
-        onPageChanged: (value) => ref.read(selectedViewProvider.notifier).state = value,
+        onPageChanged: (value) =>
+            ref.read(selectedViewProvider.notifier).state = value,
         children: screens,
       ),
       bottomNavigationBar: CustomButtomNavegationBar(
