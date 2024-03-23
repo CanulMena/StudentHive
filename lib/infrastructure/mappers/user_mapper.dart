@@ -3,7 +3,7 @@ import 'package:studenthive/infrastructure/models/studenthivedb/studenthivedb_us
 
 class UserMapper {
   static User userToEntity(UserModel user) => User(
-        idUser: user.idRol,
+        idUser: user.idUser,
         name: user.name,
         email: user.email,
         userAge: user.userAge,
@@ -12,7 +12,6 @@ class UserMapper {
         phoneNumber: user.phoneNumber,
         profilePhotoUrl: user.profilePhotoUrl,
         gender: user.genderu,
-        // rentalHouses: user.rentalHouses
       );
 
   static UserModel entityToUser(User user) => UserModel(

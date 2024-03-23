@@ -1,6 +1,6 @@
 
 class UserModel {
-    final int? idUser;
+    final int idUser;
     final int? userAge;
     final String email;
     final String name;

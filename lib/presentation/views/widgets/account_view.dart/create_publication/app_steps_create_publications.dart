@@ -63,6 +63,8 @@ class _AppStepsCreatePublicationsState extends ConsumerState<AppStepsCreatePubli
 
     final whoElse = ref.read(whoElseProvider);
 
+    final idUser = ref.read(userProvider)!.idUser;
+
     final postHouse = ref.read(housesRepositoryProvider).postHouse;
     final onRefresh = ref.read(allHousesPreviewProvider.notifier).refreshData;
     final scaffoldMessenger = ScaffoldMessenger.of(context);
@@ -150,7 +152,7 @@ class _AppStepsCreatePublicationsState extends ConsumerState<AppStepsCreatePubli
                       washer: isWasherAvailable,
                       water: isWaterAvailable,
                       wifi: isWifiAvailable,
-                      idUser: 6,
+                      idUser: idUser,
                       rentPrice: price,
                       status: false,
                       television: isTvAvailable,
