@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:studenthive/domain/entities/entities.dart';
 import 'package:studenthive/presentation/delegates/search_publication_delegate.dart';
 import 'package:studenthive/presentation/provider/providers.dart';
+import 'package:studenthive/presentation/provider/user/user_provider.dart';
 import 'package:studenthive/presentation/screens/widgets/home/publications/publication_container.dart';
 
 class PublicationsView extends ConsumerStatefulWidget {
@@ -25,6 +26,7 @@ class _PublicationsViewState extends ConsumerState<PublicationsView> {
   @override
   void initState() {
     super.initState();
+    ref.read(userProvider.notifier).loadUserFromSharedPreferences();
     scrollController.addListener(() { 
       if (widget.loadNextPage == null) return;
       if(scrollController.position.pixels + 200 >= scrollController.position.maxScrollExtent){
@@ -93,11 +95,11 @@ class _PublicationsViewState extends ConsumerState<PublicationsView> {
   }
 }
 
-class CustomAppbar extends StatelessWidget {
+class CustomAppbar extends ConsumerWidget {
   const CustomAppbar({super.key});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, ref) {
     final titleStyle = Theme.of(context).textTheme.titleMedium;
 
     return SafeArea(

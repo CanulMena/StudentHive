@@ -12,8 +12,6 @@ final createUserSesionProvider = Provider((ref) => ref.watch(usersRepositoryProv
 
 final loginUserProvider = Provider((ref) => ref.watch(usersRepositoryProvider).loginUser);
 
-// final userGetByEmailProvider = Provider((ref) => ref.watch(usersRepositoryProvider).getUserByEmail);
-
 final userProvider = StateNotifierProvider<UserNotifier, User?>((ref){
   final userGetByEmailProvider = ref.watch(usersRepositoryProvider).getUserByEmail;
   return UserNotifier( userGetByEmailProvider );
@@ -29,8 +27,8 @@ class UserNotifier extends StateNotifier<User?> {
     if (userJson != null) {
       Map<String, dynamic> userMap = jsonDecode(userJson);
       UserModel userModel = UserModel.fromJson(userMap);
-      User user = UserMapper.userToEntity(userModel);
-      state = user;
+      User userState = UserMapper.userToEntity(userModel);
+      state = userState;
     }
   }
 
