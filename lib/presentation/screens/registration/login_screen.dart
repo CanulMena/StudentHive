@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
-import 'package:studenthive/presentation/provider/providers.dart';
 import 'package:studenthive/presentation/screens/widgets/registration/login/blue_box.dart';
 import 'package:studenthive/presentation/screens/widgets/registration/login/loggin_form_container.dart';
 import 'package:studenthive/presentation/screens/widgets/registration/login/hive_icon.dart';
@@ -67,10 +65,10 @@ class _LoginScreenState extends State<LoginScreen> {
                 ),
               ],
             ),
-            child: Column(
+            child: const Column(
               children: [
-                const SizedBox(height: 10),
-                const Text(
+                SizedBox(height: 10),
+                Text(
                   'Login',
                   style: TextStyle(
                     color: Colors.blueGrey,
@@ -78,7 +76,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     fontWeight: FontWeight.bold,
                   ),
                 ),
-                const SizedBox(height: 30),
+                SizedBox(height: 30),
                 LogginFormContainer(),
               ],
             ),
@@ -88,17 +86,17 @@ class _LoginScreenState extends State<LoginScreen> {
     );
   }
 
-  Widget closeButton(BuildContext context, UserProvider userProvider) {
-    return Positioned(
-      top: 50,
-      left: 30,
-      child: GestureDetector(
-        onTap: () {
-          // userProvider.loadCurrentUser();
-          context.go('/home');
-        },
-        child: const Icon(Icons.close),
-      ),
-    );
-  }
+  // Widget closeButton(BuildContext context, UserProvider userProvider) {
+  //   return Positioned(
+  //     top: 50,
+  //     left: 30,
+  //     child: GestureDetector(
+  //       onTap: () {
+  //         // userProvider.loadCurrentUser();
+  //         context.go('/home');
+  //       },
+  //       child: const Icon(Icons.close),
+  //     ),
+  //   );
+  // }
 }

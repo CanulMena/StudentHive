@@ -11,6 +11,7 @@ class Token {
   static Future<String?> getToken() async{
     SharedPreferences prefs = await SharedPreferences.getInstance();
     return prefs.getString('Jwt');
+    
   }
   
 

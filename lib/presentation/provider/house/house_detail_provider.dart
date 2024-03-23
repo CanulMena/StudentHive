@@ -31,9 +31,8 @@ class MovieMapNotifier extends StateNotifier<Map<String, House>> {
 
     if(state[idHouse] != null) return; //* Si ya existe no tenemos que volver a agregarlo al mapa
 
-    print('realizando peticion http');
-    final movie = await getHouse(id: int.parse(idHouse));
+    final house = await getHouse(id: int.parse(idHouse));
 
-    state = {...state, idHouse: movie};
+    state = {...state, idHouse: house};
   }
 }

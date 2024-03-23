@@ -1,5 +1,5 @@
 import 'package:dio/dio.dart';
-import 'package:studenthive/config/token/manage_token_app.dart';
+import 'package:studenthive/config/constants/token/manage_token_app.dart';
 import 'package:studenthive/domain/datasource/user_datasource.dart';
 import 'package:studenthive/domain/entities/entities.dart';
 import 'package:studenthive/infrastructure/mappers/user_mapper.dart';
@@ -10,11 +10,13 @@ class UserDataSourceImpl extends UserDataSource {
 final Dio dio = Dio(
   BaseOptions(
     baseUrl: 'https://studenthivepro.somee.com/api',
-      
   )
 );
 
-
+Future<void> _addToken() async {
+  String? token = await Token.getToken();
+  dio.options.headers['Authorization'] = 'Bearer $token';
+}
 
 @override
 Future<void> loginUser(String email, String password) async {
@@ -36,15 +38,16 @@ Future<void> loginUser(String email, String password) async {
         token, 
         DateTime.now().millisecondsSinceEpoch
         );
+      
     } else {
       // Si la respuesta no es exitosa, lanzar una excepción con un mensaje de error
       throw Exception('Error en el inicio de sesión: ${response.statusCode}');
     }
   } catch (error) {
     // Manejar la excepción aquí
-    print('Error en el inicio de sesión: $error');
+    // print('Error en el inicio de sesión: $error');
     // Puedes lanzar la excepción nuevamente para que la capa superior la maneje si es necesario
-    throw error;
+    
   }
 }
 
@@ -73,7 +76,10 @@ Future<void> loginUser(String email, String password) async {
 
   @override
   Future<User> getUserByEmail( String email ) async {
-    final response = await dio.get('/User/email/$email');
+    await _addToken();
+    final response = await dio.get(
+      '/User/email/$email',
+      );
 
     final users = UserModel.fromJson(response.data);//* Here i convert the json to Users 
     //i need to convert users to my entity user.

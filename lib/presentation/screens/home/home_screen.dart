@@ -18,11 +18,12 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
   late final PageController _pageController;
 
   @override
-  void initState() {
+  void initState(){
     super.initState();
     _pageController =
         PageController(initialPage: ref.read(selectedViewProvider));
     ref.read(allHousesPreviewProvider.notifier).loadNextPage();
+    ref.read(userProvider.notifier).loadUserFromSharedPreferences();
   }
 
   @override

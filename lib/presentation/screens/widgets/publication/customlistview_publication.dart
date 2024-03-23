@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:studenthive/domain/entities/entities.dart';
 import 'package:studenthive/presentation/screens/widgets/publication/custom_sliverappbar_p.ublication.dart';
-//TODO: Refactorizar esto
+
 class CustomListView extends StatelessWidget {
   final House houseDetail;
 

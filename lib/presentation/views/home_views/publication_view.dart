@@ -28,7 +28,7 @@ class _PublicationsViewState extends ConsumerState<PublicationsView> {
     scrollController.addListener(() { 
       if (widget.loadNextPage == null) return;
       if(scrollController.position.pixels + 200 >= scrollController.position.maxScrollExtent){
-        widget.loadNextPage!();//si cumple la condicion, ejecutamos la función que le agregaremos al parametro
+        widget.loadNextPage!();
       }
     });
   }
@@ -55,7 +55,7 @@ class _PublicationsViewState extends ConsumerState<PublicationsView> {
   return RefreshIndicator(
     onRefresh: onRefresh,
     edgeOffset: 2,
-    strokeWidth: 1,
+    strokeWidth: 2,
     child: CustomScrollView(
             controller: scrollController,
             slivers: [
@@ -93,11 +93,11 @@ class _PublicationsViewState extends ConsumerState<PublicationsView> {
   }
 }
 
-class CustomAppbar extends StatelessWidget {
+class CustomAppbar extends ConsumerWidget {
   const CustomAppbar({super.key});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, ref) {
     final titleStyle = Theme.of(context).textTheme.titleMedium;
 
     return SafeArea(
@@ -119,8 +119,8 @@ class CustomAppbar extends StatelessWidget {
               'StudentHive',
               style: titleStyle?.copyWith(
                   color: Colors.amber.shade800,
-                  fontSize: 20, // Tamaño del texto
-                  fontWeight: FontWeight.w500  // Grosor del texto
+                  fontSize: 20,
+                  fontWeight: FontWeight.w500
               ),
             ),
 

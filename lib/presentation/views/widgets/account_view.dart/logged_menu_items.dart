@@ -1,49 +1,54 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:studenthive/config/menu/menu_item.dart';
+import 'package:studenthive/config/constants/menu/menu_item.dart';
 import 'package:studenthive/presentation/views/widgets/account_view.dart/custom_list_tile.dart';
 
 class LoggedAppMenuItems extends StatelessWidget {
   //* Parece que tendre que hacer un getbyid de usaurios para poder tener su infromacion
   final Future<void> Function() desavowToken;
-  const LoggedAppMenuItems({super.key, required this.desavowToken});
+  final Future<void> Function() removeUser;
+
+  const LoggedAppMenuItems({
+    super.key, 
+    required this.desavowToken, 
+    required this.removeUser});
 
   void openDialog(BuildContext context) {
-    final go = context.go;
-    showDialog(
-      //*showDialog personalizado
-      barrierDismissible: false,
-      context: context,
-      builder: (context) {
-        return AlertDialog(
-          title: const Text('¿Estás seguro?'),
-          content: const Text(
-            '¿Estas seguro que quires salir de tu cuenta?',
+  final go = context.go;
+  showDialog( //*showDialog personalizado
+    barrierDismissible: false,
+    context: context,
+    builder: (context) {
+      return AlertDialog(
+        title: const Text('¿Estás seguro?'),
+        content: const Text(
+          '¿Estas seguro que quires salir de tu cuenta?',     
+        ),
+        actions: [
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            FilledButton(
+            onPressed: () {
+            context.pop();
+            },
+            child: const Text('Cancelar'),
           ),
-          actions: [
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                FilledButton(
-                  onPressed: () {
-                    context.pop();
-                  },
-                  child: const Text('Cancelar'),
-                ),
-                FilledButton(
-                  onPressed: () async {
-                    await desavowToken();
-                    go('/login');
-                  },
-                  child: const Text('Aceptar'),
-                ),
-              ],
-            )
+          FilledButton(
+            onPressed: () async {
+              await desavowToken();
+              await removeUser();
+              go('/login');
+            },
+            child: const Text('Aceptar'),
+          ),
           ],
-        );
-      },
-    );
-  }
+        )
+        ],
+      );
+    },
+  );
+}
 
   @override
   Widget build(BuildContext context) {
@@ -148,7 +153,6 @@ class _ProfileListTile extends StatelessWidget {
   }
 }
 
-//! Se agrega una nueva ruta para el poder ver las publicaciones del usuario
 class _PublicationsListTile extends StatelessWidget {
   const _PublicationsListTile();
 

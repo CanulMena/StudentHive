@@ -1,49 +1,43 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_keyboard_visibility/flutter_keyboard_visibility.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:studenthive/presentation/provider/providers.dart';
 import 'package:studenthive/presentation/views/widgets/account_view.dart/create_publication/utils_for_creation_publication/buttom_steps_creationp.dart';
 import 'package:studenthive/presentation/views/widgets/account_view.dart/create_publication/utils_for_creation_publication/container_title_appbar.dart';
 
-class HouseAddDescription extends StatefulWidget {
-  final Function(String) onNext;
+class HouseAddDescription extends ConsumerStatefulWidget {
   final PageController pageController;
-  const HouseAddDescription({super.key, required this.pageController, required this.onNext});
+  const HouseAddDescription({super.key, required this.pageController});
 
   @override
-  State<HouseAddDescription> createState() => _HouseAddDescriptionState();
+  ConsumerState<HouseAddDescription> createState() => _HouseAddDescriptionState();
 }
 
-class _HouseAddDescriptionState extends State<HouseAddDescription> {
+class _HouseAddDescriptionState extends ConsumerState<HouseAddDescription> {
   final TextEditingController descriptionController = TextEditingController();
 
   bool isButtonEnabled = false;
 
-  String description = '';
-
-  void _checkFields() {
-    setState(() {
-      isButtonEnabled = descriptionController.text.isNotEmpty;
-    });
-  }
-
-  void _addListeners() {
-    descriptionController.addListener(_checkFields);
-  }
-
-  void _removeListeners(){
-    descriptionController.removeListener(_checkFields);
-  }
+  void _updateButtonState() {
+  setState(() {
+    isButtonEnabled = descriptionController.text.isNotEmpty || ref.read(descriptionHouseProvider).isNotEmpty;
+  });}
 
   @override
   void initState() {
     super.initState();
-    _addListeners();
+    descriptionController.text = ref.read(descriptionHouseProvider);
+    descriptionController.addListener(_updateButtonState);
+    _updateButtonState(); // Llama a esta función aquí para inicializar el estado del botón
   }
 
-  @override
-  void dispose() {
-    _removeListeners();
-    super.dispose();
-  }
+@override
+void dispose() {
+  descriptionController.removeListener(_updateButtonState);
+  descriptionController.dispose();
+  super.dispose();
+}
+
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
@@ -56,21 +50,29 @@ class _HouseAddDescriptionState extends State<HouseAddDescription> {
             children: [
               //? clase que se encuentra en el archivo container_title_appbar.dart
               const TitleAppbar(title: 'Describe tu espacio'),
-              _message(),
+              Container(
+                padding: const EdgeInsets.only(top: 10, bottom: 10, left: 20, right: 20),
+                child: const Text(
+                  'Detalla qué hace único a tu espacio recuerda describirlo de la mejor manera posible para que los visitantes puedan apreciar completamente.',
+                  style: TextStyle(fontSize: 15, color: Colors.grey),
+                ),
+              ),
               Container(
                 width: size.width * 1,
                 padding:
                     const EdgeInsets.only(top: 20, bottom: 20, left: 20, right: 20),
                 child: TextFormField(
+                  maxLines: 1,
+                  maxLength: 100,
                   controller: descriptionController,
-                  maxLines: 5,
                   decoration: const InputDecoration(
                     border: OutlineInputBorder(
                         borderRadius: BorderRadius.all(Radius.circular(10))),
                   ),
                 onChanged: (value) {
-                  description = value;
+                  ref.read(descriptionHouseProvider.notifier).setDescription(value.trim());
                   },
+                  
                 ),
               ),
             ],
@@ -84,21 +86,9 @@ class _HouseAddDescriptionState extends State<HouseAddDescription> {
           : ButtomStepscreateP( 
             pageController: widget.pageController, 
             isButtonEnabled: isButtonEnabled,
-            onNext: () {
-              widget.onNext(description);
-            },
+            onNext: () {},
             );
         },
-      ),
-    );
-  }
-
-  Widget _message() {
-    return Container(
-      padding: const EdgeInsets.only(top: 10, bottom: 10, left: 20, right: 20),
-      child: const Text(
-        'Detalla qué hace único a tu espacio recuerda describirlo de la mejor manera posible para que los visitantes puedan apreciar completamente.',
-        style: TextStyle(fontSize: 15, color: Colors.grey),
       ),
     );
   }

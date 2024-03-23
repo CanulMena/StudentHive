@@ -1,35 +1,56 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_keyboard_visibility/flutter_keyboard_visibility.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:studenthive/presentation/views/widgets/account_view.dart/create_publication/utils_for_creation_publication/buttom_steps_creationp.dart';
 import 'package:studenthive/presentation/views/widgets/account_view.dart/create_publication/utils_for_creation_publication/container_title_appbar.dart';
 
-class HouseLocation extends StatefulWidget {
-  final Function(String, String, String, String, String, String) onNext;
+import '../../../../../provider/providers.dart';
+
+class HouseLocation extends ConsumerStatefulWidget {
   final PageController pageController;
   
   const HouseLocation({
     super.key,  
     required this.pageController, 
-    required this.onNext
   });
 
   @override
-  State<HouseLocation> createState() => _HouseLocationState();
+  ConsumerState<HouseLocation> createState() => _HouseLocationState();
 }
 
-class _HouseLocationState extends State<HouseLocation> {
+class _HouseLocationState extends ConsumerState<HouseLocation> {
 
-  String postalCode = '';
-  String country = '';
-  String city = '';
-  String state = '';
-  String address = '';
-  String neighborhood = '';
   bool isButtonEnabled = false;
+
+  void _checkFields(){
+    setState(() {
+      isButtonEnabled = ref.read(locationHouseProvider).postalCode.isNotEmpty &&
+          ref.read(locationHouseProvider).country.isNotEmpty &&
+          ref.read(locationHouseProvider).city.isNotEmpty &&
+          ref.read(locationHouseProvider).state.isNotEmpty &&
+          ref.read(locationHouseProvider).address.isNotEmpty &&
+          ref.read(locationHouseProvider).neighborhood.isNotEmpty;
+    });
+  }
+
+  @override
+  void initState() {
+    _checkFields();
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
+    final addLocationHouse = ref.read(locationHouseProvider.notifier).setPostalCode;
+
+    final postalCodeHouse = ref.read(locationHouseProvider).postalCode;
+    final countryHouse = ref.read(locationHouseProvider).country;
+    final cityHouse = ref.read(locationHouseProvider).city;
+    final stateHouse = ref.read(locationHouseProvider).state;
+    final addressHouse = ref.read(locationHouseProvider).address;
+    final neighborhoodHouse = ref.read(locationHouseProvider).neighborhood;
+
     return Scaffold(
       body: Padding(
         padding: const EdgeInsets.symmetric(vertical: 0, horizontal: 12),
@@ -40,16 +61,15 @@ class _HouseLocationState extends State<HouseLocation> {
                 title: '¿Cuál es la ubicación de tu espacio?',
               ),
               ContainerFormLocation(
-                onFieldChanged: (pc, co, ci, st, ad, ne, isb) {
-                  setState(() {
-                  postalCode = pc;
-                  country = co;
-                  city = ci;
-                  state = st;
-                  address = ad;
-                  neighborhood = ne;
-                  isButtonEnabled = isb;
-                });
+                postalCodeHouse : postalCodeHouse,
+                countryHouse : countryHouse,
+                cityHouse : cityHouse,
+                stateHouse : stateHouse,
+                addressHouse : addressHouse,
+                neighborhoodHouse : neighborhoodHouse,
+                addLocationHouse: (a, b, c, d, e, f, i) {
+                  isButtonEnabled = i;
+                  addLocationHouse(a, b, c, d, e, f);                
                 },
               ),              
             ],
@@ -63,18 +83,8 @@ class _HouseLocationState extends State<HouseLocation> {
           ? const SizedBox() 
           : ButtomStepscreateP(
             pageController: widget.pageController, 
-            isButtonEnabled: true, 
-            onNext: () { 
-              widget.onNext(
-                postalCode,
-                country,
-                city,
-                state,
-                address,
-                neighborhood
-              );
-            },
-            
+            isButtonEnabled: isButtonEnabled, 
+            onNext: () {},
             );
         },
       ),
@@ -83,10 +93,25 @@ class _HouseLocationState extends State<HouseLocation> {
 }
 
 class ContainerFormLocation extends StatefulWidget {
-  final Function(String, String, String, String, String, String, bool) onFieldChanged; //estoy enviando una funcion
 
+  final String postalCodeHouse;
+  final String countryHouse;
+  final String cityHouse;
+  final String stateHouse;
+  final String addressHouse;
+  final String neighborhoodHouse;
+  final Function(String, String, String, String, String, String, bool ) addLocationHouse;
 
-  const ContainerFormLocation({ super.key, required this.onFieldChanged});
+  const ContainerFormLocation({ 
+    super.key, 
+    required this.postalCodeHouse,
+    required this.countryHouse,
+    required this.cityHouse,
+    required this.stateHouse,
+    required this.addressHouse,
+    required this.neighborhoodHouse,
+    required this.addLocationHouse,
+    });
 
   @override
   State<ContainerFormLocation> createState() => _ContainerFormLocationState();
@@ -135,7 +160,14 @@ class _ContainerFormLocationState extends State<ContainerFormLocation> {
   @override
   void initState() {
     super.initState();
+    postalCodeController.text = widget.postalCodeHouse;
+    countryController.text = widget.countryHouse;
+    cityController.text = widget.cityHouse;
+    stateController.text = widget.stateHouse;
+    addressController.text = widget.addressHouse;
+    neighborhoodController.text = widget.neighborhoodHouse;
     _addListeners();
+
   }
 
   @override
@@ -209,14 +241,14 @@ class _ContainerFormLocationState extends State<ContainerFormLocation> {
         ),
         onChanged: (_) {
           //* Llama a la función de devolución de llamada cada vez que cambia el texto
-          widget.onFieldChanged(
-            postalCodeController.text,
-            countryController.text,
-            cityController.text,
-            stateController.text,
-            addressController.text,
-            neighborhoodController.text,
-            isButtonEnabled
+          widget.addLocationHouse(
+            postalCodeController.text.trim(),
+            countryController.text.trim(),
+            cityController.text.trim(),
+            stateController.text.trim(),
+            addressController.text.trim(),
+            neighborhoodController.text.trim(),
+            isButtonEnabled,
           );
         },
       ),

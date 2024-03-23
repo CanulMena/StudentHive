@@ -1,8 +1,8 @@
 
 class User {
   final int idUser;
-  final String name; //Necesario
-  final String email; //Necesario 
+  final String name;
+  final String email; 
   final int? userAge;
   final String? lastName;
   final String? description;

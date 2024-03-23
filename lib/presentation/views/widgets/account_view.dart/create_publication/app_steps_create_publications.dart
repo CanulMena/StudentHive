@@ -9,7 +9,7 @@ class AppStepsCreatePublications extends ConsumerStatefulWidget {
 
   final String typeHouseRental;
 
-  const AppStepsCreatePublications(this.typeHouseRental, {super.key});
+  const AppStepsCreatePublications({super.key, required this.typeHouseRental});
 
   @override
   ConsumerState<AppStepsCreatePublications> createState() => _AppStepsCreatePublicationsState();
@@ -18,6 +18,7 @@ class AppStepsCreatePublications extends ConsumerStatefulWidget {
 class _AppStepsCreatePublicationsState extends ConsumerState<AppStepsCreatePublications> {
   final PageController pageController = PageController();
 
+  int price = 0;
   double currentPage = 0;
   bool isUploading = false;
   @override
@@ -30,48 +31,44 @@ class _AppStepsCreatePublicationsState extends ConsumerState<AppStepsCreatePubli
     });
   }
 
-  String postalCode = '';
-  String country = '';
-  String city = '';
-  String state = '';
-  String address = '';
-  String neighborhood = '';
-
-  int numberOfVisitors = 0;
-  int numberOfBeds = 0;
-  int numberOfHammocks = 0;
-  int numberOfBathrooms = 0;
-
-  String whoElse = '';
-
-  bool isWifiAvailable = false;
-  bool isKitchenAvailable = false;
-  bool isWasherAvailable = false;
-  bool isTvAvailable = false;
-  bool isAirConditionerAvailable = false;
-  bool isWaterAvailable = false;
-  bool isGasAvailable = false;
-
-  // List<XFile> imageFileList = [];
-
-  String description = '';
-
-  String title = '';
-
-  int price = 0;
-
   @override
   Widget build(BuildContext context) {
-    //! Every time the widget is built the request it makes the request to the provider
     final addHouseImages = ref.read(imagesHouseProvider.notifier).addImage;
     final removeHouseImage = ref.read(imagesHouseProvider.notifier).removeImage;
 
+    final imageFileList = ref.read(imagesHouseProvider).images;
+    final postalCode = ref.read(locationHouseProvider).postalCode;
+    final country = ref.read(locationHouseProvider).country;
+    final city = ref.read(locationHouseProvider).city;
+    final state = ref.read(locationHouseProvider).state;
+    final address = ref.read(locationHouseProvider).address;
+    final neighborhood = ref.read(locationHouseProvider).neighborhood;
+
+    final isWifiAvailable = ref.read(houseServicesProvider).isWifiAvailable;
+    final isKitchenAvailable = ref.read(houseServicesProvider).isKitchenAvailable;
+    final isWasherAvailable = ref.read(houseServicesProvider).isWasherAvailable;
+    final isTvAvailable = ref.read(houseServicesProvider).isTvAvailable;
+    final isAirConditionerAvailable = ref.read(houseServicesProvider).isAirConditionerAvailable;
+    final isWaterAvailable = ref.read(houseServicesProvider).isWaterAvailable;
+    final isGasAvailable = ref.read(houseServicesProvider).isGasAvailable;
+
+    final numberOfBathrooms = ref.read(detailHouseProvider).numberOfBathrooms;
+    final numberOfVisitors = ref.read(detailHouseProvider).numberOfVisitors;
+    final numberOfHammocks = ref.read(detailHouseProvider).numberOfHammocks;
+    final numberOfBeds = ref.read(detailHouseProvider).numberOfBeds;
+
+    final title = ref.read(titleHouseProvider);
+
+    final description = ref.read(descriptionHouseProvider);
+
+    final whoElse = ref.read(whoElseProvider);
+
     final postHouse = ref.read(housesRepositoryProvider).postHouse;
     final onRefresh = ref.read(allHousesPreviewProvider.notifier).refreshData;
-    final imageFileList = ref.read(imagesHouseProvider).images;
     final scaffoldMessenger = ScaffoldMessenger.of(context);
     final go = context.go;
     final pop = context.pop;
+    
     return isUploading ? const Scaffold( body: Center(child: CircularProgressIndicator()),) : Scaffold(
       appBar: AppBar(
         leading: const SizedBox(),
@@ -96,50 +93,18 @@ class _AppStepsCreatePublicationsState extends ConsumerState<AppStepsCreatePubli
 
                 HouseLocation(
                   pageController: pageController,
-                  onNext: (pc, co, ci, st, ad, ne) {
-                  setState(() {
-                    postalCode = pc;
-                    country = co;
-                    city = ci;
-                    state = st;
-                    address = ad;
-                    neighborhood = ne;
-                    });
-                  },
                 ),
 
                 DetailsSingleHouse(
                   pageController: pageController, 
-                  onNext: (p0, p1, p2, p3) {
-                    setState(() {
-                      numberOfVisitors = p0;
-                      numberOfBeds = p1;
-                      numberOfHammocks = p2;
-                      numberOfBathrooms = p3;
-                    });
-                  },
                   ),
                   
                 WhoElse(
                   pageController: pageController,
-                  onNext: (p0) {
-                    whoElse = p0;
-                  },
                 ),
 
                 HouseService(
                   pageController: pageController,
-                  onNext: (p0, p1, p2, p3, p4, p5, p6) {
-                    setState(() {
-                      isWifiAvailable = p0;
-                      isKitchenAvailable = p1;
-                      isWasherAvailable = p2;
-                      isTvAvailable = p3;
-                      isAirConditionerAvailable = p4;
-                      isWaterAvailable = p5;
-                      isGasAvailable = p6;
-                    });
-                  },
                 ),
   
                 AddHouseImages(
@@ -150,44 +115,42 @@ class _AppStepsCreatePublicationsState extends ConsumerState<AppStepsCreatePubli
 
                 HouseAddTittle(
                   pageController: pageController,
-                  onNext: (p0) => title = p0,
                 ),
+
                 HouseAddDescription(
                   pageController: pageController,
-                  onNext: (p0) {
-                    description = p0;
-                  },
                 ),
                 HousePrice(
                   pageController: pageController,
-                  onNext: (p0) async {
-                    price = int.parse(p0);
+                
+                  onNext: (p) async {
+                    price = p;
                     setState(() {
                       isUploading = true;
                     });
                     try{
                       await postHouse(
-                      address: address,
-                      city: city,
+                      postalCode: postalCode,
                       country: country,
+                      city: city,
+                      state: state,
+                      address: address,
+                      neighborhood: neighborhood,
                       description: description,
                       gas: isGasAvailable,
                       airConditioning: isAirConditionerAvailable,
-                      imagePaths: imageFileList.map((e) => e.path).toList(),
+                      imagePaths: imageFileList.map((e) => e.path).toList(), //This is the list of images done by the user
                       kitchen: isKitchenAvailable,
                       numberOfBathrooms: numberOfBathrooms,
                       numberOfGuests: numberOfVisitors,
                       numberOfHammocks: numberOfHammocks,
                       numberOfRooms: numberOfBeds,
-                      postalCode: postalCode,
-                      state: state,
                       title: title,
                       typeHouse: widget.typeHouseRental,
                       washer: isWasherAvailable,
                       water: isWaterAvailable,
                       wifi: isWifiAvailable,
                       idUser: 6,
-                      neighborhood: neighborhood,
                       rentPrice: price,
                       status: false,
                       television: isTvAvailable,
@@ -199,6 +162,13 @@ class _AppStepsCreatePublicationsState extends ConsumerState<AppStepsCreatePubli
                     );
 
                     ref.read(imagesHouseProvider.notifier).reset();
+                    ref.read(locationHouseProvider.notifier).reset();
+                    ref.read(houseServicesProvider.notifier).reset();
+                    ref.read(detailHouseProvider.notifier).reset();
+                    ref.read(titleHouseProvider.notifier).reset();
+                    ref.read(descriptionHouseProvider.notifier).reset();
+                    ref.read(priceHouseProvider.notifier).reset();
+                    ref.read(whoElseProvider.notifier).resetWhoElse();
                     
                     go('/');
 

@@ -50,9 +50,22 @@ class _AddHouseImagesState extends ConsumerState<AddHouseImages> {
               ),
             ),
 
+            
+            Text(
+              '${imageFileList.length} imágenes agregadas',
+              style: const TextStyle(fontSize: 15, color: Colors.grey),
+            ),
+
+            if (imageFileList.length < 3) ...[
+              Text(
+                'Por favor, agrega al menos 3 imágenes',
+                style: TextStyle(fontSize: 15, color: Colors.red[400]),
+              ),
+            ],
+
             const SizedBox(height: 20,),
 
-            if( imageFileList.isNotEmpty ) ...[
+            if( imageFileList.isNotEmpty ) ...[ // If the list is not empty, then show the images
 
               ContainerImages( // This is the main image, the one that is bigger
                 width: screenSize.width * 0.9,

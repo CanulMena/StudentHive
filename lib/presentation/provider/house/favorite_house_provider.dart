@@ -9,7 +9,7 @@ final favoritesHousesProvider = StateNotifierProvider<FavoritesPostsNotifier, Li
   return FavoritesPostsNotifier();
 });
 
-class FavoritesPostsNotifier extends StateNotifier<List<HousePreview>>{
+class FavoritesPostsNotifier extends StateNotifier<List<HousePreview>>{ //? Siempre tiene que cargar cuando carga un usuario 
   FavoritesPostsNotifier() : super([]);
 
   Future<void> loadFavoritesFromSharedPreferences() async {

@@ -6,11 +6,11 @@ class ButtomStepscreateP extends StatelessWidget {
   final VoidCallback onNext;
 
   const ButtomStepscreateP({
-    Key? key,
+    super.key,
     this.isButtonEnabled = false,
     required this.pageController,
     required this.onNext,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -32,7 +32,7 @@ class ButtomStepscreateP extends StatelessWidget {
             onTap: () {
               pageController.previousPage( // Return to the previous page
                 duration: const Duration(milliseconds: 500),
-                curve: Curves.ease,
+                curve: Curves.easeInOut,
               );
             },
             child: const Text(
@@ -52,7 +52,7 @@ class ButtomStepscreateP extends StatelessWidget {
                 onNext();
                 pageController.nextPage( // Go to the next page
                   duration: const Duration(milliseconds: 500),
-                  curve: Curves.ease,
+                  curve: Curves.easeInOut,
                 );
               }
             },

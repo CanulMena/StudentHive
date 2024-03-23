@@ -23,8 +23,6 @@ class HousesNotifier extends StateNotifier<List<HousePreview>>{
   
   Future<void> loadNextPage() async {
     if( isLoading ) return;
-
-    print('haciendo fetch');
     isLoading = true;
     currentPage++;
     final List<HousePreview> houses = await fetchMoreHousesPreview(pageSize: 3, pagenNumber: currentPage);
