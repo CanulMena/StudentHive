@@ -46,5 +46,11 @@ class UserNotifier extends StateNotifier<User?> {
     }
   }
 
+  Future<void> removeUser() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    prefs.remove('user');
+    state = null;
+  }
+
 
 }

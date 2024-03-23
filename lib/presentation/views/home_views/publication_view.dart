@@ -3,7 +3,6 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:studenthive/domain/entities/entities.dart';
 import 'package:studenthive/presentation/delegates/search_publication_delegate.dart';
 import 'package:studenthive/presentation/provider/providers.dart';
-import 'package:studenthive/presentation/provider/user/user_provider.dart';
 import 'package:studenthive/presentation/screens/widgets/home/publications/publication_container.dart';
 
 class PublicationsView extends ConsumerStatefulWidget {
@@ -26,11 +25,10 @@ class _PublicationsViewState extends ConsumerState<PublicationsView> {
   @override
   void initState() {
     super.initState();
-    ref.read(userProvider.notifier).loadUserFromSharedPreferences();
     scrollController.addListener(() { 
       if (widget.loadNextPage == null) return;
       if(scrollController.position.pixels + 200 >= scrollController.position.maxScrollExtent){
-        widget.loadNextPage!();//si cumple la condicion, ejecutamos la función que le agregaremos al parametro
+        widget.loadNextPage!();
       }
     });
   }
@@ -57,7 +55,7 @@ class _PublicationsViewState extends ConsumerState<PublicationsView> {
   return RefreshIndicator(
     onRefresh: onRefresh,
     edgeOffset: 2,
-    strokeWidth: 1,
+    strokeWidth: 2,
     child: CustomScrollView(
             controller: scrollController,
             slivers: [
@@ -121,8 +119,8 @@ class CustomAppbar extends ConsumerWidget {
               'StudentHive',
               style: titleStyle?.copyWith(
                   color: Colors.amber.shade800,
-                  fontSize: 20, // Tamaño del texto
-                  fontWeight: FontWeight.w500  // Grosor del texto
+                  fontSize: 20,
+                  fontWeight: FontWeight.w500
               ),
             ),
 

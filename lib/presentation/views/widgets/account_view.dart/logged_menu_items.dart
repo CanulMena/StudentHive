@@ -5,7 +5,12 @@ import 'package:studenthive/presentation/views/widgets/account_view.dart/custom_
 
 class LoggedAppMenuItems extends StatelessWidget { //* Parece que tendre que hacer un getbyid de usaurios para poder tener su infromacion
   final Future<void> Function() desavowToken;
-  const LoggedAppMenuItems({super.key, required this.desavowToken});
+  final Future<void> Function() removeUser;
+
+  const LoggedAppMenuItems({
+    super.key, 
+    required this.desavowToken, 
+    required this.removeUser});
 
   void openDialog(BuildContext context) {
   final go = context.go;
@@ -31,6 +36,7 @@ class LoggedAppMenuItems extends StatelessWidget { //* Parece que tendre que hac
           FilledButton(
             onPressed: () async {
               await desavowToken();
+              await removeUser();
               go('/login');
             },
             child: const Text('Aceptar'),

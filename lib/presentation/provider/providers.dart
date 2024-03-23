@@ -15,3 +15,4 @@ export 'package:studenthive/presentation/provider/house/title_house_provider.dar
 export 'package:studenthive/presentation/provider/house/description_house_provider.dart';
 export 'package:studenthive/presentation/provider/house/price_house_provider.dart';
 export 'package:studenthive/presentation/provider/house/who_else_house_provider.dart';
+export 'package:studenthive/presentation/provider/user/user_provider.dart';
