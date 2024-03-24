@@ -11,7 +11,7 @@ abstract class HouseDataSource {
     required int idUser,
     required String title,
     required String description,
-    bool status = false,
+    // bool status = false,
     required String whoElse,
     required int rentPrice,
     required String typeHouse,

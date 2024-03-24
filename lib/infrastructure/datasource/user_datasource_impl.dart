@@ -9,7 +9,7 @@ class UserDataSourceImpl extends UserDataSource {
 
 final Dio dio = Dio(
   BaseOptions(
-    baseUrl: 'https://studenthivepro.somee.com/api',
+    baseUrl: 'https://www.studenthive.somee.com/api',
   )
 );
 
@@ -60,6 +60,7 @@ Future<void> loginUser(String email, String password) async {
       '/User', 
       data: {
         "email": email,
+        "IdRol": 1,
         "password": password,
         "name": userName
         }

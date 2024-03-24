@@ -12,6 +12,7 @@ class UserMapper {
         phoneNumber: user.phoneNumber,
         profilePhotoUrl: user.profilePhotoUrl,
         gender: user.genderu,
+        idRol: user.idRol,
       );
 
   static UserModel entityToUser(User user) => UserModel(
@@ -24,6 +25,6 @@ class UserMapper {
       phoneNumber: user.phoneNumber,
       profilePhotoUrl: user.profilePhotoUrl,
       genderu: user.gender,
-      idRol: user.idUser
+      idRol: user.idRol ?? 1
       );
 }

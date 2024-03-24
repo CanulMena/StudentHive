@@ -9,6 +9,7 @@ class User {
   final int? phoneNumber;
   final String? profilePhotoUrl;
   final int? gender;
+  final int? idRol;
 
   User({
     required this.idUser,
@@ -20,6 +21,7 @@ class User {
     required this.phoneNumber,
     required this.profilePhotoUrl,
     required this.gender,
+    required this.idRol,
     });
 
 }

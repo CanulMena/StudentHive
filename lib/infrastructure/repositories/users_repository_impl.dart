@@ -14,7 +14,7 @@ class UserRepositoryImpl extends UserRepository{
   }
 
   @override
-  Future<void> loginUser(String email, String password) { //solo estoy pasando la referencia. no activo la funcion ---> async/await
+  Future<void> loginUser(String email, String password) {
     return userDataSource.loginUser(email, password);
   }
   

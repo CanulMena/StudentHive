@@ -154,7 +154,7 @@ class _AppStepsCreatePublicationsState extends ConsumerState<AppStepsCreatePubli
                       wifi: isWifiAvailable,
                       idUser: idUser,
                       rentPrice: price,
-                      status: false,
+                      // status: false,
                       television: isTvAvailable,
                       whoElse: whoElse,
                     );
