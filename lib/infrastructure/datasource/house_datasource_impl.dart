@@ -10,7 +10,7 @@ class HouseDataSourceImpl extends HouseDataSource{
 
   final Dio dio = Dio(
     BaseOptions(
-      baseUrl: "https://studenthivepro.somee.com/api/v1/RentalHouse",
+      baseUrl: "https://www.studenthive.somee.com/api/v1/RentalHouse",
     )
   );
 
@@ -42,7 +42,7 @@ class HouseDataSourceImpl extends HouseDataSource{
     required int idUser,
     required String title,
     required String description,
-    bool status = false,
+    // bool status = false,
     required String whoElse,
     required int rentPrice,
     required String typeHouse,
@@ -76,7 +76,7 @@ class HouseDataSourceImpl extends HouseDataSource{
       "IdUser": idUser,
       "Title": title,
       "Description": description,
-      "Status": status,
+      // "Status": status,
       "WhoElse": whoElse,
       "RentPrice": rentPrice,
       "TypeHouse": typeHouse,
@@ -104,7 +104,7 @@ class HouseDataSourceImpl extends HouseDataSource{
     '?IdUser=$idUser'
     '&Title=$title'
     '&Description=$description'
-    '&Status=$status'
+    // '&Status=$status'
     '&WhoElse=$whoElse'
     '&RentPrice=$rentPrice'
     '&TypeHouse=$typeHouse'

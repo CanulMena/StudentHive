@@ -97,7 +97,7 @@ Map<String, dynamic> decodePayload(String token) {
                   if (token.isNotEmpty) {
                     payload = decodePayload(token);
                   }
-                  
+
                   final String emailPayload = payload['http://schemas.xmlsoap.org/ws/2005/05/identity/claims/emailaddress'];
 
                   try{
