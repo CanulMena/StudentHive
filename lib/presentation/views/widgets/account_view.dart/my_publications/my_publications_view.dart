@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:studenthive/presentation/provider/providers.dart';
-import 'package:studenthive/presentation/views/widgets/account_view.dart/my_publications/types_publication/publication_status_false.dart';
-import 'package:studenthive/presentation/views/widgets/account_view.dart/my_publications/types_publication/publication_status_true.dart';
-import 'package:studenthive/presentation/views/widgets/account_view.dart/my_publications/types_publication/publications_all_tatus.dart';
+import 'package:studenthive/presentation/views/widgets/account_view.dart/my_publications/my_publications_list_view.dart';
 
 class MyPublicationView extends ConsumerStatefulWidget {
   const MyPublicationView({super.key});
@@ -30,7 +28,10 @@ class _MyPublicationViewState extends ConsumerState<MyPublicationView> {
   @override
   Widget build(BuildContext context) {
 
+    // allHousesPreviewProvider
     // activesHousesByUser 
+    // noactivesHousesByUser
+
     final activeHouses = ref.watch(allActiveHousesPreviewProvider);
     final allPublications = ref.watch(allHousesPreviewProvider);
     
@@ -46,9 +47,9 @@ class _MyPublicationViewState extends ConsumerState<MyPublicationView> {
               child: PageView(
                 controller: pageController,
                 children: [
-                  AllMyPublications(activeHouses: allPublications, ),
-                  PublicationStatusTrue( activeHouses: activeHouses, ),
-                  PublicationStatusFalse(activeHouses: activeHouses,)
+                  MyPublicationsListView(activeHouses: allPublications, ), // allPublications
+                  MyPublicationsListView(activeHouses: activeHouses, ), // activeHouses
+                  MyPublicationsListView(activeHouses: allPublications, ), // notActiveHouses
                 ],
               ),
             )
