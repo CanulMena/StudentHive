@@ -4,11 +4,29 @@ import 'package:studenthive/presentation/provider/providers.dart';
 import 'package:studenthive/presentation/views/widgets/account_view.dart/my_publications/types_publication/publication_status_false.dart';
 import 'package:studenthive/presentation/views/widgets/account_view.dart/my_publications/types_publication/publication_status_true.dart';
 
-class MyPublicationView extends ConsumerWidget {
+class MyPublicationView extends ConsumerStatefulWidget {
   const MyPublicationView({super.key});
 
   @override
-  Widget build(BuildContext context, ref) {
+  ConsumerState<MyPublicationView> createState() => _MyPublicationViewState();
+}
+
+class _MyPublicationViewState extends ConsumerState<MyPublicationView> {
+  final PageController pageController = PageController();
+
+  double currentPage = 0;
+
+  @override
+  void initState() {
+    pageController.addListener(() {
+      currentPage = pageController.page!;
+      setState(() {});
+    });
+    super.initState();
+  }
+
+  @override
+  Widget build(BuildContext context) {
 
     // activesHousesByUser 
     final activeHouses = ref.watch(allActiveHousesPreviewProvider);
@@ -19,7 +37,7 @@ class MyPublicationView extends ConsumerWidget {
         ),
         body: Column(
           children: [
-            const ButtonFilterStatus(), //* Botones para filtrar las publicaciones
+            const ButtonFilterStatus(), 
             const SizedBox(height: 10,),
             Expanded(
               child: PageView(
