@@ -47,20 +47,18 @@ class _ProfileViewState extends ConsumerState<ProfileView> {
                   child: Column(
                     children: [
                       const Padding(padding: EdgeInsets.all(20)),
-                      SizedBox(
-                        height: size.height * 0.5 * 0.3,
-                        width: size.width * 0.5 * 0.7,
-                        child: ClipOval(
-                          child: Image.network(
-                              'https://flutter.github.io/assets-for-api-docs/assets/widgets/owl.jpg',
-                              fit: BoxFit.cover),
-                        ),
+                      CircleAvatar(
+                        radius: 60,
+                        backgroundImage: user?.profilePhotoUrl != null
+                            ? NetworkImage(user!.profilePhotoUrl!)
+                            : const NetworkImage(
+                                'https://images.unsplash.com/photo-1511367461989-f85a21fda167?q=80&w=1931&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'),
                       ),
                       SizedBox(
                         height: size.height * 0.3 * 0.05,
                       ),
                       Text(
-                        user?.name ?? '',
+                        '${user?.name}${user?.lastName != null ? user!.lastName! : ""}',
                         style: const TextStyle(
                             fontSize: 20, fontWeight: FontWeight.bold),
                       ),
@@ -72,28 +70,49 @@ class _ProfileViewState extends ConsumerState<ProfileView> {
                     ],
                   ),
                 ),
-                if (user?.description == null ||
-                    user?.gender == null ||
-                    user?.phoneNumber == null ||
-                    user?.lastName == null ||
-                    user?.userAge == null ||
+                if (user?.description == null &&
+                    user?.gender == null &&
+                    user?.phoneNumber == null &&
+                    user?.lastName == null &&
+                    user?.userAge == null &&
                     user?.profilePhotoUrl == null) ...[
                   const ButtonCreateProfile(),
                 ] else ...[
                   ContainerInformation(
-                    textInfromation: user?.lastName ?? '',
-                  ),
-                  ContainerInformation(
                     textInfromation: user?.description ?? '',
                   ),
-                  SizedBox(
-                    child: Text(
-                      'Edad: ${user?.userAge}',
+                  Container(
+                    height: size.height * 0.1,
+                    width: size.width * 0.9,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(10),
+                      border: Border.all(
+                        color: Colors.grey.withOpacity(0.5),
+                        width: 2,
+                      ),
+                    ),
+                    child: Padding(
+                      padding: const EdgeInsets.all(30),
+                      child: Text(
+                        'Edad: ${user?.userAge}',
+                      ),
                     ),
                   ),
-                  SizedBox(
-                    child: Text(
-                      'Edad: ${user?.phoneNumber}',
+                  Container(
+                    height: size.height * 0.1,
+                    width: size.width * 0.9,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(10),
+                      border: Border.all(
+                        color: Colors.grey.withOpacity(0.5),
+                        width: 2,
+                      ),
+                    ),
+                    child: Padding(
+                      padding: const EdgeInsets.all(30),
+                      child: Text(
+                        'Edad: ${user?.phoneNumber}',
+                      ),
                     ),
                   ),
                 ],
@@ -112,16 +131,16 @@ class ContainerInformation extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
-    return SizedBox(
+    return Container(
       height: size.height * 0.1,
       width: size.width * 0.9,
-      // decoration: BoxDecoration(
-      //   borderRadius: BorderRadius.circular(10),
-      //   border: Border.all(
-      //     color: Colors.grey.withOpacity(0.5),
-      //     width: 2,
-      //   ),
-      // ),
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(10),
+        border: Border.all(
+          color: Colors.grey.withOpacity(0.5),
+          width: 2,
+        ),
+      ),
       child: Padding(
         padding: const EdgeInsets.all(30),
         child: Text(
