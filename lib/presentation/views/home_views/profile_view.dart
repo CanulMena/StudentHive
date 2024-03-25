@@ -1,12 +1,20 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:studenthive/presentation/provider/user/user_provider.dart';
 import 'package:studenthive/presentation/views/widgets/account_view.dart/create_publication/routerAnimation/router_animation.dart';
 import 'package:studenthive/presentation/views/widgets/profile_view/create_profile_view.dart';
 
-class ProfileView extends StatelessWidget {
+class ProfileView extends ConsumerStatefulWidget {
   const ProfileView({Key? key}) : super(key: key);
 
   @override
+  ConsumerState<ProfileView> createState() => _ProfileViewState();
+}
+
+class _ProfileViewState extends ConsumerState<ProfileView> {
+  @override
   Widget build(BuildContext context) {
+    var user = ref.watch(userProvider);
     final size = MediaQuery.of(context).size;
     return Scaffold(
         appBar: AppBar(
@@ -51,38 +59,44 @@ class ProfileView extends StatelessWidget {
                       SizedBox(
                         height: size.height * 0.3 * 0.05,
                       ),
-                      const Text(
-                        'Nombre de usuario',
-                        style: TextStyle(
+                      Text(
+                        user?.name ?? '',
+                        style: const TextStyle(
                             fontSize: 20, fontWeight: FontWeight.bold),
                       ),
-                      const Text(
-                        'Correo electronico',
-                        style: TextStyle(
+                      Text(
+                        user?.email ?? '',
+                        style: const TextStyle(
                             fontSize: 15, fontWeight: FontWeight.normal),
                       ),
                     ],
                   ),
                 ),
-                SizedBox(
-                  height: size.height * 0.3 * 0.05,
-                ),
-                const ContainerInformation(
-                  textInfromation:
-                      'Crea un perfil para que los demas usuarios puedan conocerte mejor y puedan contactarte mas facilmente.',
-                ),
-                SizedBox(
-                  height: size.height * 0.5 * 0.3,
-                ),
-                ElevatedButton(
-                  onPressed: () {
-                    Navigator.of(context).push(createPageRoute(const CreateProfileView()));
-                  },
-                  child: const Text(
-                    'Crear Perfil',
-                    style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                if (user?.description == null ||
+                    user?.gender == null ||
+                    user?.phoneNumber == null ||
+                    user?.lastName == null ||
+                    user?.userAge == null ||
+                    user?.profilePhotoUrl == null) ...[
+                  const ButtonCreateProfile(),
+                ] else ...[
+                  ContainerInformation(
+                    textInfromation: user?.lastName ?? '',
                   ),
-                )
+                  ContainerInformation(
+                    textInfromation: user?.description ?? '',
+                  ),
+                  SizedBox(
+                    child: Text(
+                      'Edad: ${user?.userAge}',
+                    ),
+                  ),
+                  SizedBox(
+                    child: Text(
+                      'Edad: ${user?.phoneNumber}',
+                    ),
+                  ),
+                ],
               ],
             )
           ],
@@ -98,23 +112,66 @@ class ContainerInformation extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
-    return Container(
-      height: size.height * 0.2,
+    return SizedBox(
+      height: size.height * 0.1,
       width: size.width * 0.9,
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(10),
-        border: Border.all(
-          color: Colors.grey.withOpacity(0.5),
-          width: 2,
-        ),
-      ),
+      // decoration: BoxDecoration(
+      //   borderRadius: BorderRadius.circular(10),
+      //   border: Border.all(
+      //     color: Colors.grey.withOpacity(0.5),
+      //     width: 2,
+      //   ),
+      // ),
       child: Padding(
         padding: const EdgeInsets.all(30),
         child: Text(
           textInfromation,
-          style: const TextStyle(fontSize: 20, fontWeight: FontWeight.w300),
         ),
       ),
+    );
+  }
+}
+
+class ButtonCreateProfile extends StatelessWidget {
+  const ButtonCreateProfile({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    final size = MediaQuery.of(context).size;
+    return Column(
+      children: [
+        Container(
+          height: size.height * 0.2,
+          width: size.width * 0.9,
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(10),
+            border: Border.all(
+              color: Colors.grey.withOpacity(0.5),
+              width: 2,
+            ),
+          ),
+          child: const Padding(
+            padding: EdgeInsets.all(30),
+            child: Text(
+              'Crea un perfil para que los demas usuarios puedan conocerte mejor y puedan contactarte mas facilmente.',
+              style: TextStyle(fontSize: 20, fontWeight: FontWeight.w300),
+            ),
+          ),
+        ),
+        SizedBox(
+          height: size.height * 0.5 * 0.3,
+        ),
+        ElevatedButton(
+          onPressed: () {
+            Navigator.of(context)
+                .push(createPageRoute(const CreateProfileView()));
+          },
+          child: const Text(
+            'Crear Perfil',
+            style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+          ),
+        ),
+      ],
     );
   }
 }
