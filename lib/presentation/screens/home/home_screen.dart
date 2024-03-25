@@ -36,7 +36,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     final bool isTokenAut = ref.read(isTokenAuthProvider);
-    final List<HousePreview> houses = ref.watch(allHousesPreviewProvider);
+    final List<HousePreview> houses = ref.watch(allActiveHousesPreviewProvider);
 
     List<Widget> screens = [
       PublicationsView(
@@ -52,7 +52,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
     ];
 
     final initialLoading = ref.watch(initialLoadingProvider);
-    if (initialLoading) return const FullScreenLoading(); // TODO: agregar las cosas en loading.
+    if (initialLoading) return const FullScreenLoading(); 
 
     return Scaffold(
       body: PageView(

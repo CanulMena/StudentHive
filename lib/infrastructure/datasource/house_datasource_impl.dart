@@ -40,7 +40,6 @@ class HouseDataSourceImpl extends HouseDataSource{
     
   }
 
-
   @override
   Future<House> getHouseById({int id = 1}) async {
     final response = await dio.get('/$id');
