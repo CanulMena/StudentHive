@@ -57,17 +57,17 @@ Future<void> loginUser(String email, String password) async {
     try {
     //* Realizar la solicitud POST al endpoint
     Response response = await dio.post(
-      '/User', 
-      data: {
-        "email": email,
+      '/User',
+      queryParameters: {
+        "Email": email,
         "IdRol": 1,
-        "password": password,
-        "name": userName
-        }
-      );
+        "Password": password,
+        "Name": userName,
+      },
+    );
 
     if (response.statusCode == 201) {
-      //* En este caso no es necesario regresar nada
+      
     } 
     }catch (e) { //? e ---> generalmente solo contiene información sobre el tipo de error que ocurrió. No un estatus http
     // print('error exeption $e');
