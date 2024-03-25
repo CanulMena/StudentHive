@@ -90,6 +90,7 @@ Future<void> loginUser(String email, String password) async {
 
   @override
   Future<User> getUserById( int id ) async {
+    await _addToken();
     final response = await dio.get('/User/id/$id');
 
     final users = UserModel.fromJson(response.data);//* Here i convert the json to Users 

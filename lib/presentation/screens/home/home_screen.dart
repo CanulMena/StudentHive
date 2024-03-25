@@ -24,6 +24,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
         PageController(initialPage: ref.read(selectedViewProvider));
     ref.read(allHousesPreviewProvider.notifier).loadNextPage();
     ref.read(userProvider.notifier).loadUserFromSharedPreferences();
+    ref.read(allActiveHousesPreviewProvider.notifier).loadNextPage();
   }
 
   @override
@@ -44,7 +45,6 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
             ref.read(allHousesPreviewProvider.notifier).loadNextPage(),
       ),
       FavoriteView(isTokenAut: isTokenAut),
-      // const NotificationView(),
       RequestView(
         isTokenAut: isTokenAut,
       ),
@@ -52,7 +52,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
     ];
 
     final initialLoading = ref.watch(initialLoadingProvider);
-    if (initialLoading) return const FullScreenLoading();
+    if (initialLoading) return const FullScreenLoading(); // TODO: agregar las cosas en loading.
 
     return Scaffold(
       body: PageView(

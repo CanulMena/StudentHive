@@ -11,7 +11,8 @@ class LoggedAppMenuItems extends StatelessWidget {
   const LoggedAppMenuItems({
     super.key, 
     required this.desavowToken, 
-    required this.removeUser});
+    required this.removeUser,
+    });
 
   void openDialog(BuildContext context) {
   final go = context.go;
@@ -79,7 +80,7 @@ class LoggedAppMenuItems extends StatelessWidget {
         ),
         const _ProfileListTile(),
         const _CreatePublicationListTile(),
-        const _PublicationsListTile(),
+        const _MypublicationsListTile(),
         const SizedBox(
           height: 15,
         ),
@@ -142,7 +143,6 @@ class _ProfileListTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // final colors = Theme.of(context).colorScheme;
     return CustomListTile(
       menuItem: MenuItem(
         icon: Icons.person_outline_outlined,
@@ -153,8 +153,8 @@ class _ProfileListTile extends StatelessWidget {
   }
 }
 
-class _PublicationsListTile extends StatelessWidget {
-  const _PublicationsListTile();
+class _MypublicationsListTile extends StatelessWidget {
+  const _MypublicationsListTile();
 
   @override
   Widget build(BuildContext context) {
@@ -162,7 +162,7 @@ class _PublicationsListTile extends StatelessWidget {
       menuItem: MenuItem(
         icon: Icons.home_outlined,
         title: 'Mis Publicaciones',
-        linkRoute: '/publications',
+        linkRoute: '/my-publications',
       ),
     );
   }

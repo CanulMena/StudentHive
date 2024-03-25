@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 
 class MyPublicationsImageContainer extends StatelessWidget {
-  const MyPublicationsImageContainer({super.key});
+  final String imageUrl;
+  const MyPublicationsImageContainer({super.key, required this.imageUrl});
 
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
-    //! Contendor de la imagen de la publicación
     return Container(
       height: size.height * 0.51 * 0.75,
       decoration: BoxDecoration(
@@ -20,8 +20,7 @@ class MyPublicationsImageContainer extends StatelessWidget {
           ),
         ],
       ),
-      child: Image.network(
-          'https://uxwing.com/wp-content/themes/uxwing/download/web-app-development/image-not-found-icon.png'),
+      child: Image.network(imageUrl, fit: BoxFit.cover),
     );
   }
 }

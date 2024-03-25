@@ -1,35 +1,60 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:studenthive/domain/entities/entities.dart';
+import 'package:studenthive/presentation/provider/user/user_detail_provider.dart';
 import 'package:studenthive/presentation/screens/widgets/publication/custom_sliverappbar_p.ublication.dart';
 import 'package:studenthive/presentation/screens/widgets/publication/user_information_publication_container.dart';
 
-class CustomListView extends StatelessWidget {
+class CustomListView extends ConsumerStatefulWidget {
   final House houseDetail;
 
   const CustomListView({super.key, required this.houseDetail});
 
   @override
+  ConsumerState<CustomListView> createState() => _CustomListViewState();
+}
+
+class _CustomListViewState extends ConsumerState<CustomListView> {
+
+  @override
+  void initState() {
+    String idUser = widget.houseDetail.idUser.toString();
+    ref.read(userDetailProvider.notifier).loadUserDetail(idUser);
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
+    final Map<String, dynamic> userMapDetails = ref.watch(userDetailProvider);
+    final userDetail = userMapDetails[widget.houseDetail.idUser.toString()];
+      if (userDetail == null) {
+      return const Scaffold(
+        body: Center(
+          child: CircularProgressIndicator(),
+        ),
+      );
+    } else {
     return CustomScrollView(
       slivers: [
-        CustomSliverAppBar(
-          images: houseDetail.images,
-        ),
+        CustomSliverAppBar( images: houseDetail.images, ),
         SliverList(
-            delegate:
-                SliverChildBuilderDelegate(childCount: 1, (context, index) {
-          return _RentalHouseDetils(
-            houseDetail: houseDetail,
-          );
-        }))
-      ],
-    );
+              delegate:
+                  SliverChildBuilderDelegate(childCount: 1, (context, index) {
+            return _RentalHouseDetils(
+              houseDetail: widget.houseDetail,
+              userDetail: userDetail,
+            );
+          }))
+        ],
+      );
+    }
   }
 }
 
 class _RentalHouseDetils extends StatelessWidget {
   final House houseDetail;
-  const _RentalHouseDetils({required this.houseDetail});
+  final User userDetail; // el problema es que no tengo el userDetail de manera instantanea y me tira error. Pues user detail para como null hasta que se carga
+  const _RentalHouseDetils({required this.houseDetail, required this.userDetail});
 
   @override
   Widget build(BuildContext context) {
