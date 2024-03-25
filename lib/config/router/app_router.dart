@@ -28,7 +28,7 @@ class MyRoute {
             routes: [
               GoRoute(
                   //* Ruta para ver una publicacion
-                  path: 'house/:id/:email', // <--- :id es un parametro que se puede pasar a la ruta al igual que el :email
+                  path: 'house/:id', // <--- :id es un parametro que se puede pasar a la ruta al igual que el :email
                   builder: (context, state) {
                     final houseId = state.pathParameters['id'] ?? 'no-id';
                     return PublicationScreen(houseId: houseId);
