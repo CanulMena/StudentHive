@@ -25,7 +25,7 @@ class _CustomListViewState extends ConsumerState<CustomListView> {
   @override
   Widget build(BuildContext context) {
     final Map<String, dynamic> userMapDetails = ref.watch(userDetailProvider);
-    final User userDetail = userMapDetails[widget.houseDetail.idUser.toString()];
+    final userDetail = userMapDetails[widget.houseDetail.idUser.toString()];
     return CustomScrollView(
       slivers: [
         CustomSliverAppBar( images: widget.houseDetail.images, ),
@@ -46,7 +46,7 @@ class _CustomListViewState extends ConsumerState<CustomListView> {
 
 class _RentalHouseDetils extends StatelessWidget {
   final House houseDetail;
-  final User userDetail;
+  final userDetail;
   const _RentalHouseDetils({required this.houseDetail, required this.userDetail});
 
   @override
