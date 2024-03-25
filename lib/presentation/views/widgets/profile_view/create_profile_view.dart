@@ -37,21 +37,10 @@ class _CreateProfileViewState extends State<CreateProfileView> {
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     // Padding(padding: const EdgeInsets.all(20)),
-                    Container(
-                      height: size.height * 0.5 * 0.3,
-                      width: size.width * 0.5 * 0.7,
-                      decoration: BoxDecoration(
-                        border: Border.all(
-                          color: Colors.amberAccent,
-                        ),
-                        borderRadius: BorderRadius.circular(70),
-                      ),
-                      child: const ClipOval(
-                        child: Icon(
-                          Icons.camera_alt_outlined,
-                          size: 100,
-                        ),
-                      ),
+                    const CircleAvatar(
+                      radius: 60,
+                      backgroundImage: NetworkImage(
+                          'https://images.unsplash.com/photo-1511367461989-f85a21fda167?q=80&w=1931&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'),
                     ),
                     SizedBox(
                       height: size.height * 0.5 * 0.1,
