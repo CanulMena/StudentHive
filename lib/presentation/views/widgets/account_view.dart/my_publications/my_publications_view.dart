@@ -1,37 +1,31 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:studenthive/presentation/provider/providers.dart';
 import 'package:studenthive/presentation/views/widgets/account_view.dart/my_publications/types_publication/publication_status_false.dart';
 import 'package:studenthive/presentation/views/widgets/account_view.dart/my_publications/types_publication/publication_status_true.dart';
 
-class MyPublicationView extends StatefulWidget {
+class MyPublicationView extends ConsumerWidget {
   const MyPublicationView({super.key});
 
   @override
-  State<MyPublicationView> createState() => _MyPublicationViewState();
-}
+  Widget build(BuildContext context, ref) {
 
-class _MyPublicationViewState extends State<MyPublicationView> {
-  @override
-  Widget build(BuildContext context) {
-    // final size = MediaQuery.of(context).size;
+    // activesHousesByUser 
+    final activeHouses = ref.watch(allActiveHousesPreviewProvider);
+    
     return Scaffold(
         appBar: AppBar(
           title: const Text('Mis publicaciones'),
         ),
         body: Column(
           children: [
-            const ButtonFilterStatus(),
+            const ButtonFilterStatus(), //* Botones para filtrar las publicaciones
+            const SizedBox(height: 10,),
             Expanded(
               child: PageView(
                 children: [
-                  Padding(
-                    padding: const EdgeInsets.all(10),
-                    child: ListView(
-                      children: const [
-                        PublicationStatusTrue(),
-                        PublicationStatusFalse()
-                      ],
-                    ),
-                  )
+                  PublicationStatusTrue( activeHouses: activeHouses, ),
+                  PublicationStatusFalse(activeHouses: activeHouses,)
                 ],
               ),
             )
@@ -39,17 +33,6 @@ class _MyPublicationViewState extends State<MyPublicationView> {
         ));
   }
 }
-
-// class FilterNotifier extends ChangeNotifier {
-//   String _filter = 'all';
-
-//   String get filter => _filter;
-
-//   set filter(String value) {
-//     _filter = value;
-//     notifyListeners();
-//   }
-// }
 
 class ButtonFilterStatus extends StatefulWidget {
   const ButtonFilterStatus({super.key});

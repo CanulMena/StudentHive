@@ -16,7 +16,10 @@ class AcountView extends ConsumerWidget {
     return Container(
       margin: const EdgeInsets.symmetric(horizontal: 20),
       child: isTokenAuth 
-      ? LoggedAppMenuItems(desavowToken: desavowToken, removeUser: removeUser,) 
+      ? LoggedAppMenuItems(
+        desavowToken: desavowToken, 
+        removeUser: removeUser,
+        ) 
       : const NoLoggedMenuItems(),
     );
   }
