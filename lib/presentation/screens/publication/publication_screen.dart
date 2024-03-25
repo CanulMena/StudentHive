@@ -5,10 +5,10 @@ import 'package:studenthive/presentation/screens/widgets/publication/bottom_publ
 import 'package:studenthive/presentation/screens/widgets/publication/customlistview_publication.dart';
 
 class PublicationScreen extends ConsumerStatefulWidget {
-  final String idHouse;
+  final String houseId;
   const PublicationScreen({
     super.key,
-    required this.idHouse,
+    required this.houseId,
   });
 
   @override
@@ -19,7 +19,7 @@ class _PublicationScreenState extends ConsumerState<PublicationScreen> {
 
   @override
   void initState() {
-    ref.read(houseDetailsProvider.notifier).loadHouseDetail( widget.idHouse );
+    ref.read(houseDetailsProvider.notifier).loadHouseDetail( widget.houseId );
     super.initState();
   }
 
@@ -28,7 +28,7 @@ class _PublicationScreenState extends ConsumerState<PublicationScreen> {
 
     final houseMapDetails = ref.watch(houseDetailsProvider);
 
-    final houseDetail = houseMapDetails[widget.idHouse];
+    final houseDetail = houseMapDetails[widget.houseId]; //* consumiendo el mapa del provider
 
     if (houseDetail == null) {
       return const Scaffold(
@@ -37,6 +37,8 @@ class _PublicationScreenState extends ConsumerState<PublicationScreen> {
         ),
       );
     }
+
+    //teniendo el houseDetail Podré tener el userId para hacer otro getById
 
     return Scaffold(
         body: Column(
