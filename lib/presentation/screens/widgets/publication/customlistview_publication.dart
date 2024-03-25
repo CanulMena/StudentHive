@@ -26,19 +26,27 @@ class _CustomListViewState extends ConsumerState<CustomListView> {
   Widget build(BuildContext context) {
     final Map<String, dynamic> userMapDetails = ref.watch(userDetailProvider);
     final userDetail = userMapDetails[widget.houseDetail.idUser.toString()];
+      if (userDetail == null) {
+      return const Scaffold(
+        body: Center(
+          child: CircularProgressIndicator(),
+        ),
+      );
+    } else {
     return CustomScrollView(
       slivers: [
         CustomSliverAppBar( images: widget.houseDetail.images, ),
         SliverList(
-            delegate:
-                SliverChildBuilderDelegate(childCount: 1, (context, index) {
-          return _RentalHouseDetils(
-            houseDetail: widget.houseDetail,
-            userDetail: userDetail,
-          );
-        }))
-      ],
-    );
+              delegate:
+                  SliverChildBuilderDelegate(childCount: 1, (context, index) {
+            return _RentalHouseDetils(
+              houseDetail: widget.houseDetail,
+              userDetail: userDetail,
+            );
+          }))
+        ],
+      );
+    }
   }
 }
 
@@ -46,7 +54,7 @@ class _CustomListViewState extends ConsumerState<CustomListView> {
 
 class _RentalHouseDetils extends StatelessWidget {
   final House houseDetail;
-  final userDetail;
+  final User userDetail; // el problema es que no tengo el userDetail de manera instantanea y me tira error. Pues user detail para como null hasta que se carga
   const _RentalHouseDetils({required this.houseDetail, required this.userDetail});
 
   @override

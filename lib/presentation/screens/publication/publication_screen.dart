@@ -32,13 +32,9 @@ class _PublicationScreenState extends ConsumerState<PublicationScreen> {
 
     if (houseDetail == null) {
       return const Scaffold(
-        body: Center(
-          child: CircularProgressIndicator(),
-        ),
+        body: SizedBox()
       );
     }
-
-    //teniendo el houseDetail Podré tener el userId para hacer otro getById
 
     return Scaffold(
         body: Column(
