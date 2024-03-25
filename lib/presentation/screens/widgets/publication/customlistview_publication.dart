@@ -36,7 +36,7 @@ class _CustomListViewState extends ConsumerState<CustomListView> {
     } else {
     return CustomScrollView(
       slivers: [
-        CustomSliverAppBar( images: houseDetail.images, ),
+        CustomSliverAppBar( images: widget.houseDetail.images, ),
         SliverList(
               delegate:
                   SliverChildBuilderDelegate(childCount: 1, (context, index) {
