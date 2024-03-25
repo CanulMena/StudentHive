@@ -26,6 +26,21 @@ class HouseDataSourceImpl extends HouseDataSource{
     return houses;
   }
 
+  
+  @override
+  Future<List<HousePreview>> getAllActiveHouses({int pageSize = 3, int pagenNumber = 1}) async {
+
+    final response = await dio.get("/true/Publications?pageNumber=$pagenNumber&pageSize=$pageSize");
+
+    final studenthiveDbResponse = StudentHiveDbResponse.fromJson(response.data);
+
+    final List<HousePreview> houses = studenthiveDbResponse.results.map((e) => HousePreviewMapper.housePreviewStudentHiveDbToEntity(e)).toList();
+
+    return houses;
+    
+  }
+
+
   @override
   Future<House> getHouseById({int id = 1}) async {
     final response = await dio.get('/$id');
@@ -127,5 +142,4 @@ class HouseDataSourceImpl extends HouseDataSource{
     '&HouseLocation.Neighborhood=$neighborhood',
     data: formData);
 }
-
 }

@@ -7,6 +7,10 @@ final allHousesPreviewProvider = StateNotifierProvider<HousesNotifier, List<Hous
   return HousesNotifier(fetchMoreHousesPreview: fetchMoreHousesPreview);
 });
 
+final allActiveHousesPreviewProvider = StateNotifierProvider<HousesNotifier, List<HousePreview>>((ref){
+  final fetchMoreHousesPreview = ref.watch( housesRepositoryProvider ).getAllActiveHouses;
+  return HousesNotifier(fetchMoreHousesPreview: fetchMoreHousesPreview);
+});
 
 
 typedef HousePreviewCallBack = Future<List<HousePreview>> Function({int pageSize, int pagenNumber});
