@@ -10,13 +10,14 @@ abstract class HouseRepository {
 
   Future<List<HousePreview>> getAllActiveHousesByUser({ int pageSize, int pagenNumber });
 
+  Future<List<HousePreview>> getAllHousesByUser({ int pageSize, int pagenNumber });
+
   Future<House> getHouseById({int id});
 
   Future<void> postHouse ({
     required int idUser,
     required String title,
     required String description,
-    // bool status = false,
     required String whoElse,
     required int rentPrice,
     required String typeHouse,

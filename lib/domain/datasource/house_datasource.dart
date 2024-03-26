@@ -10,6 +10,8 @@ abstract class HouseDataSource {
 
   Future<List<HousePreview>> getAllActiveHousesByUser({ int pageSize, int pagenNumber });
 
+  Future<List<HousePreview>> getAllHousesByUser({ int pageSize, int pagenNumber });
+
   Future<House> getHouseById({int id});
 
   Future<void> postHouse ({

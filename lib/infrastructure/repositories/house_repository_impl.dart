@@ -88,4 +88,9 @@ class HouseRepositoryImpl extends HouseRepository {
   Future<List<HousePreview>> getAllInactiveHousesByUser({int pageSize = 3, int pagenNumber = 1}) {
     return houseDataSource.getAllInactiveHousesByUser( pageSize: pageSize, pagenNumber: pagenNumber );
   }
+  
+  @override
+  Future<List<HousePreview>> getAllHousesByUser({int pageSize = 3, int pagenNumber = 1}) {
+    return houseDataSource.getAllHousesByUser( pageSize: pageSize, pagenNumber: pagenNumber );
+  }
 }

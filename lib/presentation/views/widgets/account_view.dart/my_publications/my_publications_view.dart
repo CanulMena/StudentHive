@@ -30,10 +30,11 @@ class _MyPublicationViewState extends ConsumerState<MyPublicationView> {
 
     final nextActiveHouses = ref.watch(allActiveHousesPreviewProviderByUser.notifier).loadNextPage; //* Todas las casas inactivas del usuario
     final nextInactivesHouses = ref.watch(allInactiveHousesPreviewProviderByUser.notifier).loadNextPage; //* Todas las casas activas del usuario
+    final nextAllHouses = ref.watch(allHousesPreviewProviderByUser.notifier).loadNextPage; //* Todas las casas del usuario
 
-    final allPublications = ref.read(allHousesPreviewProvider);
     final allHousesActivesByUser = ref.read(allActiveHousesPreviewProviderByUser); //* Todas las casas activas del usuario
     final allHousesInactivesByUser = ref.read(allInactiveHousesPreviewProviderByUser); //* Todas las casas inactivas del usuario
+    final allHousesByUser = ref.read(allHousesPreviewProviderByUser);
     
     return Scaffold(
         appBar: AppBar(
@@ -47,7 +48,7 @@ class _MyPublicationViewState extends ConsumerState<MyPublicationView> {
               child: PageView(
                 controller: pageController,
                 children: [
-                  MyPublicationsListView(activeHouses: allPublications, nextHouses: () => nextActiveHouses,), // allPublications
+                  MyPublicationsListView(activeHouses: allHousesByUser, nextHouses: () => nextAllHouses,), // allPublications
                   MyPublicationsListView(activeHouses: allHousesActivesByUser, nextHouses: () => nextActiveHouses,), // activeHousesByUser
                   MyPublicationsListView(activeHouses: allHousesInactivesByUser, nextHouses: () => nextInactivesHouses,), // notActiveHousesByUser
                 ],

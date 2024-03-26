@@ -193,4 +193,21 @@ class HouseDataSourceImpl extends HouseDataSource{
     return housesInactive;
 
   }
+  
+  @override
+  Future<List<HousePreview>> getAllHousesByUser({int pageSize = 3, int pagenNumber  = 1}) async {
+    String? token = await Token.getToken();
+    final payload = decodePayload(token!);
+    final String emailPayload = payload['http://schemas.xmlsoap.org/ws/2005/05/identity/claims/emailaddress'];
+
+    final response = await dio.get("/Publications?pageNumber=$pagenNumber&pageSize=$pageSize");
+    
+    final studenthiveDbResponse = StudentHiveDbResponse.fromJson(response.data);
+
+    final List<HousePreview> houses = studenthiveDbResponse.results.map((e) => HousePreviewMapper.housePreviewStudentHiveDbToEntity(e)).toList();
+
+    final List<HousePreview> housesInactive = houses.where((house) => house.emailUser == emailPayload).toList();
+
+    return housesInactive;
+  }
 }
