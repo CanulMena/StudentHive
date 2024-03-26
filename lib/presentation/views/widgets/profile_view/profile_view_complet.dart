@@ -2,14 +2,14 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter/material.dart';
 import 'package:studenthive/presentation/provider/user/user_provider.dart';
 
-class ProfileViewReady extends ConsumerStatefulWidget {
-  const ProfileViewReady({Key? key}) : super(key: key);
+class ProfileViewComplete extends ConsumerStatefulWidget {
+  const ProfileViewComplete({Key? key}) : super(key: key);
 
   @override
-  ConsumerState<ProfileViewReady> createState() => _ProfileViewReadyState();
+  ConsumerState<ProfileViewComplete> createState() => _ProfileViewReadyState();
 }
 
-class _ProfileViewReadyState extends ConsumerState<ProfileViewReady> {
+class _ProfileViewReadyState extends ConsumerState<ProfileViewComplete> {
   @override
   Widget build(BuildContext context) {
     var user = ref.watch(userProvider);
@@ -18,23 +18,16 @@ class _ProfileViewReadyState extends ConsumerState<ProfileViewReady> {
         Padding(
           padding: const EdgeInsets.all(10),
           child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              Row(
-                // mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  InputContainerInformation(
-                    icon: (Icons.person),
-                    title: 'Nombre',
-                    value: user?.name ?? '',
-                  ),
-                  const SizedBox(width: 100),
-                  CircleAvatar(
-                    radius: 50,
-                    backgroundImage: NetworkImage(user?.profilePhotoUrl ?? ''),
-                  )
-                ],
+              CircleAvatar(
+                radius: 70,
+                backgroundImage: NetworkImage(user?.profilePhotoUrl ?? ''),
+              ),
+              InputContainerInformation(
+                icon: (Icons.person),
+                title: 'Nombre',
+                value: user?.name ?? '',
               ),
               _HorizontalLine(),
               InputContainerInformation(
@@ -66,14 +59,11 @@ class _ProfileViewReadyState extends ConsumerState<ProfileViewReady> {
                   title: 'Genero',
                   value: getGender(user?.gender)),
               _HorizontalLine(),
-              SizedBox(
-                height: 500,
-                child: InputContainerInformation(
-                  icon: (Icons.description),
-                  title: 'Informacion',
-                  value: user?.description ?? '',
-                ),
-              )
+              InputContainerInformation(
+                icon: (Icons.description),
+                title: 'Informacion',
+                value: user?.description ?? '',
+              ),
             ],
           ),
         )
@@ -105,10 +95,10 @@ class InputContainerInformation extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // final size = MediaQuery.of(context).size;
+    final size = MediaQuery.of(context).size;
     return Container(
-      // height: size.height * 0.1,
-      // width: size.width * 0.9,
+      height: size.height * 0.12,
+      width: size.width * 0.95,
       // decoration: BoxDecoration(
       //   borderRadius: BorderRadius.circular(10),
       //   border: Border.all(
@@ -124,37 +114,35 @@ class InputContainerInformation extends StatelessWidget {
             size: 30,
             color: Colors.grey,
           ),
-          const SizedBox(width: 20),
+          const SizedBox(width: 10),
           Padding(
             padding: const EdgeInsets.all(20),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  title,
-                  style: const TextStyle(
-                    fontSize: 15,
-                    fontWeight: FontWeight.w600,
-                    color: Colors.grey,
+            child: SizedBox(
+              // width: size.width * 0.9 * 0.9,
+              height: size.height * 0.12 * 0.9,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    title,
+                    style: const TextStyle(
+                      fontSize: 15,
+                      fontWeight: FontWeight.w600,
+                      color: Colors.grey,
+                    ),
                   ),
-                ),
-                Flex(
-                  direction: Axis.horizontal,
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  children: [
-                    Text(
-                      value,
-                      softWrap: true,
-                      overflow: TextOverflow.ellipsis,
-                      maxLines: 2,
-                      style: const TextStyle(
+                  Text(
+                    value,
+                    softWrap: true,
+                    overflow: TextOverflow.visible,
+                    maxLines: 5,
+                    style: const TextStyle(
                         fontSize: 17,
                         fontWeight: FontWeight.w500,
-                      ),
-                    ),
-                  ],
-                ),
-              ],
+                        color: Color.fromARGB(255, 156, 134, 21)),
+                  )
+                ],
+              ),
             ),
           ),
         ],
