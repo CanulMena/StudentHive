@@ -1,18 +1,28 @@
 import 'package:flutter/material.dart';
+// import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:studenthive/domain/entities/entities.dart';
+// import 'package:studenthive/presentation/provider/providers.dart';
 
-class UserInfoWidget extends StatelessWidget {
-  const UserInfoWidget({Key? key}) : super(key: key);
+class UserInfoWidget extends StatefulWidget {
+  const UserInfoWidget({super.key, required this.userDetail});
+  final User userDetail;
 
   @override
+  State<UserInfoWidget> createState() => _UserInfoWidgetState();
+}
+
+class _UserInfoWidgetState extends State<UserInfoWidget> {
+  @override
   Widget build(BuildContext context) {
+    // var userDeatil = ref.watch(userProvider);
     final size = MediaQuery.of(context).size;
     return SizedBox(
       width: size.width * 0.9,
       height: size.height * 0.3,
-      child: const Card(
+      child: Card(
         elevation: 5,
         child: Padding(
-          padding: EdgeInsets.all(16.0),
+          padding: const EdgeInsets.all(16.0),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -20,24 +30,24 @@ class UserInfoWidget extends StatelessWidget {
                 children: [
                   CircleAvatar(
                     radius: 50,
-                    backgroundImage: NetworkImage(
-                        'https://images.unsplash.com/photo-1511367461989-f85a21fda167?q=80&w=1931&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'),
+                    backgroundImage:
+                        NetworkImage(widget.userDetail.profilePhotoUrl ?? ''),
                   ),
-                  SizedBox(width: 16),
+                  const SizedBox(width: 16),
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        'Name LastName',
-                        style: TextStyle(
+                        widget.userDetail.name,
+                        style: const TextStyle(
                           fontSize: 18,
                           fontWeight: FontWeight.bold,
                         ),
                       ),
-                      SizedBox(height: 8),
+                      const SizedBox(height: 8),
                       Text(
-                        'Age',
-                        style: TextStyle(
+                        '${widget.userDetail.userAge} años',
+                        style: const TextStyle(
                           fontSize: 16,
                           color: Colors.grey,
                         ),
@@ -46,9 +56,12 @@ class UserInfoWidget extends StatelessWidget {
                   )
                 ],
               ),
-              SizedBox(height: 8),
+              const SizedBox(height: 8),
               Text(
-                'Biografía del Usuario. Aquí puedes agregar información sobre el usuario, sus intereses, etc.',
+                widget.userDetail.description ?? '',
+                style: const TextStyle(
+                  fontSize: 16,
+                ),
               ),
             ],
           ),
