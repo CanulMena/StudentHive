@@ -27,30 +27,50 @@ class _MyPublicationViewState extends ConsumerState<MyPublicationView> {
 
   @override
   Widget build(BuildContext context) {
+    final nextActiveHouses = ref
+        .watch(allActiveHousesPreviewProviderByUser.notifier)
+        .loadNextPage; //* Todas las casas inactivas del usuario
+    final nextInactivesHouses = ref
+        .watch(allInactiveHousesPreviewProviderByUser.notifier)
+        .loadNextPage; //* Todas las casas activas del usuario
+    final nextAllHouses = ref
+        .watch(allHousesPreviewProviderByUser.notifier)
+        .loadNextPage; //* Todas las casas del usuario
 
-    final nextActiveHouses = ref.watch(allActiveHousesPreviewProviderByUser.notifier).loadNextPage; //* Todas las casas inactivas del usuario
-    final nextInactivesHouses = ref.watch(allInactiveHousesPreviewProviderByUser.notifier).loadNextPage; //* Todas las casas activas del usuario
-    final nextAllHouses = ref.watch(allHousesPreviewProviderByUser.notifier).loadNextPage; //* Todas las casas del usuario
-
-    final allHousesActivesByUser = ref.read(allActiveHousesPreviewProviderByUser); //* Todas las casas activas del usuario
-    final allHousesInactivesByUser = ref.read(allInactiveHousesPreviewProviderByUser); //* Todas las casas inactivas del usuario
+    final allHousesActivesByUser = ref.read(
+        allActiveHousesPreviewProviderByUser); //* Todas las casas activas del usuario
+    final allHousesInactivesByUser = ref.read(
+        allInactiveHousesPreviewProviderByUser); //* Todas las casas inactivas del usuario
     final allHousesByUser = ref.read(allHousesPreviewProviderByUser);
-    
+
     return Scaffold(
         appBar: AppBar(
           title: const Text('Mis publicaciones'),
         ),
         body: Column(
           children: [
-            ButtonFilterStatus( pageController: pageController, ), 
-            const SizedBox(height: 10,),
+            ButtonFilterStatus(
+              pageController: pageController,
+            ),
+            const SizedBox(
+              height: 10,
+            ),
             Expanded(
               child: PageView(
                 controller: pageController,
                 children: [
-                  MyPublicationsListView(activeHouses: allHousesByUser, nextHouses: () => nextAllHouses,), // allPublications
-                  MyPublicationsListView(activeHouses: allHousesActivesByUser, nextHouses: () => nextActiveHouses,), // activeHousesByUser
-                  MyPublicationsListView(activeHouses: allHousesInactivesByUser, nextHouses: () => nextInactivesHouses,), // notActiveHousesByUser
+                  MyPublicationsListView(
+                    activeHouses: allHousesByUser,
+                    nextHouses: () => nextAllHouses,
+                  ), // allPublications
+                  MyPublicationsListView(
+                    activeHouses: allHousesActivesByUser,
+                    nextHouses: () => nextActiveHouses,
+                  ), // activeHousesByUser
+                  MyPublicationsListView(
+                    activeHouses: allHousesInactivesByUser,
+                    nextHouses: () => nextInactivesHouses,
+                  ), // notActiveHousesByUser
                 ],
               ),
             )
@@ -77,7 +97,7 @@ class _ButtonFilterStatusState extends State<ButtonFilterStatus> {
         height: size.height * 0.05,
         width: size.width * 0.85,
         decoration: BoxDecoration(
-            border: Border.all(color: Colors.grey, width: 1.5),
+            border: Border.all(color: const Color.fromARGB(255, 156, 134, 21)),
             color: Colors.white,
             borderRadius: BorderRadius.circular(20)),
         child: Row(
@@ -127,16 +147,17 @@ class _ButtonFilterStatusState extends State<ButtonFilterStatus> {
     return Container(
       decoration: BoxDecoration(
           color: selectedIndex == index
-              ? const Color.fromARGB(255, 198, 197, 197)
+              ? const Color.fromARGB(255, 156, 134, 21)
               : Colors.white,
           borderRadius: BorderRadius.circular(20)),
       alignment: Alignment.center,
       height: size.height * 0.05 * 0.8,
       width: size.width * 0.5 * 0.5,
-      child: Text(
-        text,
-      ),
+      child: Text(text,
+          style: TextStyle(
+              color: selectedIndex == index
+                  ? Colors.white
+                  : const Color.fromARGB(255, 156, 134, 21))),
     );
   }
-
 }

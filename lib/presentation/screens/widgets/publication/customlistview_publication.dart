@@ -202,7 +202,7 @@ class _RentalHouseDetils extends StatelessWidget {
               const SizedBox(
                 height: 20,
               ),
-              const UserInfoWidget()
+              UserInfoWidget(userDetail: userDetail,)
             ],
           ),
         )

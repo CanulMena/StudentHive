@@ -28,7 +28,8 @@ class MyRoute {
             routes: [
               GoRoute(
                   //* Ruta para ver una publicacion
-                  path: 'house/:id', // <--- :id es un parametro que se puede pasar a la ruta al igual que el :email
+                  path:
+                      'house/:id', // <--- :id es un parametro que se puede pasar a la ruta al igual que el :email
                   builder: (context, state) {
                     final houseId = state.pathParameters['id'] ?? 'no-id';
                     return PublicationScreen(houseId: houseId);
@@ -49,21 +50,21 @@ class MyRoute {
                           GoRoute(
                               path: 'create-publication-steps/:typeHouseRental',
                               builder: (context, state) {
-                                final typeHouseRental = state.pathParameters['typeHouseRental'] ?? 'no-type';
+                                final typeHouseRental =
+                                    state.pathParameters['typeHouseRental'] ??
+                                        'no-type';
                                 return AppStepsCreatePublications(
                                   typeHouseRental: typeHouseRental,
                                 );
                               }),
                         ])
                   ]),
-
               GoRoute(
                 path: 'view-profile',
                 builder: (context, state) {
                   return const ProfileView();
                 },
               ),
-
               GoRoute(
                 path: 'my-publications',
                 builder: (context, state) {
@@ -71,7 +72,6 @@ class MyRoute {
                 },
               ),
             ]),
-
         GoRoute(
           path: '/login',
           builder: (context, state) {
@@ -90,7 +90,12 @@ class MyRoute {
             return const HomeScreen();
           },
         ),
-
+        GoRoute(
+          path: '/profile',
+          builder: (context, state) {
+            return const ProfileView();
+          },
+        )
       ],
     );
   }
