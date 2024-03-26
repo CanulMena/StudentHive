@@ -60,7 +60,7 @@ class _PublicationsViewState extends ConsumerState<PublicationsView> {
             controller: scrollController,
             slivers: [
               const SliverAppBar(
-                pinned: true, //this is to show persistence the color of the appbar
+                pinned: true,
                 floating: true,
                 flexibleSpace: FlexibleSpaceBar(
                   centerTitle: true,

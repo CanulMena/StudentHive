@@ -20,11 +20,15 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
   @override
   void initState(){
     super.initState();
-    _pageController =
-        PageController(initialPage: ref.read(selectedViewProvider));
-    ref.read(allHousesPreviewProvider.notifier).loadNextPage();
-    ref.read(userProvider.notifier).loadUserFromSharedPreferences();
-    ref.read(allActiveHousesPreviewProvider.notifier).loadNextPage();
+    _pageController = PageController(initialPage: ref.read(selectedViewProvider));
+
+    ref.read(allHousesPreviewProvider.notifier).loadNextPage(); //* Todas las casas de la base de datos
+    ref.read(userProvider.notifier).loadUserFromSharedPreferences(); // Cargar usuario
+
+    ref.read(allActiveHousesPreviewProvider.notifier).loadNextPage(); // Todas las casas activas de la base de datos
+    ref.read(allActiveHousesPreviewProviderByUser.notifier).loadNextPage(); // Todas las casas activas del usuario
+    ref.read(allInactiveHousesPreviewProviderByUser.notifier).loadNextPage(); // Todas las casas inactivas del usuario
+    ref.read(allHousesPreviewProviderByUser.notifier).loadNextPage(); // Todas las casas del usuario
   }
 
   @override
@@ -36,11 +40,11 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     final bool isTokenAut = ref.read(isTokenAuthProvider);
-    final List<HousePreview> houses = ref.watch(allHousesPreviewProvider);
+    final List<HousePreview> activeHouses = ref.watch(allActiveHousesPreviewProvider);
 
     List<Widget> screens = [
       PublicationsView(
-        listHousePreview: houses,
+        listHousePreview: activeHouses,
         loadNextPage: () =>
             ref.read(allHousesPreviewProvider.notifier).loadNextPage(),
       ),
@@ -52,7 +56,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
     ];
 
     final initialLoading = ref.watch(initialLoadingProvider);
-    if (initialLoading) return const FullScreenLoading(); // TODO: agregar las cosas en loading.
+    if (initialLoading) return const FullScreenLoading(); 
 
     return Scaffold(
       body: PageView(

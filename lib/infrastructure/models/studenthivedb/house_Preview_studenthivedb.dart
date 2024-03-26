@@ -29,8 +29,10 @@ class StudentHiveDbResponse {
 
 class HousePreviewStudentHiveDb {
     final int idPublication;
+    final bool status;
     final String title;
     final String nameofUser;
+    final String emailUser;
     final List<String> images;
     final int rentPrice;
     final DateTime publicationDate;
@@ -38,8 +40,10 @@ class HousePreviewStudentHiveDb {
 
     HousePreviewStudentHiveDb({
         required this.idPublication,
+        required this.status,
         required this.title,
         required this.nameofUser,
+        required this.emailUser,
         required this.images,
         required this.rentPrice,
         required this.publicationDate,
@@ -48,8 +52,10 @@ class HousePreviewStudentHiveDb {
 
     factory HousePreviewStudentHiveDb.fromJson(Map<String, dynamic> json) => HousePreviewStudentHiveDb(
         idPublication: json["idPublication"],
+        status: json["status"],
         title: json["title"],
         nameofUser: json["nameofUser"],
+        emailUser: json["email"],
         images: List<String>.from(json["images"].map((x) => x)),
         rentPrice: json["rentPrice"],
         publicationDate: DateTime.parse(json["publicationDate"]), 
