@@ -180,6 +180,7 @@ class _AppStepsCreatePublicationsState extends ConsumerState<AppStepsCreatePubli
                       scaffoldMessenger.showSnackBar(
                         const SnackBar(content: Text('Error al publicar la casa')),
                       );
+                      print('Error: $e');
 
                     pop();
                     }

@@ -28,12 +28,12 @@ class _MyPublicationViewState extends ConsumerState<MyPublicationView> {
   @override
   Widget build(BuildContext context) {
 
-    // allHousesPreviewProvider
-    // activesHousesByUser 
-    // noactivesHousesByUser
+    final nextActiveHouses = ref.watch(allActiveHousesPreviewProviderByUser.notifier).loadNextPage; //* Todas las casas inactivas del usuario
+    final nextInactivesHouses = ref.watch(allInactiveHousesPreviewProviderByUser.notifier).loadNextPage; //* Todas las casas activas del usuario
 
-    final activeHouses = ref.watch(allActiveHousesPreviewProvider);
-    final allPublications = ref.watch(allHousesPreviewProvider);
+    final allPublications = ref.read(allHousesPreviewProvider);
+    final allHousesActivesByUser = ref.read(allActiveHousesPreviewProviderByUser); //* Todas las casas activas del usuario
+    final allHousesInactivesByUser = ref.read(allInactiveHousesPreviewProviderByUser); //* Todas las casas inactivas del usuario
     
     return Scaffold(
         appBar: AppBar(
@@ -47,9 +47,9 @@ class _MyPublicationViewState extends ConsumerState<MyPublicationView> {
               child: PageView(
                 controller: pageController,
                 children: [
-                  MyPublicationsListView(activeHouses: allPublications, ), // allPublications
-                  MyPublicationsListView(activeHouses: activeHouses, ), // activeHouses
-                  MyPublicationsListView(activeHouses: allPublications, ), // notActiveHouses
+                  MyPublicationsListView(activeHouses: allPublications, nextHouses: () => nextActiveHouses,), // allPublications
+                  MyPublicationsListView(activeHouses: allHousesActivesByUser, nextHouses: () => nextActiveHouses,), // activeHousesByUser
+                  MyPublicationsListView(activeHouses: allHousesInactivesByUser, nextHouses: () => nextInactivesHouses,), // notActiveHousesByUser
                 ],
               ),
             )
@@ -110,7 +110,7 @@ class _ButtonFilterStatusState extends State<ButtonFilterStatus> {
                   });
                 },
                 child: builContainer(
-                    text: 'Rechazadas',
+                    text: 'Pendientes',
                     index: 2,
                     selectedIndex: _selectedIndex)),
           ],

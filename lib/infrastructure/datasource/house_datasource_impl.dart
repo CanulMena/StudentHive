@@ -1,4 +1,7 @@
+import 'dart:convert';
+
 import 'package:dio/dio.dart';
+import 'package:studenthive/config/constants/token/manage_token_app.dart';
 import 'package:studenthive/domain/datasource/house_datasource.dart';
 import 'package:studenthive/domain/entities/entities.dart';
 import 'package:studenthive/infrastructure/mappers/house_detail_mapper.dart';
@@ -14,11 +17,28 @@ class HouseDataSourceImpl extends HouseDataSource{
     )
   );
 
+  Map<String, dynamic> decodePayload(String token) { //* Puedo refactorizar esto a un archivo de utilidades
+  try {
+    final parts = token.split('.');
+    if (parts.length != 3) {
+      throw Exception('Invalid token');
+    }
+
+    final payload = parts[1];
+    final normalized = base64Url.normalize(payload);
+    final resp = utf8.decode(base64Url.decode(normalized));
+    final payloadMap = json.decode(resp);
+    return payloadMap;
+  } catch (e) {
+    return {};
+  }
+}
+
   @override //* Tenemos que agregar los datos
   Future<List<HousePreview>> getAllHouses({int pageSize = 3, int pagenNumber = 1}) async {
 
     final response = await dio.get("/Publications?pageNumber=$pagenNumber&pageSize=$pageSize");
-    
+
     final studenthiveDbResponse = StudentHiveDbResponse.fromJson(response.data);
 
     final List<HousePreview> houses = studenthiveDbResponse.results.map((e) => HousePreviewMapper.housePreviewStudentHiveDbToEntity(e)).toList();
@@ -26,7 +46,6 @@ class HouseDataSourceImpl extends HouseDataSource{
     return houses;
   }
 
-  
   @override
   Future<List<HousePreview>> getAllActiveHouses({int pageSize = 3, int pagenNumber = 1}) async {
 
@@ -56,7 +75,6 @@ class HouseDataSourceImpl extends HouseDataSource{
     required int idUser,
     required String title,
     required String description,
-    // bool status = false,
     required String whoElse,
     required int rentPrice,
     required String typeHouse,
@@ -90,7 +108,6 @@ class HouseDataSourceImpl extends HouseDataSource{
       "IdUser": idUser,
       "Title": title,
       "Description": description,
-      // "Status": status,
       "WhoElse": whoElse,
       "RentPrice": rentPrice,
       "TypeHouse": typeHouse,
@@ -118,7 +135,6 @@ class HouseDataSourceImpl extends HouseDataSource{
     '?IdUser=$idUser'
     '&Title=$title'
     '&Description=$description'
-    // '&Status=$status'
     '&WhoElse=$whoElse'
     '&RentPrice=$rentPrice'
     '&TypeHouse=$typeHouse'
@@ -141,4 +157,40 @@ class HouseDataSourceImpl extends HouseDataSource{
     '&HouseLocation.Neighborhood=$neighborhood',
     data: formData);
 }
+
+  @override
+  Future<List<HousePreview>> getAllActiveHousesByUser({int pageSize = 3, int pagenNumber = 1}) async {
+
+    String? token = await Token.getToken();
+    final payload = decodePayload(token!);
+    final String emailPayload = payload['http://schemas.xmlsoap.org/ws/2005/05/identity/claims/emailaddress'];
+
+    final response = await dio.get("/Publications?pageNumber=$pagenNumber&pageSize=$pageSize");
+    
+    final studenthiveDbResponse = StudentHiveDbResponse.fromJson(response.data);
+
+    final List<HousePreview> houses = studenthiveDbResponse.results.map((e) => HousePreviewMapper.housePreviewStudentHiveDbToEntity(e)).toList();
+
+    return houses.where((house) => house.emailUser == emailPayload && house.status == true ).toList();
+    
+  }
+
+  @override
+  Future<List<HousePreview>> getAllInactiveHousesByUser({int pageSize = 3, int pagenNumber = 1}) async {
+
+    String? token = await Token.getToken();
+    final payload = decodePayload(token!);
+    final String emailPayload = payload['http://schemas.xmlsoap.org/ws/2005/05/identity/claims/emailaddress'];
+
+    final response = await dio.get("/Publications?pageNumber=$pagenNumber&pageSize=$pageSize");
+    
+    final studenthiveDbResponse = StudentHiveDbResponse.fromJson(response.data);
+
+    final List<HousePreview> houses = studenthiveDbResponse.results.map((e) => HousePreviewMapper.housePreviewStudentHiveDbToEntity(e)).toList();
+
+    final List<HousePreview> housesInactive = houses.where((house) => house.emailUser == emailPayload && house.status == false ).toList();
+
+    return housesInactive;
+
+  }
 }

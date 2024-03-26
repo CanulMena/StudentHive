@@ -1,11 +1,14 @@
-import 'package:studenthive/domain/entities/house.dart';
-import 'package:studenthive/domain/entities/house_preview.dart';
+import 'package:studenthive/domain/entities/entities.dart';
 
 abstract class HouseDataSource {
 
   Future<List<HousePreview>> getAllHouses({ int pageSize, int pagenNumber });
 
   Future<List<HousePreview>> getAllActiveHouses({ int pageSize, int pagenNumber });
+
+  Future<List<HousePreview>> getAllInactiveHousesByUser({ int pageSize, int pagenNumber });
+
+  Future<List<HousePreview>> getAllActiveHousesByUser({ int pageSize, int pagenNumber });
 
   Future<House> getHouseById({int id});
 

@@ -6,6 +6,10 @@ abstract class HouseRepository {
 
   Future<List<HousePreview>> getAllActiveHouses({ int pageSize, int pagenNumber });
 
+  Future<List<HousePreview>> getAllInactiveHousesByUser({ int pageSize, int pagenNumber });
+
+  Future<List<HousePreview>> getAllActiveHousesByUser({ int pageSize, int pagenNumber });
+
   Future<House> getHouseById({int id});
 
   Future<void> postHouse ({

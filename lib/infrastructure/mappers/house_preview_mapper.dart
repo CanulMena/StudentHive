@@ -15,8 +15,10 @@ class HousePreviewMapper {
     );
     return HousePreview(
         idPublication: house.idPublication,
+        status: house.status,
         title: house.title,
         nameofUser: house.nameofUser,
+        emailUser: house.emailUser,
         images: house.images,
         rentPrice: house.rentPrice,
         publicationDate: house.publicationDate,
@@ -38,8 +40,10 @@ class HousePreviewMapper {
 
     return HousePreviewStudentHiveDb(
         idPublication: house.idPublication,
+        status: house.status,
         title: house.title,
         nameofUser: house.nameofUser,
+        emailUser: house.emailUser,
         images: house.images,
         rentPrice: house.rentPrice,
         publicationDate: house.publicationDate, 
