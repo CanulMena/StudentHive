@@ -5,6 +5,12 @@ import 'package:studenthive/domain/entities/entities.dart';
 import 'package:studenthive/infrastructure/mappers/user_mapper.dart';
 import 'package:studenthive/infrastructure/models/studenthivedb/studenthivedb_users.dart';
 
+///* Podemos hacer muchos tipos de peticiones a la API cuando tenemos que pasar parametros. 
+///* 1. QueryParameters: Son los parametros que se pasan en la URL, por ejemplo: /User/email/$email
+/// 2. Data: Son los parametros que se pasan en el cuerpo de la petición, por ejemplo: data: { "email": email, "password": password, }
+/// 3. Headers: Son los parametros que se pasan en la cabecera de la petición, por ejemplo: dio.options.headers['Authorization
+/// 4. PathParameters: Son los parametros que se pasan en la URL, pero se pasan de una forma diferente a los QueryParameters, por ejemplo: /User/id/$id
+/// 5. FormData: Son los parametros que se pasan en el cuerpo de la petición, pero se pasan de una forma diferente a los Data, por ejemplo: FormData.fromMap({ "email": email, "password": password, })
 class UserDataSourceImpl extends UserDataSource {
 
 final Dio dio = Dio(
@@ -53,17 +59,17 @@ Future<void> loginUser(String email, String password) async {
 
 
   @override
-  Future<void> postUser( String userName, String password, String email ) async { //* This just is to do add the account
-    try {
-    //* Realizar la solicitud POST al endpoint
-    Response response = await dio.post(
-      '/User',
-      queryParameters: {
-        "Email": email,
-        "IdRol": 1,
-        "Password": password,
-        "Name": userName,
-      },
+  Future<void> postUser( String userName, String password, String email ) async {
+
+    try { //* Cosas que no debo de pasar en la url son: contraseñas, tokens, credenciales, etc.
+    Response response = await dio.post( //* Estoy pasando datos como queryParameters y esto se convierte directamete en la url de la petición
+      '/User', //* Por lo tanto estas practicas son malas, ya que la información se puede ver en la url si alguien la intercepta
+        queryParameters: { //* Por lo tanto, es mejor pasar los datos como data, ya que estos se pasan en el cuerpo de la petición
+          "Email": email,
+          "IdRol": 1,
+          "Password": password, 
+          "Name": userName,
+        },
     );
 
     if (response.statusCode == 201) {
