@@ -15,7 +15,6 @@ class CustomListView extends ConsumerStatefulWidget {
 }
 
 class _CustomListViewState extends ConsumerState<CustomListView> {
-
   @override
   void initState() {
     String idUser = widget.houseDetail.idUser.toString();
@@ -27,17 +26,19 @@ class _CustomListViewState extends ConsumerState<CustomListView> {
   Widget build(BuildContext context) {
     final Map<String, dynamic> userMapDetails = ref.watch(userDetailProvider);
     final userDetail = userMapDetails[widget.houseDetail.idUser.toString()];
-      if (userDetail == null) {
+    if (userDetail == null) {
       return const Scaffold(
         body: Center(
           child: CircularProgressIndicator(),
         ),
       );
     } else {
-    return CustomScrollView(
-      slivers: [
-        CustomSliverAppBar( images: widget.houseDetail.images, ),
-        SliverList(
+      return CustomScrollView(
+        slivers: [
+          CustomSliverAppBar(
+            images: widget.houseDetail.images,
+          ),
+          SliverList(
               delegate:
                   SliverChildBuilderDelegate(childCount: 1, (context, index) {
             return _RentalHouseDetils(
@@ -53,8 +54,10 @@ class _CustomListViewState extends ConsumerState<CustomListView> {
 
 class _RentalHouseDetils extends StatelessWidget {
   final House houseDetail;
-  final User userDetail; // el problema es que no tengo el userDetail de manera instantanea y me tira error. Pues user detail para como null hasta que se carga
-  const _RentalHouseDetils({required this.houseDetail, required this.userDetail});
+  final User
+      userDetail; // el problema es que no tengo el userDetail de manera instantanea y me tira error. Pues user detail para como null hasta que se carga
+  const _RentalHouseDetils(
+      {required this.houseDetail, required this.userDetail});
 
   @override
   Widget build(BuildContext context) {
@@ -202,7 +205,9 @@ class _RentalHouseDetils extends StatelessWidget {
               const SizedBox(
                 height: 20,
               ),
-              UserInfoWidget(userDetail: userDetail,)
+              UserInfoWidget(
+                userDetail: userDetail,
+              )
             ],
           ),
         )
