@@ -91,7 +91,7 @@ Future<void> loginUser(String email, String password) async {
     final users = UserModel.fromJson(response.data);//* Here i convert the json to Users 
     //i need to convert users to my entity user.
     final User user = UserMapper.userToEntity(users);
-    return user;
+    return user; 
   }
 
   @override
