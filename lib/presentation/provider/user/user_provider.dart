@@ -11,6 +11,7 @@ import 'package:studenthive/presentation/provider/user/user_respository_provider
 final createUserSesionProvider = Provider((ref) => ref.watch(usersRepositoryProvider).postUser);
 
 final loginUserProvider = Provider((ref) => ref.watch(usersRepositoryProvider).loginUser);
+// final userCreateAccountProvider = Provider((ref) => ref.watch(usersRepositoryProvider).putUserAccount(user));
 
 final userProvider = StateNotifierProvider<UserNotifier, User?>((ref){
   final userGetByEmailProvider = ref.watch(usersRepositoryProvider).getUserByEmail;

@@ -102,7 +102,8 @@ class ButtonCreateProfile extends StatelessWidget {
         ElevatedButton(
           onPressed: () {
             Navigator.of(context)
-                .push(createPageRoute(const CreateProfileView()));
+                // ignore: non_constant_identifier_names
+                .push(createPageRoute(CreateProfileView(addProfileImage: (ImageSource ) {  },)));
           },
           child: const Text(
             'Crear Perfil',

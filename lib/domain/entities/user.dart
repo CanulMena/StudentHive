@@ -22,6 +22,8 @@ class User {
     required this.profilePhotoUrl,
     required this.gender,
     required this.idRol,
-    });
+  });
+
+  // addUser({required int userAge, required String name, required String lastName, required String description, required int phoneNumber, required int gender, required String profilePhotoUrl}) {}
 
 }

@@ -12,6 +12,7 @@ class ProfileViewComplete extends ConsumerStatefulWidget {
 class _ProfileViewReadyState extends ConsumerState<ProfileViewComplete> {
   @override
   Widget build(BuildContext context) {
+    final textStyles = Theme.of(context).textTheme;
     var user = ref.watch(userProvider);
     return ListView(
       children: [
@@ -28,41 +29,56 @@ class _ProfileViewReadyState extends ConsumerState<ProfileViewComplete> {
                 icon: (Icons.person),
                 title: 'Nombre',
                 value: user?.name ?? '',
+                textStyle: textStyles.bodyMedium!.copyWith(
+                    fontWeight: FontWeight.w600, color: Colors.black54),
               ),
               _HorizontalLine(),
               InputContainerInformation(
                 icon: (Icons.person),
                 title: 'Apellido',
                 value: user?.lastName ?? '',
+                textStyle: textStyles.bodyMedium!.copyWith(
+                    fontWeight: FontWeight.w600, color: Colors.black54),
               ),
               _HorizontalLine(),
               InputContainerInformation(
                 icon: (Icons.email),
                 title: 'Correo',
                 value: user?.email ?? '',
+                textStyle: textStyles.bodyMedium!.copyWith(
+                    fontWeight: FontWeight.w600, color: Colors.black54),
               ),
               _HorizontalLine(),
               InputContainerInformation(
                 icon: (Icons.phone),
                 title: 'Telefono',
                 value: '${user?.phoneNumber ?? ''}',
+                textStyle: textStyles.bodyMedium!.copyWith(
+                    fontWeight: FontWeight.w600, color: Colors.black54),
               ),
               _HorizontalLine(),
               InputContainerInformation(
                 icon: (Icons.cake),
                 title: 'Edad',
                 value: '${user?.userAge ?? ''}',
+                textStyle: textStyles.bodyMedium!.copyWith(
+                    fontWeight: FontWeight.w600, color: Colors.black54),
               ),
               _HorizontalLine(),
               InputContainerInformation(
-                  icon: (Icons.location_on),
-                  title: 'Genero',
-                  value: getGender(user?.gender)),
+                icon: (Icons.location_on),
+                title: 'Genero',
+                value: getGender(user?.gender),
+                textStyle: textStyles.bodyMedium!.copyWith(
+                    fontWeight: FontWeight.w600, color: Colors.black54),
+              ),
               _HorizontalLine(),
               InputContainerInformation(
                 icon: (Icons.description),
                 title: 'Informacion',
                 value: user?.description ?? '',
+                textStyle: textStyles.bodyMedium!.copyWith(
+                    fontWeight: FontWeight.w600, color: Colors.black54),
               ),
             ],
           ),
@@ -87,17 +103,20 @@ class InputContainerInformation extends StatelessWidget {
   final String title;
   final String value;
   final IconData icon;
+  final TextStyle textStyle;
   const InputContainerInformation(
       {super.key,
       required this.title,
       required this.value,
-      required this.icon});
+      required this.icon,
+      required this.textStyle});
 
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
+    final textStyle = Theme.of(context).textTheme;
     return Container(
-      height: size.height * 0.12,
+      // height: size.height * 0.12,
       width: size.width * 0.95,
       // decoration: BoxDecoration(
       //   borderRadius: BorderRadius.circular(10),
@@ -114,37 +133,35 @@ class InputContainerInformation extends StatelessWidget {
             size: 30,
             color: Colors.grey,
           ),
-          const SizedBox(width: 10),
           Padding(
-            padding: const EdgeInsets.all(20),
-            child: SizedBox(
-              // width: size.width * 0.9 * 0.9,
-              height: size.height * 0.12 * 0.9,
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
+              padding: const EdgeInsets.all(20),
+              child: Wrap(
                 children: [
-                  Text(
-                    title,
-                    style: const TextStyle(
-                      fontSize: 15,
-                      fontWeight: FontWeight.w600,
-                      color: Colors.grey,
-                    ),
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        title,
+                        style: const TextStyle(
+                          fontSize: 15,
+                          fontWeight: FontWeight.w600,
+                          color: Colors.grey,
+                        ),
+                      ),
+                      SizedBox(
+                        width: size.width * 0.95 * 0.75,
+                        child: Text(value,
+                            style: textStyle.bodyMedium?.copyWith(
+                                fontWeight: FontWeight.w600,
+                                color: Colors.black54,
+                                fontSize: 17)),
+                      )
+                    ],
                   ),
-                  Text(
-                    value,
-                    softWrap: true,
-                    overflow: TextOverflow.visible,
-                    maxLines: 5,
-                    style: const TextStyle(
-                        fontSize: 17,
-                        fontWeight: FontWeight.w500,
-                        color: Color.fromARGB(255, 156, 134, 21)),
-                  )
                 ],
+              )
               ),
-            ),
-          ),
+          const SizedBox(width: 10),
         ],
       ),
     );

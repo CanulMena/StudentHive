@@ -11,4 +11,6 @@ import 'package:studenthive/domain/entities/user.dart';
 
     Future <User> getUserByEmail( String email );
 
+    // Future<User> putUserAccount( User user );
+
   }

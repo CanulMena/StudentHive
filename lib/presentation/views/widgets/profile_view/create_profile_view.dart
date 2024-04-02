@@ -1,21 +1,25 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:studenthive/presentation/screens/widgets/registration/input_decoration.dart';
 
-class CreateProfileView extends StatefulWidget {
-  const CreateProfileView({super.key});
-
-  @override
-  State<CreateProfileView> createState() => _CreateProfileViewState();
-}
-
-List<String> options = ['Masculino', 'Femenino', 'Otro'];
-
-class _CreateProfileViewState extends State<CreateProfileView> {
+// ignore: must_be_immutable
+class CreateProfileView extends ConsumerWidget {
+  final void Function(ImageSource) addProfileImage;
+  CreateProfileView({super.key, required this.addProfileImage});
+  final lastNameContoller = TextEditingController();
+  final ageController = TextEditingController();
+  final biographyController = TextEditingController();
+  final phoneController = TextEditingController();
+  final nameController = TextEditingController();
+  List<String> options = ['Masculino', 'Femenino', 'Otro'];
   // final _formKey = GlobalKey<FormState>();
-  String currentOption = options[0];
+
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref,) {
+    // final createProfile = ref.read()
     final size = MediaQuery.of(context).size;
+    String currentOption = options[0];
     return Scaffold(
         appBar: AppBar(
           title: const Text('Completa tu perfil'),
@@ -37,24 +41,16 @@ class _CreateProfileViewState extends State<CreateProfileView> {
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     // Padding(padding: const EdgeInsets.all(20)),
-                    const CircleAvatar(
+
+                    CircleAvatar(
                       radius: 60,
-                      backgroundImage: NetworkImage(
-                          'https://images.unsplash.com/photo-1511367461989-f85a21fda167?q=80&w=1931&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'),
-                    ),
-                    SizedBox(
-                      height: size.height * 0.5 * 0.1,
-                    ),
-                    builTextFormField(
-                      labelText: "Edad",
-                      hintText: "Escribe tu edad", //! es como el placeholder
-                      prefixIcon: const Icon(Icons.assignment_outlined),
-                      validator: (value) {
-                        if (value == null || value.isEmpty) {
-                          return 'Por favor ingrese su nombre';
-                        }
-                        return null;
-                      },
+                      child: IconButton(
+                        icon: const Icon(Icons.camera_alt_outlined),
+                        iconSize: 50,
+                        onPressed: () {
+                          addProfileImage(ImageSource.gallery);
+                        },
+                      ),
                     ),
                     SizedBox(
                       height: size.height * 0.5 * 0.1,
@@ -69,6 +65,7 @@ class _CreateProfileViewState extends State<CreateProfileView> {
                         }
                         return null;
                       },
+                      controller:nameController,
                     ),
                     SizedBox(
                       height: size.height * 0.5 * 0.1,
@@ -84,15 +81,36 @@ class _CreateProfileViewState extends State<CreateProfileView> {
                         }
                         return null;
                       },
+                      controller: lastNameContoller,
                     ),
                     SizedBox(
                       height: size.height * 0.5 * 0.1,
                     ),
                     builTextFormField(
-                      labelText: 'Bibliografia',
-                      hintText: 'Describete', //! es como el placeholder
-                      prefixIcon: const Icon(Icons.assignment_ind_outlined),
+                        labelText: "Edad",
+                        hintText: "Escribe tu edad", //! es como el placeholder
+                        prefixIcon: const Icon(Icons.assignment_outlined),
+                        validator: (value) {
+                          if (value == null || value.isEmpty) {
+                            return 'Por favor ingrese su nombre';
+                          }
+                          return null;
+                        },
+                        controller: ageController),
+                    SizedBox(
+                      height: size.height * 0.5 * 0.1,
                     ),
+                    builTextFormField(
+                        labelText: 'Bibliografia',
+                        hintText: 'Describete', //! es como el placeholder
+                        prefixIcon: const Icon(Icons.assignment_ind_outlined),
+                        validator: (value) {
+                          if (value == null || value.isEmpty) {
+                            return 'Por favor ingrese su bibliografia';
+                          }
+                          return null;
+                        },
+                        controller: biographyController),
                     SizedBox(
                       height: size.height * 0.5 * 0.1,
                     ),
@@ -100,7 +118,15 @@ class _CreateProfileViewState extends State<CreateProfileView> {
                         labelText: 'Numero de telefono',
                         hintText:
                             'Escribe tu numero de telefono', //! es como el placeholder
-                        prefixIcon: const Icon(Icons.phone)),
+                        prefixIcon: const Icon(Icons.phone),
+                        validator: (value) {
+                          if (value == null || value.isEmpty) {
+                            return 'Por favor ingrese su numero de telefono';
+                          }
+                          return null;
+                        },
+                        controller: phoneController),
+
                     SizedBox(
                       height: size.height * 0.5 * 0.1,
                     ),
@@ -116,9 +142,9 @@ class _CreateProfileViewState extends State<CreateProfileView> {
                             value: options[0],
                             groupValue: currentOption,
                             onChanged: (value) {
-                              setState(() {
-                                currentOption = value.toString();
-                              });
+                              // setState(() {
+                              //   currentOption = value.toString();
+                              // });
                             },
                           ),
                         ),
@@ -128,9 +154,9 @@ class _CreateProfileViewState extends State<CreateProfileView> {
                             value: options[1],
                             groupValue: currentOption,
                             onChanged: (value) {
-                              setState(() {
-                                currentOption = value.toString();
-                              });
+                              // setState(() {
+                              //   currentOption = value.toString();
+                              // });
                             },
                           ),
                         ),
@@ -142,16 +168,10 @@ class _CreateProfileViewState extends State<CreateProfileView> {
 
                     // Agrega más TextFormField aquí para más campos
                     ElevatedButton(
-                      onPressed: () {
-                        // if (_formKey.currentState.validate()) {
-                        //   // Si el formulario es válido, muestra un snackbar
-                        //   ScaffoldMessenger.of(context).showSnackBar(
-                        //     const SnackBar(content: Text('Procesando Datos')),
-                        //   );
-                        // }
-                      },
-                      child: const Text('Guardar'),
-                    ),
+                    onPressed: () {
+                    },
+                    child: const Text('Guardar'),
+                    )
                   ],
                 ),
               ),
@@ -165,6 +185,7 @@ class _CreateProfileViewState extends State<CreateProfileView> {
     required String hintText,
     required Icon prefixIcon,
     String? Function(String?)? validator,
+    required TextEditingController controller,
   }) {
     return Form(
       child: TextFormField(
@@ -174,7 +195,12 @@ class _CreateProfileViewState extends State<CreateProfileView> {
           prefixIcon: prefixIcon,
         ),
         validator: validator,
+        controller: controller,
       ),
     );
   }
+
+  // Widget _buildCreateAccount(
+  //   final 
+  // )
 }
