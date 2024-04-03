@@ -14,12 +14,12 @@ class FavoritesPostsNotifier extends StateNotifier<List<HousePreview>>{ //? Siem
 
   Future<void> loadFavoritesFromSharedPreferences() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    List<String> favoritesListString = prefs.getStringList('favorites') ?? <String>[];
+    List<String> favoritesListString = prefs.getStringList('favorites') ?? <String>[];  //* obtiene la lista de favoritos del shared preferences
 
     List<HousePreview> favorites = [];
 
-    for (String jsonString in favoritesListString) {
-      Map<String, dynamic> housePreviewStudentHiveDbMap = jsonDecode(jsonString);
+    for (String jsonString in favoritesListString) { // Recorre la lista de favoritos que estan en el shared preferences
+      Map<String, dynamic> housePreviewStudentHiveDbMap = jsonDecode(jsonString); //Convierte el json a un mapa
       HousePreviewStudentHiveDb housePreviewStudentHiveDb = HousePreviewStudentHiveDb.fromJson(housePreviewStudentHiveDbMap); //lo mapea a HousePreviewStudentHiveDb
       HousePreview housePreview = HousePreviewMapper.housePreviewStudentHiveDbToEntity(housePreviewStudentHiveDb); // lo convierte a mi entidad
       favorites.add(housePreview);
@@ -32,13 +32,13 @@ class FavoritesPostsNotifier extends StateNotifier<List<HousePreview>>{ //? Siem
     SharedPreferences prefs = await SharedPreferences.getInstance();
     List<String> favoritesListString = prefs.getStringList('favorites') ?? <String>[];
 
-    HousePreviewStudentHiveDb housePreviewStudentHiveDb = HousePreviewMapper.entityToHousePreviewStudentHiveDb(housePreview);
-    Map<String, dynamic> housePreviewStudentHiveDbMap = housePreviewStudentHiveDb.toJson(); 
-    String housePreviewJson = jsonEncode(housePreviewStudentHiveDbMap); //Convierto el mapa a un json
+    HousePreviewStudentHiveDb housePreviewStudentHiveDb = HousePreviewMapper.entityToHousePreviewStudentHiveDb(housePreview); //* La entidad que agrega lo convierto a mi modelo
+    Map<String, dynamic> housePreviewStudentHiveDbMap = housePreviewStudentHiveDb.toJson(); //* convierto el modelo a un mapa
+    String housePreviewJson = jsonEncode(housePreviewStudentHiveDbMap); //* Convierto el mapa a un json para guardarlo en shared preferences como un string
 
-    if (!favoritesListString.contains(housePreviewJson)) {
-      favoritesListString.add(housePreviewJson);
-      prefs.setStringList('favorites', favoritesListString);
+    if (!favoritesListString.contains(housePreviewJson)) { //* Si no contiene el favorito lo agrega
+      favoritesListString.add(housePreviewJson); //* Agrega el favorito a la lista de favoritos
+      prefs.setStringList('favorites', favoritesListString); //* Guarda la lista de favoritos en shared preferences
     }
   }
 

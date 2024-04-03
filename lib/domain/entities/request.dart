@@ -21,5 +21,4 @@ class Request {
     required this.image,
   });
 
-  // createRequest({required int idRequest, required int idUser, required int idPublication, required String status, required String createdAt}) {}
 }

@@ -1,7 +1,9 @@
 import 'package:dio/dio.dart';
 import 'package:studenthive/config/constants/token/manage_token_app.dart';
-// import 'package:studenthive/config/constants/token/manage_token_app.dart';
 import 'package:studenthive/domain/datasource/request_datasource.dart';
+import 'package:studenthive/domain/entities/request.dart';
+import 'package:studenthive/infrastructure/models/studenthivedb/house_preview_studenthivedb.dart';
+import 'package:studenthive/infrastructure/models/studenthivedb/request_studenhivedb.dart';
 
 class RequestDataSourceImpl extends RequestDataSource {
   final Dio dio = Dio(BaseOptions(
@@ -39,4 +41,21 @@ class RequestDataSourceImpl extends RequestDataSource {
       throw Exception('Error en la solicitud de la publicación: $error');
     }
   }
+
+  // @override
+  // Future<List<Request>> getRequestsByUserId({required int idUser}) async {
+  //   await Token.getToken();
+    
+  //   try{
+  //     final response = await dio.get('/Request/user/$idUser');
+
+  //     final List<RequestModel> requestStudentHiveDb = response.data.map<RequestModel>((e) => RequestModel.fromJson(e)).toList(); 
+
+  //   } catch (error) {
+  //     throw Exception('Error en la solicitud de la publicación: $error');
+  //   }
+
+
+
+  // }
 }

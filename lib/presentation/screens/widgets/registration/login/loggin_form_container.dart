@@ -119,7 +119,7 @@ Map<String, dynamic> decodePayload(String token) {
                   scaffoldMessenger.showSnackBar(
                   const SnackBar(content: Text('Erorr en el inicio de sesión')),
                   );
-                  throw Exception('Erro al iniciar sesion intentalo mas tarde. $error');
+                    throw Exception('Erro al iniciar sesion intentalo mas tarde. $error');
                 }
               },
             ),
