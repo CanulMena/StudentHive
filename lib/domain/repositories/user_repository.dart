@@ -9,6 +9,6 @@ abstract class UserRepository {
 
   Future<User> getUserByEmail(String email);
 
-  Future<User> putUserAccount(int id, int userAge, String name, String lastName, String description,
-    int phoneNumber, int gender, String profilePhotoUrl);
+  // Future<User> putUserAccount(int id, int userAge, String name, String lastName, String description,
+  //   int phoneNumber, int gender, String profilePhotoUrl);
 }
