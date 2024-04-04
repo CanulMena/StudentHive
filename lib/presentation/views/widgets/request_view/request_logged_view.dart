@@ -6,11 +6,11 @@ import 'package:studenthive/presentation/views/widgets/request_view/reques_list_
 class RequestViewLogged extends StatelessWidget {
   final List<MyRequest> myRequests;
   final Future<void> Function(int) removeRequest;
-  final Size size;
+  // final Size size;
   const RequestViewLogged({
     super.key, 
     required this.myRequests, 
-    required this.size,
+    // required this.size,
     required this.removeRequest
     });
 
@@ -31,7 +31,7 @@ class RequestViewLogged extends StatelessWidget {
             myRequests.isEmpty
                 ? const ListEmpty()
                 : ListEmptyNoRequest(
-                    size: size,
+                    // size: size,
                     myRequests: myRequests,
                     removeRequest: removeRequest,
                   )

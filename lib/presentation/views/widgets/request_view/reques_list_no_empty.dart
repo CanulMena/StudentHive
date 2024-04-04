@@ -4,17 +4,18 @@ import 'package:studenthive/domain/entities/entities.dart';
 class ListEmptyNoRequest extends StatelessWidget {
   final List<MyRequest> myRequests;
   final Future<void> Function(int) removeRequest;
-  final Size size;
+  // final Size size;
 
   const ListEmptyNoRequest({
     super.key, 
     required this.myRequests, 
-    required this.size,
+    // required this.size,
     required this.removeRequest
     });
 
   @override
   Widget build(BuildContext context) {
+    final size = MediaQuery.of(context).size;
     return Wrap(
         spacing: 10,
         direction: Axis.horizontal,
