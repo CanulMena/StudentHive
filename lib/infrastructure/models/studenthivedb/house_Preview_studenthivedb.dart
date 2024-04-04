@@ -64,8 +64,10 @@ class HousePreviewStudentHiveDb {
 
     Map<String, dynamic> toJson() => {
         "idPublication": idPublication,
+        "status": status,
         "title": title,
         "nameofUser": nameofUser,
+        "email": emailUser,
         "images": List<dynamic>.from(images.map((x) => x)),
         "rentPrice": rentPrice,
         "publicationDate": publicationDate.toIso8601String(),

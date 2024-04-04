@@ -1,6 +1,5 @@
 export 'package:studenthive/presentation/provider/auth/auth_token_provider.dart';
 export 'package:studenthive/presentation/provider/house/favorite_house_provider.dart';
-export 'package:studenthive/presentation/provider/reserve_provider.dart';
 export 'package:studenthive/presentation/provider/home/select_view_provider.dart';
 export 'package:studenthive/presentation/provider/home/initial_loading_provider.dart';
 export 'package:studenthive/presentation/provider/house/house_preview_provider.dart';
@@ -15,4 +14,5 @@ export 'package:studenthive/presentation/provider/house/title_house_provider.dar
 export 'package:studenthive/presentation/provider/house/description_house_provider.dart';
 export 'package:studenthive/presentation/provider/house/price_house_provider.dart';
 export 'package:studenthive/presentation/provider/house/who_else_house_provider.dart';
-export 'package:studenthive/presentation/provider/user/user_provider.dart';
+export 'package:studenthive/presentation/provider/user/user_provider.dart'; 
+export 'package:studenthive/presentation/provider/request/request_provider.dart';

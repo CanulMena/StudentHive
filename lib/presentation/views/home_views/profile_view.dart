@@ -6,7 +6,7 @@ import 'package:studenthive/presentation/views/widgets/profile_view/profile_view
 import 'package:studenthive/presentation/views/widgets/profile_view/profile_view_no_complet.dart';
 
 class ProfileView extends ConsumerStatefulWidget {
-  const ProfileView({Key? key}) : super(key: key);
+  const ProfileView({super.key});
 
   @override
   ConsumerState<ProfileView> createState() => _ProfileViewState();

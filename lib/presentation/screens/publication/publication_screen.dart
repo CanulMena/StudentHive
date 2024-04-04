@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:studenthive/presentation/provider/house/house_detail_provider.dart';
-import 'package:studenthive/presentation/screens/widgets/publication/bottom_publication.dart'; //TODO: Refactorizar esto
+import 'package:studenthive/presentation/screens/widgets/publication/bottom_publication.dart';
 import 'package:studenthive/presentation/screens/widgets/publication/customlistview_publication.dart';
 
 class PublicationScreen extends ConsumerStatefulWidget {
@@ -28,7 +28,7 @@ class _PublicationScreenState extends ConsumerState<PublicationScreen> {
 
     final houseMapDetails = ref.watch(houseDetailsProvider);
 
-    final houseDetail = houseMapDetails[widget.houseId]; //* consumiendo el mapa del provider
+    final houseDetail = houseMapDetails[widget.houseId];
 
     if (houseDetail == null) {
       return const Scaffold(

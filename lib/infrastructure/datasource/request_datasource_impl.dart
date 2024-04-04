@@ -1,7 +1,9 @@
 import 'package:dio/dio.dart';
 import 'package:studenthive/config/constants/token/manage_token_app.dart';
-// import 'package:studenthive/config/constants/token/manage_token_app.dart';
 import 'package:studenthive/domain/datasource/request_datasource.dart';
+import 'package:studenthive/domain/entities/entities.dart';
+import 'package:studenthive/infrastructure/mappers/my_request_mapper.dart';
+import 'package:studenthive/infrastructure/models/studenthivedb/models_studenthivedb.dart';
 
 class RequestDataSourceImpl extends RequestDataSource {
   final Dio dio = Dio(BaseOptions(
@@ -25,6 +27,44 @@ class RequestDataSourceImpl extends RequestDataSource {
         'idUser': idUser,
         'idPublication': idPublication
       });
+
+      if (response.statusCode == 200) {
+        // Si la solicitud fue exitosa, no necesitamos hacer nada
+      } else {
+        // Si la respuesta no es exitosa, lanzar una excepción con un mensaje de error
+        throw Exception('Error en la solicitud de la publicación: ${response.statusCode}');
+      }
+    } catch (error) {
+      // Manejar la excepción aquí
+      // print('Error en el inicio de sesión: $error');
+      // Puedes lanzar la excepción nuevamente para que la capa superior la maneje si es necesario
+      throw Exception('Error en la solicitud de la publicación: $error');
+    }
+  }
+
+  @override
+  Future<List<MyRequest>> getRequestsByUserId( int idUser ) async {
+    await _addToken();
+    
+    try{
+      final response = await dio.get('/Request/user/$idUser');
+
+      final List<RequestModel> requestStudentHiveDb = response.data.map<RequestModel>((e) => RequestModel.fromJson(e)).toList(); 
+
+      final List<MyRequest> myRequests = requestStudentHiveDb.map((e) => RequestMapper.requestStudentHiveDbToEntity(e)).toList();
+
+      return myRequests;
+
+    } catch (error) {
+      throw Exception('Error en la solicitud de la publicación: $error');
+    }
+  }
+  
+  @override
+  Future<void> deleteRequest(int idRequest) async {
+    await _addToken();
+    try {
+      Response response = await dio.delete('/Request/$idRequest');
 
       if (response.statusCode == 200) {
         // Si la solicitud fue exitosa, no necesitamos hacer nada

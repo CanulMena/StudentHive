@@ -28,7 +28,7 @@ class UserNotifier extends StateNotifier<User?> {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     String? userJson = prefs.getString('user');
     if (userJson != null) {
-      Map<String, dynamic> userMap = jsonDecode(userJson);
+      Map<String, dynamic> userMap = jsonDecode(userJson);  
       UserModel userModel = UserModel.fromJson(userMap);
       User userState = UserMapper.userToEntity(userModel);
       state = userState;

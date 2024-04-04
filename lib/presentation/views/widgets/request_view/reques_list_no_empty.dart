@@ -2,20 +2,24 @@ import 'package:flutter/material.dart';
 import 'package:studenthive/domain/entities/entities.dart';
 
 class ListEmptyNoRequest extends StatelessWidget {
-  final List<HousePreview> favorites;
+  final List<MyRequest> myRequests;
+  final Future<void> Function(int) removeRequest;
   final Size size;
 
-  const ListEmptyNoRequest(
-      {super.key, required this.favorites, required this.size});
+  const ListEmptyNoRequest({
+    super.key, 
+    required this.myRequests, 
+    required this.size,
+    required this.removeRequest
+    });
 
   @override
   Widget build(BuildContext context) {
     return Wrap(
         spacing: 10,
         direction: Axis.horizontal,
-        children: List.generate(favorites.length, (index) {
-          final favorite = favorites[index];
-          // const Radius radius = Radius.circular(20);
+        children: List.generate(myRequests.length, (index) {
+          final myRequest = myRequests[index];
           return Padding(
             padding: const EdgeInsets.only(top: 10),
             //! contenido del contenedor de la solicitud (Contendor principal)
@@ -45,7 +49,7 @@ class ListEmptyNoRequest extends StatelessWidget {
                     child: ClipRRect(
                       borderRadius: BorderRadius.circular(20),
                       child: Image.network(
-                        favorite.images[0],
+                        myRequest.image ?? '',
                         width: double.infinity,
                         height: double.infinity,
                         fit: BoxFit.cover,
@@ -62,7 +66,7 @@ class ListEmptyNoRequest extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Text(
-                          favorite.title,
+                          myRequest.title ?? '',
                           style: const TextStyle(
                             fontSize: 20,
                             fontWeight: FontWeight.bold,
@@ -72,7 +76,7 @@ class ListEmptyNoRequest extends StatelessWidget {
                           height: 10,
                         ),
                         Text(
-                          '\$${favorite.rentPrice}',
+                          '\$${myRequest.rentPrice}',
                           style: const TextStyle(
                             fontSize: 15,
                             fontWeight: FontWeight.w500,
@@ -81,7 +85,7 @@ class ListEmptyNoRequest extends StatelessWidget {
                         const SizedBox(
                           height: 10,
                         ),
-                        Text(favorite.nameofUser,
+                        Text(myRequest.userName ?? '',
                             style: const TextStyle(
                               fontSize: 15,
                               fontWeight: FontWeight.w500,
@@ -90,7 +94,13 @@ class ListEmptyNoRequest extends StatelessWidget {
                     ),
                   ),
                   IconButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      try {
+                        removeRequest(myRequest.idRequest!);
+                      } catch (e) {
+                        // Manejar la excepción aquí
+                      }
+                    },
                     icon: const Icon(Icons.clear),
                   )
                 ],

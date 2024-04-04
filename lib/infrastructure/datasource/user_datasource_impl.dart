@@ -7,6 +7,12 @@ import 'package:studenthive/domain/entities/entities.dart';
 import 'package:studenthive/infrastructure/mappers/user_mapper.dart';
 import 'package:studenthive/infrastructure/models/studenthivedb/studenthivedb_users.dart';
 
+///* Podemos hacer muchos tipos de peticiones a la API cuando tenemos que pasar parametros. 
+///* 1. QueryParameters: Son los parametros que se pasan en la URL, por ejemplo: /User/email/$email
+/// 2. Data: Son los parametros que se pasan en el cuerpo de la petición, por ejemplo: data: { "email": email, "password": password, }
+/// 3. Headers: Son los parametros que se pasan en la cabecera de la petición, por ejemplo: dio.options.headers['Authorization
+/// 4. PathParameters: Son los parametros que se pasan en la URL, pero se pasan de una forma diferente a los QueryParameters, por ejemplo: /User/id/$id
+/// 5. FormData: Son los parametros que se pasan en el cuerpo de la petición, pero se pasan de una forma diferente a los Data, por ejemplo: FormData.fromMap({ "email": email, "password": password, })
 class UserDataSourceImpl extends UserDataSource {
   final Dio dio = Dio(BaseOptions(
     baseUrl: 'https://www.studenthive.somee.com/api',
@@ -46,19 +52,18 @@ class UserDataSourceImpl extends UserDataSource {
   }
 
   @override
-  Future<void> postUser(String userName, String password, String email) async {
-    //* This just is to do add the account
+  Future<void> postUser( String userName, String password, String email ) async { //* This just is to do add the account
     try {
-      //* Realizar la solicitud POST al endpoint
-      Response response = await dio.post(
-        '/User',
-        queryParameters: {
-          "Email": email,
-          "IdRol": 1,
-          "Password": password,
-          "Name": userName,
-        },
-      );
+    //* Realizar la solicitud POST al endpoint
+    Response response = await dio.post(
+      '/User',
+      queryParameters: {
+        "Email": email,
+        "IdRol": 1,
+        "Password": password,
+        "Name": userName,
+      },
+    );
 
       if (response.statusCode == 201) {}
     } catch (e) {
@@ -79,7 +84,7 @@ class UserDataSourceImpl extends UserDataSource {
         UserModel.fromJson(response.data); //* Here i convert the json to Users
     //i need to convert users to my entity user.
     final User user = UserMapper.userToEntity(users);
-    return user;
+    return user; 
   }
 
   @override
@@ -94,37 +99,38 @@ class UserDataSourceImpl extends UserDataSource {
     return user;
   }
 
-// ! End-Point para crear la cuenta del usuario
-// ! POST /User
-  @override
-  Future<User> putUserAccount(
-      int id,
-      int userAge,
-      String name,
-      String lastName,
-      String description,
-      int phoneNumber,
-      int gender,
-      String profilePhotoUrl) async {
-    MultipartFile profilePhotoFile =
-        await MultipartFile.fromFile(profilePhotoUrl);
+//! End-Point para crear la cuenta del usuario
+//! POST /User
+  // // ignore: override_on_non_overriding_member
+  // @override
+  // Future<User> putUserAccount(
+  //     int id,
+  //     int userAge,
+  //     String name,
+  //     String lastName,
+  //     String description,
+  //     int phoneNumber,
+  //     int gender,
+  //     String profilePhotoUrl) async {
+  //   MultipartFile profilePhotoFile =
+  //       await MultipartFile.fromFile(profilePhotoUrl);
 
-    await _addToken();
-    final formData = FormData.fromMap({
-      "IdUser": id,
-      "UserAge": userAge,
-      "Name": name,
-      "LastName": lastName,
-      "Description": description,
-      "PhoneNumber": phoneNumber,
-      "ProfilePhoto": profilePhotoFile,
-    });
-    final response = await dio.put(
-        'User/complete/$id?UserAge=$userAge&Name=$name&LastName=$lastName&Description=$description&PhoneNumber=$phoneNumber&Genderu=$gender',
-        data: formData);
+  //   await _addToken();
+  //   final formData = FormData.fromMap({
+  //     "IdUser": id,
+  //     "UserAge": userAge,
+  //     "Name": name,
+  //     "LastName": lastName,
+  //     "Description": description,
+  //     "PhoneNumber": phoneNumber,
+  //     "ProfilePhoto": profilePhotoFile,
+  //   });
+  //   final response = await dio.put(
+  //       'User/complete/$id?UserAge=$userAge&Name=$name&LastName=$lastName&Description=$description&PhoneNumber=$phoneNumber&Genderu=$gender',
+  //       data: formData);
 
-    final userAccount = UserModel.fromJson(response.data);
-    final User user = UserMapper.userToEntity(userAccount);
-    return user;
-  }
+  //   final userAccount = UserModel.fromJson(response.data);
+  //   final User user = UserMapper.userToEntity(userAccount);
+  //   return user;
+  // }
 }

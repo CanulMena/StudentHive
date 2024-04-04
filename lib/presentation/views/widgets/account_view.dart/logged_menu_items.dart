@@ -147,7 +147,7 @@ class _ProfileListTile extends StatelessWidget {
       menuItem: MenuItem(
         icon: Icons.person_outline_outlined,
         title: 'Profile',
-        linkRoute: '/profile',
+        linkRoute: '/view-profile',
       ),
     );
   }
