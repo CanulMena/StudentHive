@@ -11,7 +11,8 @@ class LogginFormContainer extends ConsumerStatefulWidget {
   const LogginFormContainer({super.key});
 
   @override
-  ConsumerState<LogginFormContainer> createState() =>  _LogginFormContainerState();
+  ConsumerState<LogginFormContainer> createState() =>
+      _LogginFormContainerState();
 }
 
 class _LogginFormContainerState extends ConsumerState<LogginFormContainer> {
@@ -21,28 +22,28 @@ class _LogginFormContainerState extends ConsumerState<LogginFormContainer> {
   late String token;
   Map<String, dynamic> payload = {};
 
-@override
-void initState() {
-  super.initState();
-}
-
-Map<String, dynamic> decodePayload(String token) {
-  try {
-    final parts = token.split('.');
-    if (parts.length != 3) {
-      throw Exception('Invalid token');
-    }
-
-    final payload = parts[1];
-    final normalized = base64Url.normalize(payload);
-    final resp = utf8.decode(base64Url.decode(normalized));
-    final payloadMap = json.decode(resp);
-    return payloadMap;
-  } catch (e) {
-    // print('Error decoding token: $e');
-    return {}; // Devolver un mapa vacío en caso de error
+  @override
+  void initState() {
+    super.initState();
   }
-}
+
+  Map<String, dynamic> decodePayload(String token) {
+    try {
+      final parts = token.split('.');
+      if (parts.length != 3) {
+        throw Exception('Invalid token');
+      }
+
+      final payload = parts[1];
+      final normalized = base64Url.normalize(payload);
+      final resp = utf8.decode(base64Url.decode(normalized));
+      final payloadMap = json.decode(resp);
+      return payloadMap;
+    } catch (e) {
+      // print('Error decoding token: $e');
+      return {}; // Devolver un mapa vacío en caso de error
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -61,22 +62,24 @@ Map<String, dynamic> decodePayload(String token) {
             buildTextFormField(
               labelText: "Email",
               hintText: "ejemplo@gmail.com",
-              prefixIcon: const Icon(Icons.person, color: Color.fromRGBO(21, 154, 156, 1)),
+              prefixIcon: const Icon(
+                Icons.person,
+                color: Color.fromARGB(241, 159, 133, 0),
+              ),
               controller: emailController,
             ),
-
             const SizedBox(height: 30),
-
             buildTextFormField(
               labelText: "Contraseña",
               hintText: "********",
-              prefixIcon: const Icon(Icons.lock, color: Color(0xFF159A9C)),
+              prefixIcon: const Icon(
+                Icons.lock,
+                color: Color.fromARGB(241, 159, 133, 0),
+              ),
               isPassword: true,
               controller: passwordController,
             ),
-
             const SizedBox(height: 30),
-
             buildMaterialButton(
               label: "Ingresar",
               onPressed: () async {
@@ -84,7 +87,8 @@ Map<String, dynamic> decodePayload(String token) {
                 final password = passwordController.text.trim();
                 if (email.isEmpty || password.isEmpty) {
                   ScaffoldMessenger.of(context).showSnackBar(
-                    const SnackBar(content: Text('Todos los campos son obligatorios')),
+                    const SnackBar(
+                        content: Text('Todos los campos son obligatorios')),
                   );
                   return;
                 }
@@ -92,40 +96,42 @@ Map<String, dynamic> decodePayload(String token) {
                 try {
                   await loginUser(email, password);
 
-                  SharedPreferences prefs = await SharedPreferences.getInstance();
+                  SharedPreferences prefs =
+                      await SharedPreferences.getInstance();
                   token = prefs.getString('Jwt') ?? '';
                   if (token.isNotEmpty) {
                     payload = decodePayload(token);
                   }
 
-                  final String emailPayload = payload['http://schemas.xmlsoap.org/ws/2005/05/identity/claims/emailaddress'];
+                  final String emailPayload = payload[
+                      'http://schemas.xmlsoap.org/ws/2005/05/identity/claims/emailaddress'];
 
-                  try{
+                  try {
                     await adduser(emailPayload);
-                  } catch(e) {
-                    
+                  } catch (e) {
                     throw Exception('Error al guardar el usuario');
                   }
 
                   await isTokenAuth();
 
                   scaffoldMessenger.showSnackBar(
-                    const SnackBar(content: Text('El inicio de sesion fue exitoso')),
+                    const SnackBar(
+                        content: Text('El inicio de sesion fue exitoso')),
                   );
 
                   go('/');
                 } catch (error) {
                   removeToken();
                   scaffoldMessenger.showSnackBar(
-                  const SnackBar(content: Text('Erorr en el inicio de sesión')),
+                    const SnackBar(
+                        content: Text('Erorr en el inicio de sesión')),
                   );
-                  throw Exception('Erro al iniciar sesion intentalo mas tarde. $error');
+                  throw Exception(
+                      'Erro al iniciar sesion intentalo mas tarde. $error');
                 }
               },
             ),
-
             const SizedBox(height: 30),
-
             buildRegistrationLink(context),
           ],
         ),
@@ -142,7 +148,9 @@ Map<String, dynamic> decodePayload(String token) {
     required TextEditingController controller,
   }) {
     return TextFormField(
-      keyboardType: isPassword ? TextInputType.visiblePassword : TextInputType.emailAddress,
+      keyboardType: isPassword
+          ? TextInputType.visiblePassword
+          : TextInputType.emailAddress,
       autovalidateMode: AutovalidateMode.onUserInteraction,
       cursorWidth: 1,
       cursorColor: Colors.black,
@@ -168,7 +176,7 @@ Map<String, dynamic> decodePayload(String token) {
         borderRadius: BorderRadius.circular(15),
       ),
       disabledColor: Colors.indigo,
-      color: const Color(0xFF159A9C),
+      color: const Color.fromARGB(255, 156, 134, 21),
       onPressed: onPressed,
       child: Container(
         padding: const EdgeInsets.symmetric(horizontal: 60, vertical: 20),
@@ -195,7 +203,7 @@ Map<String, dynamic> decodePayload(String token) {
           child: const Text(
             "Registrate",
             style: TextStyle(
-              color: Color(0xFF159A9C),
+              color: Color.fromARGB(255, 199, 184, 9),
             ),
           ),
         ),

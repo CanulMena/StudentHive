@@ -28,6 +28,9 @@ class UserRepositoryImpl extends UserRepository{
     return userDataSource.getUserById(id);
   }
 
-
-
+  @override
+  Future<User> putUserAccount(int id, int userAge, String name, String lastName, String description,
+    int phoneNumber, int gender, String profilePhotoUrl) {
+    return userDataSource.putUserAccount(id, userAge, name, lastName, description, phoneNumber, gender, profilePhotoUrl);
+  }
 }

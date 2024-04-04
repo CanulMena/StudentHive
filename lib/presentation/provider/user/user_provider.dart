@@ -11,12 +11,14 @@ import 'package:studenthive/presentation/provider/user/user_respository_provider
 final createUserSesionProvider = Provider((ref) => ref.watch(usersRepositoryProvider).postUser);
 
 final loginUserProvider = Provider((ref) => ref.watch(usersRepositoryProvider).loginUser);
-// final userCreateAccountProvider = Provider((ref) => ref.watch(usersRepositoryProvider).putUserAccount(user));
+
+final userCreateProfileProvider = Provider((ref) => ref.watch(usersRepositoryProvider).putUserAccount);
 
 final userProvider = StateNotifierProvider<UserNotifier, User?>((ref){
   final userGetByEmailProvider = ref.watch(usersRepositoryProvider).getUserByEmail;
   return UserNotifier( userGetByEmailProvider );
 });
+
 
 class UserNotifier extends StateNotifier<User?> {
   final Future<User> Function(String) userGetByEmailProvider;
@@ -53,5 +55,15 @@ class UserNotifier extends StateNotifier<User?> {
     state = null;
   }
 
-
+  // Fetch para crear un perfil (update a user)
+  // Future<void> updateUser() async {
+  //   SharedPreferences prefs = await SharedPreferences.getInstance();
+  //   String? userJson = prefs.getString('user');
+  //   if (userJson != null) {
+  //     Map<String, dynamic> userMap = jsonDecode(userJson);
+  //     UserModel userModel = UserModel.fromJson(userMap);
+  //     User userState = UserMapper.userToEntity(userModel);
+  //     state = userState;
+  //   }
+  // }
 }

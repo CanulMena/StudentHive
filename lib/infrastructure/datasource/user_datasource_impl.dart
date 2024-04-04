@@ -94,38 +94,37 @@ class UserDataSourceImpl extends UserDataSource {
     return user;
   }
 
-//! End-Point para crear la cuenta del usuario
-//! POST /User
-  // // ignore: override_on_non_overriding_member
-  // @override
-  // Future<User> putUserAccount(
-  //     int id,
-  //     int userAge,
-  //     String name,
-  //     String lastName,
-  //     String description,
-  //     int phoneNumber,
-  //     int gender,
-  //     String profilePhotoUrl) async {
-  //   MultipartFile profilePhotoFile =
-  //       await MultipartFile.fromFile(profilePhotoUrl);
+// ! End-Point para crear la cuenta del usuario
+// ! POST /User
+  @override
+  Future<User> putUserAccount(
+      int id,
+      int userAge,
+      String name,
+      String lastName,
+      String description,
+      int phoneNumber,
+      int gender,
+      String profilePhotoUrl) async {
+    MultipartFile profilePhotoFile =
+        await MultipartFile.fromFile(profilePhotoUrl);
 
-  //   await _addToken();
-  //   final formData = FormData.fromMap({
-  //     "IdUser": id,
-  //     "UserAge": userAge,
-  //     "Name": name,
-  //     "LastName": lastName,
-  //     "Description": description,
-  //     "PhoneNumber": phoneNumber,
-  //     "ProfilePhoto": profilePhotoFile,
-  //   });
-  //   final response = await dio.put(
-  //       'User/complete/$id?UserAge=$userAge&Name=$name&LastName=$lastName&Description=$description&PhoneNumber=$phoneNumber&Genderu=$gender',
-  //       data: formData);
+    await _addToken();
+    final formData = FormData.fromMap({
+      "IdUser": id,
+      "UserAge": userAge,
+      "Name": name,
+      "LastName": lastName,
+      "Description": description,
+      "PhoneNumber": phoneNumber,
+      "ProfilePhoto": profilePhotoFile,
+    });
+    final response = await dio.put(
+        'User/complete/$id?UserAge=$userAge&Name=$name&LastName=$lastName&Description=$description&PhoneNumber=$phoneNumber&Genderu=$gender',
+        data: formData);
 
-  //   final userAccount = UserModel.fromJson(response.data);
-  //   final User user = UserMapper.userToEntity(userAccount);
-  //   return user;
-  // }
+    final userAccount = UserModel.fromJson(response.data);
+    final User user = UserMapper.userToEntity(userAccount);
+    return user;
+  }
 }
