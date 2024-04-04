@@ -9,15 +9,15 @@ class ImageState{
   ImageState({required this.isButtonEnabled, required this.images});
 }
 
-final imagesHouseProvider = StateNotifierProvider<ImagesHouseProvider, ImageState>((ref) {
-  return ImagesHouseProvider();
+final imagesHouseProvider = StateNotifierProvider<ImagesHouseNotifier, ImageState>((ref) {
+  return ImagesHouseNotifier();
 });
 
-class ImagesHouseProvider extends StateNotifier<ImageState> {
+class ImagesHouseNotifier extends StateNotifier<ImageState> {
 
   dynamic pickImageError;
 
-  ImagesHouseProvider() : super(
+  ImagesHouseNotifier() : super(
     ImageState(
       isButtonEnabled: false, 
       images: []

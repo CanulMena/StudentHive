@@ -49,7 +49,6 @@ class _AddHouseImagesState extends ConsumerState<AddHouseImages> {
                 style: TextStyle(fontSize: 15, color: Colors.grey),
               ),
             ),
-
             
             Text(
               '${imageFileList.length} imágenes agregadas',

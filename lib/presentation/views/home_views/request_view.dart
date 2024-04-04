@@ -29,10 +29,6 @@ class _RequestViewState extends ConsumerState<RequestView> {
     final size = MediaQuery.of(context).size;
     return Scaffold(
       backgroundColor: Colors.white,
-      appBar: AppBar(
-        backgroundColor: Colors.white,
-        elevation: 0,
-      ),
       body: RefreshIndicator(
         strokeWidth: 2,
         onRefresh: () {

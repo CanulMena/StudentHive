@@ -21,9 +21,12 @@ class RequestViewLogged extends StatelessWidget {
         Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const Text(
-              'Solicitudes',
-              style: TextStyle(fontSize: 30, fontWeight: FontWeight.w600),
+            const Padding(
+              padding: EdgeInsets.only(top: 55),
+              child: Text(
+                'Solicitudes',
+                style: TextStyle(fontSize: 30, fontWeight: FontWeight.w600),
+              ),
             ),
             const SizedBox(
               height: 20,

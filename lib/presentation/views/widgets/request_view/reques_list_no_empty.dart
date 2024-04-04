@@ -60,7 +60,7 @@ class ListEmptyNoRequest extends StatelessWidget {
                   Container(
                     padding: const EdgeInsets.all(5),
                     height: size.height * 0.20 * 100,
-                    width: size.width * 0.95 * 0.35,
+                    width: size.width * 0.95 * 0.33,
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       mainAxisAlignment: MainAxisAlignment.center,
@@ -94,9 +94,9 @@ class ListEmptyNoRequest extends StatelessWidget {
                     ),
                   ),
                   IconButton(
-                    onPressed: () {
+                    onPressed: () async {
                       try {
-                        removeRequest(myRequest.idRequest!);
+                        await removeRequest(myRequest.idRequest!);
                       } catch (e) {
                         // Manejar la excepción aquí
                       }
