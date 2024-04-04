@@ -6,12 +6,11 @@ class ListEmptyNoRequest extends StatelessWidget {
   final Future<void> Function(int) removeRequest;
   // final Size size;
 
-  const ListEmptyNoRequest({
-    super.key, 
-    required this.myRequests, 
-    // required this.size,
-    required this.removeRequest
-    });
+  const ListEmptyNoRequest(
+      {super.key,
+      required this.myRequests,
+      // required this.size,
+      required this.removeRequest});
 
   @override
   Widget build(BuildContext context) {
