@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:studenthive/domain/entities/house.dart';
 import 'package:studenthive/presentation/provider/providers.dart';
-import 'package:studenthive/presentation/provider/request/request_provider.dart';
 
 class BottomPublication extends ConsumerWidget {
   final House houseDetail;
@@ -10,8 +9,11 @@ class BottomPublication extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final user = ref.read(userProvider)!.idUser;
-    final postRequest = ref.watch(requestProvider.notifier).postRequest;
+    final userId = ref.read(userProvider)!.idUser;
+    final myPostRequest = ref.watch(requestProvider.notifier).myPostRequest;
+
+    final scaffoldMessenger = ScaffoldMessenger.of(context);
+    final navigation = Navigator.of(context);
     final colors = Theme.of(context).colorScheme;
     final size = MediaQuery.of(context).size;
     return Container(
@@ -60,25 +62,36 @@ class BottomPublication extends ConsumerWidget {
                           ),
                           TextButton(
                             child: const Text('Confirmar'),
-                            onPressed: () {
-                              postRequest(user, houseDetail.idPublication);
-                              Navigator.of(context).pop();
-                              ScaffoldMessenger.of(context).showSnackBar(
-                                  const SnackBar(
-                                      content:
-                                          Text('Reserva Hecha con exito!')));
+                            onPressed: () async {
+                              try {
+                              final success = await myPostRequest(userId, houseDetail.idPublication);
+                                if (success) {
+                                  scaffoldMessenger.showSnackBar(
+                                    const SnackBar(content: Text('Reserva Hecha con exito!'))
+                                  );
+                                  navigation.pop();
+                                } else {
+                                  scaffoldMessenger.showSnackBar(
+                                    const SnackBar(content: Text('Ya has hecho una reserva'))
+                                  );
+                                  navigation.pop();
+                                }
+                              } catch (e) {
+                                scaffoldMessenger.showSnackBar(
+                                    const SnackBar(content: Text('La reserva no sepudo hacer'))
+                                  );
+                                  navigation.pop();
+                              }
+                              
                             },
                           ),
                         ]);
                   });
-              // postRequest(user, houseDetail.idPublication);
-              // if(authProvider.isLogged){ //TODO: Terminar la validacion
-              // //TODO implementar el baner de cofirmacion para la solicitud
-              // // context.push('/reserve',);
-              // // reserveProvider.addReservation(publicationPost);
-              // // } else {
-              // //   DialogUtils.openDialog(context, authProvider, userProvider);
-              // // }
+              // if(authProvider.isLogged){
+              // reserveProvider.addReservation(publicationPost);
+              // } else {
+              //   DialogUtils.openDialog(context, authProvider, userProvider);
+              // }
             },
             style: ElevatedButton.styleFrom(
               backgroundColor: colors.primary,

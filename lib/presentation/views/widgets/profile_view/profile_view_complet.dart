@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:studenthive/presentation/provider/user/user_provider.dart';
 
 class ProfileViewComplete extends ConsumerStatefulWidget {
-  const ProfileViewComplete({Key? key}) : super(key: key);
+  const ProfileViewComplete({super.key});
 
   @override
   ConsumerState<ProfileViewComplete> createState() => _ProfileViewReadyState();

@@ -11,9 +11,15 @@ class RequestRepositoryImpl extends RequestRepository {
   Future<void> postRequest(int idUser, int idPublication) {
     return requestDataSource.postRequest(idUser, idPublication);
   }
+  
+  @override
+  Future<List<MyRequest>> getRequestsByUserId(int idUser) {
+    return requestDataSource.getRequestsByUserId(idUser);
+  }
+  
+  @override
+  Future<void> deleteRequest(int idRequest) {
+    return requestDataSource.deleteRequest(idRequest);
+  }
 
-  // @override
-  // Future<List<Request>> getRequestsByUserId({required int idUser}) {
-  //   return requestDataSource.getRequestsByUserId(idUser: idUser);
-  // }
 }

@@ -4,10 +4,15 @@ import 'package:studenthive/presentation/views/widgets/favorites_view/list_empty
 import 'package:studenthive/presentation/views/widgets/request_view/reques_list_no_empty.dart';
 
 class RequestViewLogged extends StatelessWidget {
-  final List<HousePreview> favorites;
+  final List<MyRequest> myRequests;
+  final Future<void> Function(int) removeRequest;
   final Size size;
-  const RequestViewLogged(
-      {super.key, required this.favorites, required this.size});
+  const RequestViewLogged({
+    super.key, 
+    required this.myRequests, 
+    required this.size,
+    required this.removeRequest
+    });
 
   @override
   Widget build(BuildContext context) {
@@ -23,11 +28,12 @@ class RequestViewLogged extends StatelessWidget {
             const SizedBox(
               height: 20,
             ),
-            favorites.isEmpty
+            myRequests.isEmpty
                 ? const ListEmpty()
                 : ListEmptyNoRequest(
                     size: size,
-                    favorites: favorites,
+                    myRequests: myRequests,
+                    removeRequest: removeRequest,
                   )
           ],
         )

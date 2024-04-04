@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:studenthive/domain/entities/entities.dart';
-import 'package:studenthive/presentation/provider/house/favorite_house_provider.dart';
+import 'package:studenthive/presentation/provider/providers.dart';
 import 'package:studenthive/presentation/views/widgets/request_view/request_logged_view.dart';
 import 'package:studenthive/presentation/views/widgets/request_view/request_no_logged_view.dart';
 
@@ -18,14 +17,15 @@ class _RequestViewState extends ConsumerState<RequestView> {
   @override
   void initState() {
     ref
-        .read(favoritesHousesProvider.notifier)
-        .loadFavoritesFromSharedPreferences();
+        .read(requestProvider.notifier)
+        .getAllMyRequests(ref.read(userProvider)!.idUser);
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
-    final List<HousePreview> favorites = ref.watch(favoritesHousesProvider);
+    final myRequests = ref.watch(requestProvider);
+    final removeRequest = ref.read(requestProvider.notifier).removeRequest;
     final size = MediaQuery.of(context).size;
     return Scaffold(
       backgroundColor: Colors.white,
@@ -45,7 +45,8 @@ class _RequestViewState extends ConsumerState<RequestView> {
             child: !widget.isTokenAut
                 ? const RequestViewNoLogged()
                 : RequestViewLogged(
-                    favorites: favorites,
+                    myRequests: myRequests,
+                    removeRequest: removeRequest,
                     size: size,
                   )),
       ),
