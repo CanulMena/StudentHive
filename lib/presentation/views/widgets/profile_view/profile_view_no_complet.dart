@@ -5,7 +5,7 @@ import 'package:studenthive/presentation/views/widgets/account_view.dart/create_
 import 'package:studenthive/presentation/views/widgets/profile_view/create_profile_view.dart';
 
 class ProfileViewNoComplete extends ConsumerStatefulWidget {
-  const ProfileViewNoComplete({Key? key}) : super(key: key);
+  const ProfileViewNoComplete({super.key});
 
   @override
   ConsumerState<ProfileViewNoComplete> createState() => _ProfileViewNoCompleteState();
