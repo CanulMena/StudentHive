@@ -8,7 +8,8 @@ class ProfileViewNoComplete extends ConsumerStatefulWidget {
   const ProfileViewNoComplete({super.key});
 
   @override
-  ConsumerState<ProfileViewNoComplete> createState() => _ProfileViewNoCompleteState();
+  ConsumerState<ProfileViewNoComplete> createState() =>
+      _ProfileViewNoCompleteState();
 }
 
 class _ProfileViewNoCompleteState extends ConsumerState<ProfileViewNoComplete> {
@@ -17,56 +18,59 @@ class _ProfileViewNoCompleteState extends ConsumerState<ProfileViewNoComplete> {
     final size = MediaQuery.of(context).size;
     var user = ref.watch(userProvider);
     return ListView(
-          children: [
-            Column(children: [
-              Container(
-                // color: Colors.white,
-                width: size.width * 0.9,
-                height: size.height * 0.3,
-                decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(10),
-                    boxShadow: [
-                      BoxShadow(
-                        color: Colors.grey.withOpacity(0.5),
-                        spreadRadius: 5,
-                        blurRadius: 7,
-                        offset:
-                            const Offset(0, 3), // changes position of shadow
-                      ),
-                    ],
-                    border: Border.all(
-                      color: Colors.grey.withOpacity(0.5),
-                      width: 2,
-                    )),
-                margin: const EdgeInsets.all(8.0),
-                child: Column(
-                  children: [
-                    const Padding(padding: EdgeInsets.all(20)),
-                    const CircleAvatar(
-                      radius: 60,
-                      backgroundImage: NetworkImage(
-                          'https://images.unsplash.com/photo-1511367461989-f85a21fda167?q=80&w=1931&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'),
-                    ),
-                    SizedBox(
-                      height: size.height * 0.3 * 0.05,
-                    ),
-                    Text(
-                      '${user?.name}${user?.lastName != null ? user!.lastName! : ""}',
-                      style: const TextStyle(
-                          fontSize: 20, fontWeight: FontWeight.bold),
-                    ),
-                    Text(
-                      user?.email ?? '',
-                      style: const TextStyle(
-                          fontSize: 15, fontWeight: FontWeight.normal),
-                    ),
-                  ],
+      children: [
+        Column(children: [
+          Container(
+            // color: Colors.white,
+            width: size.width * 0.9,
+            height: size.height * 0.3,
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(10),
+              color: Colors.white,
+              boxShadow: [
+                BoxShadow(
+                  color: Colors.grey.withOpacity(0.5),
+                  spreadRadius: 5,
+                  blurRadius: 7,
+                  offset: const Offset(0, 3), // changes position of shadow
                 ),
-              ),
-              const ButtonCreateProfile()
-            ])
-          ],
-        );
+              ],
+            ),
+            margin: const EdgeInsets.all(8.0),
+            child: Column(
+              children: [
+                const Padding(padding: EdgeInsets.all(20)),
+                const CircleAvatar(
+                  radius: 60,
+                  child: Icon(Icons.person_outline_sharp, size: 80),
+                  // backgroundImage: NetworkImage(
+                  //     'https://images.unsplash.com/photo-1511367461989-f85a21fda167?q=80&w=1931&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'),
+                ),
+                SizedBox(
+                  height: size.height * 0.3 * 0.05,
+                ),
+                Text(
+                  '${user?.name}',
+                  style: const TextStyle(
+                      fontSize: 20, fontWeight: FontWeight.bold),
+                ),
+                Text(
+                  user?.email ?? '',
+                  style: const TextStyle(
+                      fontSize: 17,
+                      color: Colors.grey,
+                      fontWeight: FontWeight.w400),
+                ),
+                const SizedBox(
+                  height: 20,
+                )
+              ],
+            ),
+          ),
+          const ButtonCreateProfile()
+        ])
+      ],
+    );
   }
 }
 
@@ -83,10 +87,15 @@ class ButtonCreateProfile extends StatelessWidget {
           width: size.width * 0.9,
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(10),
-            border: Border.all(
-              color: Colors.grey.withOpacity(0.5),
-              width: 2,
-            ),
+            color: Colors.white,
+            boxShadow: [
+              BoxShadow(
+                color: Colors.grey.withOpacity(0.5),
+                spreadRadius: 5,
+                blurRadius: 7,
+                offset: const Offset(0, 3), // changes position of shadow
+              ),
+            ],
           ),
           child: const Padding(
             padding: EdgeInsets.all(30),
@@ -103,7 +112,9 @@ class ButtonCreateProfile extends StatelessWidget {
           onPressed: () {
             Navigator.of(context)
                 // ignore: non_constant_identifier_names
-                .push(createPageRoute(CreateProfileView(addProfileImage: (ImageSource ) {  },)));
+                .push(createPageRoute(CreateProfileView(
+              addProfileImage: (ImageSource) {},
+            )));
           },
           child: const Text(
             'Crear Perfil',

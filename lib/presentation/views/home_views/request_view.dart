@@ -41,8 +41,8 @@ class _RequestViewState extends ConsumerState<RequestView> {
         },
         child: Padding(
             padding: widget.isTokenAut
-                ? const EdgeInsets.symmetric(horizontal: 20)
-                : const EdgeInsets.symmetric(horizontal: 25),
+                ? const EdgeInsets.symmetric(horizontal: 0)
+                : const EdgeInsets.symmetric(horizontal: 15),
             child: !widget.isTokenAut
                 ? const RequestViewNoLogged()
                 : RequestViewLogged(

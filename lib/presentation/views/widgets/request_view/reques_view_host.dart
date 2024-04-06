@@ -15,85 +15,74 @@ class _RequestViewHostState extends ConsumerState<RequestViewHost> {
     final size = MediaQuery.of(context).size;
     final textStyle = Theme.of(context).textTheme;
     final user = ref.watch(userProvider);
-    return ListView(
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            const Text(
-              'Solicitudes',
-              style: TextStyle(fontSize: 30, fontWeight: FontWeight.w600),
-            ),
-            SizedBox(
-              height: size.height * 0.02,
-            ),
-            Container(
-              width: size.width * 0.95,
-              height: size.height * 0.15,
-              decoration: BoxDecoration(
-                color: Colors.white,
-                borderRadius: BorderRadius.circular(10),
-                border: Border.all(color: Colors.grey),
-              ),
-              child: Padding(
-                padding:
-                    const EdgeInsets.symmetric(vertical: 12, horizontal: 6),
-                child: Row(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  // mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        Container(
+          width: size.width * 0.95,
+          height: size.height * 0.15,
+          decoration: BoxDecoration(
+            color: Colors.white,
+            borderRadius: BorderRadius.circular(10),
+            border: Border.all(color: Colors.grey),
+          ),
+          child: Padding(
+            padding:
+                const EdgeInsets.symmetric(vertical: 12, horizontal: 6),
+            child: Row(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              mainAxisAlignment: MainAxisAlignment.start,
+              // mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                CircleAvatar(
+                  radius: 40,
+                  backgroundImage:
+                      NetworkImage(user?.profilePhotoUrl ?? ''),
+                ),
+                const SizedBox(
+                  width: 25,
+                ),
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    CircleAvatar(
-                      radius: 40,
-                      backgroundImage:
-                          NetworkImage(user?.profilePhotoUrl ?? ''),
+                    SizedBox(
+                      width: size.width * 0.95 * 0.65,
+                      child: Text(
+                        '${user?.name} ${user?.lastName ?? ''} a mandado una solicitud para ser tu inquilino',
+                        style: textStyle.bodyMedium!.copyWith(
+                            fontWeight: FontWeight.w600,
+                            color: Colors.black54),
+                      ),
                     ),
                     const SizedBox(
-                      width: 25,
+                      height: 10,
                     ),
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        SizedBox(
-                          width: size.width * 0.95 * 0.65,
-                          child: Text(
-                            '${user?.name} ${user?.lastName ?? ''} a mandado una solicitud para ser tu inquilino',
-                            style: textStyle.bodyMedium!.copyWith(
-                                fontWeight: FontWeight.w600,
-                                color: Colors.black54),
-                          ),
+                        ElevatedButton(
+                          onPressed: () {
+                            //TODO Logica para aceptar solicitud
+                          },
+                          child: const Text('Aceptar'),
                         ),
                         const SizedBox(
-                          height: 10,
+                          width: 10,
                         ),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            ElevatedButton(
-                              onPressed: () {
-                                //TODO Logica para aceptar solicitud
-                              },
-                              child: const Text('Aceptar'),
-                            ),
-                            const SizedBox(
-                              width: 10,
-                            ),
-                            ElevatedButton(
-                              onPressed: () {
-                                //TODO Logica para rechazar una solicitud
-                              },
-                              child: const Text('Rechazar'),
-                            ),
-                          ],
-                        )
+                        ElevatedButton(
+                          onPressed: () {
+                            //TODO Logica para rechazar una solicitud
+                          },
+                          child: const Text('Rechazar'),
+                        ),
                       ],
                     )
                   ],
-                ),
-              ),
+                )
+              ],
             ),
-          ],
-        )
+          ),
+        ),
       ],
     );
   }
