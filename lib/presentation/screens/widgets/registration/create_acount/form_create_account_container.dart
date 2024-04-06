@@ -150,7 +150,7 @@ class FormularioContainer extends ConsumerWidget {
           );
           return; //* Salir del método si hay campos vacíos
         }
-
+        
         try {
           //* Realizar la creación de la cuenta
           await createAccountFunction(name, password, email);
