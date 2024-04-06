@@ -53,11 +53,12 @@ class RequestNotifier extends StateNotifier<List<MyRequest>> {
   Future<void> deleteRequest(int idRequest) async {
     try{
       await removeRequest(idRequest);
-      var newState = state;
+      var newState = List<MyRequest>.from(state);
       newState.removeWhere((element) => element.idRequest == idRequest);
       state = newState;
+      
     } catch (e) {
-      // Manejar la excepción aquí
+      state = [];
     }
   }
 }

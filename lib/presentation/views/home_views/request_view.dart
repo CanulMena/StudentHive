@@ -26,7 +26,7 @@ class _RequestViewState extends ConsumerState<RequestView> {
   @override
   Widget build(BuildContext context) {
     final myRequests = ref.watch(requestProvider);
-    final removeRequest = ref.read(requestProvider.notifier).removeRequest;
+    final removeRequest = ref.read(requestProvider.notifier).deleteRequest;
     // final size = MediaQuery.of(context).size;
     return Scaffold(
       backgroundColor: Colors.white,

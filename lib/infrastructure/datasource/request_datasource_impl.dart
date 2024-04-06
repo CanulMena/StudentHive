@@ -56,7 +56,8 @@ class RequestDataSourceImpl extends RequestDataSource {
       return myRequests;
 
     } catch (error) {
-      throw Exception('Error en la solicitud de la publicación: $error');
+
+      return [];
     }
   }
   
