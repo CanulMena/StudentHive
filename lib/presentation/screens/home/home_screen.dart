@@ -29,6 +29,8 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
     ref.read(allActiveHousesPreviewProviderByUser.notifier).loadNextPage(); // Todas las casas activas del usuario
     ref.read(allInactiveHousesPreviewProviderByUser.notifier).loadNextPage(); // Todas las casas inactivas del usuario
     ref.read(allHousesPreviewProviderByUser.notifier).loadNextPage(); // Todas las casas del usuario
+
+    // ref.read(requestProvider.notifier).getAllMyRequests(ref.read(userProvider)!.idUser); // Todas las solicitudes del usuario
   }
 
   @override

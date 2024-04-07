@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:studenthive/presentation/provider/providers.dart';
-// import 'package:studenthive/presentation/provider/house/favorite_house_provider.dart';
 import 'package:studenthive/presentation/views/widgets/request_view/request_logged_view.dart';
 import 'package:studenthive/presentation/views/widgets/request_view/request_no_logged_view.dart';
 
@@ -27,12 +26,10 @@ class _RequestViewState extends ConsumerState<RequestView> {
   Widget build(BuildContext context) {
     final myRequests = ref.watch(requestProvider);
     final removeRequest = ref.read(requestProvider.notifier).deleteRequest;
-    // final size = MediaQuery.of(context).size;
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
-        backgroundColor: Colors.white,
-        elevation: 0,
+        // title: const Text(''),
       ),
       body: RefreshIndicator(
         strokeWidth: 2,
@@ -44,8 +41,8 @@ class _RequestViewState extends ConsumerState<RequestView> {
                 ? const EdgeInsets.symmetric(horizontal: 0)
                 : const EdgeInsets.symmetric(horizontal: 15),
             child: !widget.isTokenAut
-                ? const RequestViewNoLogged()
-                : RequestViewLogged(
+                ? const RequestViewNoLogged() // ---> Este se muestra si no esta logeado
+                : RequestViewLogged( //* ---> Este se muestra si esta logeado
                     myRequests: myRequests,
                     removeRequest: removeRequest,
                   )),

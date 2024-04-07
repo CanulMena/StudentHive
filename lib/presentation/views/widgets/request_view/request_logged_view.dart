@@ -3,37 +3,57 @@ import 'package:studenthive/domain/entities/entities.dart';
 import 'package:studenthive/presentation/views/widgets/favorites_view/list_empty.dart';
 import 'package:studenthive/presentation/views/widgets/request_view/reques_list_no_empty.dart';
 
-class RequestViewLogged extends StatelessWidget {
+class RequestViewLogged extends StatefulWidget {
   final List<MyRequest> myRequests;
   final Future<void> Function(int) removeRequest;
-  // final Size size;
-  const RequestViewLogged(
-      {super.key,
-      required this.myRequests,
-      // required this.size,
-      required this.removeRequest});
+  const RequestViewLogged({super.key,required this.myRequests,required this.removeRequest});
+
+  @override
+  State<RequestViewLogged> createState() => _RequestViewLoggedState();
+}
+
+class _RequestViewLoggedState extends State<RequestViewLogged> {
+
+  late PageController pageController;
+
+  @override
+  void initState() {
+    pageController = PageController();
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    pageController.dispose();
+    super.dispose();
+  }
+
 
   @override
   Widget build(BuildContext context) {
-    return ListView(
+    return Column( 
       children: [
-        const Padding(
-          padding: EdgeInsets.symmetric(horizontal: 20),
-          child: Text(
-            'Solicitudes',
-            style: TextStyle(fontSize: 30, fontWeight: FontWeight.w600),
-          ),
+        const Text(
+          'Solicitudes',
+          style: TextStyle(fontSize: 30, fontWeight: FontWeight.w600),
         ),
         const SizedBox(
           height: 10,
         ),
-        myRequests.isEmpty
-            ? const ListEmpty()
-            : ListEmptyNoRequest(
-                // size: size,
-                myRequests: myRequests,
-                removeRequest: removeRequest,
-              )
+        widget.myRequests.isEmpty
+          ? const SizedBox()
+          : ButtonFilterForType(
+          pageController: pageController,
+        ),
+        widget.myRequests.isEmpty 
+            ? const ListEmpty() // ---> Este se muestra si no hay solicitudes
+            : Expanded(
+              child: ListEmptyNoRequest( // ---> Este se muestra si hay solicitudes echas o no tenemos solicitudes
+                  pageController: pageController,
+                  myRequests: widget.myRequests,
+                  removeRequest: widget.removeRequest,
+                ),
+            )
       ],
     );
   }

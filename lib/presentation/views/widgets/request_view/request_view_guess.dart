@@ -5,14 +5,13 @@ class RequestViewGuess extends StatelessWidget {
   final List<MyRequest> myRequests;
   final Future<void> Function(int) removeRequest;
 
-  const RequestViewGuess(
-      {super.key, required this.myRequests, required this.removeRequest});
+  const RequestViewGuess({super.key, required this.myRequests, required this.removeRequest});
 
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
     return Column(
-        children: List.generate(myRequests.length, (index) {
+      children: List.generate(myRequests.length, (index) {
       final myRequest = myRequests[index];
       return Padding(
         padding: const EdgeInsets.only(top: 10),
