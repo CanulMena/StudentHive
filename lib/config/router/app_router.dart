@@ -6,6 +6,7 @@ import 'package:studenthive/presentation/screens/screens.dart';
 import 'package:studenthive/presentation/views/home_views/profile_view.dart';
 import 'package:studenthive/presentation/views/widgets/account_view.dart/create_publication/app_steps_create_publications.dart';
 import 'package:studenthive/presentation/views/widgets/account_view.dart/create_publication/steps_for_creation_publication/type_house.dart';
+import 'package:studenthive/presentation/views/widgets/account_view.dart/my_publications/my_publication_screen.dart.dart';
 import 'package:studenthive/presentation/views/widgets/account_view.dart/my_publications/my_publications_view.dart';
 
 class MyRoute {
@@ -27,7 +28,7 @@ class MyRoute {
             },
             routes: [
               GoRoute(
-                  //* Ruta para ver una publicacion
+                  //* Ruta para ver una publicacion 
                   path:
                       'house/:id', // <--- :id es un parametro que se puede pasar a la ruta al igual que el :email
                   builder: (context, state) {
@@ -60,6 +61,13 @@ class MyRoute {
                         ])
                   ]),
               GoRoute(
+                path: 'my-publication-request/:id',
+                builder: (context, state) {
+                  final houseId = state.pathParameters['id'] ?? 'no-id';
+                  return MyPublicationScreen(houseId: houseId);
+                },
+                ),
+              GoRoute(
                 path: 'view-profile',
                 builder: (context, state) {
                   return const ProfileView();
@@ -70,6 +78,15 @@ class MyRoute {
                 builder: (context, state) {
                   return const MyPublicationView();
                 },
+                routes: [
+                  GoRoute(
+                    path: 'publication/:id',
+                    builder: (context, state) {
+                      final houseId = state.pathParameters['id'] ?? 'no-id';
+                      return MyPublicationScreen(houseId: houseId);
+                    },
+                  )
+                ]
               ),
             ]),
         GoRoute(
