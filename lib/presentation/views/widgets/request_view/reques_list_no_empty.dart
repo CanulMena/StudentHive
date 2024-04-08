@@ -1,55 +1,45 @@
 import 'package:flutter/material.dart';
 import 'package:studenthive/domain/entities/entities.dart';
+import 'package:studenthive/presentation/views/widgets/request_view/reques_view_host.dart';
 import 'package:studenthive/presentation/views/widgets/request_view/request_view_guess.dart';
 
 class ListEmptyNoRequest extends StatefulWidget {
   final List<MyRequest> myRequests;
+  final List<YourRequest> yourRequests;
+  final PageController pageController;
   final Future<void> Function(int) removeRequest;
-  // final Size size;
 
-  const ListEmptyNoRequest(
-      {super.key,
-      required this.myRequests,
-      // required this.size,
-      required this.removeRequest});
+  const ListEmptyNoRequest({
+    super.key,
+    required this.myRequests,
+    required this.removeRequest, 
+    required this.pageController,
+    required this.yourRequests
+    });
 
   @override
   State<ListEmptyNoRequest> createState() => _ListEmptyNoRequestState();
 }
 
 class _ListEmptyNoRequestState extends State<ListEmptyNoRequest> {
-  late PageController pageController;
-
-  @override
-  void initState() {
-    pageController = PageController();
-    super.initState();
-  }
-
-  @override
-  void dispose() {
-    pageController.dispose();
-    super.dispose();
-  }
-
   @override
   Widget build(BuildContext context) {
-    // final size = MediaQuery.of(context).size;
-    return Column(
+    return PageView(
+      controller: widget.pageController,
       children: [
-        ButtonFilterForType(
-          pageController: pageController,
-        ),
         RequestViewGuess(
           myRequests: widget.myRequests,
           removeRequest: widget.removeRequest,
         ),
+        RequestViewHost(
+          yourRequests: widget.yourRequests,
+        )
       ],
     );
   }
 }
 
-class ButtonFilterForType extends StatefulWidget {
+class ButtonFilterForType extends StatefulWidget { //* Este es el boton superior para los filtros de mism solicitudes
   final PageController pageController;
   const ButtonFilterForType({super.key, required this.pageController});
 

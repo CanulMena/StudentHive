@@ -55,7 +55,7 @@ class _MyPublicationsListViewState extends State<MyPublicationsListView> {
                   padding: const EdgeInsets.symmetric(vertical: 15),
                   child: GestureDetector(
                     onTap: () {
-                      context.push('/house/${house.idPublication}');
+                      context.push('/my-publications/publication/${house.idPublication}');
                     },
                     child: Container( 
                       decoration: BoxDecoration(borderRadius: BorderRadius.circular(20)),

@@ -24,8 +24,8 @@ class _ProfileViewState extends ConsumerState<ProfileView> {
       body: isUserDataComplete(user!)
           ? const ProfileViewNoComplete()
           : const ProfileViewComplete(),
-      // ProfileViewNoComplete(),
-      // ProfileViewReady(),,
+      // ProfileViewNoComplete(), 
+      // ProfileViewReady(),
     );
   }
 

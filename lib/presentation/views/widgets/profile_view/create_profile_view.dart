@@ -2,10 +2,8 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-// import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:studenthive/presentation/provider/user/user_photo_profile_provider.dart';
-// import 'package:studenthive/presentation/provider/user/user_provider.dart';
 import 'package:studenthive/presentation/screens/widgets/registration/input_decoration.dart';
 
 class CreateProfileView extends ConsumerStatefulWidget {
@@ -19,7 +17,7 @@ class CreateProfileView extends ConsumerStatefulWidget {
 class _CreateProfileViewState extends ConsumerState<CreateProfileView> {
   @override
   Widget build(BuildContext context) {
-    // String currentOption = options[0];
+    
     final size = MediaQuery.of(context).size;
     final imageProvider =
         ref.read(imageUserProvider.select((state) => state.image));

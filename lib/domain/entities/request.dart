@@ -27,3 +27,27 @@ class MyRequest {
   });
 
 }
+
+class YourRequest{
+  final int idRequest;
+  final String status;
+  final int idPublication;
+  final String title;
+  final int rentPrice;
+  final String image;
+  final int idUser;
+  final String userName;
+  final String? userLastName;
+
+  YourRequest({
+    required this.idRequest,
+    required this.status,
+    required this.idPublication,
+    required this.title,
+    required this.rentPrice,
+    required this.image,
+    required this.idUser,
+    required this.userName,
+    required this.userLastName,
+  });
+}
