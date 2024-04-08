@@ -14,7 +14,7 @@ class RequestRepositoryImpl extends RequestRepository {
   
   @override
   Future<List<MyRequest>> getMyRequestsByUserId(int idUser) {
-    return requestDataSource.getRequestsByUserId(idUser);
+    return requestDataSource.getMyRequestsByUserId(idUser);
   }
   
   @override

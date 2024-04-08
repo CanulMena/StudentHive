@@ -3,12 +3,12 @@ import 'package:go_router/go_router.dart';
 import 'package:studenthive/domain/entities/entities.dart';
 
 class RequestViewGuess extends StatelessWidget {
-  final List<MyRequest> myRequests;
+  final List<YourRequest> yourRequests;
   final Future<void> Function(int) removeRequest;
 
   const RequestViewGuess({
     super.key, 
-    required this.myRequests, 
+    required this.yourRequests, 
     required this.removeRequest
     });
 
@@ -16,10 +16,10 @@ class RequestViewGuess extends StatelessWidget {
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
     return Column(
-      children: List.generate(myRequests.length, (index) {
-      final myRequest = myRequests[index];
+      children: List.generate(yourRequests.length, (index) {
+      final yourRequest = yourRequests[index];
       return GestureDetector(
-        onTap: () => context.push('/my-publication-request/${myRequest.idPublication}'),
+        onTap: () => context.push('/my-publication-request/${yourRequest.idPublication}'),
         child: Padding(
           padding: const EdgeInsets.only(top: 10),
           //! contenido del contenedor de la solicitud (Contendor principal)
@@ -49,7 +49,7 @@ class RequestViewGuess extends StatelessWidget {
                   child: ClipRRect(
                     borderRadius: BorderRadius.circular(20),
                     child: Image.network(
-                      myRequest.image ?? '',
+                      yourRequest.image ?? '',
                       width: double.infinity,
                       height: double.infinity,
                       fit: BoxFit.cover,
@@ -66,7 +66,7 @@ class RequestViewGuess extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Text(
-                        myRequest.title ?? '',
+                        yourRequest.title ?? '',
                         style: const TextStyle(
                           fontSize: 20,
                           fontWeight: FontWeight.bold,
@@ -76,7 +76,7 @@ class RequestViewGuess extends StatelessWidget {
                         height: 10,
                       ),
                       Text(
-                        '\$${myRequest.rentPrice}',
+                        '\$${yourRequest.rentPrice}',
                         style: const TextStyle(
                           fontSize: 15,
                           fontWeight: FontWeight.w500,
@@ -85,7 +85,7 @@ class RequestViewGuess extends StatelessWidget {
                       const SizedBox(
                         height: 10,
                       ),
-                      Text(myRequest.userName ?? '',
+                      Text(yourRequest.userName ?? '',
                           style: const TextStyle(
                             fontSize: 15,
                             fontWeight: FontWeight.w500,
@@ -98,7 +98,7 @@ class RequestViewGuess extends StatelessWidget {
                   child: IconButton(
                     onPressed: () {
                       try {
-                        removeRequest(myRequest.idRequest!);
+                        removeRequest(yourRequest.idRequest!);
                       } catch (e) {
                         // Manejar la excepción aquí
                       }

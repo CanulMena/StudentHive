@@ -28,11 +28,11 @@ class _ListEmptyNoRequestState extends State<ListEmptyNoRequest> {
       controller: widget.pageController,
       children: [
         RequestViewGuess(
-          myRequests: widget.myRequests,
+          yourRequests: widget.yourRequests,
           removeRequest: widget.removeRequest,
         ),
         RequestViewHost(
-          yourRequests: widget.yourRequests,
+          myRequests: widget.myRequests,
         )
       ],
     );

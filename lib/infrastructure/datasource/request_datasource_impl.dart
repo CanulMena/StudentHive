@@ -44,13 +44,13 @@ class RequestDataSourceImpl extends RequestDataSource {
   }
 
   @override
-  Future<List<MyRequest>> getRequestsByUserId( int idUser ) async {
+  Future<List<MyRequest>> getMyRequestsByUserId( int idUser ) async {
     await _addToken();
     
     try{
       final response = await dio.get('/Request/MyRequest/$idUser');
 
-      final List<RequestModel> requestStudentHiveDb = response.data.map<RequestModel>((e) => RequestModel.fromJson(e)).toList(); 
+      final List<MyRequestModel> requestStudentHiveDb = response.data.map<MyRequestModel>((e) => MyRequestModel.fromJson(e)).toList(); 
 
       final List<MyRequest> myRequests = requestStudentHiveDb.map((e) => RequestMapper.requestStudentHiveDbToEntity(e)).toList();
 

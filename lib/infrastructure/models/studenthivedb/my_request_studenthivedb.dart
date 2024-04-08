@@ -1,79 +1,52 @@
 
-class RequestModel {
+
+class MyRequestModel {
     final int idRequest;
     final String status;
-    final RequestPublicationDto requestPublicationDto;
+    final UserRequestDto userRequestDto;
 
-    RequestModel({
+    MyRequestModel({
         required this.idRequest,
         required this.status,
-        required this.requestPublicationDto,
+        required this.userRequestDto,
     });
 
-    factory RequestModel.fromJson(Map<String, dynamic> json) => RequestModel(
+    factory MyRequestModel.fromJson(Map<String, dynamic> json) => MyRequestModel(
         idRequest: json["idRequest"],
         status: json["status"],
-        requestPublicationDto: RequestPublicationDto.fromJson(json["requestPublicationDto"]),
+        userRequestDto: UserRequestDto.fromJson(json["userRequestDto"]),
     );
 
     Map<String, dynamic> toJson() => {
         "idRequest": idRequest,
         "status": status,
-        "requestPublicationDto": requestPublicationDto.toJson(),
+        "userRequestDto": userRequestDto.toJson(),
     };
 }
 
-class RequestPublicationDto {
-    final int idPublication;
-    final String title;
-    final int rentPrice;
-    final String images;
-    final RequestUserDto requestUserDto;
-
-    RequestPublicationDto({
-        required this.idPublication,
-        required this.title,
-        required this.rentPrice,
-        required this.images,
-        required this.requestUserDto,
-    });
-
-    factory RequestPublicationDto.fromJson(Map<String, dynamic> json) => RequestPublicationDto(
-        idPublication: json["idPublication"],
-        title: json["title"],
-        rentPrice: json["rentPrice"],
-        images: json["images"],
-        requestUserDto: RequestUserDto.fromJson(json["requestUserDto"]),
-    );
-
-    Map<String, dynamic> toJson() => {
-        "idPublication": idPublication,
-        "title": title,
-        "rentPrice": rentPrice,
-        "images": images,
-        "requestUserDto": requestUserDto.toJson(),
-    };
-}
-
-class RequestUserDto {
+class UserRequestDto {
     final int idUser;
+    final String? profilePhotoUrl;
     final String name;
     final String? lastName;
 
-    RequestUserDto({
+    UserRequestDto({
         required this.idUser,
+        required this.profilePhotoUrl,
         required this.name,
         required this.lastName,
     });
 
-    factory RequestUserDto.fromJson(Map<String, dynamic> json) => RequestUserDto(
+    factory UserRequestDto.fromJson(Map<String, dynamic> json) => UserRequestDto(
         idUser: json["idUser"],
+        profilePhotoUrl: json["profilePhotoUrl"],
         name: json["name"],
-        lastName: json["lastName"] ?? '',
+        lastName: json["lastName"],
     );
 
     Map<String, dynamic> toJson() => {
         "idUser": idUser,
+        "profilePhotoUrl": profilePhotoUrl,
         "name": name,
         "lastName": lastName,
     };
