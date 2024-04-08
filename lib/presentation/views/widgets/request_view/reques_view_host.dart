@@ -20,7 +20,7 @@ class RequestViewHost extends ConsumerWidget {
           future: getUserById(request.idUser),
           builder: (context, snapshot) {
             if (snapshot.connectionState == ConnectionState.waiting) {
-              return const Center(child: CircularProgressIndicator());  // Show a loading spinner while waiting
+              return const SizedBox();  // Show a loading spinner while waiting
             } else if (snapshot.hasError) {
               return Text('Error: ${snapshot.error}');  // Show error if something goes wrong
             } else {
