@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:go_router/go_router.dart';
+import 'package:studenthive/domain/entities/entities.dart';
 import 'package:studenthive/presentation/provider/providers.dart';
 
 class RequestViewHost extends ConsumerWidget {
-  const RequestViewHost({super.key});
+  final List<YourRequest> yourRequests;
+  const RequestViewHost({super.key, required this.yourRequests});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -12,8 +13,9 @@ class RequestViewHost extends ConsumerWidget {
     final textStyle = Theme.of(context).textTheme;
     final user = ref.watch(userProvider);
     return ListView.builder(
-      itemCount: 5,
+      itemCount: yourRequests.length,
       itemBuilder: (context, index) {
+        final YourRequest request = yourRequests[index];
         return Padding(
           padding: const EdgeInsets.all(8.0),
           child: Center(
@@ -42,46 +44,48 @@ class RequestViewHost extends ConsumerWidget {
                         width: 25,
                       ),
                       Flexible(
-                        child: Column(
-                          mainAxisSize: MainAxisSize.min,
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              '${user?.name} ${user?.lastName ?? ''} a mandado una solicitud para ser tu inquilino',
-                              style: textStyle.bodyMedium!.copyWith(
-                                  fontWeight: FontWeight.w600,
-                                  color: Colors.black54),
-                            ),
-                            const SizedBox(
-                              height: 10,
-                            ),
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                ElevatedButton(
-                                  onPressed: () {
-                                    //TODO Logica para aceptar solicitud
-                                  },
-                                  style: ButtonStyle(
-                                    backgroundColor: MaterialStateProperty.all(Colors.green),
+                        child: SingleChildScrollView(
+                          child: Column(
+                            mainAxisSize: MainAxisSize.min,
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                '${user?.name} ${user?.lastName ?? ''} a mandado una solicitud para ser tu inquilino',
+                                style: textStyle.bodyMedium!.copyWith(
+                                    fontWeight: FontWeight.w600,
+                                    color: Colors.black54),
+                              ),
+                              const SizedBox(
+                                height: 10,
+                              ),
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                children: [
+                                  ElevatedButton(
+                                    onPressed: () {
+                                      //TODO Logica para aceptar solicitud
+                                    },
+                                    child: Text('Aceptar'),
+                                    style: ButtonStyle(
+                                      backgroundColor: MaterialStateProperty.all(Colors.green),
+                                    ),
                                   ),
-                                  child: const    Text('Aceptar'),
-                                ),
-                                const SizedBox(
-                                  width: 10,
-                                ),
-                                ElevatedButton(
-                                  onPressed: () {
-                                    //TODO Logica para rechazar una solicitud
-                                  },
-                                  style: ButtonStyle(
-                                    backgroundColor: MaterialStateProperty.all(Colors.red),
+                                  const SizedBox(
+                                    width: 10,
                                   ),
-                                  child: const Text('Rechazar'),
-                                ),
-                              ],
-                            )
-                          ],
+                                  ElevatedButton(
+                                    onPressed: () {
+                                      //TODO Logica para rechazar una solicitud
+                                    },
+                                    child: const Text('Rechazar'),
+                                    style: ButtonStyle(
+                                      backgroundColor: MaterialStateProperty.all(Colors.red),
+                                    ),
+                                  ),
+                                ],
+                              )
+                            ],
+                          ),
                         ),
                       )
                     ],

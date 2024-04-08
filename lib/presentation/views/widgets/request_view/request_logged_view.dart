@@ -5,15 +5,20 @@ import 'package:studenthive/presentation/views/widgets/request_view/reques_list_
 
 class RequestViewLogged extends StatefulWidget {
   final List<MyRequest> myRequests;
+  final List<YourRequest> yourRequests;
   final Future<void> Function(int) removeRequest;
-  const RequestViewLogged({super.key,required this.myRequests,required this.removeRequest});
+  const RequestViewLogged({
+    super.key,
+    required this.myRequests,
+    required this.removeRequest,
+    required this.yourRequests
+    });
 
   @override
   State<RequestViewLogged> createState() => _RequestViewLoggedState();
 }
 
 class _RequestViewLoggedState extends State<RequestViewLogged> {
-
   late PageController pageController;
 
   @override
@@ -28,10 +33,9 @@ class _RequestViewLoggedState extends State<RequestViewLogged> {
     super.dispose();
   }
 
-
   @override
   Widget build(BuildContext context) {
-    return Column( 
+    return Column(
       children: [
         const Text(
           'Solicitudes',
@@ -41,19 +45,21 @@ class _RequestViewLoggedState extends State<RequestViewLogged> {
           height: 10,
         ),
         widget.myRequests.isEmpty
-          ? const SizedBox()
-          : ButtonFilterForType(
-          pageController: pageController,
-        ),
-        widget.myRequests.isEmpty 
+            ? const SizedBox()
+            : ButtonFilterForType(
+                pageController: pageController,
+              ),
+        widget.myRequests.isEmpty
             ? const ListEmpty() // ---> Este se muestra si no hay solicitudes
             : Expanded(
-              child: ListEmptyNoRequest( // ---> Este se muestra si hay solicitudes echas o no tenemos solicitudes
+                child: ListEmptyNoRequest(
+                  // ---> Este se muestra si hay solicitudes echas o no tenemos solicitudes
                   pageController: pageController,
                   myRequests: widget.myRequests,
                   removeRequest: widget.removeRequest,
+                  yourRequests: widget.yourRequests,
                 ),
-            )
+              )
       ],
     );
   }

@@ -4,6 +4,7 @@ import 'package:studenthive/domain/datasource/request_datasource.dart';
 import 'package:studenthive/domain/entities/entities.dart';
 import 'package:studenthive/infrastructure/mappers/my_request_mapper.dart';
 import 'package:studenthive/infrastructure/models/studenthivedb/models_studenthivedb.dart';
+import 'package:studenthive/infrastructure/models/studenthivedb/your_request_studenthivedb.dart';
 
 class RequestDataSourceImpl extends RequestDataSource {
   final Dio dio = Dio(BaseOptions(
@@ -47,7 +48,7 @@ class RequestDataSourceImpl extends RequestDataSource {
     await _addToken();
     
     try{
-      final response = await dio.get('/Request/user/$idUser');
+      final response = await dio.get('/Request/MyRequest/$idUser');
 
       final List<RequestModel> requestStudentHiveDb = response.data.map<RequestModel>((e) => RequestModel.fromJson(e)).toList(); 
 
@@ -78,6 +79,23 @@ class RequestDataSourceImpl extends RequestDataSource {
       // print('Error en el inicio de sesión: $error');
       // Puedes lanzar la excepción nuevamente para que la capa superior la maneje si es necesario
       throw Exception('Error en la solicitud de la publicación: $error');
+    }
+  }
+  
+  @override
+  Future<List<YourRequest>> getYourRequestsById(int idUser) async {
+    await _addToken();
+    try {
+      final response = await dio.get('/Request/YourRequest/$idUser');
+
+      final List<YourRequestModel> yourRequestStudentHiveDb = response.data.map<YourRequestModel>((e) => YourRequestModel.fromJson(e)).toList();
+
+      final List<YourRequest> yourRequests = yourRequestStudentHiveDb.map((e) => RequestMapper.yourRequestStudentHiveDbToEntity(e)).toList();
+
+      return yourRequests;
+
+    } catch (error) {
+      return [];
     }
   }
 }

@@ -5,15 +5,16 @@ import 'package:studenthive/presentation/views/widgets/request_view/request_view
 
 class ListEmptyNoRequest extends StatefulWidget {
   final List<MyRequest> myRequests;
+  final List<YourRequest> yourRequests;
   final PageController pageController;
-  //Todo: agregar las solicitudes echas a mis poblicaciones. 
   final Future<void> Function(int) removeRequest;
 
   const ListEmptyNoRequest({
     super.key,
     required this.myRequests,
     required this.removeRequest, 
-    required this.pageController
+    required this.pageController,
+    required this.yourRequests
     });
 
   @override
@@ -30,7 +31,9 @@ class _ListEmptyNoRequestState extends State<ListEmptyNoRequest> {
           myRequests: widget.myRequests,
           removeRequest: widget.removeRequest,
         ),
-        RequestViewHost()
+        RequestViewHost(
+          yourRequests: widget.yourRequests,
+        )
       ],
     );
   }

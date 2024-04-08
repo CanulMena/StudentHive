@@ -16,16 +16,21 @@ class RequestView extends ConsumerStatefulWidget {
 class _RequestViewState extends ConsumerState<RequestView> {
   @override
   void initState() {
+    final userId = ref.read(userProvider)!.idUser;
     ref
-        .read(requestProvider.notifier)
-        .getAllMyRequests(ref.read(userProvider)!.idUser);
+        .read(myRequestProvider.notifier)
+        .getAllMyRequests(userId);
+    ref
+        .read(yourRequestProvider.notifier)
+        .getAllYourRequests(userId);
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
-    final myRequests = ref.watch(requestProvider);
-    final removeRequest = ref.read(requestProvider.notifier).deleteRequest;
+    final myRequests = ref.watch(myRequestProvider);
+    final yourRequests = ref.watch(yourRequestProvider);
+    final removeRequest = ref.read(myRequestProvider.notifier).deleteRequest;
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
@@ -45,6 +50,7 @@ class _RequestViewState extends ConsumerState<RequestView> {
                 : RequestViewLogged( //* ---> Este se muestra si esta logeado
                     myRequests: myRequests,
                     removeRequest: removeRequest,
+                    yourRequests: yourRequests,
                   )),
       ),
     );

@@ -12,8 +12,6 @@ final createUserSesionProvider = Provider((ref) => ref.watch(usersRepositoryProv
 
 final loginUserProvider = Provider((ref) => ref.watch(usersRepositoryProvider).loginUser);
 
-// final userCreateProfileProvider = Provider((ref) => ref.watch(usersRepositoryProvider).putUserAccount);
-
 final userProvider = StateNotifierProvider<UserNotifier, User?>((ref){
   final userGetByEmailProvider = ref.watch(usersRepositoryProvider).getUserByEmail;
   return UserNotifier( userGetByEmailProvider );

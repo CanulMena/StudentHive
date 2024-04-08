@@ -6,4 +6,6 @@ abstract class RequestDataSource {
   Future<List<MyRequest>> getRequestsByUserId( int idUser );
 
   Future<void> deleteRequest( int idRequest );
+
+  Future<List<YourRequest>> getYourRequestsById( int idUser );
 }
