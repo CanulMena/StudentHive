@@ -1,28 +1,22 @@
-import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter/material.dart';
 
 class ImageStateUser {
-  // final bool isButtonEnabled;
   final XFile image;
-
   ImageStateUser({required this.image});
 }
 
-final imageUserProvider = StateNotifierProvider<ImageUserProvider, ImageStateUser>((ref) {
+final imageUserProvider =
+    StateNotifierProvider<ImageUserProvider, ImageStateUser>((ref) {
   return ImageUserProvider();
 });
 
 class ImageUserProvider extends StateNotifier<ImageStateUser> {
   dynamic pickImageError;
 
-  ImageUserProvider() : super(
-    ImageStateUser(
-      // isButtonEnabled: false, 
-      image: XFile('')
-      )
-    );
-  
+  ImageUserProvider() : super(ImageStateUser(image: XFile('')));
+
   final ImagePicker _picker = ImagePicker();
 
   void addImage(ImageSource source) async {
@@ -35,10 +29,8 @@ class ImageUserProvider extends StateNotifier<ImageStateUser> {
       );
       if (pickedFile != null) {
         state = ImageStateUser(
-          // isButtonEnabled: state.images.length + 1 >= 3 ? true : false, 
           image: pickedFile,
-          );
-        
+        );
       }
     } catch (e) {
       debugPrint(e.toString());
@@ -47,16 +39,10 @@ class ImageUserProvider extends StateNotifier<ImageStateUser> {
   }
 
   void removeImage() {
-    state = ImageStateUser(
-      // isButtonEnabled: newImages.length >= 3 ? true : false, 
-      image: XFile(''),
-      );
+    state = ImageStateUser(image: XFile(''));
   }
 
-  void reset(){
-    state = ImageStateUser(
-      // isButtonEnabled: false, 
-      image: XFile('')
-      );
+  void reset() {
+    state = ImageStateUser(image: XFile(''));
   }
 }

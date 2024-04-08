@@ -14,14 +14,14 @@ class ListEmptyRequest extends StatelessWidget {
             height: 20,
           ),
           Text(
-            'Add you Resquest',
+            'Manda una solictud ó espera a recibir una!!',
             style: TextStyle(fontSize: 20, fontWeight: FontWeight.w600),
           ),
           SizedBox(
             height: 10,
           ),
           Text(
-            'Send requests to the publications you like',
+            'Reserva tu lugar favorito y disfruta de tu estancia en tu espacio perfecto.',
             style: TextStyle(fontSize: 15, fontWeight: FontWeight.w400),
           )
         ],

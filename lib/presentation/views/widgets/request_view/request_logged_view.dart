@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:studenthive/domain/entities/entities.dart';
-import 'package:studenthive/presentation/views/widgets/favorites_view/list_empty.dart';
 import 'package:studenthive/presentation/views/widgets/request_view/reques_list_no_empty.dart';
+import 'package:studenthive/presentation/views/widgets/request_view/request_list_empty.dart';
 
 class RequestViewLogged extends StatefulWidget {
   final List<MyRequest> myRequests;
@@ -50,7 +50,7 @@ class _RequestViewLoggedState extends State<RequestViewLogged> {
                 pageController: pageController,
               ),
         widget.myRequests.isEmpty
-            ? const ListEmpty() // ---> Este se muestra si no hay solicitudes
+            ? const ListEmptyRequest() // ---> Este se muestra si no hay solicitudes
             : Expanded(
                 child: ListEmptyNoRequest(
                   // ---> Este se muestra si hay solicitudes echas o no tenemos solicitudes
