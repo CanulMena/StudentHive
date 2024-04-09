@@ -128,9 +128,9 @@ class OptionsContainerSelector extends StatelessWidget {
                     Text(
                       title,
                       style: const TextStyle(
-                        fontSize: 20,
-                        fontWeight: FontWeight.w600,
-                      ),
+                          fontSize: 20,
+                          fontWeight: FontWeight.w600,
+                          color: Color(0xFFF9A825)),
                     ),
                     Text(
                       desciption,
@@ -145,6 +145,7 @@ class OptionsContainerSelector extends StatelessWidget {
                 child: Icon(
                   icon,
                   size: 40,
+                  color: Colors.yellow.shade800,
                 )),
             const SizedBox(
               width: 10,

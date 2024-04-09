@@ -17,12 +17,8 @@ class _RequestViewState extends ConsumerState<RequestView> {
   @override
   void initState() {
     final userId = ref.read(userProvider)!.idUser;
-    ref
-        .read(myRequestProvider.notifier)
-        .getAllMyRequests(userId);
-    ref
-        .read(yourRequestProvider.notifier)
-        .getAllYourRequestsM(userId);
+    ref.read(myRequestProvider.notifier).getAllMyRequests(userId);
+    ref.read(yourRequestProvider.notifier).getAllYourRequestsM(userId);
     super.initState();
   }
 
@@ -31,12 +27,15 @@ class _RequestViewState extends ConsumerState<RequestView> {
     final myRequests = ref.watch(myRequestProvider);
     final yourRequests = ref.watch(yourRequestProvider);
     final removeRequest = ref.read(yourRequestProvider.notifier).deleteRequest;
-    final removeMyRequest = ref.read(myRequestProvider.notifier).deleteMyRequest;
-    final evaluateRequest = ref.read(myRequestProvider.notifier).evaluateRequestM;
+    final removeMyRequest =
+        ref.read(myRequestProvider.notifier).deleteMyRequest;
+    final evaluateRequest =
+        ref.read(myRequestProvider.notifier).evaluateRequestM;
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
-        // title: const Text(''),
+        backgroundColor: (Colors.white),
+        elevation: 0,
       ),
       body: RefreshIndicator(
         strokeWidth: 2,
@@ -49,7 +48,8 @@ class _RequestViewState extends ConsumerState<RequestView> {
                 : const EdgeInsets.symmetric(horizontal: 15),
             child: !widget.isTokenAut
                 ? const RequestViewNoLogged() // ---> Este se muestra si no esta logeado
-                : RequestViewLogged( //* ---> Este se muestra si esta logeado
+                : RequestViewLogged(
+                    //* ---> Este se muestra si esta logeado
                     myRequests: myRequests,
                     removeRequest: removeRequest,
                     yourRequests: yourRequests,

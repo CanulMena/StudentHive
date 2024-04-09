@@ -51,29 +51,21 @@ class _StepProgessState extends State<StepProgess> {
                     width: longProgress * widget.currentStep,
                     duration: const Duration(milliseconds: 300),
                     decoration: BoxDecoration(
-                        color: Colors.yellow.shade800,
-                        borderRadius: const BorderRadius.all(Radius.circular(8))),
+                        color: Colors.amber.shade800,
+                        borderRadius:
+                            const BorderRadius.all(Radius.circular(8))),
                   ),
                 ],
               ),
             ),
-    
           ],
         ),
-
         const Spacer(),
-
         Text(
           '${(widget.currentStep + 1).toInt()} / ${widget.steps.toInt()}',
-          style: const TextStyle(
-            fontSize: 12,
-            color: Colors.black54
-          ),
+          style: const TextStyle(fontSize: 12, color: Colors.black54),
         ),
-
       ],
     );
-  } 
-
-
+  }
 }

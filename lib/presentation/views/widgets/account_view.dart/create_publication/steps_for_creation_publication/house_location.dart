@@ -9,10 +9,10 @@ import '../../../../../provider/providers.dart';
 
 class HouseLocation extends ConsumerStatefulWidget {
   final PageController pageController;
-  
+
   const HouseLocation({
-    super.key,  
-    required this.pageController, 
+    super.key,
+    required this.pageController,
   });
 
   @override
@@ -20,10 +20,9 @@ class HouseLocation extends ConsumerStatefulWidget {
 }
 
 class _HouseLocationState extends ConsumerState<HouseLocation> {
-
   bool isButtonEnabled = false;
 
-  void _checkFields(){
+  void _checkFields() {
     setState(() {
       isButtonEnabled = ref.read(locationHouseProvider).postalCode.isNotEmpty &&
           ref.read(locationHouseProvider).country.isNotEmpty &&
@@ -42,7 +41,8 @@ class _HouseLocationState extends ConsumerState<HouseLocation> {
 
   @override
   Widget build(BuildContext context) {
-    final addLocationHouse = ref.read(locationHouseProvider.notifier).setPostalCode;
+    final addLocationHouse =
+        ref.read(locationHouseProvider.notifier).setPostalCode;
 
     final postalCodeHouse = ref.read(locationHouseProvider).postalCode;
     final countryHouse = ref.read(locationHouseProvider).country;
@@ -61,31 +61,30 @@ class _HouseLocationState extends ConsumerState<HouseLocation> {
                 title: '¿Cuál es la ubicación de tu espacio?',
               ),
               ContainerFormLocation(
-                postalCodeHouse : postalCodeHouse,
-                countryHouse : countryHouse,
-                cityHouse : cityHouse,
-                stateHouse : stateHouse,
-                addressHouse : addressHouse,
-                neighborhoodHouse : neighborhoodHouse,
+                postalCodeHouse: postalCodeHouse,
+                countryHouse: countryHouse,
+                cityHouse: cityHouse,
+                stateHouse: stateHouse,
+                addressHouse: addressHouse,
+                neighborhoodHouse: neighborhoodHouse,
                 addLocationHouse: (a, b, c, d, e, f, i) {
                   isButtonEnabled = i;
-                  addLocationHouse(a, b, c, d, e, f);                
+                  addLocationHouse(a, b, c, d, e, f);
                 },
-              ),              
+              ),
             ],
           ),
         ),
       ),
-      
       bottomNavigationBar: KeyboardVisibilityBuilder(
         builder: (context, isKeyboardVisible) {
-          return isKeyboardVisible 
-          ? const SizedBox() 
-          : ButtomStepscreateP(
-            pageController: widget.pageController, 
-            isButtonEnabled: isButtonEnabled, 
-            onNext: () {},
-            );
+          return isKeyboardVisible
+              ? const SizedBox()
+              : ButtomStepscreateP(
+                  pageController: widget.pageController,
+                  isButtonEnabled: isButtonEnabled,
+                  onNext: () {},
+                );
         },
       ),
     );
@@ -93,17 +92,17 @@ class _HouseLocationState extends ConsumerState<HouseLocation> {
 }
 
 class ContainerFormLocation extends StatefulWidget {
-
   final String postalCodeHouse;
   final String countryHouse;
   final String cityHouse;
   final String stateHouse;
   final String addressHouse;
   final String neighborhoodHouse;
-  final Function(String, String, String, String, String, String, bool ) addLocationHouse;
+  final Function(String, String, String, String, String, String, bool)
+      addLocationHouse;
 
-  const ContainerFormLocation({ 
-    super.key, 
+  const ContainerFormLocation({
+    super.key,
     required this.postalCodeHouse,
     required this.countryHouse,
     required this.cityHouse,
@@ -111,14 +110,13 @@ class ContainerFormLocation extends StatefulWidget {
     required this.addressHouse,
     required this.neighborhoodHouse,
     required this.addLocationHouse,
-    });
+  });
 
   @override
   State<ContainerFormLocation> createState() => _ContainerFormLocationState();
 }
 
 class _ContainerFormLocationState extends State<ContainerFormLocation> {
-
   final TextEditingController postalCodeController = TextEditingController();
   final TextEditingController countryController = TextEditingController();
   final TextEditingController cityController = TextEditingController();
@@ -167,7 +165,6 @@ class _ContainerFormLocationState extends State<ContainerFormLocation> {
     addressController.text = widget.addressHouse;
     neighborhoodController.text = widget.neighborhoodHouse;
     _addListeners();
-
   }
 
   @override

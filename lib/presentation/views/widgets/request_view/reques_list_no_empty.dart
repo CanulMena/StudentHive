@@ -14,12 +14,12 @@ class ListEmptyNoRequest extends StatefulWidget {
   const ListEmptyNoRequest({
     super.key,
     required this.myRequests,
-    required this.removeRequest, 
+    required this.removeRequest,
     required this.pageController,
     required this.yourRequests,
     required this.removeMyRequest,
     required this.evaluateRequest,
-    });
+  });
 
   @override
   State<ListEmptyNoRequest> createState() => _ListEmptyNoRequestState();
@@ -46,7 +46,8 @@ class _ListEmptyNoRequestState extends State<ListEmptyNoRequest> {
   }
 }
 
-class ButtonFilterForType extends StatefulWidget { //* Este es el boton superior para los filtros de mism solicitudes
+class ButtonFilterForType extends StatefulWidget {
+  //* Este es el boton superior para los filtros de mism solicitudes
   final PageController pageController;
   const ButtonFilterForType({super.key, required this.pageController});
 
@@ -64,7 +65,7 @@ class _ButtonFilterForTypeState extends State<ButtonFilterForType> {
       height: size.height * 0.05,
       width: size.width * 0.85,
       decoration: BoxDecoration(
-          border: Border.all(color: const Color.fromARGB(255, 156, 134, 21)),
+          border: Border.all(color: Colors.yellow.shade800),
           color: Colors.white,
           borderRadius: BorderRadius.circular(20)),
       child: Row(
@@ -105,9 +106,7 @@ class _ButtonFilterForTypeState extends State<ButtonFilterForType> {
     final size = MediaQuery.of(context).size;
     return Container(
       decoration: BoxDecoration(
-          color: selectedIndex == index
-              ? const Color.fromARGB(255, 156, 134, 21)
-              : Colors.white,
+          color: selectedIndex == index ? Colors.amber.shade700 : Colors.white,
           borderRadius: BorderRadius.circular(20)),
       alignment: Alignment.center,
       height: size.height * 0.05 * 0.8,
@@ -116,7 +115,7 @@ class _ButtonFilterForTypeState extends State<ButtonFilterForType> {
           style: TextStyle(
               color: selectedIndex == index
                   ? Colors.white
-                  : const Color.fromARGB(255, 156, 134, 21))),
+                  : Colors.amber.shade700)),
     );
   }
 }
