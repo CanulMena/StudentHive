@@ -9,7 +9,7 @@ import 'package:studenthive/presentation/views/widgets/account_view.dart/create_
 import 'package:studenthive/presentation/views/widgets/account_view.dart/my_publications/my_publication_screen.dart.dart';
 import 'package:studenthive/presentation/views/widgets/account_view.dart/my_publications/my_publications_view.dart';
 
-class MyRoute {
+class MyRoute { //! Pude haber resulto esto de mejor forma si es que envuelto en un provider de Riverpod
   final WidgetRef ref;
 
   MyRoute(this.ref);
@@ -22,9 +22,12 @@ class MyRoute {
             path: '/',
             builder: (context, state) {
               final isTokenAuth = ref.read(isTokenAuthProvider);
-              // final isLoading = ref.read(isTokenAuthProvider.notifier).isLoading;
-              // if( isLoading ) return const Scaffold( body: Center( child: CircularProgressIndicator(),),);
-              return isTokenAuth ? const HomeScreen() : const LoginScreen();
+              final authNotifier = ref.read(isTokenAuthProvider.notifier);
+              if (authNotifier.isLoading) {
+                return const Scaffold(backgroundColor: Colors.white,);
+              } else {
+                return isTokenAuth ? const HomeScreen() : const LoginScreen();
+              }
             },
             routes: [
               GoRoute(

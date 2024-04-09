@@ -22,7 +22,7 @@ class _RequestViewState extends ConsumerState<RequestView> {
         .getAllMyRequests(userId);
     ref
         .read(yourRequestProvider.notifier)
-        .getAllYourRequests(userId);
+        .getAllYourRequestsM(userId);
     super.initState();
   }
 
@@ -30,7 +30,9 @@ class _RequestViewState extends ConsumerState<RequestView> {
   Widget build(BuildContext context) {
     final myRequests = ref.watch(myRequestProvider);
     final yourRequests = ref.watch(yourRequestProvider);
-    final removeRequest = ref.read(myRequestProvider.notifier).deleteRequest;
+    final removeRequest = ref.read(yourRequestProvider.notifier).deleteRequest;
+    final removeMyRequest = ref.read(myRequestProvider.notifier).deleteMyRequest;
+    final evaluateRequest = ref.read(myRequestProvider.notifier).evaluateRequestM;
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
@@ -51,6 +53,8 @@ class _RequestViewState extends ConsumerState<RequestView> {
                     myRequests: myRequests,
                     removeRequest: removeRequest,
                     yourRequests: yourRequests,
+                    removeMyRequest: removeMyRequest,
+                    evaluateRequest: evaluateRequest,
                   )),
       ),
     );

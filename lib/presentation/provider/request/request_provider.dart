@@ -6,62 +6,101 @@ typedef RequestCallback = Future<void> Function(int idUser, int idPublication);
 typedef RequestCallbackGetAllMyRequests = Future<List<MyRequest>> Function(int);
 typedef RequestCallbackGetAllYourRequests = Future<List<YourRequest>> Function(int);
 typedef RequestCallbackDelete = Future<void> Function(int);
+typedef RequestCallbackEvaluateRequest = Future<void> Function(int, String);
 
-final yourRequestProvider = StateNotifierProvider<YourRequestNotifier, List<YourRequest>>((ref){
+final myRequestProvider = StateNotifierProvider<MyRequestNotifier, List<MyRequest>>((ref){ //! Son las solicitudes que les hicieron a mis publicaciones
   final requestRepository = ref.watch(requestRepositoryProvider);
-  final getAllYourRequests = requestRepository.getYourRequestsById;  
-  return YourRequestNotifier(
-    getAllYourPublications: getAllYourRequests,
+  final getAllMyRequest = requestRepository.getMyRequestsByUserId;  
+  final evaluateRequest = requestRepository.evaluateRequest;
+  final refreshAllYourRequest = ref.watch(yourRequestProvider.notifier).getAllYourRequestsM;
+
+  return MyRequestNotifier(
+    getAllMyRequest: getAllMyRequest,
+    deleteRequest: requestRepository.deleteRequest,
+    evaluateRequest: evaluateRequest,
+    refreshAllYourRequest: refreshAllYourRequest
     );
 });
 
-class YourRequestNotifier extends StateNotifier<List<YourRequest>> {
-  final RequestCallbackGetAllYourRequests getAllYourPublications;
+class MyRequestNotifier extends StateNotifier<List<MyRequest>> {
+  final RequestCallbackGetAllMyRequests getAllMyRequest;
+  final RequestCallbackDelete deleteRequest;
+  final RequestCallbackEvaluateRequest evaluateRequest;
+  final Future<void> Function(int) refreshAllYourRequest;
 
-  YourRequestNotifier({ 
-    required this.getAllYourPublications,
+  MyRequestNotifier({ 
+    required this.getAllMyRequest,
+    required this.deleteRequest, 
+    required this.evaluateRequest,
+    required this.refreshAllYourRequest
     }) 
     : super([]);
 
-  Future<void> getAllYourRequests( int idUser ) async {
-    final requests = await getAllYourPublications( idUser );
+  Future<void> refreshAllYourRequestM( int idUser ) async {
+    await refreshAllYourRequest( idUser );
+  }
+
+  Future<void> evaluateRequestM( int idRequest, String statusRequest, int idUser ) async {
+    try {
+      await evaluateRequest(idRequest, statusRequest);
+      await refreshAllYourRequestM(idUser);
+      final newState = await getAllMyRequest(idUser); //* Estoy llamando a mi lista de solicitudes
+      state =  newState;
+    } catch (e) {
+      throw Exception('Error al evaluar la solicitud');
+    }
+  }
+
+  Future<void> getAllMyRequests( int idUser ) async {
+    final requests = await getAllMyRequest( idUser );
     state = requests;
+  }
+
+  Future<void> deleteMyRequest(int idRequest) async {
+    try{
+      await deleteRequest(idRequest);
+      var newState = List<MyRequest>.from(state);
+      newState.removeWhere((element) => element.idRequest == idRequest);
+      state = newState;
+    } catch (e) {
+      throw Exception('Error al eliminar la solicitud');
+    }
   }
 }
 //!---------------------------------------------------------------------------------------------------------------------
 
-final myRequestProvider = StateNotifierProvider<RequestNotifier, List<MyRequest>>((ref){
+final yourRequestProvider = StateNotifierProvider<YourRequestNotifier, List<YourRequest>>((ref){ //! Son las solicitudes que hice a otras publicaciones
   final requestRepository = ref.watch(requestRepositoryProvider);
   final removeRequest = requestRepository.deleteRequest;
-  final getAllMyRequests = requestRepository.getMyRequestsByUserId;  
+  final getAllYourRequests = requestRepository.getYourRequestsById;  
   final postRequest = requestRepository.postRequest;
-  return RequestNotifier(
-    getAllMyPublications: getAllMyRequests,
+  return YourRequestNotifier(
+    getAllYourRequests: getAllYourRequests,
     postRequest: postRequest,
     removeRequest: removeRequest
     );
 });
 
-class RequestNotifier extends StateNotifier<List<MyRequest>> {
+class YourRequestNotifier extends StateNotifier<List<YourRequest>> {
   final RequestCallback postRequest;
-  final RequestCallbackGetAllMyRequests getAllMyPublications;
+  final RequestCallbackGetAllYourRequests getAllYourRequests;
   final RequestCallbackDelete removeRequest;
 
-  RequestNotifier({ 
-    required this.getAllMyPublications,
+  YourRequestNotifier({ 
+    required this.getAllYourRequests,
     required this.postRequest, 
     required this.removeRequest,
     }) 
     : super([]);
 
-  Future<void> getAllMyRequests( int idUser ) async {
-    final requests = await getAllMyPublications( idUser );
-    state = requests;
+  Future<void> getAllYourRequestsM( int idUser ) async {
+    final requests = await getAllYourRequests( idUser );
+    state = requests; 
   }
 
   Future<bool> myPostRequest(int idUser, int idPublication) async {
     try {
-      await getAllMyRequests(idUser);
+      await getAllYourRequests(idUser);
       final hasExistingRequest = state.any((element) => element.idPublication == idPublication);
       if (!hasExistingRequest) {
         await postRequest(idUser, idPublication);
@@ -76,7 +115,7 @@ class RequestNotifier extends StateNotifier<List<MyRequest>> {
   Future<void> deleteRequest(int idRequest) async {
     try{
       await removeRequest(idRequest);
-      var newState = List<MyRequest>.from(state);
+      var newState = List<YourRequest>.from(state);
       newState.removeWhere((element) => element.idRequest == idRequest);
       state = newState;
       

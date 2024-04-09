@@ -16,9 +16,9 @@ class AuthNotifier extends StateNotifier<bool> {
   }
 
   Future<void> isTokenAuth() async {
+    isLoading = true;
     SharedPreferences prefs = await SharedPreferences.getInstance();
 
-    isLoading = true;
     String? token = prefs.getString('Jwt');
     int? tokenTimestamp = prefs.getInt('token_timestamp'); 
 
@@ -28,15 +28,16 @@ class AuthNotifier extends StateNotifier<bool> {
       DateTime tokenExpiration = DateTime.fromMillisecondsSinceEpoch(tokenTimestamp);
       if (now.isBefore(tokenExpiration.add(const Duration(days: 365)))) {
         state = true;
-        isLoading = false;
-        return;
       } else {
         //* Token expirado, eliminar el token
         await prefs.remove('Jwt');
         await prefs.remove('token_timestamp');
+        state = false;
       }
+    } else {
+      state = false; //*No se encontró algún token o el token_timestamp es invalido
     }
-    state = false; //*No se encontró algún token o el token_timestamp es invalido
+    isLoading = false;
   }
 
   Future<void> desavowToken() async { // here we remove the token from the shared preferences. loggout 

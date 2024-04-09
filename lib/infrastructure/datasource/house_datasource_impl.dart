@@ -172,7 +172,6 @@ class HouseDataSourceImpl extends HouseDataSource{
     final List<HousePreview> houses = studenthiveDbResponse.results.map((e) => HousePreviewMapper.housePreviewStudentHiveDbToEntity(e)).toList();
 
     return houses.where((house) => house.emailUser == emailPayload && house.status == true ).toList();
-    
   }
 
   @override
@@ -191,7 +190,6 @@ class HouseDataSourceImpl extends HouseDataSource{
     final List<HousePreview> housesInactive = houses.where((house) => house.emailUser == emailPayload && house.status == false ).toList();
 
     return housesInactive;
-
   }
   
   @override

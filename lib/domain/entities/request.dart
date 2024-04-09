@@ -5,7 +5,7 @@
 ///* Nombre del usuario que publico 
 ///* Fecha de la cual hice la solicitud
 
-class MyRequest {
+class YourRequest {
   final int? idRequest;
   final int idPublication; // --> Necesario para hacer un getbyid de la publicacion
   final String? title;  
@@ -15,7 +15,7 @@ class MyRequest {
   final String? status;
   final String? image;
 
-  MyRequest({
+  YourRequest({
     required this.idRequest,
     required this.idPublication,
     required this.userLastName,
@@ -28,25 +28,19 @@ class MyRequest {
 
 }
 
-class YourRequest{
+class MyRequest{
   final int idRequest;
   final String status;
-  final int idPublication;
-  final String title;
-  final int rentPrice;
-  final String image;
   final int idUser;
+  final String imageUser;
   final String userName;
   final String? userLastName;
 
-  YourRequest({
+  MyRequest({
     required this.idRequest,
     required this.status,
-    required this.idPublication,
-    required this.title,
-    required this.rentPrice,
-    required this.image,
     required this.idUser,
+    required this.imageUser,
     required this.userName,
     required this.userLastName,
   });

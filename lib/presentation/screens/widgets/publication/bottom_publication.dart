@@ -10,7 +10,7 @@ class BottomPublication extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final userId = ref.read(userProvider)!.idUser;
-    final myPostRequest = ref.watch(myRequestProvider.notifier).myPostRequest;
+    final myPostRequest = ref.watch(yourRequestProvider.notifier).myPostRequest;
 
     final scaffoldMessenger = ScaffoldMessenger.of(context);
     final navigation = Navigator.of(context);

@@ -3,16 +3,14 @@ import 'package:studenthive/infrastructure/models/studenthivedb/my_request_stude
 import 'package:studenthive/infrastructure/models/studenthivedb/your_request_studenthivedb.dart';
 
 class RequestMapper {
-  static MyRequest requestStudentHiveDbToEntity(RequestModel myRequest) {
+  static MyRequest requestStudentHiveDbToEntity(MyRequestModel myRequest) {
     return MyRequest(
       idRequest: myRequest.idRequest,
-      idPublication: myRequest.requestPublicationDto.idPublication,
-      userLastName: myRequest.requestPublicationDto.requestUserDto.lastName,
+      idUser: myRequest.userRequestDto.idUser,
+      imageUser: myRequest.userRequestDto.profilePhotoUrl ?? '',
+      userLastName: myRequest.userRequestDto.lastName ?? '',
       status: myRequest.status,
-      title: myRequest.requestPublicationDto.title,
-      rentPrice: myRequest.requestPublicationDto.rentPrice,
-      userName: myRequest.requestPublicationDto.requestUserDto.name,
-      image: myRequest.requestPublicationDto.images,
+      userName: myRequest.userRequestDto.name,
     );
   }
 
@@ -24,7 +22,6 @@ class RequestMapper {
         title: yourRequest.requestPublication.title,
         rentPrice: yourRequest.requestPublication.rentPrice,
         image: yourRequest.requestPublication.images,
-        idUser: yourRequest.requestPublication.requestUser.idUser,
         userName: yourRequest.requestPublication.requestUser.name,
         userLastName: yourRequest.requestPublication.requestUser.lastName ?? ''
         );

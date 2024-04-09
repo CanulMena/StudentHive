@@ -14,7 +14,7 @@ class RequestRepositoryImpl extends RequestRepository {
   
   @override
   Future<List<MyRequest>> getMyRequestsByUserId(int idUser) {
-    return requestDataSource.getRequestsByUserId(idUser);
+    return requestDataSource.getMyRequestsByUserId(idUser);
   }
   
   @override
@@ -25,6 +25,11 @@ class RequestRepositoryImpl extends RequestRepository {
   @override
   Future<List<YourRequest>> getYourRequestsById(int idUser) {
     return requestDataSource.getYourRequestsById(idUser);
+  }
+  
+  @override
+  Future<void> evaluateRequest(int idRequest, String status) {
+    return requestDataSource.evaluateRequest(idRequest, status);
   }
 
 }
