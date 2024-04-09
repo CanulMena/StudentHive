@@ -92,7 +92,7 @@ class RequestDataSourceImpl extends RequestDataSource {
 
       final List<YourRequest> yourRequests = yourRequestStudentHiveDb.map((e) => RequestMapper.yourRequestStudentHiveDbToEntity(e)).toList();
 
-      return yourRequests;
+      return yourRequests.where((element) => element.status == 'Pendiente').toList();
 
     } catch (error) {
       return [];

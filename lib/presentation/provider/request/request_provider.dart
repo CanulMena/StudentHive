@@ -12,10 +12,13 @@ final myRequestProvider = StateNotifierProvider<MyRequestNotifier, List<MyReques
   final requestRepository = ref.watch(requestRepositoryProvider);
   final getAllMyRequest = requestRepository.getMyRequestsByUserId;  
   final evaluateRequest = requestRepository.evaluateRequest;
+  final refreshAllYourRequest = ref.watch(yourRequestProvider.notifier).getAllYourRequestsM;
+
   return MyRequestNotifier(
     getAllMyRequest: getAllMyRequest,
     deleteRequest: requestRepository.deleteRequest,
-    evaluateRequest: evaluateRequest  
+    evaluateRequest: evaluateRequest,
+    refreshAllYourRequest: refreshAllYourRequest
     );
 });
 
@@ -23,17 +26,24 @@ class MyRequestNotifier extends StateNotifier<List<MyRequest>> {
   final RequestCallbackGetAllMyRequests getAllMyRequest;
   final RequestCallbackDelete deleteRequest;
   final RequestCallbackEvaluateRequest evaluateRequest;
+  final Future<void> Function(int) refreshAllYourRequest;
 
   MyRequestNotifier({ 
     required this.getAllMyRequest,
     required this.deleteRequest, 
-    required this.evaluateRequest
+    required this.evaluateRequest,
+    required this.refreshAllYourRequest
     }) 
     : super([]);
+
+  Future<void> refreshAllYourRequestM( int idUser ) async {
+    await refreshAllYourRequest( idUser );
+  }
 
   Future<void> evaluateRequestM( int idRequest, String statusRequest, int idUser ) async {
     try {
       await evaluateRequest(idRequest, statusRequest);
+      await refreshAllYourRequestM(idUser);
       final newState = await getAllMyRequest(idUser); //* Estoy llamando a mi lista de solicitudes
       state =  newState;
     } catch (e) {
