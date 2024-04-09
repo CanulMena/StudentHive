@@ -22,9 +22,12 @@ class MyRoute { //! Pude haber resulto esto de mejor forma si es que envuelto en
             path: '/',
             builder: (context, state) {
               final isTokenAuth = ref.read(isTokenAuthProvider);
-              // final isLoading = ref.read(isTokenAuthProvider.notifier).isLoading;
-              // if( isLoading ) return const Scaffold( body: Center( child: CircularProgressIndicator(),),);
-              return isTokenAuth ? const HomeScreen() : const LoginScreen();
+              final authNotifier = ref.read(isTokenAuthProvider.notifier);
+              if (authNotifier.isLoading) {
+                return const Scaffold(backgroundColor: Colors.white,);
+              } else {
+                return isTokenAuth ? const HomeScreen() : const LoginScreen();
+              }
             },
             routes: [
               GoRoute(
