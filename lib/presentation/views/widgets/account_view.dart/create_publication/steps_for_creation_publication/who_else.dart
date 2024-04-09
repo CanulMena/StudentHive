@@ -42,7 +42,7 @@ class _WhoElseState extends ConsumerState<WhoElse> {
           
           _buildOptionRow([ // se paramos en dos filas
               ContainerOptionWhoElse(
-                text: 'IAm',
+                text: 'Yo',
                 icon: Icons.person_outline, 
                 isSelected: whoElse == 'IAm' ? true : false, 
                 onTap: () { 
@@ -52,7 +52,7 @@ class _WhoElseState extends ConsumerState<WhoElse> {
               ),
     
               ContainerOptionWhoElse(
-                text: 'Family',
+                text: 'Familia',
                 icon: Icons.groups_outlined,
                 isSelected: whoElse == 'Family' ? true : false, 
                 onTap: () { 
@@ -69,7 +69,7 @@ class _WhoElseState extends ConsumerState<WhoElse> {
     
             _buildOptionRow([ // se paramos en dos filas
               ContainerOptionWhoElse(
-                text: 'Other People',
+                text: 'Otras Personas',
                 icon: Icons.group_outlined,
                 isSelected: whoElse == 'Other People' ? true : false, 
                 onTap: () { 
@@ -78,7 +78,7 @@ class _WhoElseState extends ConsumerState<WhoElse> {
                 }, 
               ),
               ContainerOptionWhoElse(
-                text: 'Companions',
+                text: 'Compañeros',
                 icon: Icons.group_add_outlined,
                 isSelected: whoElse == 'Companions' ? true : false, 
                 onTap: () { 
