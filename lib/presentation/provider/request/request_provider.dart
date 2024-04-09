@@ -95,7 +95,7 @@ class YourRequestNotifier extends StateNotifier<List<YourRequest>> {
 
   Future<void> getAllYourRequestsM( int idUser ) async {
     final requests = await getAllYourRequests( idUser );
-    state = requests;
+    state = requests; 
   }
 
   Future<bool> myPostRequest(int idUser, int idPublication) async {
