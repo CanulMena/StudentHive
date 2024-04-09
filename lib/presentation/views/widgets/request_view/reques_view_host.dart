@@ -18,6 +18,7 @@ class RequestViewHost extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final size = MediaQuery.of(context).size;
     final textStyle = Theme.of(context).textTheme;
+    final myIdUser = ref.watch(userProvider)!.idUser; 
     final getUserById = ref.watch(getUserByIdProvider);
     final scaffoldMessenger = ScaffoldMessenger.of(context);
     return ListView.builder(
@@ -81,7 +82,8 @@ class RequestViewHost extends ConsumerWidget {
                                         ElevatedButton(
                                           onPressed: () async {
                                             try{
-                                              await evaluateRequest(request.idRequest, 'Aceptada', request.idUser);
+                                              await evaluateRequest(request.idRequest, 'Aceptada', myIdUser);
+                                              //TODO: Logica para enviar una notificación al usuario que envio la solicitud
                                               scaffoldMessenger.showSnackBar(
                                                 const SnackBar(
                                                   content: Text('Solicitud aceptada con éxito'),

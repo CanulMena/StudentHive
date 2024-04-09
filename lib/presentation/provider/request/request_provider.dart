@@ -31,10 +31,11 @@ class MyRequestNotifier extends StateNotifier<List<MyRequest>> {
     }) 
     : super([]);
 
-  Future<void> evaluateRequestM( int idRequest, String status, int idUser ) async {
+  Future<void> evaluateRequestM( int idRequest, String statusRequest, int idUser ) async {
     try {
-      await evaluateRequest(idRequest, status);
-      await getAllMyRequest(idUser);
+      await evaluateRequest(idRequest, statusRequest);
+      final newState = await getAllMyRequest(idUser); //* Estoy llamando a mi lista de solicitudes
+      state =  newState;
     } catch (e) {
       throw Exception('Error al evaluar la solicitud');
     }

@@ -9,7 +9,7 @@ import 'package:studenthive/presentation/views/widgets/account_view.dart/create_
 import 'package:studenthive/presentation/views/widgets/account_view.dart/my_publications/my_publication_screen.dart.dart';
 import 'package:studenthive/presentation/views/widgets/account_view.dart/my_publications/my_publications_view.dart';
 
-class MyRoute {
+class MyRoute { //! Pude haber resulto esto de mejor forma si es que envuelto en un provider de Riverpod
   final WidgetRef ref;
 
   MyRoute(this.ref);
