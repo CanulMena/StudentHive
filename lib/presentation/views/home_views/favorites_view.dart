@@ -37,32 +37,22 @@ class _FavoriteViewState extends ConsumerState<FavoriteView> {
         backgroundColor: Colors.white,
         elevation: 0,
       ),
-      body: Center(
-        child: Column(
-          children: [
-            Text('Test of animations'),
-            Lottie.asset(
-              'assets/animations/home_move.json',
-            )
-          ],
-        ),
+      body: RefreshIndicator(
+        strokeWidth: 2,
+        onRefresh: () {
+          return Future(() {});
+        },
+        child: Padding(
+            padding: widget.isTokenAut
+                ? const EdgeInsets.symmetric(horizontal: 20)
+                : const EdgeInsets.symmetric(horizontal: 25),
+            child: !widget.isTokenAut
+                ? const FavoriteViewNoLogged()
+                : FavoriteViewLogged(
+                    favorites: favorites,
+                    size: size,
+                  )),
       ),
-      // body: RefreshIndicator(
-      //   strokeWidth: 2,
-      //   onRefresh: () {
-      //     return Future(() {});
-      //   },
-      //   child: Padding(
-      //       padding: widget.isTokenAut
-      //           ? const EdgeInsets.symmetric(horizontal: 20)
-      //           : const EdgeInsets.symmetric(horizontal: 25),
-      //       child: !widget.isTokenAut
-      //           ? const FavoriteViewNoLogged()
-      //           : FavoriteViewLogged(
-      //               favorites: favorites,
-      //               size: size,
-      //             )),
-      // ),
     );
   }
 }

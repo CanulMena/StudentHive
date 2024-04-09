@@ -30,10 +30,14 @@ dev_dependencies:
 flutter_launcher_icons:
   android: "launcher_icon"
   ios: true
-  image_path: "assets/icons/icon.png"
+  image_path: "assets/icon/icon.png"
 
 flutter:
   uses-material-design: true
   assets:
-    - assets/animations/animation_construction_home.json
-    - assets/animations/home_move.json
+    - assets/animations/animartion_prueba.json
+    - assets/animations/loading.json
+    - assets/animations/aprober.json
+    - assets/animations/location.json
+    - assets/animations/casa-prueba.json
+    - assets/animations/casa.json

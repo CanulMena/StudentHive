@@ -32,7 +32,7 @@ class InputDecorations2 {
           borderSide: BorderSide(color: Color.fromARGB(255, 156, 134, 21))),
       focusedBorder: const UnderlineInputBorder(
           borderSide:
-              BorderSide(color: Color.fromARGB(255, 156, 134, 21), width: 3)),
+              BorderSide(color: Color.fromARGB(255, 241, 238, 21), width: 3)),
       floatingLabelStyle: MaterialStateTextStyle.resolveWith((states) =>
           const TextStyle(color: Color.fromARGB(255, 156, 134, 21))),
       hintText: hintText,
