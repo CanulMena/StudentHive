@@ -8,13 +8,17 @@ class ListEmptyNoRequest extends StatefulWidget {
   final List<YourRequest> yourRequests;
   final PageController pageController;
   final Future<void> Function(int) removeRequest;
+  final Future<void> Function(int) removeMyRequest;
+  final Future<void> Function(int, String, int) evaluateRequest;
 
   const ListEmptyNoRequest({
     super.key,
     required this.myRequests,
     required this.removeRequest, 
     required this.pageController,
-    required this.yourRequests
+    required this.yourRequests,
+    required this.removeMyRequest,
+    required this.evaluateRequest,
     });
 
   @override
@@ -26,6 +30,7 @@ class _ListEmptyNoRequestState extends State<ListEmptyNoRequest> {
   Widget build(BuildContext context) {
     return PageView(
       controller: widget.pageController,
+      physics: const NeverScrollableScrollPhysics(),
       children: [
         RequestViewGuess(
           yourRequests: widget.yourRequests,
@@ -33,6 +38,8 @@ class _ListEmptyNoRequestState extends State<ListEmptyNoRequest> {
         ),
         RequestViewHost(
           myRequests: widget.myRequests,
+          removeMyRequest: widget.removeMyRequest,
+          evaluateRequest: widget.evaluateRequest,
         )
       ],
     );

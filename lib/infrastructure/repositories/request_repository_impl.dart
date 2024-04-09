@@ -26,5 +26,10 @@ class RequestRepositoryImpl extends RequestRepository {
   Future<List<YourRequest>> getYourRequestsById(int idUser) {
     return requestDataSource.getYourRequestsById(idUser);
   }
+  
+  @override
+  Future<void> evaluateRequest(int idRequest, String status) {
+    return requestDataSource.evaluateRequest(idRequest, status);
+  }
 
 }

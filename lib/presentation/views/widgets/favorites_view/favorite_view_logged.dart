@@ -30,7 +30,9 @@ class FavoriteViewLogged extends StatelessWidget {
             const SizedBox(
               height: 20,
             ),
-            favorites.isEmpty ? const ListEmpty() : ListNoEmpty(size: size, favorites: favorites,)
+            favorites.isEmpty 
+            ? const ListEmpty() 
+            : ListNoEmpty(size: size, favorites: favorites,)
           ],
         ),
       ],

@@ -7,11 +7,15 @@ class RequestViewLogged extends StatefulWidget {
   final List<MyRequest> myRequests;
   final List<YourRequest> yourRequests;
   final Future<void> Function(int) removeRequest;
+  final Future<void> Function(int) removeMyRequest;
+  final Future<void> Function(int, String, int) evaluateRequest;
   const RequestViewLogged({
     super.key,
     required this.myRequests,
     required this.removeRequest,
-    required this.yourRequests
+    required this.yourRequests,
+    required this.removeMyRequest,
+    required this.evaluateRequest,
     });
 
   @override
@@ -44,12 +48,12 @@ class _RequestViewLoggedState extends State<RequestViewLogged> {
         const SizedBox(
           height: 10,
         ),
-        widget.myRequests.isEmpty
+        widget.myRequests.isEmpty && widget.yourRequests.isEmpty
             ? const SizedBox()
             : ButtonFilterForType(
                 pageController: pageController,
               ),
-        widget.myRequests.isEmpty
+        widget.myRequests.isEmpty && widget.yourRequests.isEmpty
             ? const ListEmpty() // ---> Este se muestra si no hay solicitudes
             : Expanded(
                 child: ListEmptyNoRequest(
@@ -58,6 +62,8 @@ class _RequestViewLoggedState extends State<RequestViewLogged> {
                   myRequests: widget.myRequests,
                   removeRequest: widget.removeRequest,
                   yourRequests: widget.yourRequests,
+                  removeMyRequest: widget.removeMyRequest,
+                  evaluateRequest: widget.evaluateRequest,
                 ),
               )
       ],

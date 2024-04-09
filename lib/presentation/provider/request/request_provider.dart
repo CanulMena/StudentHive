@@ -6,26 +6,54 @@ typedef RequestCallback = Future<void> Function(int idUser, int idPublication);
 typedef RequestCallbackGetAllMyRequests = Future<List<MyRequest>> Function(int);
 typedef RequestCallbackGetAllYourRequests = Future<List<YourRequest>> Function(int);
 typedef RequestCallbackDelete = Future<void> Function(int);
+typedef RequestCallbackEvaluateRequest = Future<void> Function(int, String);
 
 final myRequestProvider = StateNotifierProvider<MyRequestNotifier, List<MyRequest>>((ref){ //! Son las solicitudes que les hicieron a mis publicaciones
   final requestRepository = ref.watch(requestRepositoryProvider);
   final getAllMyRequest = requestRepository.getMyRequestsByUserId;  
+  final evaluateRequest = requestRepository.evaluateRequest;
   return MyRequestNotifier(
     getAllMyRequest: getAllMyRequest,
+    deleteRequest: requestRepository.deleteRequest,
+    evaluateRequest: evaluateRequest  
     );
 });
 
 class MyRequestNotifier extends StateNotifier<List<MyRequest>> {
   final RequestCallbackGetAllMyRequests getAllMyRequest;
+  final RequestCallbackDelete deleteRequest;
+  final RequestCallbackEvaluateRequest evaluateRequest;
 
   MyRequestNotifier({ 
     required this.getAllMyRequest,
+    required this.deleteRequest, 
+    required this.evaluateRequest
     }) 
     : super([]);
+
+  Future<void> evaluateRequestM( int idRequest, String status, int idUser ) async {
+    try {
+      await evaluateRequest(idRequest, status);
+      await getAllMyRequest(idUser);
+    } catch (e) {
+      throw Exception('Error al evaluar la solicitud');
+    }
+  }
 
   Future<void> getAllMyRequests( int idUser ) async {
     final requests = await getAllMyRequest( idUser );
     state = requests;
+  }
+
+  Future<void> deleteMyRequest(int idRequest) async {
+    try{
+      await deleteRequest(idRequest);
+      var newState = List<MyRequest>.from(state);
+      newState.removeWhere((element) => element.idRequest == idRequest);
+      state = newState;
+    } catch (e) {
+      throw Exception('Error al eliminar la solicitud');
+    }
   }
 }
 //!---------------------------------------------------------------------------------------------------------------------

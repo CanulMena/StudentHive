@@ -8,4 +8,6 @@ abstract class RequestDataSource {
   Future<void> deleteRequest( int idRequest );
 
   Future<List<YourRequest>> getYourRequestsById( int idUser );
+
+  Future<void> evaluateRequest( int idRequest, String status);
 }

@@ -5,13 +5,21 @@ import 'package:studenthive/presentation/provider/providers.dart';
 
 class RequestViewHost extends ConsumerWidget {
   final List<MyRequest> myRequests;
-  const RequestViewHost({Key? key, required this.myRequests}) : super(key: key);
+  final Future<void> Function(int) removeMyRequest;
+  final Future<void> Function(int, String, int) evaluateRequest;
+  const RequestViewHost({
+    super.key, 
+    required this.myRequests,
+    required this.removeMyRequest,
+    required this.evaluateRequest
+    });
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final size = MediaQuery.of(context).size;
     final textStyle = Theme.of(context).textTheme;
     final getUserById = ref.watch(getUserByIdProvider);
+    final scaffoldMessenger = ScaffoldMessenger.of(context);
     return ListView.builder(
       itemCount: myRequests.length,
       itemBuilder: (context, index) {
@@ -71,8 +79,18 @@ class RequestViewHost extends ConsumerWidget {
                                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                       children: [
                                         ElevatedButton(
-                                          onPressed: () {
-                                            //TODO Logica para aceptar solicitud
+                                          onPressed: () async {
+                                            try{
+                                              await evaluateRequest(request.idRequest, 'Aceptada', request.idUser);
+                                              scaffoldMessenger.showSnackBar(
+                                                const SnackBar(
+                                                  content: Text('Solicitud aceptada con éxito'),
+                                                  duration: Duration(seconds: 2),
+                                                ),
+                                              );
+                                            } catch (e) {
+                                              //Manejar el error aquí
+                                            }
                                           },
                                           style: ButtonStyle(
                                             backgroundColor: MaterialStateProperty.all(Colors.green),
@@ -83,8 +101,13 @@ class RequestViewHost extends ConsumerWidget {
                                           width: 10,
                                         ),
                                         ElevatedButton(
-                                          onPressed: () {
-                                            //TODO Logica para rechazar una solicitud
+                                          onPressed: () async {
+                                            try{
+                                              await removeMyRequest(request.idRequest);
+                                            } catch (e) {
+                                              //Manejar el error aquí
+                                            }
+
                                           },
                                           style: ButtonStyle(
                                             backgroundColor: MaterialStateProperty.all(Colors.red),

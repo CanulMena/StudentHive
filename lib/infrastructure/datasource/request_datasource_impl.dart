@@ -44,7 +44,7 @@ class RequestDataSourceImpl extends RequestDataSource {
   }
 
   @override
-  Future<List<MyRequest>> getMyRequestsByUserId( int idUser ) async {
+  Future<List<MyRequest>> getMyRequestsByUserId( int idUser ) async { //* Obtenemos las solicitudes que me hicieron
     await _addToken();
     
     try{
@@ -54,7 +54,7 @@ class RequestDataSourceImpl extends RequestDataSource {
 
       final List<MyRequest> myRequests = requestStudentHiveDb.map((e) => RequestMapper.requestStudentHiveDbToEntity(e)).toList();
 
-      return myRequests;
+      return myRequests.where((element) => element.status == 'Pendiente').toList();
 
     } catch (error) {
 
@@ -96,6 +96,26 @@ class RequestDataSourceImpl extends RequestDataSource {
 
     } catch (error) {
       return [];
+    }
+  }
+  
+  @override
+  Future<void> evaluateRequest(int idRequest, String status) async {
+    try {
+      final response = await dio.patch(
+        'https://studenthive.somee.com/api/v1/Request?id=$idRequest',
+        data: {
+          'status': status,
+        },
+      );
+
+      if (response.statusCode == 200) {
+        // Handle success
+      } else {
+        // Handle error
+      }
+    } catch (e) {
+      // Handle exception
     }
   }
 }
