@@ -31,11 +31,11 @@ dev_dependencies:
 flutter_launcher_icons:
   android: "launcher_icon"
   ios: true
-  image_path: "assets/icon/icon.png"
+  image_path: "assets/icons/icon.png"
 
 flutter_native_splash:
-  image: assets/splash/splash.png 
-  color: "FFD700" 
+  image: assets/icons/icon.png 
+  color: "FFFFFF" 
 
 flutter:
   uses-material-design: true
