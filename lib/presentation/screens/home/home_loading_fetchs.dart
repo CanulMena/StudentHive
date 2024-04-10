@@ -37,13 +37,21 @@ class FullScreenLoading extends StatelessWidget {
               key: const Key('loading_animation'),
             ),
             const SizedBox(
-              height: 10,
+              height: 15,
             ),
             StreamBuilder(
               stream: stream(),
               builder: (context, snapshot) {
-                if (!snapshot.hasData) return const Text('cargando...');
-                return Text(snapshot.data!, style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold));
+                if (!snapshot.hasData) return const Text('En busca de tu proximo cuarto...', style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600, color: Colors.black45),);
+                return Text(
+                  snapshot.data!,
+                  style: const TextStyle(
+                    fontSize: 16,  // Ajusta el tamaño del texto
+                    fontWeight: FontWeight.w600,  // Hace que el texto sea negrita
+                    color: Colors.black45,  // Cambia el color del texto
+                    // letterSpacing: 1.2,  // Ajusta el espaciado entre las letras
+                  ),
+                );
               },
             )
           ],
