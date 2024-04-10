@@ -64,7 +64,7 @@ class _LogginFormContainerState extends ConsumerState<LogginFormContainer> {
               hintText: "ejemplo@gmail.com",
               prefixIcon: const Icon(
                 Icons.person,
-                color: Color.fromARGB(241, 159, 133, 0),
+                color: Color.fromARGB(255, 228, 145, 21),
               ),
               controller: emailController,
             ),
@@ -74,7 +74,7 @@ class _LogginFormContainerState extends ConsumerState<LogginFormContainer> {
               hintText: "********",
               prefixIcon: const Icon(
                 Icons.lock,
-                color: Color.fromARGB(241, 159, 133, 0),
+                color: Color.fromARGB(255, 228, 145, 21),
               ),
               isPassword: true,
               controller: passwordController,
@@ -126,7 +126,8 @@ class _LogginFormContainerState extends ConsumerState<LogginFormContainer> {
                     const SnackBar(
                         content: Text('Erorr en el inicio de sesión')),
                   );
-                  throw Exception('Erro al iniciar sesion intentalo mas tarde.');
+                  throw Exception(
+                      'Erro al iniciar sesion intentalo mas tarde.');
                 }
               },
             ),
@@ -175,7 +176,7 @@ class _LogginFormContainerState extends ConsumerState<LogginFormContainer> {
         borderRadius: BorderRadius.circular(15),
       ),
       disabledColor: Colors.indigo,
-      color: const Color.fromARGB(255, 156, 134, 21),
+      color: Color.fromARGB(246, 213, 138, 1),
       onPressed: onPressed,
       child: Container(
         padding: const EdgeInsets.symmetric(horizontal: 60, vertical: 20),
@@ -202,7 +203,7 @@ class _LogginFormContainerState extends ConsumerState<LogginFormContainer> {
           child: const Text(
             "Registrate",
             style: TextStyle(
-              color: Color.fromARGB(255, 199, 184, 9),
+              color: Color.fromARGB(255, 228, 145, 21),
             ),
           ),
         ),

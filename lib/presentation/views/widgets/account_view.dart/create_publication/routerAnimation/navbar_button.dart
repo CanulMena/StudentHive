@@ -10,7 +10,6 @@ class BottomButtons extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
@@ -24,15 +23,13 @@ class BottomButtons extends StatelessWidget {
               backgroundColor: Colors.white,
               elevation: 0,
               shadowColor: Colors.transparent,
-              shape:
-                  const CircleBorder(side: BorderSide(color: Colors.amber))),
-          
-          child: const SizedBox(
+              shape: const CircleBorder(side: BorderSide(color: Colors.amber))),
+          child: SizedBox(
             height: 50,
             width: 50,
             child: Icon(
               Icons.arrow_back,
-              color: Colors.amber,
+              color: Colors.amber.shade900,
             ),
           ),
         ),
@@ -43,12 +40,10 @@ class BottomButtons extends StatelessWidget {
                 curve: Curves.ease);
           },
           style: ElevatedButton.styleFrom(
-              backgroundColor: Colors.amber,
+              backgroundColor: Colors.amber.shade800,
               elevation: 0,
               shadowColor: Colors.transparent,
-              shape:
-                  const CircleBorder(side: BorderSide(color: Colors.amber))),
-          
+              shape: const CircleBorder(side: BorderSide(color: Colors.amber))),
           child: const SizedBox(
             height: 50,
             width: 50,

@@ -10,7 +10,7 @@ class BlueBox extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
-        color: const Color.fromARGB(255, 156, 134, 21),
+        color: const Color.fromARGB(255, 228, 145, 21),
         borderRadius: BorderRadius.only(
           bottomLeft: Radius.circular(circularRadius),
           bottomRight: Radius.circular(circularRadius),

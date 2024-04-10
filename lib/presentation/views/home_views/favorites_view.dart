@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+// import 'package:lottie/lottie.dart';
 import 'package:studenthive/domain/entities/entities.dart';
 import 'package:studenthive/presentation/provider/providers.dart';
 import 'package:studenthive/presentation/views/widgets/favorites_view/favorite_view_logged.dart'; //agregar en un archivo de barril
@@ -10,8 +11,7 @@ class FavoriteView extends ConsumerStatefulWidget {
 
   const FavoriteView({
     super.key,
-    required 
-    this.isTokenAut, 
+    required this.isTokenAut,
   });
 
   @override
@@ -19,10 +19,11 @@ class FavoriteView extends ConsumerStatefulWidget {
 }
 
 class _FavoriteViewState extends ConsumerState<FavoriteView> {
-
   @override
   void initState() {
-    ref.read(favoritesHousesProvider.notifier).loadFavoritesFromSharedPreferences();
+    ref
+        .read(favoritesHousesProvider.notifier)
+        .loadFavoritesFromSharedPreferences();
     super.initState();
   }
 

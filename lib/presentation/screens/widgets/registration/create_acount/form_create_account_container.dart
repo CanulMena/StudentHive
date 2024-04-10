@@ -28,7 +28,7 @@ class FormularioContainer extends ConsumerWidget {
             _buildTextFormField(
                 label: "Nombre",
                 prefixIcon: const Icon(Icons.person,
-                    color: Color.fromARGB(255, 156, 134, 21)),
+                    color: Color.fromARGB(255, 228, 145, 21)),
                 validator: (value) => _validateField(value, "nombre"),
                 controller:
                     nameController //* --> por medio del controlador mando la informacion
@@ -37,7 +37,7 @@ class FormularioContainer extends ConsumerWidget {
             _buildTextFormField(
                 label: "Correo Electrónico",
                 prefixIcon: const Icon(Icons.email,
-                    color: Color.fromARGB(255, 156, 134, 21)),
+                    color: Color.fromARGB(255, 228, 145, 21)),
                 keyboardType: TextInputType.emailAddress,
                 validator: (value) => _validateEmail(value),
                 controller: emailController),
@@ -45,7 +45,7 @@ class FormularioContainer extends ConsumerWidget {
             _buildTextFormField(
                 label: "Contraseña",
                 prefixIcon: const Icon(Icons.lock,
-                    color: Color.fromARGB(255, 156, 134, 21)),
+                    color: Color.fromARGB(255, 228, 145, 21)),
                 obscureText: true,
                 validator: (value) => _validatePassword(value),
                 controller: passwordController),
@@ -105,7 +105,7 @@ class FormularioContainer extends ConsumerWidget {
           Row(
             children: [
               Checkbox(
-                activeColor: const Color.fromARGB(255, 156, 134, 21),
+                activeColor: const Color.fromARGB(255, 228, 145, 21),
                 value: false,
                 onChanged: (value) {},
               ),
@@ -130,7 +130,7 @@ class FormularioContainer extends ConsumerWidget {
     return MaterialButton(
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
       disabledColor: Colors.indigo,
-      color: const Color.fromARGB(255, 156, 134, 21),
+      color: const Color.fromARGB(255, 228, 145, 21),
       child: Container(
         padding: const EdgeInsets.symmetric(horizontal: 40, vertical: 20),
         child: const Text(
@@ -150,7 +150,7 @@ class FormularioContainer extends ConsumerWidget {
           );
           return; //* Salir del método si hay campos vacíos
         }
-        
+
         try {
           //* Realizar la creación de la cuenta
           await createAccountFunction(name, password, email);

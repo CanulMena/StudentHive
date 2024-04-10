@@ -97,7 +97,7 @@ class _ButtonFilterStatusState extends State<ButtonFilterStatus> {
         height: size.height * 0.05,
         width: size.width * 0.85,
         decoration: BoxDecoration(
-            border: Border.all(color: const Color.fromARGB(255, 156, 134, 21)),
+            border: Border.all(color: Colors.yellow.shade800),
             color: Colors.white,
             borderRadius: BorderRadius.circular(20)),
         child: Row(
@@ -146,9 +146,7 @@ class _ButtonFilterStatusState extends State<ButtonFilterStatus> {
     final size = MediaQuery.of(context).size;
     return Container(
       decoration: BoxDecoration(
-          color: selectedIndex == index
-              ? const Color.fromARGB(255, 156, 134, 21)
-              : Colors.white,
+          color: selectedIndex == index ? Colors.amber.shade700 : Colors.white,
           borderRadius: BorderRadius.circular(20)),
       alignment: Alignment.center,
       height: size.height * 0.05 * 0.8,
@@ -157,7 +155,7 @@ class _ButtonFilterStatusState extends State<ButtonFilterStatus> {
           style: TextStyle(
               color: selectedIndex == index
                   ? Colors.white
-                  : const Color.fromARGB(255, 156, 134, 21))),
+                  : Colors.amber.shade700)),
     );
   }
 }

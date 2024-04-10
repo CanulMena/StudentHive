@@ -3,6 +3,7 @@ import 'package:studenthive/domain/entities/entities.dart';
 import 'package:studenthive/presentation/views/widgets/favorites_view/list_empty.dart';
 import 'package:studenthive/presentation/views/widgets/request_view/reques_list_no_empty.dart';
 
+
 class RequestViewLogged extends StatefulWidget {
   final List<MyRequest> myRequests;
   final List<YourRequest> yourRequests;

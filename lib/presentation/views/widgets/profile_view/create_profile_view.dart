@@ -1,5 +1,4 @@
 import 'dart:io';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:image_picker/image_picker.dart';
@@ -17,9 +16,8 @@ class CreateProfileView extends ConsumerStatefulWidget {
 class _CreateProfileViewState extends ConsumerState<CreateProfileView> {
   @override
   Widget build(BuildContext context) {
-    
     final size = MediaQuery.of(context).size;
-    final imageProvider =
+    XFile imageProvider =
         ref.read(imageUserProvider.select((state) => state.image));
     return Scaffold(
         appBar: AppBar(
@@ -44,7 +42,7 @@ class _CreateProfileViewState extends ConsumerState<CreateProfileView> {
                     // Padding(padding: const EdgeInsets.all(20)),
                     CircleAvatar(
                       radius: 60,
-                      backgroundImage: imageProvider.path.isEmpty
+                      backgroundImage: imageProvider.path.isNotEmpty
                           ? const AssetImage('')
                           : FileImage(
                               File(imageProvider.path),

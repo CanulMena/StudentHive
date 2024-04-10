@@ -62,7 +62,7 @@ class LoggedAppMenuItems extends StatelessWidget {
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Text('Profile',
+            Text('Perfil',
                 style: textStyle.bodyLarge
                     ?.copyWith(fontSize: 32, fontWeight: FontWeight.w600)),
             IconButton(
@@ -85,7 +85,7 @@ class LoggedAppMenuItems extends StatelessWidget {
           height: 15,
         ),
         const Text(
-          'Settings',
+          'Configuraciones',
           style: TextStyle(fontSize: 25, fontWeight: FontWeight.w500),
         ),
         ...loggedSettigMenuItems

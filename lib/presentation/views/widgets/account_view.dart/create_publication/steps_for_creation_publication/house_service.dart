@@ -6,7 +6,6 @@ import 'package:studenthive/presentation/views/widgets/account_view.dart/create_
 import 'package:studenthive/presentation/views/widgets/account_view.dart/create_publication/utils_for_creation_publication/container_title_appbar.dart';
 
 class HouseService extends ConsumerStatefulWidget {
-  
   final PageController pageController;
 
   const HouseService({
@@ -19,7 +18,6 @@ class HouseService extends ConsumerStatefulWidget {
 }
 
 class _HouseServiceState extends ConsumerState<HouseService> {
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -38,27 +36,35 @@ class _HouseServiceState extends ConsumerState<HouseService> {
                 text: 'Wifi',
                 icon: Icons.signal_wifi_0_bar_outlined,
                 onChanged: (value) {
-                  ref.read(houseServicesProvider.notifier).setWifiAvailable(value);
+                  ref
+                      .read(houseServicesProvider.notifier)
+                      .setWifiAvailable(value);
                 },
               ),
               const SizedBox(height: 15),
               SwitchListTileExample(
-                initialOption: ref.read(houseServicesProvider).isKitchenAvailable,
+                initialOption:
+                    ref.read(houseServicesProvider).isKitchenAvailable,
                 icon: Icons.kitchen_outlined,
                 text: 'Cocina',
                 iconChanged: Icons.kitchen,
                 onChanged: (value) {
-                  ref.read(houseServicesProvider.notifier).setKitchenAvailable(value);
+                  ref
+                      .read(houseServicesProvider.notifier)
+                      .setKitchenAvailable(value);
                 },
               ),
               const SizedBox(height: 15),
               SwitchListTileExample(
-                initialOption: ref.read(houseServicesProvider).isWasherAvailable,
+                initialOption:
+                    ref.read(houseServicesProvider).isWasherAvailable,
                 icon: Icons.wash_outlined,
                 text: 'Lavadora',
                 iconChanged: Icons.wash,
                 onChanged: (value) {
-                  ref.read(houseServicesProvider.notifier).setWasherAvailable(value);
+                  ref
+                      .read(houseServicesProvider.notifier)
+                      .setWasherAvailable(value);
                 },
               ),
               const SizedBox(height: 15),
@@ -68,17 +74,22 @@ class _HouseServiceState extends ConsumerState<HouseService> {
                 text: 'Televisión',
                 iconChanged: Icons.tv,
                 onChanged: (value) {
-                  ref.read(houseServicesProvider.notifier).setTvAvailable(value);
+                  ref
+                      .read(houseServicesProvider.notifier)
+                      .setTvAvailable(value);
                 },
               ),
               const SizedBox(height: 15),
               SwitchListTileExample(
-                initialOption: ref.read(houseServicesProvider).isAirConditionerAvailable,
+                initialOption:
+                    ref.read(houseServicesProvider).isAirConditionerAvailable,
                 icon: Icons.air_outlined,
                 text: 'Aire Acondicionado',
                 iconChanged: Icons.air,
                 onChanged: (value) {
-                  ref.read(houseServicesProvider.notifier).setAirConditionerAvailable(value);
+                  ref
+                      .read(houseServicesProvider.notifier)
+                      .setAirConditionerAvailable(value);
                 },
               ),
               const SizedBox(height: 15),
@@ -88,7 +99,9 @@ class _HouseServiceState extends ConsumerState<HouseService> {
                 text: 'Agua',
                 iconChanged: Icons.water_drop,
                 onChanged: (value) {
-                  ref.read(houseServicesProvider.notifier).setWaterAvailable(value);
+                  ref
+                      .read(houseServicesProvider.notifier)
+                      .setWaterAvailable(value);
                 },
               ),
               const SizedBox(height: 15),
@@ -98,7 +111,9 @@ class _HouseServiceState extends ConsumerState<HouseService> {
                 text: 'Gas',
                 iconChanged: Icons.gas_meter,
                 onChanged: (value) {
-                  ref.read(houseServicesProvider.notifier).setGasAvailable(value);
+                  ref
+                      .read(houseServicesProvider.notifier)
+                      .setGasAvailable(value);
                 },
               ),
               const SizedBox(
@@ -124,7 +139,6 @@ class _HouseServiceState extends ConsumerState<HouseService> {
 }
 
 class SwitchListTileExample extends StatefulWidget {
-
   final IconData icon;
   final String text;
   final IconData iconChanged;
@@ -147,7 +161,7 @@ class SwitchListTileExample extends StatefulWidget {
 class _SwitchListTileExampleState extends State<SwitchListTileExample> {
   bool _selectOption = false;
 
-    @override
+  @override
   void initState() {
     super.initState();
     _selectOption = widget.initialOption;
@@ -176,7 +190,9 @@ class _SwitchListTileExampleState extends State<SwitchListTileExample> {
           activeColor: iconColor,
           title: Text(
             widget.text,
-            style: const TextStyle(fontSize: 25),
+            style: TextStyle(
+                fontSize: 25,
+                color: _selectOption ? Colors.amber : Colors.grey.shade800),
           ),
           value: _selectOption,
           onChanged: (bool value) {
