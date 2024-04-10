@@ -46,13 +46,38 @@ class _CustomSliverAppBarState extends State<CustomSliverAppBar> {
                 itemCount: widget.images.length,
                 itemBuilder: (context, index) {
                   final imagePost = widget.images[index];
-                  return Image.network(
-                  imagePost,
-                  fit: BoxFit.cover,
-                  loadingBuilder: (context, child, loadingProgress) {
-                    if( loadingProgress != null) return const SizedBox();
-                    return child;
+                  return GestureDetector(
+                    onTap: (){
+                      Navigator.push(
+                        context, 
+                        MaterialPageRoute(
+                          builder: (context) {
+                            return Scaffold(
+                              body: InteractiveViewer(
+                              child: Center(
+                                child: Image.network(
+                                  imagePost,
+                                  fit: BoxFit.cover,
+                                  loadingBuilder: (context, child, loadingProgress) {
+                                    if( loadingProgress != null) return const SizedBox();
+                                    return child;
+                                    },
+                                ),
+                              )
+                              ),
+                            );
+                          }
+                          )
+                        );
                     },
+                    child: Image.network(
+                    imagePost,
+                    fit: BoxFit.cover,
+                    loadingBuilder: (context, child, loadingProgress) {
+                      if( loadingProgress != null) return const SizedBox();
+                      return child;
+                      },
+                    ),
                   );
                 },
               )
